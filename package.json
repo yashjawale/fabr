@@ -1,21 +1,21 @@
 {
-  "name": "catalyst",
-  "version": "0.1.1",
+  "name": "fabr",
+  "version": "0.0.1-alpha.0",
   "description": "A command line utility for scaffolding new development projects ",
   "keywords": [
     "scaffold",
     "starter",
     "template",
     "bootstrap",
-    "catalyst"
+    "fabr"
   ],
-  "homepage": "https://github.com/yashjawale/catalyst#readme",
+  "homepage": "https://github.com/yashjawale/fabr#readme",
   "bugs": {
-    "url": "https://github.com/yashjawale/catalyst/issues"
+    "url": "https://github.com/yashjawale/fabr/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yashjawale/catalyst.git"
+    "url": "git+https://github.com/yashjawale/fabr.git"
   },
   "license": "GPL-3.0-or-later",
   "author": "Yash Jawale",
