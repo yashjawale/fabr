@@ -1,0 +1,9 @@
+{
+  "templates": [
+    {
+      "name": "fabr-sample",
+      "value": "fabr-sample",
+      "repo": "yashjawale/fabr-sample"
+    }
+  ]
+}
