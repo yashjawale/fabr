@@ -89,8 +89,8 @@ async function main() {
         if (error.isTtyError) {
             console.log(chalk.yellow('\n\nProject creation cancelled.'));
         } else {
-            // Error is already logged by runCommand, so we just exit gracefully.
-        }
+			console.log('\n\nProject creation failed due to an error.');
+		}
     }
 }
 
