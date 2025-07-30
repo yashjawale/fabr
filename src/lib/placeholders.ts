@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import inquirer from 'inquirer';
+import { input } from '@inquirer/prompts';
 
 type CaseType = 'kebab' | 'pascal' | 'camel' | 'snake' | 'constant';
 
@@ -24,27 +24,25 @@ interface Placeholder {
  * @param format - The target case.
  * @returns The transformed string.
  */
-const transformCase = (input: string, format: CaseType): string => {
-    const words = input.split(/[\s_-]+/).filter(Boolean);
+const transformCase = (inputStr: string, format: CaseType): string => {
+    const words = inputStr.split(/[\s_-]+/).filter(Boolean);
     switch (format) {
         case 'kebab': return words.map(w => w.toLowerCase()).join('-');
         case 'pascal': return words.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('');
         case 'camel': return words.map((w, i) => i === 0 ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('');
         case 'snake': return words.map(w => w.toLowerCase()).join('_');
         case 'constant': return words.map(w => w.toUpperCase()).join('_');
-        default: return input;
+        default: return inputStr;
     }
 };
 
 /**
  * Processes placeholder configurations to get final values.
  * @param placeholderConfig - The array of placeholder objects.
- * @param promptUser - The function to prompt the user for input.
  * @returns An object mapping placeholder keys to their final values.
  */
 export const processPlaceholders = async (
-    placeholderConfig: Placeholder[] | undefined,
-    promptUser: (questions: any[]) => Promise<any>
+    placeholderConfig: Placeholder[] | undefined
 ): Promise<Record<string, string>> => {
     const placeholderValues: Record<string, string> = {};
     if (!placeholderConfig || placeholderConfig.length === 0) {
@@ -69,16 +67,18 @@ export const processPlaceholders = async (
             }
         }
 
-        const answers = await promptUser([
-            {
-                type: 'input',
-                name: p.key,
-                message: p.prompt,
-                default: defaultValue,
-                suffix: p.description ? `\n  ${chalk.gray(p.description)}` : '',
-            },
-        ]);
-        placeholderValues[p.key] = answers[p.key];
+        const answer = await input({
+            message: p.prompt || `Enter value for ${p.key}:`,
+            default: defaultValue,
+            validate: (inputValue: string) => {
+                if (!inputValue.trim()) {
+                    return 'Value cannot be empty';
+                }
+                return true;
+            }
+        });
+        
+        placeholderValues[p.key] = answer;
     }
 
     derivedPlaceholders.forEach(p => {

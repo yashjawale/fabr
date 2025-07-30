@@ -10,7 +10,6 @@ import { runCommand } from './lib/commands.js';
 import { findAndReplace } from './lib/files.js';
 import { processPlaceholders } from './lib/placeholders.js';
 import { promptForProjectDetails } from './lib/ui.js';
-import inquirer from 'inquirer';
 
 // Load the list of available templates
 import templatesData from './templates.json' with { type: 'json' };
@@ -59,7 +58,7 @@ async function main() {
         await runCommand(config.preSetupCommand, 'Running pre-setup tasks...');
 
         // STAGE 2: Process all placeholders
-        const placeholderValues = await processPlaceholders(config.placeholders, inquirer.prompt);
+        const placeholderValues = await processPlaceholders(config.placeholders);
         
         if (Object.keys(placeholderValues).length > 0) {
             const replaceSpinner = ora('Replacing placeholders in files...').start();

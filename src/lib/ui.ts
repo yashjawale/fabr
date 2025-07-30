@@ -1,4 +1,4 @@
-import inquirer from 'inquirer';
+import { select, input } from '@inquirer/prompts';
 
 interface Template {
     name: string;
@@ -12,23 +12,19 @@ interface Template {
  * @returns A promise that resolves to the user's answers.
  */
 export const promptForProjectDetails = async (templates: Template[]): Promise<{ template: string; projectName: string }> => {
-    const answers = await inquirer.prompt([
-        {
-            type: 'list',
-            name: 'template',
-            message: 'Which project template would you like to use?',
-            choices: templates.map(t => ({ name: t.name, value: t.value })),
-        },
-        {
-            type: 'input',
-            name: 'projectName',
-            message: 'What is the name of your new project folder?',
-            validate: (input: string) => 
-                /^([A-Za-z\-\_\d])+$/.test(input) || 'Project name may only include letters, numbers, underscores and hashes.',
-        },
-    ]);
+    const template = await select({
+        message: 'Which project template would you like to use?',
+        choices: templates.map(t => ({ name: t.name, value: t.value })),
+    });
+
+    const projectName = await input({
+        message: 'What is the name of your new project folder?',
+        validate: (input: string) => 
+            /^([A-Za-z\-\_\d])+$/.test(input) || 'Project name may only include letters, numbers, underscores and hashes.',
+    });
+
     return {
-        template: answers.template,
-        projectName: answers.projectName
+        template,
+        projectName
     };
 };
