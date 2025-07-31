@@ -13,17 +13,19 @@ import { promptForProjectDetails } from './lib/ui.js';
 
 // Import types
 import { FabrConfig, validateFabrConfig } from './types/fabr-config.js';
+import { Template, TemplatesConfig, validateTemplatesConfig, findTemplateBySlug } from './types/templates.js';
 
 // Load the list of available templates
 import templatesData from './templates.json' with { type: 'json' };
-const templates = templatesData.templates;
 
-// Define the structure of a template
-interface Template {
-    name: string;
-    value: string;
-    repo: string;
+// Validate templates configuration
+if (!validateTemplatesConfig(templatesData)) {
+    console.error('Invalid templates.json configuration');
+    process.exit(1);
 }
+
+const templatesConfig = templatesData as TemplatesConfig;
+const templates = templatesConfig.templates;
 
 /**
  * The main function that drives the CLI tool.
@@ -35,7 +37,7 @@ async function main() {
         // 1. Get project details from user
         const { template, projectName } = await promptForProjectDetails(templates);
 
-        const chosenTemplate = templates.find((t: Template) => t.value === template);
+        const chosenTemplate = findTemplateBySlug(templates, template);
         if (!chosenTemplate) {
             console.error(chalk.red('Invalid template selected.'));
             return;

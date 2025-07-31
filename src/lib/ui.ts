@@ -1,10 +1,5 @@
 import { select, input } from '@inquirer/prompts';
-
-interface Template {
-    name: string;
-    value: string;
-    repo: string;
-}
+import { Template } from '../types/templates.js';
 
 /**
  * Prompts the user for the initial project setup info.
@@ -14,7 +9,7 @@ interface Template {
 export const promptForProjectDetails = async (templates: Template[]): Promise<{ template: string; projectName: string }> => {
     const template = await select({
         message: 'Which project template would you like to use?',
-        choices: templates.map(t => ({ name: t.name, value: t.value })),
+        choices: templates.map(t => ({ name: t.name, value: t.slug })),
     });
 
     const projectName = await input({

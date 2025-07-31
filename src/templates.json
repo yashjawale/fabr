@@ -1,9 +1,11 @@
 {
+  "$schema": "../templates.schema.json",
   "templates": [
     {
-      "name": "fabr-sample",
-      "value": "fabr-sample",
+      "name": "Fabr Sample Template",
+      "slug": "fabr-sample",
       "repo": "yashjawale/fabr-sample"
     }
-  ]
+  ],
+  "defaultTemplate": "fabr-sample"
 }
