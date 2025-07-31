@@ -1,22 +1,6 @@
 import chalk from 'chalk';
 import { input } from '@inquirer/prompts';
-
-type CaseType = 'kebab' | 'pascal' | 'camel' | 'snake' | 'constant';
-
-interface Placeholder {
-    key: string;
-    prompt?: string;
-    description?: string;
-    transform?: {
-        source: string;
-        case: CaseType;
-    };
-    defaultCase?: {
-        source: string;
-        case: CaseType;
-        template?: string;
-    };
-}
+import { Placeholder, CaseType } from '../types/fabr-config.js';
 
 /**
  * Transforms a string into various cases.

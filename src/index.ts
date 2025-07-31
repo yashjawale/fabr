@@ -11,6 +11,9 @@ import { findAndReplace } from './lib/files.js';
 import { processPlaceholders } from './lib/placeholders.js';
 import { promptForProjectDetails } from './lib/ui.js';
 
+// Import types
+import { FabrConfig, validateFabrConfig } from './types/fabr-config.js';
+
 // Load the list of available templates
 import templatesData from './templates.json' with { type: 'json' };
 const templates = templatesData.templates;
@@ -46,12 +49,21 @@ async function main() {
         const projectPath = process.cwd();
 
         // 3. Read the template's configuration file
-        const configPath = path.join(projectPath, 'starter.config.json');
-        let config: any = {};
+        const configPath = path.join(projectPath, 'fabr.config.json');
+        let config: FabrConfig = {};
         if (fs.existsSync(configPath)) {
-            config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+            try {
+                const configData = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+                if (validateFabrConfig(configData)) {
+                    config = configData;
+                } else {
+                    console.log(chalk.yellow("Invalid 'fabr.config.json' format. Skipping advanced setup."));
+                }
+            } catch (error) {
+                console.log(chalk.yellow("Failed to parse 'fabr.config.json'. Skipping advanced setup."));
+            }
         } else {
-            console.log(chalk.yellow("No 'starter.config.json' found. Skipping advanced setup."));
+            console.log(chalk.yellow("No 'fabr.config.json' found. Skipping advanced setup."));
         }
         
         // STAGE 1: Run pre-setup command
