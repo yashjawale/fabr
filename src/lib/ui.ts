@@ -1,4 +1,4 @@
-import { select, input } from '@inquirer/prompts';
+import { search, input } from '@inquirer/prompts';
 import { Template } from '../types/templates.js';
 
 /**
@@ -7,9 +7,21 @@ import { Template } from '../types/templates.js';
  * @returns A promise that resolves to the user's answers.
  */
 export const promptForProjectDetails = async (templates: Template[]): Promise<{ template: string; projectName: string }> => {
-    const template = await select({
+    const template = await search({
         message: 'Which project template would you like to use?',
-        choices: templates.map(t => ({ name: t.name, value: t.slug })),
+        source: (input) => {
+            if (!input) {
+                return templates.map(t => ({ name: t.name, value: t.slug, description: t.repo }));
+            }
+            
+            const filtered = templates.filter(t => 
+                t.name.toLowerCase().includes(input.toLowerCase()) ||
+                t.slug.toLowerCase().includes(input.toLowerCase()) ||
+                t.repo.toLowerCase().includes(input.toLowerCase())
+            );
+            
+            return filtered.map(t => ({ name: t.name, value: t.slug, description: t.repo }));
+        },
     });
 
     const projectName = await input({
