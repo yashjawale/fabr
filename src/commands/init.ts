@@ -14,18 +14,60 @@ import { FabrConfig, validateFabrConfig } from '../types/fabr-config.js';
 import { Template, findTemplateBySlug } from '../types/templates.js';
 
 /**
+ * Parse init command arguments
+ */
+function parseInitArgs(args: string[]): { projectName?: string; templateSlug?: string } {
+    // Remove 'init' from args if it's the first argument
+    const cleanArgs = args[0] === 'init' ? args.slice(1) : args;
+    
+    let projectName: string | undefined;
+    let templateSlug: string | undefined;
+
+    for (let i = 0; i < cleanArgs.length; i++) {
+        const arg = cleanArgs[i];
+        
+        if (arg.startsWith('--template=')) {
+            templateSlug = arg.split('=')[1];
+        } else if (!arg.startsWith('-') && !projectName) {
+            // First non-flag argument is the project name
+            projectName = arg;
+        }
+    }
+
+    return { projectName, templateSlug };
+}
+
+/**
  * Initialize a new project from a template
  */
-export async function initCommand(templates: Template[]): Promise<void> {
+export async function initCommand(templates: Template[], args: string[] = []): Promise<void> {
     console.log(chalk.cyan.bold('Welcome to Fabr! 🚀'));
 
     try {
-        // 1. Get project details from user
-        const { template, projectName } = await promptForProjectDetails(templates);
+        // Parse command line arguments
+        const { projectName: providedProjectName, templateSlug: providedTemplate } = parseInitArgs(args);
+
+        // Validate provided project name
+        if (providedProjectName && !/^([A-Za-z\-\_\d])+$/.test(providedProjectName)) {
+            console.error(chalk.red('Project name may only include letters, numbers, underscores and hashes.'));
+            process.exit(1);
+        }
+
+        // 1. Get project details from user (skip prompts if already provided)
+        const { template, projectName } = await promptForProjectDetails(
+            templates, 
+            providedProjectName, 
+            providedTemplate
+        );
 
         const chosenTemplate = findTemplateBySlug(templates, template);
         if (!chosenTemplate) {
-            console.error(chalk.red('Invalid template selected.'));
+            if (providedTemplate) {
+                console.error(chalk.red(`Template '${providedTemplate}' not found.`));
+                console.log(chalk.gray('Run "npx fabr list" to see available templates.'));
+            } else {
+                console.error(chalk.red('Invalid template selected.'));
+            }
             process.exit(1);
         }
 

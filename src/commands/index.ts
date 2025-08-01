@@ -17,7 +17,7 @@ export const commands: Record<string, CommandDefinition> = {
         name: 'init',
         description: 'Create a new project from a template',
         handler: async (templates: Template[], args: string[]) => {
-            await initCommand(templates);
+            await initCommand(templates, args);
         }
     },
     list: {

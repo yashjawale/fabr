@@ -14,7 +14,9 @@ export function showHelp() {
     console.log(chalk.white('Global Options:'));
     console.log(chalk.cyan('  --help, -h') + chalk.gray('  Show help for any command\n'));
     console.log(chalk.white('Examples:'));
-    console.log(chalk.gray('  npx fabr init'));
+    console.log(chalk.gray('  npx fabr init                              ') + chalk.dim('# Interactive mode'));
+    console.log(chalk.gray('  npx fabr init my-project                   ') + chalk.dim('# Specify project name'));
+    console.log(chalk.gray('  npx fabr init my-project --template=slug   ') + chalk.dim('# Specify both'));
     console.log(chalk.gray('  npx fabr list'));
     console.log(chalk.gray('  npx fabr help\n'));
 }
