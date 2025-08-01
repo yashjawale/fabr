@@ -9,6 +9,12 @@ Create a new project from a template:
 npx fabr init
 ```
 
+List available templates:
+
+```bash
+npx fabr list
+```
+
 Get help:
 
 ```bash
@@ -18,4 +24,5 @@ npx fabr help
 ## Available Commands
 
 - `npx fabr init` - Create a new project from a template
+- `npx fabr list` - List all available templates  
 - `npx fabr help` - Show help information
