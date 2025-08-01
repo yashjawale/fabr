@@ -79,10 +79,6 @@ async function main() {
             findAndReplace(projectPath, placeholderValues);
             replaceSpinner.succeed(chalk.green('Placeholders replaced successfully!'));
         }
-        
-        if (fs.existsSync(configPath)) {
-            fs.unlinkSync(configPath);
-        }
 
         // STAGE 3: Run post-setup command
         await runCommand(config.postSetupCommand, 'Running post-setup tasks...');
@@ -92,6 +88,12 @@ async function main() {
 
         // STAGE 5: Run post-install command
         await runCommand(config.postInstallCommand, 'Running post-install tasks...');
+
+        // STAGE 6: Clean up config file
+        if (fs.existsSync(configPath)) {
+            fs.unlinkSync(configPath);
+            console.log(chalk.gray('Cleaned up fabr.config.json'));
+        }
 
         // Final success message
         console.log(chalk.green.bold('\n✨ Your project is ready! ✨\n'));
