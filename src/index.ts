@@ -28,9 +28,57 @@ const templatesConfig = templatesData as TemplatesConfig;
 const templates = templatesConfig.templates;
 
 /**
- * The main function that drives the CLI tool.
+ * Show help information
+ */
+function showHelp() {
+    console.log(chalk.cyan.bold('Fabr - Project Template Generator 🚀\n'));
+    console.log(chalk.white('Usage:'));
+    console.log(chalk.cyan('  npx fabr init') + chalk.gray('    Create a new project from a template'));
+    console.log(chalk.cyan('  npx fabr help') + chalk.gray('    Show this help message'));
+    console.log(chalk.cyan('  npx fabr --help') + chalk.gray('  Show this help message\n'));
+    console.log(chalk.white('Examples:'));
+    console.log(chalk.gray('  npx fabr init'));
+    console.log(chalk.gray('  npx fabr init --help\n'));
+}
+
+/**
+ * Parse command line arguments and execute the appropriate command
  */
 async function main() {
+    const args = process.argv.slice(2);
+    const command = args[0];
+
+    // Handle help flags
+    if (args.includes('--help') || args.includes('-h')) {
+        showHelp();
+        return;
+    }
+
+    // Handle commands
+    switch (command) {
+        case 'init':
+            await initProject();
+            break;
+        case 'help':
+            showHelp();
+            process.exit(0);
+            break;
+        case undefined:
+            console.log(chalk.yellow('No command specified. Use "npx fabr init" to create a new project.'));
+            console.log(chalk.gray('Run "npx fabr help" for more information.'));
+            process.exit(0);
+            break;
+        default:
+            console.log(chalk.red(`Unknown command: ${command}`));
+            console.log(chalk.gray('Run "npx fabr help" for available commands.'));
+            process.exit(1);
+    }
+}
+
+/**
+ * Initialize a new project from a template
+ */
+async function initProject() {
     console.log(chalk.cyan.bold('Welcome to Fabr! 🚀'));
 
     try {
@@ -40,7 +88,7 @@ async function main() {
         const chosenTemplate = findTemplateBySlug(templates, template);
         if (!chosenTemplate) {
             console.error(chalk.red('Invalid template selected.'));
-            return;
+            process.exit(1);
         }
 
         // 2. Download the template from GitHub
@@ -104,9 +152,12 @@ async function main() {
     } catch (error: any) {
         if (error.isTtyError) {
             console.log(chalk.yellow('\n\nProject creation cancelled.'));
+            process.exit(0); // User cancelled, not an error
         } else {
-			console.log('\n\nProject creation failed due to an error.');
-		}
+            console.log('\n\nProject creation failed due to an error.');
+            console.error(error);
+            process.exit(1); // Actual error occurred
+        }
     }
 }
 

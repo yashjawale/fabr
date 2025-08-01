@@ -166,7 +166,8 @@ For placeholder validation:
 
 1. Place `fabr.config.json` in your template repository root
 2. Use placeholder syntax in your template files: `{{PROJECT_NAME}}`
-3. Fabr will automatically process the configuration when the template is used
+3. Run `npx fabr init` and select your template
+4. Fabr will automatically process the configuration when the template is used
 
 ## Schema Validation
 
