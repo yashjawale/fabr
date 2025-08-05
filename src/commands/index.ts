@@ -3,6 +3,7 @@ import { parseGlobalArgs } from '../lib/args.js';
 import { initCommandHandler } from './init.js';
 import { helpCommandHandler, showGlobalHelp } from './help.js';
 import { listCommandHandler } from './list.js';
+import chalk from 'chalk';
 
 export interface CommandDefinition {
     name: string;
@@ -59,16 +60,16 @@ export async function executeCommand(
 
     // Handle no command specified
     if (!command) {
-        console.log('\x1b[33mNo command specified. Use "npx fabr init" to create a new project.\x1b[0m');
-        console.log('\x1b[90mRun "npx fabr help" for more information.\x1b[0m');
+        console.log(chalk.yellow('No command specified. Use "npx fabr init" to create a new project.'));
+        console.log(chalk.gray('Run "npx fabr help" for more information.'));
         process.exit(0);
     }
 
     // Find and execute the command
     const commandDef = commands[command];
     if (!commandDef) {
-        console.log(`\x1b[31mUnknown command: ${command}\x1b[0m`);
-        console.log('\x1b[90mRun "npx fabr help" for available commands.\x1b[0m');
+        console.log(chalk.red(`Unknown command: ${command}`));
+        console.log(chalk.gray('Run "npx fabr help" for available commands.'));
         process.exit(1);
     }
 
