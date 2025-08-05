@@ -1,0 +1,128 @@
+{
+  "$schema": "./fabr.config.schema.json",
+  "type": "commands",
+  "name": "Express TypeScript API",
+  "description": "Creates a production-ready Express.js API with TypeScript",
+  "version": "1.0.0",
+  "placeholders": [
+    {
+      "key": "PROJECT_NAME",
+      "prompt": "What's your API project name?",
+      "description": "The name of your Express API project",
+      "required": true,
+      "validate": {
+        "pattern": "^[a-z][a-z0-9-]*$",
+        "minLength": 3,
+        "maxLength": 50
+      }
+    },
+    {
+      "key": "AUTHOR_NAME", 
+      "prompt": "What's your name?",
+      "description": "Project author name",
+      "required": true
+    },
+    {
+      "key": "DESCRIPTION",
+      "prompt": "API description",
+      "description": "Brief description of your API",
+      "default": "A new Express.js TypeScript API"
+    },
+    {
+      "key": "PORT",
+      "prompt": "Default port number",
+      "description": "Port number for the API server",
+      "default": "3000",
+      "validate": {
+        "pattern": "^[0-9]+$"
+      }
+    },
+    {
+      "key": "DATABASE_URL",
+      "prompt": "Database connection URL",
+      "description": "Connection string for your database",
+      "default": "postgresql://localhost:5432/{{PROJECT_NAME}}"
+    }
+  ],
+  "commands": [
+    {
+      "command": "npm init -y",
+      "description": "Initialize package.json",
+      "showOutput": false
+    },
+    {
+      "command": "npm pkg set name={{PROJECT_NAME}}",
+      "description": "Set project name"
+    },
+    {
+      "command": "npm pkg set description='{{DESCRIPTION}}'",
+      "description": "Set project description"
+    },
+    {
+      "command": "npm pkg set author='{{AUTHOR_NAME}}'",
+      "description": "Set project author"
+    },
+    {
+      "command": "npm pkg set version=1.0.0",
+      "description": "Set initial version"
+    },
+    {
+      "command": "npm pkg set main=dist/index.js",
+      "description": "Set main entry point"
+    },
+    {
+      "command": "npm install express cors helmet morgan dotenv",
+      "description": "Install production dependencies",
+      "showOutput": true
+    },
+    {
+      "command": "npm install --save-dev typescript @types/node @types/express @types/cors @types/morgan ts-node nodemon concurrently",
+      "description": "Install development dependencies", 
+      "showOutput": true
+    },
+    {
+      "command": "npx tsc --init --target ES2020 --module commonjs --outDir dist --rootDir src --strict --esModuleInterop --skipLibCheck",
+      "description": "Initialize TypeScript configuration"
+    },
+    {
+      "command": "mkdir -p src/routes src/middleware src/models src/utils",
+      "description": "Create project structure"
+    },
+    {
+      "command": "echo 'PORT={{PORT}}\\nDATABASE_URL={{DATABASE_URL}}\\nNODE_ENV=development' > .env",
+      "description": "Create environment configuration"
+    },
+    {
+      "command": "echo 'node_modules/\\ndist/\\n.env\\n*.log' > .gitignore",
+      "description": "Create .gitignore file"
+    },
+    {
+      "command": "cat > src/index.ts << 'EOF'\nimport express from 'express';\nimport cors from 'cors';\nimport helmet from 'helmet';\nimport morgan from 'morgan';\nimport dotenv from 'dotenv';\n\n// Load environment variables\ndotenv.config();\n\nconst app = express();\nconst PORT = process.env.PORT || {{PORT}};\n\n// Middleware\napp.use(helmet());\napp.use(cors());\napp.use(morgan('combined'));\napp.use(express.json());\napp.use(express.urlencoded({ extended: true }));\n\n// Routes\napp.get('/', (req, res) => {\n  res.json({\n    message: 'Welcome to {{PROJECT_NAME}} API!',\n    version: '1.0.0',\n    timestamp: new Date().toISOString()\n  });\n});\n\napp.get('/health', (req, res) => {\n  res.json({ status: 'OK', uptime: process.uptime() });\n});\n\n// Start server\napp.listen(PORT, () => {\n  console.log(`🚀 {{PROJECT_NAME}} API running on port ${PORT}`);\n  console.log(`📊 Health check: http://localhost:${PORT}/health`);\n});\n\nexport default app;\nEOF",
+      "description": "Create main TypeScript entry file"
+    },
+    {
+      "command": "npm pkg set scripts.dev='concurrently \"tsc -w\" \"nodemon dist/index.js\"'",
+      "description": "Add development script"
+    },
+    {
+      "command": "npm pkg set scripts.build='tsc'",
+      "description": "Add build script"
+    },
+    {
+      "command": "npm pkg set scripts.start='node dist/index.js'",
+      "description": "Add production start script"
+    },
+    {
+      "command": "npm pkg set scripts.clean='rm -rf dist'",
+      "description": "Add clean script"
+    },
+    {
+      "command": "echo '# {{PROJECT_NAME}}\\n\\n{{DESCRIPTION}}\\n\\n## Quick Start\\n\\n```bash\\n# Install dependencies\\nnpm install\\n\\n# Start development server\\nnpm run dev\\n\\n# Build for production\\nnpm run build\\n\\n# Start production server\\nnpm start\\n```\\n\\n## API Endpoints\\n\\n- `GET /` - Welcome message\\n- `GET /health` - Health check\\n\\n## Environment Variables\\n\\nCopy `.env.example` to `.env` and configure:\\n\\n- `PORT` - Server port (default: {{PORT}})\\n- `DATABASE_URL` - Database connection URL\\n- `NODE_ENV` - Environment (development/production)\\n\\n## Author\\n\\n{{AUTHOR_NAME}}' > README.md",
+      "description": "Create comprehensive README"
+    },
+    {
+      "command": "cp .env .env.example && echo '# Example environment configuration\\n# Copy this file to .env and update values\\n' | cat - .env.example > temp && mv temp .env.example",
+      "description": "Create environment example file"
+    }
+  ]
+}

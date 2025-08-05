@@ -12,10 +12,11 @@ import { promptForProjectDetails } from '../lib/ui.js';
 import { parseSubcommandOnlyArgs, parseSubcommandArgs, validateProjectName } from '../lib/args.js';
 
 // Import types
-import { FabrConfig, validateFabrConfig } from '../types/fabr-config.js';
+import { FabrConfig, validateFabrConfig, isCommandBasedTemplate, isFileBasedTemplate } from '../types/fabr-config.js';
 import { Template, findTemplateBySlug } from '../types/templates.js';
 import { BaseSubcommand, SubcommandArgs } from '../types/subcommand.js';
 import { HelpContent } from '../lib/help.js';
+import { executeCommandTemplates, validateCommandPlaceholders } from '../lib/commands.js';
 
 export interface InitArgs extends SubcommandArgs {
     projectName?: string;
@@ -144,10 +145,30 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
             // STAGE 2: Process all placeholders
             const placeholderValues = await processPlaceholders(config.placeholders);
             
-            if (Object.keys(placeholderValues).length > 0) {
-                const replaceSpinner = ora('Replacing placeholders in files...').start();
-                findAndReplace(projectPath, placeholderValues);
-                replaceSpinner.succeed(chalk.green('Placeholders replaced successfully!'));
+            // Check if this is a command-based template
+            if (isCommandBasedTemplate(config)) {
+                console.log(chalk.cyan.bold('\n🔧 Processing command-based template...\n'));
+                
+                // Validate that all command placeholders have values
+                if (config.commands) {
+                    const missingPlaceholders = validateCommandPlaceholders(config.commands, placeholderValues);
+                    if (missingPlaceholders.length > 0) {
+                        console.error(chalk.red(`Missing values for placeholders: ${missingPlaceholders.join(', ')}`));
+                        process.exit(1);
+                    }
+                    
+                    // Execute all command templates
+                    await executeCommandTemplates(config.commands, placeholderValues, projectPath);
+                } else {
+                    console.log(chalk.yellow('Command-based template specified but no commands found.'));
+                }
+            } else {
+                // File-based template processing (existing logic)
+                if (Object.keys(placeholderValues).length > 0) {
+                    const replaceSpinner = ora('Replacing placeholders in files...').start();
+                    findAndReplace(projectPath, placeholderValues);
+                    replaceSpinner.succeed(chalk.green('Placeholders replaced successfully!'));
+                }
             }
 
             // STAGE 3: Run post-setup command

@@ -56,6 +56,17 @@ export interface FileConfiguration {
     include?: string[];
 }
 
+export interface CommandTemplate {
+    /** The command to execute */
+    command: string;
+    /** Description of what this command does */
+    description?: string;
+    /** Working directory for this command (relative to project root) */
+    workingDirectory?: string;
+    /** Whether to show command output (default: true) */
+    showOutput?: boolean;
+}
+
 export interface FabrConfig {
     /** The name of the template configuration */
     name?: string;
@@ -63,6 +74,8 @@ export interface FabrConfig {
     description?: string;
     /** Version of the template configuration */
     version?: string;
+    /** Template type: 'files' (default) or 'commands' */
+    type?: 'files' | 'commands';
     /** Command to run before any setup tasks */
     preSetupCommand?: string;
     /** Command to run after placeholder replacement */
@@ -79,6 +92,8 @@ export interface FabrConfig {
     gitInit?: boolean;
     /** Array of file patterns to remove after setup completion */
     removeFiles?: string[];
+    /** Array of commands to run for command-based templates */
+    commands?: CommandTemplate[];
 }
 
 /**
@@ -93,6 +108,20 @@ export function isPromptedPlaceholder(placeholder: Placeholder): boolean {
  */
 export function isTransformedPlaceholder(placeholder: Placeholder): boolean {
     return !!placeholder.transform;
+}
+
+/**
+ * Type guard to check if a config is a command-based template
+ */
+export function isCommandBasedTemplate(config: FabrConfig): boolean {
+    return config.type === 'commands' || (!!config.commands && config.commands.length > 0);
+}
+
+/**
+ * Type guard to check if a config is a file-based template
+ */
+export function isFileBasedTemplate(config: FabrConfig): boolean {
+    return !isCommandBasedTemplate(config);
 }
 
 /**
