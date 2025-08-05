@@ -163,10 +163,3 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
         }
     }
 }
-
-// Create instance and export handler function for compatibility
-const initCommand = new InitCommand();
-
-export async function initCommandHandler(templates: Template[], args: string[]): Promise<void> {
-    await initCommand.handle(templates, args);
-}

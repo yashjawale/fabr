@@ -55,10 +55,3 @@ export class ListCommand extends BaseSubcommand<ListArgs> {
         console.log(chalk.white(`Total: ${templates.length} template${templates.length !== 1 ? 's' : ''} available`));
     }
 }
-
-// Create instance and export handler function for compatibility
-const listCommand = new ListCommand();
-
-export async function listCommandHandler(templates: Template[], args: string[]): Promise<void> {
-    await listCommand.handle(templates, args);
-}

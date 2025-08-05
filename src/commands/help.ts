@@ -69,10 +69,3 @@ export class HelpCommand extends BaseSubcommand<HelpArgs> {
         process.exit(0);
     }
 }
-
-// Create instance and export handler function for compatibility
-const helpCommand = new HelpCommand();
-
-export async function helpCommandHandler(templates: Template[], args: string[]): Promise<void> {
-    await helpCommand.handle(templates, args);
-}

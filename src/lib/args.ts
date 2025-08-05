@@ -9,10 +9,6 @@ export interface ParsedArgs {
     help: boolean;
 }
 
-export interface GlobalArgs {
-    help: boolean;
-}
-
 export interface SubcommandResult<T = Record<string, any>> {
     args: T;
     help: boolean;
@@ -124,16 +120,6 @@ export function parseSubcommandOnlyArgs(args: string[]): Omit<ParsedArgs, 'comma
     }
 
     return result;
-}
-
-/**
- * Parse global arguments (before any subcommand)
- */
-export function parseGlobalArgs(args: string[]): GlobalArgs {
-    const parsed = parseArgs(args);
-    return {
-        help: parsed.help
-    };
 }
 
 /**
