@@ -48,9 +48,16 @@ Execute shell commands to set up projects programmatically:
 - **Defaults**: Computed defaults from other placeholders
 - **Interactive prompts**: Guided project setup
 
+### 🌍 **Environment Variable Management**
+- **Automatic .env creation**: Generate .env and .env.local files from prompts
+- **Sensitive data handling**: Separate local variables from shared config
+- **Validation & defaults**: Same powerful validation as placeholders
+- **Template integration**: Derive environment values from project placeholders
+
 ### 📝 **Template Configuration**
 Templates use `fabr.config.json` to define:
 - Placeholder prompts and validation
+- Environment variable configuration
 - Pre/post setup commands
 - File processing rules
 - Command sequences for setup
@@ -67,6 +74,13 @@ Templates use `fabr.config.json` to define:
       "prompt": "Project name",
       "required": true
     }
+  ],
+  "environmentVariables": [
+    {
+      "key": "API_URL",
+      "prompt": "Enter API URL",
+      "default": "http://localhost:3000/api"
+    }
   ]
 }
 ```
@@ -80,6 +94,19 @@ Templates use `fabr.config.json` to define:
     {
       "key": "PROJECT_NAME", 
       "prompt": "Project name",
+      "required": true
+    }
+  ],
+  "environmentVariables": [
+    {
+      "key": "PORT",
+      "prompt": "Server port",
+      "default": "3000"
+    },
+    {
+      "key": "JWT_SECRET",
+      "prompt": "JWT secret",
+      "local": true,
       "required": true
     }
   ],
@@ -99,5 +126,6 @@ Templates use `fabr.config.json` to define:
 ## Documentation
 
 - [Command-Based Templates Guide](./COMMAND-TEMPLATES.md) - Detailed guide for command templates
+- [Environment Variables Guide](./ENVIRONMENT-VARIABLES.md) - Complete guide for .env file generation
 - [JSON Schema](./fabr.config.schema.json) - Complete configuration schema
 - [Examples](./example-command-template.json) - Sample configurations

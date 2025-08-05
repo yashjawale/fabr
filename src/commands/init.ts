@@ -8,6 +8,7 @@ import { confirm } from '@inquirer/prompts';
 import { runShellCommand } from '../lib/shell.js';
 import { findAndReplace } from '../lib/files.js';
 import { processPlaceholders } from '../lib/placeholders.js';
+import { processAndCreateEnvironmentFiles } from '../lib/env.js';
 import { promptForProjectDetails } from '../lib/ui.js';
 import { parseSubcommandOnlyArgs, parseSubcommandArgs, validateProjectName } from '../lib/args.js';
 
@@ -144,6 +145,9 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
 
             // STAGE 2: Process all placeholders
             const placeholderValues = await processPlaceholders(config.placeholders);
+            
+            // STAGE 2.5: Process environment variables and create .env files
+            await processAndCreateEnvironmentFiles(config.environmentVariables, placeholderValues, projectPath);
             
             // Check if this is a command-based template
             if (isCommandBasedTemplate(config)) {

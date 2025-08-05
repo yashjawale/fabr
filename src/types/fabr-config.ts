@@ -49,6 +49,27 @@ export interface Placeholder {
     validate?: PlaceholderValidation;
 }
 
+export interface EnvironmentVariable {
+    /** The environment variable name (e.g., 'DATABASE_URL', 'API_KEY') */
+    key: string;
+    /** The message to show when prompting for this value */
+    prompt?: string;
+    /** Additional description or help text for this environment variable */
+    description?: string;
+    /** Default value for this environment variable */
+    default?: string;
+    /** Whether this environment variable is required */
+    required?: boolean;
+    /** Whether this should be saved to .env.local instead of .env (for sensitive values) */
+    local?: boolean;
+    /** Transform this environment variable's value from a placeholder */
+    transform?: PlaceholderTransform;
+    /** Generate a default value by transforming a placeholder */
+    defaultCase?: PlaceholderDefaultCase;
+    /** Validation rules for this environment variable */
+    validate?: PlaceholderValidation;
+}
+
 export interface FileConfiguration {
     /** Array of file patterns to ignore during placeholder replacement */
     ignore?: string[];
@@ -86,6 +107,8 @@ export interface FabrConfig {
     postInstallCommand?: string;
     /** Array of placeholder configurations for template customization */
     placeholders?: Placeholder[];
+    /** Array of environment variable configurations */
+    environmentVariables?: EnvironmentVariable[];
     /** File-specific configurations */
     files?: FileConfiguration;
     /** Whether to initialize a git repository after setup */
@@ -108,6 +131,20 @@ export function isPromptedPlaceholder(placeholder: Placeholder): boolean {
  */
 export function isTransformedPlaceholder(placeholder: Placeholder): boolean {
     return !!placeholder.transform;
+}
+
+/**
+ * Type guard to check if an environment variable is a prompted environment variable
+ */
+export function isPromptedEnvironmentVariable(envVar: EnvironmentVariable): boolean {
+    return !!envVar.prompt && !envVar.transform;
+}
+
+/**
+ * Type guard to check if an environment variable is a transformed environment variable
+ */
+export function isTransformedEnvironmentVariable(envVar: EnvironmentVariable): boolean {
+    return !!envVar.transform;
 }
 
 /**

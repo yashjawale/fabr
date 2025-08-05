@@ -51,6 +51,13 @@
         "$ref": "#/definitions/placeholder"
       }
     },
+    "environmentVariables": {
+      "type": "array",
+      "description": "Array of environment variable configurations for .env file generation",
+      "items": {
+        "$ref": "#/definitions/environmentVariable"
+      }
+    },
     "files": {
       "type": "object",
       "description": "File-specific configurations",
@@ -182,6 +189,108 @@
               "type": "integer",
               "description": "Maximum length of the value",
               "minimum": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["key"],
+      "oneOf": [
+        {
+          "required": ["prompt"]
+        },
+        {
+          "required": ["transform"]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "environmentVariable": {
+      "type": "object",
+      "description": "Configuration for a single environment variable",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The environment variable name (e.g., 'DATABASE_URL', 'API_KEY')",
+          "pattern": "^[A-Z_][A-Z0-9_]*$"
+        },
+        "prompt": {
+          "type": "string",
+          "description": "The message to show when prompting for this value"
+        },
+        "description": {
+          "type": "string",
+          "description": "Additional description or help text for this environment variable"
+        },
+        "default": {
+          "type": "string",
+          "description": "Default value for this environment variable"
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether this environment variable is required",
+          "default": false
+        },
+        "local": {
+          "type": "boolean",
+          "description": "Whether this should be saved to .env.local instead of .env (for sensitive values)",
+          "default": false
+        },
+        "transform": {
+          "type": "object",
+          "description": "Transform this environment variable's value from a placeholder",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "The source placeholder key to transform from"
+            },
+            "case": {
+              "type": "string",
+              "enum": ["kebab", "pascal", "camel", "snake", "constant"],
+              "description": "The case transformation to apply"
+            }
+          },
+          "required": ["source", "case"],
+          "additionalProperties": false
+        },
+        "defaultCase": {
+          "type": "object",
+          "description": "Generate a default value by transforming a placeholder",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "The source placeholder key to transform from"
+            },
+            "case": {
+              "type": "string",
+              "enum": ["kebab", "pascal", "camel", "snake", "constant"],
+              "description": "The case transformation to apply"
+            },
+            "template": {
+              "type": "string",
+              "description": "Template string where {value} will be replaced with the transformed value"
+            }
+          },
+          "required": ["source", "case"],
+          "additionalProperties": false
+        },
+        "validate": {
+          "type": "object",
+          "description": "Validation rules for this environment variable",
+          "properties": {
+            "pattern": {
+              "type": "string",
+              "description": "Regular expression pattern that the value must match"
+            },
+            "minLength": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Minimum length of the value"
+            },
+            "maxLength": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Maximum length of the value"
             }
           },
           "additionalProperties": false
