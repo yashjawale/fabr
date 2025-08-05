@@ -137,22 +137,56 @@ export function parseSubcommandArgs(args: string[], commandName: string): string
 /**
  * Validate project name format
  */
-export function validateProjectName(name: string): { valid: boolean; error?: string } {
+/**
+ * Convert a string to a valid project name slug
+ */
+export function slugifyProjectName(name: string): string {
+    return name
+        .toLowerCase()
+        .trim()
+        // Replace spaces with hyphens
+        .replace(/\s+/g, '-')
+        // Remove invalid characters, keeping only letters, numbers, hyphens, and underscores
+        .replace(/[^a-z0-9\-_]/g, '')
+        // Replace multiple consecutive hyphens with single hyphen
+        .replace(/-+/g, '-')
+        // Remove leading/trailing hyphens
+        .replace(/^-+|-+$/g, '')
+        // Truncate to 100 characters
+        .substring(0, 100)
+        // Remove trailing hyphen if truncation created one
+        .replace(/-+$/, '');
+}
+
+export function validateProjectName(name: string): { valid: boolean; error?: string; suggestion?: string } {
     if (!name) {
         return { valid: false, error: 'Project name cannot be empty.' };
+    }
+
+    const slugified = slugifyProjectName(name);
+    
+    // If the slugified version is empty after processing, it means the name was all invalid characters
+    if (!slugified) {
+        return { 
+            valid: false, 
+            error: 'Project name contains no valid characters. Use letters, numbers, underscores, and hyphens only.',
+            suggestion: undefined
+        };
     }
 
     if (!/^([A-Za-z\-\_\d])+$/.test(name)) {
         return { 
             valid: false, 
-            error: 'Project name may only include letters, numbers, underscores and hyphens.' 
+            error: 'Project name may only include letters, numbers, underscores and hyphens.',
+            suggestion: slugified !== name ? slugified : undefined
         };
     }
 
     if (name.length > 100) {
         return { 
             valid: false, 
-            error: 'Project name must be 100 characters or less.' 
+            error: 'Project name must be 100 characters or less.',
+            suggestion: slugified !== name ? slugified : undefined
         };
     }
 

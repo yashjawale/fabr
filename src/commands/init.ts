@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import * as fs from 'fs';
 import * as path from 'path';
 import ora from 'ora';
+import { confirm } from '@inquirer/prompts';
 
 // Import modularized functions from the 'lib' directory
 import { runShellCommand } from '../lib/shell.js';
@@ -64,21 +65,40 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
 
     async execute(templates: Template[], args: InitArgs): Promise<void> {
         try {
+            let projectName = args.projectName;
+            
             // Validate provided project name if given
-            if (args.projectName) {
-                const validation = validateProjectName(args.projectName);
+            if (projectName) {
+                const validation = validateProjectName(projectName);
                 if (!validation.valid) {
                     console.error(chalk.red(validation.error));
-                    process.exit(1);
+                    
+                    // If we have a suggestion, offer it to the user
+                    if (validation.suggestion) {
+                        const useSuggestion = await confirm({
+                            message: `Would you like to use "${chalk.cyan(validation.suggestion)}" instead?`,
+                            default: true
+                        });
+                        
+                        if (useSuggestion) {
+                            projectName = validation.suggestion;
+                            console.log(chalk.green(`✓ Using project name: ${projectName}`));
+                        } else {
+                            console.log(chalk.gray('Please choose a different project name.'));
+                            process.exit(1);
+                        }
+                    } else {
+                        process.exit(1);
+                    }
                 }
             }
 
             console.log(chalk.cyan.bold('Welcome to Fabr! 🚀'));
 
             // Get project details from user (skip prompts if already provided)
-            const { template, projectName } = await promptForProjectDetails(
+            const { template, projectName: finalProjectName } = await promptForProjectDetails(
                 templates, 
-                args.projectName, 
+                projectName, 
                 args.templateSlug
             );
 
@@ -94,10 +114,10 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
             }
 
             // 2. Download the template from GitHub
-            await runShellCommand(`npx degit ${chosenTemplate.repo} ${projectName}`, `Downloading template '${chosenTemplate.name}'...`);
+            await runShellCommand(`npx degit ${chosenTemplate.repo} ${finalProjectName}`, `Downloading template '${chosenTemplate.name}'...`);
 
             // Change into the newly created project directory
-            process.chdir(projectName);
+            process.chdir(finalProjectName);
             const projectPath = process.cwd();
 
             // 3. Read the template's configuration file
@@ -148,7 +168,7 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
             // Final success message
             console.log(chalk.green.bold('\n✨ Your project is ready! ✨\n'));
             console.log(chalk.white(`To get started, navigate to your new project:`));
-            console.log(chalk.cyan(`   cd ${projectName}`));
+            console.log(chalk.cyan(`   cd ${finalProjectName}`));
             console.log(chalk.white('\nHappy coding!'));
 
         } catch (error: any) {
