@@ -1,7 +1,8 @@
 import { Template } from '../types/templates.js';
-import { initCommand } from './init.js';
-import { helpCommand, showHelp } from './help.js';
-import { listCommand } from './list.js';
+import { parseGlobalArgs } from '../lib/args.js';
+import { initCommandHandler } from './init.js';
+import { helpCommandHandler, showGlobalHelp } from './help.js';
+import { listCommandHandler } from './list.js';
 
 export interface CommandDefinition {
     name: string;
@@ -17,21 +18,21 @@ export const commands: Record<string, CommandDefinition> = {
         name: 'init',
         description: 'Create a new project from a template',
         handler: async (templates: Template[], args: string[]) => {
-            await initCommand(templates, args);
+            await initCommandHandler(templates, args);
         }
     },
     list: {
         name: 'list',
         description: 'List all available templates',
         handler: async (templates: Template[], args: string[]) => {
-            await listCommand(templates);
+            await listCommandHandler(templates, args);
         }
     },
     help: {
         name: 'help',
         description: 'Show this help message',
         handler: async (templates: Template[], args: string[]) => {
-            await helpCommand();
+            await helpCommandHandler(templates, args);
         }
     }
 };
@@ -44,28 +45,35 @@ export async function executeCommand(
     templates: Template[],
     args: string[]
 ): Promise<void> {
-    // Handle help flags first
-    if (args.includes('--help') || args.includes('-h')) {
-        showHelp();
+    // Parse global arguments for better handling
+    const globalArgs = parseGlobalArgs(args);
+
+    // Use first positional argument as command if commandName is not provided
+    const command = commandName || (args.length > 0 ? args[0] : undefined);
+
+    // Handle global help flags (when no specific command or help command)
+    if (globalArgs.help && (!command || command === 'help')) {
+        showGlobalHelp();
         process.exit(0);
     }
 
     // Handle no command specified
-    if (!commandName) {
+    if (!command) {
         console.log('\x1b[33mNo command specified. Use "npx fabr init" to create a new project.\x1b[0m');
         console.log('\x1b[90mRun "npx fabr help" for more information.\x1b[0m');
         process.exit(0);
     }
 
     // Find and execute the command
-    const command = commands[commandName];
-    if (!command) {
-        console.log(`\x1b[31mUnknown command: ${commandName}\x1b[0m`);
+    const commandDef = commands[command];
+    if (!commandDef) {
+        console.log(`\x1b[31mUnknown command: ${command}\x1b[0m`);
         console.log('\x1b[90mRun "npx fabr help" for available commands.\x1b[0m');
         process.exit(1);
     }
 
-    await command.handler(templates, args);
+    // Execute the command (command-specific help is handled within each command)
+    await commandDef.handler(templates, args);
 }
 
 /**

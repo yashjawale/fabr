@@ -1,9 +1,17 @@
 import chalk from 'chalk';
+import { parseSubcommandOnlyArgs, parseSubcommandArgs } from '../lib/args.js';
+import { BaseSubcommand, SubcommandArgs } from '../types/subcommand.js';
+import { Template } from '../types/templates.js';
+import { HelpContent } from '../lib/help.js';
+
+export interface HelpArgs extends SubcommandArgs {
+    // No additional arguments for help command
+}
 
 /**
- * Show help information
+ * Show global help information
  */
-export function showHelp() {
+export function showGlobalHelp() {
     console.log(chalk.cyan.bold('Fabr - Project Template Generator 🚀\n'));
     console.log(chalk.white('Usage:'));
     console.log(chalk.cyan('  npx fabr <command>') + chalk.gray('  Execute a command\n'));
@@ -21,10 +29,50 @@ export function showHelp() {
     console.log(chalk.gray('  npx fabr help\n'));
 }
 
+export interface HelpArgs extends SubcommandArgs {
+    // No additional arguments for help command
+}
+
 /**
- * Handle the help command
+ * Show help information for the CLI
  */
-export async function helpCommand(): Promise<void> {
-    showHelp();
-    process.exit(0);
+export class HelpCommand extends BaseSubcommand<HelpArgs> {
+    readonly name = 'help';
+    readonly description = 'Show this help message';
+    
+    protected getHelpContent(): HelpContent {
+        return {
+            usage: 'npx fabr help',
+            description: this.description,
+            examples: [
+                { command: 'npx fabr help', description: 'Show global help' }
+            ]
+        };
+    }
+
+    parseArgs(rawArgs: string[]): HelpArgs {
+        const cleanArgs = parseSubcommandArgs(rawArgs, this.name);
+        const parsed = parseSubcommandOnlyArgs(cleanArgs);
+        
+        return {
+            help: parsed.help
+        };
+    }
+
+    showHelp(): void {
+        // Help command always shows global help
+        showGlobalHelp();
+    }
+
+    async execute(templates: Template[], args: HelpArgs): Promise<void> {
+        showGlobalHelp();
+        process.exit(0);
+    }
+}
+
+// Create instance and export handler function for compatibility
+const helpCommand = new HelpCommand();
+
+export async function helpCommandHandler(templates: Template[], args: string[]): Promise<void> {
+    await helpCommand.handle(templates, args);
 }

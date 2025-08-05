@@ -8,135 +8,165 @@ import { runShellCommand } from '../lib/shell.js';
 import { findAndReplace } from '../lib/files.js';
 import { processPlaceholders } from '../lib/placeholders.js';
 import { promptForProjectDetails } from '../lib/ui.js';
+import { parseSubcommandOnlyArgs, parseSubcommandArgs, validateProjectName } from '../lib/args.js';
 
 // Import types
 import { FabrConfig, validateFabrConfig } from '../types/fabr-config.js';
 import { Template, findTemplateBySlug } from '../types/templates.js';
+import { BaseSubcommand, SubcommandArgs } from '../types/subcommand.js';
+import { HelpContent } from '../lib/help.js';
 
-/**
- * Parse init command arguments
- */
-function parseInitArgs(args: string[]): { projectName?: string; templateSlug?: string } {
-    // Remove 'init' from args if it's the first argument
-    const cleanArgs = args[0] === 'init' ? args.slice(1) : args;
-    
-    let projectName: string | undefined;
-    let templateSlug: string | undefined;
-
-    for (let i = 0; i < cleanArgs.length; i++) {
-        const arg = cleanArgs[i];
-        
-        if (arg.startsWith('--template=')) {
-            templateSlug = arg.split('=')[1];
-        } else if (!arg.startsWith('-') && !projectName) {
-            // First non-flag argument is the project name
-            projectName = arg;
-        }
-    }
-
-    return { projectName, templateSlug };
+export interface InitArgs extends SubcommandArgs {
+    projectName?: string;
+    templateSlug?: string;
 }
 
 /**
- * Initialize a new project from a template
+ * Create a new project from a template
  */
-export async function initCommand(templates: Template[], args: string[] = []): Promise<void> {
-    console.log(chalk.cyan.bold('Welcome to Fabr! 🚀'));
+export class InitCommand extends BaseSubcommand<InitArgs> {
+    readonly name = 'init';
+    readonly description = 'Create a new project from a template';
+    
+    protected getHelpContent(): HelpContent {
+        return {
+            usage: 'npx fabr init [project-name] [options]',
+            description: this.description,
+            arguments: [
+                { name: 'project-name', description: 'Name of the project directory to create' }
+            ],
+            options: [
+                { flag: '--template=<slug>', description: 'Template slug to use (skips template selection)' },
+                { flag: '-t <slug>', description: 'Short form of --template' },
+                { flag: '--help, -h', description: 'Show this help message' }
+            ],
+            examples: [
+                { command: 'npx fabr init', description: 'Interactive mode' },
+                { command: 'npx fabr init my-project', description: 'Specify project name' },
+                { command: 'npx fabr init my-project --template=slug', description: 'Specify both (long form)' },
+                { command: 'npx fabr init my-project -t slug', description: 'Specify both (short form)' },
+                { command: 'npx fabr init --help', description: 'Show this help' }
+            ]
+        };
+    }
 
-    try {
-        // Parse command line arguments
-        const { projectName: providedProjectName, templateSlug: providedTemplate } = parseInitArgs(args);
+    parseArgs(rawArgs: string[]): InitArgs {
+        const cleanArgs = parseSubcommandArgs(rawArgs, this.name);
+        const parsed = parseSubcommandOnlyArgs(cleanArgs);
+        
+        return {
+            projectName: parsed.positional[0] || undefined,
+            templateSlug: typeof parsed.flags.template === 'string' ? parsed.flags.template : 
+                         typeof parsed.flags.t === 'string' ? parsed.flags.t : undefined,
+            help: parsed.help
+        };
+    }
 
-        // Validate provided project name
-        if (providedProjectName && !/^([A-Za-z\-\_\d])+$/.test(providedProjectName)) {
-            console.error(chalk.red('Project name may only include letters, numbers, underscores and hashes.'));
-            process.exit(1);
-        }
-
-        // 1. Get project details from user (skip prompts if already provided)
-        const { template, projectName } = await promptForProjectDetails(
-            templates, 
-            providedProjectName, 
-            providedTemplate
-        );
-
-        const chosenTemplate = findTemplateBySlug(templates, template);
-        if (!chosenTemplate) {
-            if (providedTemplate) {
-                console.error(chalk.red(`Template '${providedTemplate}' not found.`));
-                console.log(chalk.gray('Run "npx fabr list" to see available templates.'));
-            } else {
-                console.error(chalk.red('Invalid template selected.'));
-            }
-            process.exit(1);
-        }
-
-        // 2. Download the template from GitHub
-        await runShellCommand(`npx degit ${chosenTemplate.repo} ${projectName}`, `Downloading template '${chosenTemplate.name}'...`);
-
-        // Change into the newly created project directory
-        process.chdir(projectName);
-        const projectPath = process.cwd();
-
-        // 3. Read the template's configuration file
-        const configPath = path.join(projectPath, 'fabr.config.json');
-        let config: FabrConfig = {};
-        if (fs.existsSync(configPath)) {
-            try {
-                const configData = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-                if (validateFabrConfig(configData)) {
-                    config = configData;
-                } else {
-                    console.log(chalk.yellow("Invalid 'fabr.config.json' format. Skipping advanced setup."));
+    async execute(templates: Template[], args: InitArgs): Promise<void> {
+        try {
+            // Validate provided project name if given
+            if (args.projectName) {
+                const validation = validateProjectName(args.projectName);
+                if (!validation.valid) {
+                    console.error(chalk.red(validation.error));
+                    process.exit(1);
                 }
-            } catch (error) {
-                console.log(chalk.yellow("Failed to parse 'fabr.config.json'. Skipping advanced setup."));
             }
-        } else {
-            console.log(chalk.yellow("No 'fabr.config.json' found. Skipping advanced setup."));
-        }
-        
-        // STAGE 1: Run pre-setup command
-        await runShellCommand(config.preSetupCommand, 'Running pre-setup tasks...');
 
-        // STAGE 2: Process all placeholders
-        const placeholderValues = await processPlaceholders(config.placeholders);
-        
-        if (Object.keys(placeholderValues).length > 0) {
-            const replaceSpinner = ora('Replacing placeholders in files...').start();
-            findAndReplace(projectPath, placeholderValues);
-            replaceSpinner.succeed(chalk.green('Placeholders replaced successfully!'));
-        }
+            console.log(chalk.cyan.bold('Welcome to Fabr! 🚀'));
 
-        // STAGE 3: Run post-setup command
-        await runShellCommand(config.postSetupCommand, 'Running post-setup tasks...');
+            // Get project details from user (skip prompts if already provided)
+            const { template, projectName } = await promptForProjectDetails(
+                templates, 
+                args.projectName, 
+                args.templateSlug
+            );
 
-        // STAGE 4: Install dependencies
-        await runShellCommand(config.installCommand, 'Installing dependencies...');
+            const chosenTemplate = findTemplateBySlug(templates, template);
+            if (!chosenTemplate) {
+                if (args.templateSlug) {
+                    console.error(chalk.red(`Template '${args.templateSlug}' not found.`));
+                    console.log(chalk.gray('Run "npx fabr list" to see available templates.'));
+                } else {
+                    console.error(chalk.red('Invalid template selected.'));
+                }
+                process.exit(1);
+            }
 
-        // STAGE 5: Run post-install command
-        await runShellCommand(config.postInstallCommand, 'Running post-install tasks...');
+            // 2. Download the template from GitHub
+            await runShellCommand(`npx degit ${chosenTemplate.repo} ${projectName}`, `Downloading template '${chosenTemplate.name}'...`);
 
-        // STAGE 6: Clean up config file
-        if (fs.existsSync(configPath)) {
-            fs.unlinkSync(configPath);
-            console.log(chalk.gray('Cleaned up fabr.config.json'));
-        }
+            // Change into the newly created project directory
+            process.chdir(projectName);
+            const projectPath = process.cwd();
 
-        // Final success message
-        console.log(chalk.green.bold('\n✨ Your project is ready! ✨\n'));
-        console.log(chalk.white(`To get started, navigate to your new project:`));
-        console.log(chalk.cyan(`   cd ${projectName}`));
-        console.log(chalk.white('\nHappy coding!'));
+            // 3. Read the template's configuration file
+            const configPath = path.join(projectPath, 'fabr.config.json');
+            let config: FabrConfig = {};
+            if (fs.existsSync(configPath)) {
+                try {
+                    const configData = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+                    if (validateFabrConfig(configData)) {
+                        config = configData;
+                    } else {
+                        console.log(chalk.yellow("Invalid 'fabr.config.json' format. Skipping advanced setup."));
+                    }
+                } catch (error) {
+                    console.log(chalk.yellow("Failed to parse 'fabr.config.json'. Skipping advanced setup."));
+                }
+            } else {
+                console.log(chalk.yellow("No 'fabr.config.json' found. Skipping advanced setup."));
+            }
+            
+            // STAGE 1: Run pre-setup command
+            await runShellCommand(config.preSetupCommand, 'Running pre-setup tasks...');
 
-    } catch (error: any) {
-        if (error.isTtyError) {
-            console.log(chalk.yellow('\n\nProject creation cancelled.'));
-            process.exit(0); // User cancelled, not an error
-        } else {
-            console.log('\n\nProject creation failed due to an error.');
-            console.error(error);
-            process.exit(1); // Actual error occurred
+            // STAGE 2: Process all placeholders
+            const placeholderValues = await processPlaceholders(config.placeholders);
+            
+            if (Object.keys(placeholderValues).length > 0) {
+                const replaceSpinner = ora('Replacing placeholders in files...').start();
+                findAndReplace(projectPath, placeholderValues);
+                replaceSpinner.succeed(chalk.green('Placeholders replaced successfully!'));
+            }
+
+            // STAGE 3: Run post-setup command
+            await runShellCommand(config.postSetupCommand, 'Running post-setup tasks...');
+
+            // STAGE 4: Install dependencies
+            await runShellCommand(config.installCommand, 'Installing dependencies...');
+
+            // STAGE 5: Run post-install command
+            await runShellCommand(config.postInstallCommand, 'Running post-install tasks...');
+
+            // STAGE 6: Clean up config file
+            if (fs.existsSync(configPath)) {
+                fs.unlinkSync(configPath);
+                console.log(chalk.gray('Cleaned up fabr.config.json'));
+            }
+
+            // Final success message
+            console.log(chalk.green.bold('\n✨ Your project is ready! ✨\n'));
+            console.log(chalk.white(`To get started, navigate to your new project:`));
+            console.log(chalk.cyan(`   cd ${projectName}`));
+            console.log(chalk.white('\nHappy coding!'));
+
+        } catch (error: any) {
+            if (error.isTtyError) {
+                console.log(chalk.yellow('\n\nProject creation cancelled.'));
+                process.exit(0); // User cancelled, not an error
+            } else {
+                console.log('\n\nProject creation failed due to an error.');
+                console.error(error);
+                process.exit(1); // Actual error occurred
+            }
         }
     }
+}
+
+// Create instance and export handler function for compatibility
+const initCommand = new InitCommand();
+
+export async function initCommandHandler(templates: Template[], args: string[]): Promise<void> {
+    await initCommand.handle(templates, args);
 }

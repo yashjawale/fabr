@@ -23,8 +23,14 @@ const templates = templatesConfig.templates;
  */
 async function main() {
     const args = process.argv.slice(2);
+    
+    // Handle global help flags when no command is provided or help is explicitly requested
+    if (args.length === 0 || args[0] === '--help' || args[0] === '-h') {
+        await executeCommand('help', templates, args);
+        return;
+    }
+    
     const command = args[0];
-
     await executeCommand(command, templates, args);
 }
 
