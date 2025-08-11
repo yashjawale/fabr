@@ -42,7 +42,7 @@ export const promptForProjectDetails = async (
         projectName = await input({
             message: 'What is the name of your new project folder?',
             validate: (input: string) => 
-                /^([A-Za-z\-\_\d])+$/.test(input) || 'Project name may only include letters, numbers, underscores and hashes.',
+                /^([A-Za-z\-_\d])+$/.test(input) || 'Project name may only include letters, numbers, underscores and hashes.',
         });
     }
 

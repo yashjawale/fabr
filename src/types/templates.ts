@@ -45,56 +45,60 @@ export function isValidTemplateSlug(templates: Template[], slug: string): boolea
 /**
  * Validate templates configuration
  */
-export function validateTemplatesConfig(config: any): config is TemplatesConfig {
+export function validateTemplatesConfig(config: unknown): config is TemplatesConfig {
     if (!config || typeof config !== 'object') {
         return false;
     }
 
-    if (!Array.isArray(config.templates) || config.templates.length === 0) {
+    const configObj = config as Record<string, unknown>;
+
+    if (!Array.isArray(configObj.templates) || configObj.templates.length === 0) {
         return false;
     }
 
     // Validate each template
-    for (const template of config.templates) {
+    for (const template of configObj.templates) {
         if (!template || typeof template !== 'object') {
             return false;
         }
 
-        if (typeof template.name !== 'string' || template.name.trim().length === 0) {
+        const templateObj = template as Record<string, unknown>;
+
+        if (typeof templateObj.name !== 'string' || templateObj.name.trim().length === 0) {
             return false;
         }
 
-        if (typeof template.slug !== 'string' || template.slug.trim().length === 0) {
+        if (typeof templateObj.slug !== 'string' || templateObj.slug.trim().length === 0) {
             return false;
         }
 
-        if (typeof template.repo !== 'string' || template.repo.trim().length === 0) {
+        if (typeof templateObj.repo !== 'string' || templateObj.repo.trim().length === 0) {
             return false;
         }
 
         // Validate slug pattern
         const slugPattern = /^[a-z0-9][a-z0-9-]*[a-z0-9]$|^[a-z0-9]$/;
-        if (!slugPattern.test(template.slug)) {
+        if (!slugPattern.test(templateObj.slug)) {
             return false;
         }
 
         // Validate repo pattern
         const repoPattern = /^([a-zA-Z0-9_.-]+\/[a-zA-Z0-9_.-]+)|(https?:\/\/[^\s]+)$/;
-        if (!repoPattern.test(template.repo)) {
+        if (!repoPattern.test(templateObj.repo)) {
             return false;
         }
     }
 
     // Check for duplicate slugs
-    const slugs = config.templates.map((t: any) => t.slug);
+    const slugs = configObj.templates.map((t: Record<string, unknown>) => t.slug);
     const uniqueSlugs = new Set(slugs);
     if (slugs.length !== uniqueSlugs.size) {
         return false;
     }
 
     // Validate defaultTemplate if provided
-    if (config.defaultTemplate && typeof config.defaultTemplate === 'string') {
-        if (!isValidTemplateSlug(config.templates, config.defaultTemplate)) {
+    if (configObj.defaultTemplate && typeof configObj.defaultTemplate === 'string') {
+        if (!isValidTemplateSlug(configObj.templates as Template[], configObj.defaultTemplate)) {
             return false;
         }
     }

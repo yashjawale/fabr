@@ -4,9 +4,7 @@ import { parseSubcommandOnlyArgs, parseSubcommandArgs } from '../lib/args.js';
 import { BaseSubcommand, SubcommandArgs } from '../types/subcommand.js';
 import { HelpContent } from '../lib/help.js';
 
-export interface ListArgs extends SubcommandArgs {
-    // No additional arguments for list command currently
-}
+type ListArgs = SubcommandArgs;
 
 /**
  * List all available templates with their details
@@ -38,7 +36,7 @@ export class ListCommand extends BaseSubcommand<ListArgs> {
         };
     }
 
-    async execute(templates: Template[], args: ListArgs): Promise<void> {
+    async execute(templates: Template[]): Promise<void> {
         console.log(chalk.cyan.bold('Available Templates:\n'));
         
         if (templates.length === 0) {

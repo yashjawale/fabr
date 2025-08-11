@@ -19,9 +19,10 @@ export const runShellCommand = async (command: string | undefined, spinnerText: 
             await execa(file, args);
         }
         spinner.succeed(chalk.green('Done!'));
-    } catch (error: any) {
+    } catch (error: unknown) {
         spinner.fail(chalk.red('An error occurred.'));
-        console.error(error.stderr || error.message);
+        const err = error as { stderr?: string; message?: string };
+        console.error(err.stderr || err.message);
         throw error;
     }
 };

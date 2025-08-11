@@ -9,7 +9,7 @@ export interface ParsedArgs {
     help: boolean;
 }
 
-export interface SubcommandResult<T = Record<string, any>> {
+export interface SubcommandResult<T = Record<string, unknown>> {
     args: T;
     help: boolean;
 }
@@ -174,7 +174,7 @@ export function validateProjectName(name: string): { valid: boolean; error?: str
         };
     }
 
-    if (!/^([A-Za-z\-\_\d])+$/.test(name)) {
+    if (!/^([A-Za-z\-_\d])+$/.test(name)) {
         return { 
             valid: false, 
             error: 'Project name may only include letters, numbers, underscores and hyphens.',

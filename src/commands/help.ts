@@ -1,12 +1,9 @@
 import chalk from 'chalk';
 import { parseSubcommandOnlyArgs, parseSubcommandArgs } from '../lib/args.js';
 import { BaseSubcommand, SubcommandArgs } from '../types/subcommand.js';
-import { Template } from '../types/templates.js';
 import { HelpContent } from '../lib/help.js';
 
-export interface HelpArgs extends SubcommandArgs {
-    // No additional arguments for help command
-}
+type HelpArgs = SubcommandArgs;
 
 /**
  * Show global help information
@@ -27,10 +24,6 @@ export function showGlobalHelp() {
     console.log(chalk.gray('  npx fabr init my-project --template=slug   ') + chalk.dim('# Specify both'));
     console.log(chalk.gray('  npx fabr list'));
     console.log(chalk.gray('  npx fabr help\n'));
-}
-
-export interface HelpArgs extends SubcommandArgs {
-    // No additional arguments for help command
 }
 
 /**
@@ -64,7 +57,7 @@ export class HelpCommand extends BaseSubcommand<HelpArgs> {
         showGlobalHelp();
     }
 
-    async execute(templates: Template[], args: HelpArgs): Promise<void> {
+    async execute(): Promise<void> {
         showGlobalHelp();
         process.exit(0);
     }

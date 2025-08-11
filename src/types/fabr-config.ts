@@ -164,15 +164,17 @@ export function isFileBasedTemplate(config: FabrConfig): boolean {
 /**
  * Validates a fabr config object against the expected structure
  */
-export function validateFabrConfig(config: any): config is FabrConfig {
+export function validateFabrConfig(config: unknown): config is FabrConfig {
     // Basic validation - you might want to add more comprehensive validation
     if (typeof config !== 'object' || config === null) {
         return false;
     }
     
+    const configObj = config as Record<string, unknown>;
+    
     // Validate placeholders if they exist
-    if (config.placeholders && Array.isArray(config.placeholders)) {
-        for (const placeholder of config.placeholders) {
+    if (configObj.placeholders && Array.isArray(configObj.placeholders)) {
+        for (const placeholder of configObj.placeholders) {
             if (!placeholder.key || typeof placeholder.key !== 'string') {
                 return false;
             }

@@ -13,7 +13,7 @@ import { promptForProjectDetails } from '../lib/ui.js';
 import { parseSubcommandOnlyArgs, parseSubcommandArgs, validateProjectName } from '../lib/args.js';
 
 // Import types
-import { FabrConfig, validateFabrConfig, isCommandBasedTemplate, isFileBasedTemplate } from '../types/fabr-config.js';
+import { FabrConfig, validateFabrConfig, isCommandBasedTemplate } from '../types/fabr-config.js';
 import { Template, findTemplateBySlug } from '../types/templates.js';
 import { BaseSubcommand, SubcommandArgs } from '../types/subcommand.js';
 import { HelpContent } from '../lib/help.js';
@@ -133,7 +133,7 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
                     } else {
                         console.log(chalk.yellow("Invalid 'fabr.config.json' format. Skipping advanced setup."));
                     }
-                } catch (error) {
+                } catch {
                     console.log(chalk.yellow("Failed to parse 'fabr.config.json'. Skipping advanced setup."));
                 }
             } else {
@@ -196,8 +196,9 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
             console.log(chalk.cyan(`   cd ${finalProjectName}`));
             console.log(chalk.white('\nHappy coding!'));
 
-        } catch (error: any) {
-            if (error.isTtyError) {
+        } catch (error: unknown) {
+            const err = error as { isTtyError?: boolean };
+            if (err.isTtyError) {
                 console.log(chalk.yellow('\n\nProject creation cancelled.'));
                 process.exit(0); // User cancelled, not an error
             } else {
