@@ -6,9 +6,13 @@ import { HelpContent } from '../lib/help.js';
 type HelpArgs = SubcommandArgs;
 
 /**
- * Show global help information
+ * Show global help information for the Fabr CLI.
+ * Displays usage instructions, available commands, global options, and examples.
+ * This function outputs formatted help text to the console.
+ * 
+ * @returns {void}
  */
-export function showGlobalHelp() {
+export function showGlobalHelp(): void {
     console.log(chalk.cyan.bold('Fabr - Project Template Generator 🚀\n'));
     console.log(chalk.white('Usage:'));
     console.log(chalk.cyan('  npx fabr <command>') + chalk.gray('  Execute a command\n'));
@@ -33,6 +37,13 @@ export class HelpCommand extends BaseSubcommand<HelpArgs> {
     readonly name = 'help';
     readonly description = 'Show this help message';
     
+    /**
+     * Get help content configuration for the help command.
+     * Returns usage instructions, description, and examples specific to the help command.
+     * 
+     * @returns {HelpContent} Help content object with usage, description, and examples
+     * @protected
+     */
     protected getHelpContent(): HelpContent {
         return {
             usage: 'npx fabr help',
@@ -43,6 +54,14 @@ export class HelpCommand extends BaseSubcommand<HelpArgs> {
         };
     }
 
+    /**
+     * Parse command line arguments for the help command.
+     * Extracts and validates arguments specific to the help command.
+     * 
+     * @param {string[]} rawArgs - Raw command line arguments
+	 * 
+     * @returns {HelpArgs} Parsed help command arguments
+     */
     parseArgs(rawArgs: string[]): HelpArgs {
         const cleanArgs = parseSubcommandArgs(rawArgs, this.name);
         const parsed = parseSubcommandOnlyArgs(cleanArgs);
@@ -52,11 +71,23 @@ export class HelpCommand extends BaseSubcommand<HelpArgs> {
         };
     }
 
+    /**
+     * Show help information for the help command.
+     * Always displays global help since help command shows overall CLI help.
+     * 
+     * @returns {void}
+     */
     showHelp(): void {
         // Help command always shows global help
         showGlobalHelp();
     }
 
+    /**
+     * Execute the help command.
+     * Displays global help information and exits the process.
+     * 
+     * @returns {Promise<void>} A promise that resolves when help is displayed
+     */
     async execute(): Promise<void> {
         showGlobalHelp();
         process.exit(0);

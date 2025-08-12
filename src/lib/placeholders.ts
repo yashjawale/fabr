@@ -3,10 +3,14 @@ import { input } from '@inquirer/prompts';
 import { Placeholder, CaseType } from '../types/fabr-config.js';
 
 /**
- * Transforms a string into various cases.
- * @param input - The source string.
- * @param format - The target case.
- * @returns The transformed string.
+ * Transforms a string into various cases (kebab, pascal, camel, snake, constant).
+ * Splits the input string by common delimiters (spaces, underscores, hyphens) and applies
+ * the specified case transformation to create a consistently formatted output.
+ * 
+ * @param {string} inputStr - The source string to transform
+ * @param {CaseType} format - The target case format (kebab, pascal, camel, snake, constant)
+ * 
+ * @returns {string} The transformed string in the specified case format
  */
 const transformCase = (inputStr: string, format: CaseType): string => {
     const words = inputStr.split(/[\s_-]+/).filter(Boolean);
@@ -22,8 +26,13 @@ const transformCase = (inputStr: string, format: CaseType): string => {
 
 /**
  * Processes placeholder configurations to get final values.
- * @param placeholderConfig - The array of placeholder objects.
- * @returns An object mapping placeholder keys to their final values.
+ * Handles both prompted placeholders (requiring user input) and derived placeholders
+ * (transformed from other placeholder values). Processes prompted placeholders first,
+ * then derives transformed placeholders from the collected values.
+ * 
+ * @param {Placeholder[] | undefined} placeholderConfig - The array of placeholder configuration objects
+ * 
+ * @returns {Promise<Record<string, string>>} A promise resolving to an object mapping placeholder keys to their final values
  */
 export const processPlaceholders = async (
     placeholderConfig: Placeholder[] | undefined

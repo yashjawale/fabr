@@ -22,28 +22,55 @@ export interface TemplatesConfig {
 }
 
 /**
- * Find a template by its slug
+ * Find a template by its slug from an array of templates.
+ * Performs a linear search through the templates array to find a matching slug.
+ * 
+ * @param {Template[]} templates - Array of templates to search through
+ * @param {string} slug - The slug to search for
+ * 
+ * @returns {Template | undefined} The matching template object, or undefined if not found
  */
 export function findTemplateBySlug(templates: Template[], slug: string): Template | undefined {
     return templates.find(template => template.slug === slug);
 }
 
 /**
- * Get all template slugs
+ * Extract all template slugs from an array of templates.
+ * Returns an array containing just the slug values from all templates.
+ * 
+ * @param {Template[]} templates - Array of template objects
+ * 
+ * @returns {string[]} Array of template slug strings
  */
 export function getTemplateSlugs(templates: Template[]): string[] {
     return templates.map(template => template.slug);
 }
 
 /**
- * Validate that a template slug exists in the templates array
+ * Validate that a template slug exists in the templates array.
+ * Checks if any template in the provided array has the specified slug.
+ * 
+ * @param {Template[]} templates - Array of templates to check against
+ * @param {string} slug - The slug to validate
+ * 
+ * @returns {boolean} True if the slug exists in the templates array, false otherwise
  */
 export function isValidTemplateSlug(templates: Template[], slug: string): boolean {
     return templates.some(template => template.slug === slug);
 }
 
 /**
- * Validate templates configuration
+ * Validate templates configuration structure and content.
+ * Performs comprehensive validation of a templates configuration object:
+ * - Validates basic structure and required fields
+ * - Checks template object properties (name, slug, repo)
+ * - Validates slug and repository URL patterns
+ * - Ensures no duplicate slugs exist
+ * - Validates defaultTemplate reference if provided
+ * 
+ * @param {unknown} config - The configuration object to validate
+ * 
+ * @returns {config is TemplatesConfig} Type predicate indicating if the config is a valid TemplatesConfig
  */
 export function validateTemplatesConfig(config: unknown): config is TemplatesConfig {
     if (!config || typeof config !== 'object') {

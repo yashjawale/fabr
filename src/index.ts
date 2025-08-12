@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-import chalk from 'chalk';
-
 // Import types
 import { TemplatesConfig, validateTemplatesConfig } from './types/templates.js';
 import { executeCommand } from './commands/index.js';
@@ -19,9 +17,13 @@ const templatesConfig = templatesData as TemplatesConfig;
 const templates = templatesConfig.templates;
 
 /**
- * Parse command line arguments and execute the appropriate command
+ * Main entry point for the Fabr CLI application.
+ * Parses command line arguments and executes the appropriate command.
+ * Handles global help flags and routes commands to their respective handlers.
+ * 
+ * @returns {Promise<void>} A promise that resolves when the command execution is complete
  */
-async function main() {
+async function main(): Promise<void> {
     const args = process.argv.slice(2);
     
     // Handle global help flags when no command is provided or help is explicitly requested

@@ -9,7 +9,15 @@ import { runShellCommand } from './shell.js';
 import { CommandTemplate } from '../types/fabr-config.js';
 
 /**
- * Execute a command with output visible to the user
+ * Execute a command with output visible to the user.
+ * Uses execa with inherit stdio to show command output directly in the terminal.
+ * Enables shell features like redirection and piping.
+ * 
+ * @param {string} command - The command to execute
+ * 
+ * @returns {Promise<void>} A promise that resolves when the command completes
+ * 
+ * @throws {Error} Throws an error if the command execution fails
  */
 async function executeCommandWithOutput(command: string): Promise<void> {
     // Use shell: true for commands that need shell features like redirection
@@ -17,7 +25,18 @@ async function executeCommandWithOutput(command: string): Promise<void> {
 }
 
 /**
- * Execute a list of command templates with placeholder replacement
+ * Execute a list of command templates with placeholder replacement.
+ * Processes each command template by replacing placeholders with their values,
+ * executing commands in their specified working directories, and providing
+ * progress feedback. Supports both visible output and silent execution modes.
+ * 
+ * @param {CommandTemplate[]} commands - Array of command templates to execute
+ * @param {Record<string, string>} placeholderValues - Mapping of placeholder keys to their values
+ * @param {string} projectPath - The base project path for relative working directories
+ * 
+ * @returns {Promise<void>} A promise that resolves when all commands complete successfully
+ * 
+ * @throws {Error} Throws an error if any command execution fails
  */
 export async function executeCommandTemplates(
     commands: CommandTemplate[],
@@ -73,7 +92,15 @@ export async function executeCommandTemplates(
 }
 
 /**
- * Replace placeholders in a command string
+ * Replace placeholders in a command string with their corresponding values.
+ * Searches for placeholder patterns in the format {{PLACEHOLDER_NAME}} and replaces
+ * them with the provided values. Uses global replacement to handle multiple
+ * occurrences of the same placeholder within a command.
+ * 
+ * @param {string} command - The command string containing placeholder patterns
+ * @param {Record<string, string>} placeholderValues - Mapping of placeholder keys to their replacement values
+ * 
+ * @returns {string} The processed command string with all placeholders replaced
  */
 export function replacePlaceholdersInCommand(
     command: string,
@@ -91,7 +118,15 @@ export function replacePlaceholdersInCommand(
 }
 
 /**
- * Validate that all placeholders in commands have values
+ * Validate that all placeholders in commands have corresponding values.
+ * Scans all command templates for placeholder patterns and checks if each
+ * placeholder has a corresponding value in the provided placeholder values.
+ * Returns a list of missing placeholder keys that need to be resolved.
+ * 
+ * @param {CommandTemplate[]} commands - Array of command templates to validate
+ * @param {Record<string, string>} placeholderValues - Available placeholder values
+ * 
+ * @returns {string[]} Array of placeholder keys that are missing values
  */
 export function validateCommandPlaceholders(
     commands: CommandTemplate[],

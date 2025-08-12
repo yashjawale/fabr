@@ -38,7 +38,15 @@ export const commands: Record<string, CommandDefinition> = {
 };
 
 /**
- * Execute a command by name
+ * Execute a command by name with the provided arguments.
+ * Looks up the command in the registry and delegates execution to the appropriate handler.
+ * Shows an error message and exits if the command is not found.
+ * 
+ * @param {string} commandName - The name of the command to execute
+ * @param {Template[]} templates - Array of available templates
+ * @param {string[]} args - Command line arguments including the command name
+ * 
+ * @returns {Promise<void>} A promise that resolves when the command execution is complete
  */
 export async function executeCommand(
     commandName: string,
@@ -58,7 +66,10 @@ export async function executeCommand(
 }
 
 /**
- * Get list of all available commands
+ * Get list of all available commands with their definitions.
+ * Returns an array of CommandDefinition objects containing name, description, and handler.
+ * 
+ * @returns {CommandDefinition[]} Array of all available command definitions
  */
 export function getAvailableCommands(): CommandDefinition[] {
     return Object.values(commands);

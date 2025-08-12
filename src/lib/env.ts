@@ -5,10 +5,14 @@ import * as path from 'path';
 import { EnvironmentVariable, CaseType, isPromptedEnvironmentVariable, isTransformedEnvironmentVariable } from '../types/fabr-config.js';
 
 /**
- * Transforms a string into various cases.
- * @param input - The source string.
- * @param format - The target case.
- * @returns The transformed string.
+ * Transforms a string into various cases (kebab, pascal, camel, snake, constant).
+ * Splits the input string by common delimiters (spaces, underscores, hyphens) and applies
+ * the specified case transformation to create a consistently formatted output.
+ * 
+ * @param {string} inputStr - The source string to transform
+ * @param {CaseType} format - The target case format (kebab, pascal, camel, snake, constant)
+ * 
+ * @returns {string} The transformed string in the specified case format
  */
 const transformCase = (inputStr: string, format: CaseType): string => {
     const words = inputStr.split(/[\s_-]+/).filter(Boolean);
@@ -24,9 +28,14 @@ const transformCase = (inputStr: string, format: CaseType): string => {
 
 /**
  * Processes environment variable configurations to get final values.
- * @param envVarConfig - The array of environment variable objects.
- * @param placeholderValues - Existing placeholder values for transformations.
- * @returns An object with regular and local environment variables.
+ * Handles both prompted environment variables (requiring user input) and transformed
+ * environment variables (derived from placeholder values). Separates variables into
+ * regular (.env) and local (.env.local) categories based on their configuration.
+ * 
+ * @param {EnvironmentVariable[] | undefined} envVarConfig - The array of environment variable configuration objects
+ * @param {Record<string, string>} placeholderValues - Existing placeholder values for transformations
+ * 
+ * @returns {Promise<{ regular: Record<string, string>; local: Record<string, string> }>} Object containing regular and local environment variables
  */
 export const processEnvironmentVariables = async (
     envVarConfig: EnvironmentVariable[] | undefined,
@@ -121,9 +130,15 @@ export const processEnvironmentVariables = async (
 
 /**
  * Creates .env and .env.local files with the provided environment variables.
- * @param projectPath - The path to the project directory.
- * @param regularEnvVars - Environment variables for .env file.
- * @param localEnvVars - Environment variables for .env.local file.
+ * Writes environment variables to appropriate files based on their categorization.
+ * Regular variables go to .env, sensitive/local variables go to .env.local.
+ * Only creates files if there are variables to write.
+ * 
+ * @param {string} projectPath - The path to the project directory where files will be created
+ * @param {Record<string, string>} regularEnvVars - Environment variables for .env file
+ * @param {Record<string, string>} localEnvVars - Environment variables for .env.local file
+ * 
+ * @returns {void}
  */
 export const createEnvironmentFiles = (
     projectPath: string,
@@ -155,9 +170,14 @@ export const createEnvironmentFiles = (
 
 /**
  * Processes environment variables and creates the appropriate .env files.
- * @param envVarConfig - The array of environment variable configurations.
- * @param placeholderValues - Existing placeholder values for transformations.
- * @param projectPath - The path to the project directory.
+ * Combines the processing of environment variable configurations with file creation.
+ * This is a convenience function that handles the complete environment variable workflow.
+ * 
+ * @param {EnvironmentVariable[] | undefined} envVarConfig - The array of environment variable configurations
+ * @param {Record<string, string>} placeholderValues - Existing placeholder values for transformations
+ * @param {string} projectPath - The path to the project directory where .env files will be created
+ * 
+ * @returns {Promise<void>} A promise that resolves when environment files are created
  */
 export const processAndCreateEnvironmentFiles = async (
     envVarConfig: EnvironmentVariable[] | undefined,

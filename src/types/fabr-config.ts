@@ -120,49 +120,85 @@ export interface FabrConfig {
 }
 
 /**
- * Type guard to check if a placeholder is a prompted placeholder
+ * Type guard to check if a placeholder is a prompted placeholder.
+ * A prompted placeholder is one that requires user input and is not transformed from another placeholder.
+ * 
+ * @param {Placeholder} placeholder - The placeholder object to check
+ * 
+ * @returns {boolean} True if the placeholder has a prompt and no transform property
  */
 export function isPromptedPlaceholder(placeholder: Placeholder): boolean {
     return !!placeholder.prompt && !placeholder.transform;
 }
 
 /**
- * Type guard to check if a placeholder is a transformed placeholder
+ * Type guard to check if a placeholder is a transformed placeholder.
+ * A transformed placeholder derives its value from another placeholder using case transformation.
+ * 
+ * @param {Placeholder} placeholder - The placeholder object to check
+ * 
+ * @returns {boolean} True if the placeholder has a transform property
  */
 export function isTransformedPlaceholder(placeholder: Placeholder): boolean {
     return !!placeholder.transform;
 }
 
 /**
- * Type guard to check if an environment variable is a prompted environment variable
+ * Type guard to check if an environment variable is a prompted environment variable.
+ * A prompted environment variable requires user input and is not transformed from a placeholder.
+ * 
+ * @param {EnvironmentVariable} envVar - The environment variable object to check
+ * 
+ * @returns {boolean} True if the environment variable has a prompt and no transform property
  */
 export function isPromptedEnvironmentVariable(envVar: EnvironmentVariable): boolean {
     return !!envVar.prompt && !envVar.transform;
 }
 
 /**
- * Type guard to check if an environment variable is a transformed environment variable
+ * Type guard to check if an environment variable is a transformed environment variable.
+ * A transformed environment variable derives its value from a placeholder using case transformation.
+ * 
+ * @param {EnvironmentVariable} envVar - The environment variable object to check
+ * 
+ * @returns {boolean} True if the environment variable has a transform property
  */
 export function isTransformedEnvironmentVariable(envVar: EnvironmentVariable): boolean {
     return !!envVar.transform;
 }
 
 /**
- * Type guard to check if a config is a command-based template
+ * Type guard to check if a config is a command-based template.
+ * Command-based templates execute commands to generate files rather than using file copying.
+ * 
+ * @param {FabrConfig} config - The configuration object to check
+ * 
+ * @returns {boolean} True if the config is explicitly marked as 'commands' type or has command definitions
  */
 export function isCommandBasedTemplate(config: FabrConfig): boolean {
     return config.type === 'commands' || (!!config.commands && config.commands.length > 0);
 }
 
 /**
- * Type guard to check if a config is a file-based template
+ * Type guard to check if a config is a file-based template.
+ * File-based templates copy and modify files rather than executing commands to generate content.
+ * 
+ * @param {FabrConfig} config - The configuration object to check
+ * 
+ * @returns {boolean} True if the config is not a command-based template
  */
 export function isFileBasedTemplate(config: FabrConfig): boolean {
     return !isCommandBasedTemplate(config);
 }
 
 /**
- * Validates a fabr config object against the expected structure
+ * Validates a fabr config object against the expected structure.
+ * Performs basic validation of the configuration object structure and placeholder definitions.
+ * Ensures that placeholders have required properties and valid configurations.
+ * 
+ * @param {unknown} config - The configuration object to validate
+ * 
+ * @returns {config is FabrConfig} Type predicate indicating if the config is a valid FabrConfig
  */
 export function validateFabrConfig(config: unknown): config is FabrConfig {
     // Basic validation - you might want to add more comprehensive validation

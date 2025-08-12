@@ -13,6 +13,13 @@ export class ListCommand extends BaseSubcommand<ListArgs> {
     readonly name = 'list';
     readonly description = 'List all available templates';
     
+    /**
+     * Get help content configuration for the list command.
+     * Returns usage instructions, description, options, and examples for the list command.
+     * 
+     * @returns {HelpContent} Help content object with usage, description, options, and examples
+     * @protected
+     */
     protected getHelpContent(): HelpContent {
         return {
             usage: 'npx fabr list [options]',
@@ -27,6 +34,14 @@ export class ListCommand extends BaseSubcommand<ListArgs> {
         };
     }
 
+    /**
+     * Parse command line arguments for the list command.
+     * Extracts and validates arguments specific to the list command.
+     * 
+     * @param {string[]} rawArgs - Raw command line arguments
+	 * 
+     * @returns {ListArgs} Parsed list command arguments
+     */
     parseArgs(rawArgs: string[]): ListArgs {
         const cleanArgs = parseSubcommandArgs(rawArgs, this.name);
         const parsed = parseSubcommandOnlyArgs(cleanArgs);
@@ -36,6 +51,15 @@ export class ListCommand extends BaseSubcommand<ListArgs> {
         };
     }
 
+    /**
+     * Execute the list command.
+     * Displays all available templates with their names, slugs, and repositories.
+     * Shows a count of total templates at the end.
+     * 
+     * @param {Template[]} templates - Array of available templates to display
+	 * 
+     * @returns {Promise<void>} A promise that resolves when the template list is displayed
+     */
     async execute(templates: Template[]): Promise<void> {
         console.log(chalk.cyan.bold('Available Templates:\n'));
         

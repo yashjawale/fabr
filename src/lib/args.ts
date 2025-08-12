@@ -15,7 +15,14 @@ export interface SubcommandResult<T = Record<string, unknown>> {
 }
 
 /**
- * Parse command line arguments into a structured format
+ * Parse command line arguments into a structured format.
+ * Handles positional arguments, flags (both long and short), and help flags.
+ * Supports both --key=value and --key formats for long flags.
+ * Supports single-character flags like -h and -t with optional values.
+ * 
+ * @param {string[]} args - Array of command line arguments to parse
+ * 
+ * @returns {ParsedArgs} Structured object containing command, positional args, flags, and help status
  */
 export function parseArgs(args: string[]): ParsedArgs {
     const result: ParsedArgs = {
@@ -71,7 +78,13 @@ export function parseArgs(args: string[]): ParsedArgs {
 }
 
 /**
- * Parse arguments for subcommands (treats all non-flag arguments as positional)
+ * Parse arguments for subcommands, treating all non-flag arguments as positional.
+ * Similar to parseArgs but doesn't distinguish between command and positional arguments.
+ * All non-flag arguments are treated as positional arguments for subcommands.
+ * 
+ * @param {string[]} args - Array of command line arguments to parse
+ * 
+ * @returns {Omit<ParsedArgs, 'command'> & { positional: string[] }} Parsed arguments without command field
  */
 export function parseSubcommandOnlyArgs(args: string[]): Omit<ParsedArgs, 'command'> & { positional: string[] } {
     const result = {
@@ -123,8 +136,14 @@ export function parseSubcommandOnlyArgs(args: string[]): Omit<ParsedArgs, 'comma
 }
 
 /**
- * Generic subcommand argument parser
- * Removes the command name from args and returns clean arguments for the subcommand
+ * Generic subcommand argument parser that removes the command name from arguments.
+ * If the first argument matches the command name, it removes it and returns the rest.
+ * This prepares arguments for subcommand-specific parsing.
+ * 
+ * @param {string[]} args - Original command line arguments
+ * @param {string} commandName - Name of the command to remove from arguments
+ * 
+ * @returns {string[]} Clean arguments array without the command name
  */
 export function parseSubcommandArgs(args: string[], commandName: string): string[] {
     // Remove the command name if it's the first argument
@@ -135,10 +154,18 @@ export function parseSubcommandArgs(args: string[], commandName: string): string
 }
 
 /**
- * Validate project name format
- */
-/**
- * Convert a string to a valid project name slug
+ * Convert a string to a valid project name slug.
+ * Applies multiple transformations to ensure the name is suitable for directory/project names:
+ * - Converts to lowercase
+ * - Replaces spaces with hyphens
+ * - Removes invalid characters (keeps only letters, numbers, hyphens, underscores)
+ * - Removes consecutive hyphens
+ * - Removes leading/trailing hyphens
+ * - Truncates to 100 characters
+ * 
+ * @param {string} name - The original project name to slugify
+ * 
+ * @returns {string} A valid project name slug
  */
 export function slugifyProjectName(name: string): string {
     return name
@@ -158,6 +185,15 @@ export function slugifyProjectName(name: string): string {
         .replace(/-+$/, '');
 }
 
+/**
+ * Validate project name format and provide suggestions if invalid.
+ * Checks for empty names, invalid characters, and length limits.
+ * Returns validation result with optional error message and suggested alternative.
+ * 
+ * @param {string} name - The project name to validate
+ * 
+ * @returns {{ valid: boolean; error?: string; suggestion?: string }} Validation result with optional error and suggestion
+ */
 export function validateProjectName(name: string): { valid: boolean; error?: string; suggestion?: string } {
     if (!name) {
         return { valid: false, error: 'Project name cannot be empty.' };

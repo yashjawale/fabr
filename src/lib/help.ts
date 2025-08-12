@@ -11,7 +11,15 @@ export interface HelpContent {
 }
 
 /**
- * Format help content into a readable string
+ * Format help content into a readable string.
+ * Takes help content configuration and formats it into a structured help message
+ * with sections for usage, description, arguments, options, and examples.
+ * Provides consistent formatting and spacing for command help display.
+ * 
+ * @param {string} commandName - The name of the command for which help is being formatted
+ * @param {HelpContent} content - The help content object containing usage, description, etc.
+ * 
+ * @returns {string} A formatted help string ready for console output
  */
 export function formatHelpContent(commandName: string, content: HelpContent): string {
     let output = '';

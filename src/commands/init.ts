@@ -31,6 +31,13 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
     readonly name = 'init';
     readonly description = 'Create a new project from a template';
     
+    /**
+     * Get help content configuration for the init command.
+     * Returns usage instructions, description, arguments, options, and examples for the init command.
+     * 
+     * @returns {HelpContent} Help content object with usage, description, arguments, options, and examples
+     * @protected
+     */
     protected getHelpContent(): HelpContent {
         return {
             usage: 'npx fabr init [project-name] [options]',
@@ -53,6 +60,14 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
         };
     }
 
+    /**
+     * Parse command line arguments for the init command.
+     * Extracts project name, template slug, and help flag from the provided arguments.
+     * 
+     * @param {string[]} rawArgs - Raw command line arguments
+	 * 
+     * @returns {InitArgs} Parsed init command arguments including project name and template slug
+     */
     parseArgs(rawArgs: string[]): InitArgs {
         const cleanArgs = parseSubcommandArgs(rawArgs, this.name);
         const parsed = parseSubcommandOnlyArgs(cleanArgs);
@@ -65,6 +80,24 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
         };
     }
 
+    /**
+     * Execute the init command to create a new project from a template.
+     * 
+     * This method orchestrates the entire project creation process:
+     * 1. Validates the project name
+     * 2. Prompts for missing information (project name, template)
+     * 3. Downloads the template from GitHub
+     * 4. Processes the template configuration
+     * 5. Handles placeholders and environment variables
+     * 6. Runs setup commands
+     * 7. Installs dependencies and runs post-install tasks
+     * 8. Cleans up temporary files
+     * 
+     * @param {Template[]} templates - Array of available templates
+     * @param {InitArgs} args - Parsed command arguments
+	 * 
+     * @returns {Promise<void>} A promise that resolves when project creation is complete
+     */
     async execute(templates: Template[], args: InitArgs): Promise<void> {
         try {
             let projectName = args.projectName;

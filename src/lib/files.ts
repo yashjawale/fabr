@@ -3,8 +3,11 @@ import path from 'path';
 
 /**
  * Recursively walks a directory and returns all file paths.
- * @param dirPath - The directory to walk.
- * @returns An array of full file paths.
+ * Traverses the directory tree while excluding common build/version control directories.
+ * Skips 'node_modules', '.git', and 'dist' directories to avoid processing unnecessary files.
+ * 
+ * @param {string} dirPath - The directory path to walk recursively
+ * @returns {string[]} An array of absolute file paths found in the directory tree
  */
 const walkDir = (dirPath: string): string[] => {
     let fileList: string[] = [];
@@ -24,8 +27,13 @@ const walkDir = (dirPath: string): string[] => {
 
 /**
  * Finds and replaces placeholder values in all files within a directory.
- * @param projectPath - The root path of the project.
- * @param placeholderValues - An object mapping placeholder keys to their final values.
+ * Recursively processes all files in the project directory, searching for placeholder
+ * patterns and replacing them with their corresponding values. Only writes files back
+ * if changes were made to avoid unnecessary disk operations.
+ * 
+ * @param {string} projectPath - The root path of the project directory to process
+ * @param {Record<string, string>} placeholderValues - An object mapping placeholder keys to their replacement values
+ * @returns {void}
  */
 export const findAndReplace = (projectPath: string, placeholderValues: Record<string, string>): void => {
     const filesToProcess = walkDir(projectPath);

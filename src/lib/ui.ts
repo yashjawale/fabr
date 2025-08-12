@@ -2,11 +2,15 @@ import { search, input } from '@inquirer/prompts';
 import { Template } from '../types/templates.js';
 
 /**
- * Prompts the user for the initial project setup info.
- * @param templates - The list of available templates.
- * @param providedProjectName - Pre-provided project name (optional).
- * @param providedTemplate - Pre-provided template slug (optional).
- * @returns A promise that resolves to the user's answers.
+ * Prompts the user for the initial project setup information.
+ * Handles interactive prompting for template selection and project name if not provided.
+ * Uses fuzzy search for template selection and validates project name format.
+ * 
+ * @param {Template[]} templates - The list of available templates to choose from
+ * @param {string} [providedProjectName] - Pre-provided project name (optional, will prompt if not provided)
+ * @param {string} [providedTemplate] - Pre-provided template slug (optional, will prompt if not provided)
+ * 
+ * @returns {Promise<{ template: string; projectName: string }>} A promise that resolves to the user's template and project name choices
  */
 export const promptForProjectDetails = async (
     templates: Template[], 
