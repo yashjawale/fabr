@@ -14,3 +14,7 @@
   --color-fabr-light: #F1F1F1;
   --color-fabr-bg-dark: #242424;
 }
+
+.app-container {
+  @apply container mx-auto px-6 sm:px-20 2xl:px-16;
+}

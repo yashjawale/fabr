@@ -1,45 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import StyleDemo from '../components/StyleDemo.astro';
+import Navbar from '../components/Navbar.astro';
 ---
 
 <Layout>
-	<div class="max-w-4xl mx-auto px-4 py-8 space-y-8">
-		<div class="text-center">
-			<h1 class="text-5xl font-title text-fabr-orange mb-4">fabr</h1>
-			<p class="text-xl text-fabr-dark mb-8">Fast project template generator built with TypeScript</p>
-		</div>
-
-		<StyleDemo />
-
-		<div class="prose prose-lg mx-auto text-fabr-dark">
-			<h2 class="font-title text-2xl text-fabr-orange">What is fabr?</h2>
-			<p>
-				fabr is a powerful command-line tool that helps developers quickly bootstrap new projects 
-				using customizable templates. Whether you're starting a new web application, API, or any 
-				other type of project, fabr streamlines the setup process.
-			</p>
-
-			<h2 class="font-title text-2xl text-fabr-orange">Quick Start</h2>
-			<div class="bg-fabr-cream p-4 rounded-lg">
-				<pre class="text-sm"><code># Install globally
-npm install -g fabr
-
-# Initialize a new project
-fabr init my-project
-
-# Or use npx for one-time use
-npx fabr init my-project</code></pre>
-			</div>
-
-			<h2 class="font-title text-2xl text-fabr-orange">Features</h2>
-			<ul>
-				<li>🚀 Lightning-fast project initialization</li>
-				<li>📦 Customizable templates with variable substitution</li>
-				<li>🔧 Environment-based configuration</li>
-				<li>📝 Interactive command setup</li>
-				<li>🎨 Built with modern TypeScript</li>
-			</ul>
-		</div>
-	</div>
+	<Navbar/>
 </Layout>
