@@ -244,5 +244,5 @@ NEXTAUTH_SECRET=your-super-secret-key-here
 
 ## Template Examples
 
-- [Full Stack Next.js Example](./example-env-template.json) - Complete setup with database, auth, and caching
-- [Simple API Example](./example-simple-env-template.json) - Basic environment variables for an API project
+- [Full Stack Next.js Example](../examples/example-env-template.json) - Complete setup with database, auth, and caching
+- [Simple API Example](../examples/example-simple-env-template.json) - Basic environment variables for an API project

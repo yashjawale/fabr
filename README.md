@@ -125,7 +125,7 @@ Templates use `fabr.config.json` to define:
 
 ## Documentation
 
-- [Command-Based Templates Guide](./COMMAND-TEMPLATES.md) - Detailed guide for command templates
-- [Environment Variables Guide](./ENVIRONMENT-VARIABLES.md) - Complete guide for .env file generation
+- [Command-Based Templates Guide](./docs/COMMAND-TEMPLATES.md) - Detailed guide for command templates
+- [Environment Variables Guide](./docs/ENVIRONMENT-VARIABLES.md) - Complete guide for .env file generation
 - [JSON Schema](./fabr.config.schema.json) - Complete configuration schema
-- [Examples](./example-command-template.json) - Sample configurations
+- [Examples](./examples/) - Sample configurations

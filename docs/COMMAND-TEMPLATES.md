@@ -200,8 +200,8 @@ Commands support the same placeholder system as file templates:
 ## Examples
 
 See the example configuration files:
-- `example-simple-command-template.json` - Basic Node.js setup
-- `example-command-template.json` - Advanced Express TypeScript API
+- [`example-simple-command-template.json`](../examples/example-simple-command-template.json) - Basic Node.js setup
+- [`example-command-template.json`](../examples/example-command-template.json) - Advanced Express TypeScript API
 
 ## Mixed Mode
 
