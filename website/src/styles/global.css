@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+/* Import Amaranth font for headings */
+@import '@fontsource/amaranth/400.css';
+@import '@fontsource/amaranth/700.css';
+
+@theme {
+  --font-title: 'Amaranth', serif;
+  
+  --color-fabr-orange: #C94402;
+  --color-fabr-cream: #FCFAEE;
+  --color-fabr-dark: #242424;
+  --color-fabr-orange-dark: #EC8856;
+  --color-fabr-light: #F1F1F1;
+  --color-fabr-bg-dark: #242424;
+}
