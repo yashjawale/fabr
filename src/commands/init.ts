@@ -36,6 +36,7 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
      * Returns usage instructions, description, arguments, options, and examples for the init command.
      * 
      * @returns {HelpContent} Help content object with usage, description, arguments, options, and examples
+	 * 
      * @protected
      */
     protected getHelpContent(): HelpContent {

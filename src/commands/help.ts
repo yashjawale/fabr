@@ -42,6 +42,7 @@ export class HelpCommand extends BaseSubcommand<HelpArgs> {
      * Returns usage instructions, description, and examples specific to the help command.
      * 
      * @returns {HelpContent} Help content object with usage, description, and examples
+	 * 
      * @protected
      */
     protected getHelpContent(): HelpContent {

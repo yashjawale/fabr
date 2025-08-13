@@ -40,6 +40,7 @@ export abstract class BaseSubcommand<T extends SubcommandArgs = SubcommandArgs> 
      * Returns help content structure for this specific command.
      * 
      * @returns {HelpContent} Help content object with usage, description, options, and examples
+	 * 
      * @protected
      */
     protected abstract getHelpContent(): HelpContent;

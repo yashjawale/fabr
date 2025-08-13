@@ -7,6 +7,7 @@ import path from 'path';
  * Skips 'node_modules', '.git', and 'dist' directories to avoid processing unnecessary files.
  * 
  * @param {string} dirPath - The directory path to walk recursively
+ * 
  * @returns {string[]} An array of absolute file paths found in the directory tree
  */
 const walkDir = (dirPath: string): string[] => {
@@ -33,6 +34,7 @@ const walkDir = (dirPath: string): string[] => {
  * 
  * @param {string} projectPath - The root path of the project directory to process
  * @param {Record<string, string>} placeholderValues - An object mapping placeholder keys to their replacement values
+ * 
  * @returns {void}
  */
 export const findAndReplace = (projectPath: string, placeholderValues: Record<string, string>): void => {
