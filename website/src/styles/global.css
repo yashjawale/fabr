@@ -4,6 +4,12 @@
 @import '@fontsource/amaranth/400.css';
 @import '@fontsource/amaranth/700.css';
 
+@layer base, starlight, theme, components, utilities;
+
+@import '@astrojs/starlight-tailwind';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
 @theme {
   --font-title: 'Amaranth', serif;
   
@@ -17,4 +23,20 @@
 
 .app-container {
   @apply container mx-auto px-6 sm:px-20 2xl:px-16;
+}
+
+/* Hero section */
+.hero-section-clip {
+	clip-path: ellipse(100% 100% at 50% 0%);
+}
+.hero-code-snippet {
+	@apply max-w-2xs mx-auto mt-28;
+}
+
+.hero-code-snippet pre {
+	@apply text-white bg-neutral-800 rounded-lg border-0 p-2;
+}
+
+.hero-code-snippet * {
+	@apply text-white text-lg;
 }
