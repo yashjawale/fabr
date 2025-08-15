@@ -59,6 +59,6 @@ button.theme-button {
 	@apply p-1 rounded-full duration-0;
 }
 
-/* button.active {
-	@apply text-background bg-foreground bg-opacity-90;
-} */
+button.active {
+	@apply text-fabr-orange bg-fabr-cream;
+}

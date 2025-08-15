@@ -1,11 +1,13 @@
 ---
+import { Icon } from '@astrojs/starlight/components'
+
 const { class: className } = Astro.props
 ---
 
 <div
   class:list={[
     className,
-    'border-[1px] border-foreground rounded-full flex justify-center items-center text-foreground [&>*:hover]:brightness-75 md:opacity-80',
+    'border border-foreground rounded-full flex -gap-1 justify-center items-center [&>*]:text-lg [&>*]:cursor-pointer text-foreground  md:opacity-80',
   ]}
 >
   <button
@@ -13,20 +15,20 @@ const { class: className } = Astro.props
     aria-label="Auto Theme"
     class="theme-button theme-auto"
   >
-    A
+    <Icon name='starlight' />
   </button>
   <button
     data-theme="theme-light"
     aria-label="Light Theme"
     class="theme-button theme-light"
   >
-    L
+    <Icon name='sun' />
   </button>
   <button
     data-theme="theme-dark"
     aria-label="Dark Theme"
     class="theme-button theme-dark"
   >
-    D
+	<Icon name='moon' />
   </button>
 </div>
