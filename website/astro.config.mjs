@@ -22,10 +22,9 @@ export default defineConfig({
     },
     sidebar: [
       {
-        label: 'Documentation',
+        label: 'General',
         items: [
           { label: 'Getting Started', slug: 'docs' },
-          { label: 'Style Guide', slug: 'style-guide' },
         ],
       },
     ],
