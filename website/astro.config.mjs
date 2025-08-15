@@ -8,6 +8,12 @@ export default defineConfig({
   integrations: [starlight({
     title: 'Fabr',
     description: 'Project Template Generator',
+	logo: {
+		dark: './src/assets/fabr-docs-dark.svg',
+		light: './src/assets/fabr-docs-light.svg',
+		alt: 'fabr Docs',
+		replacesTitle: true,
+	},
     customCss: [
       './src/styles/global.css',
     ],
