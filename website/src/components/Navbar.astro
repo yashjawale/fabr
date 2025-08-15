@@ -1,5 +1,6 @@
 ---
 import FabrLogo from './FabrLogo.astro';
+import ThemeSelector from './ThemeSelector.astro';
 
 ---
 
@@ -10,6 +11,68 @@ import FabrLogo from './FabrLogo.astro';
 		</a>
 		<ul class='flex space-x-6 uppercase text-sm font-semibold'>
 			<li><a href="/docs" class="hover:underline">Docs</a></li>
+			<ThemeSelector/>
 		</ul>
 	</nav>
 </div>
+
+<!-- Theme Selector Script -->
+ <script is:inline>
+  function reComputeTheme() {
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+
+    let theme = localStorage.theme || 'auto'
+    document
+      .querySelectorAll(`[data-theme="theme-${theme}"]`)
+      .forEach((el) => el.classList.add('active'))
+  }
+
+  function addThemeEventListeners() {
+    themeButtons = document.querySelectorAll('.theme-button')
+    themeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        themeButtons.forEach((btn) => btn.classList.remove('active'))
+        button.classList.add('active')
+        if (button.dataset.theme === 'theme-auto') {
+          localStorage.removeItem('theme')
+          reComputeTheme()
+        } else {
+          localStorage.theme = button.dataset.theme.replace('theme-', '')
+          document.documentElement.classList.toggle(
+            'dark',
+            button.dataset.theme === 'theme-dark'
+          )
+        }
+      })
+    })
+  }
+
+  // Set active class on OS theme change
+  window
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', (e) => {
+      reComputeTheme()
+    })
+
+  // run recomputeTheme when screen crosses 768px
+  window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => {
+    addThemeEventListeners()
+    reComputeTheme()
+  })
+
+  reComputeTheme()
+
+  // Run on page load
+  window.addEventListener('DOMContentLoaded', () => {
+    addThemeEventListeners()
+    reComputeTheme()
+  })
+</script>

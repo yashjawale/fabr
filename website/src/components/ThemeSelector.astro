@@ -1,0 +1,32 @@
+---
+const { class: className } = Astro.props
+---
+
+<div
+  class:list={[
+    className,
+    'border-[1px] border-foreground rounded-full flex justify-center items-center text-foreground [&>*:hover]:brightness-75 md:opacity-80',
+  ]}
+>
+  <button
+    data-theme="theme-auto"
+    aria-label="Auto Theme"
+    class="theme-button theme-auto"
+  >
+    A
+  </button>
+  <button
+    data-theme="theme-light"
+    aria-label="Light Theme"
+    class="theme-button theme-light"
+  >
+    L
+  </button>
+  <button
+    data-theme="theme-dark"
+    aria-label="Dark Theme"
+    class="theme-button theme-dark"
+  >
+    D
+  </button>
+</div>

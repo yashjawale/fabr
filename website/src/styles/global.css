@@ -54,3 +54,11 @@
   mask: var(--mask);
 }
 
+/* THeme selector */
+button.theme-button {
+	@apply p-1 rounded-full duration-0;
+}
+
+/* button.active {
+	@apply text-background bg-foreground bg-opacity-90;
+} */
