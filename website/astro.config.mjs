@@ -8,8 +8,8 @@ export default defineConfig({
 	site: 'https://yashjawale.github.io',
 	base: 'fabr',
 	integrations: [starlight({
-		title: 'Fabr',
-		description: 'Project Template Generator',
+		title: 'fabr Docs',
+		description: 'A simple CLI tool to bootstrap projects with templates faster than ever before',
 		logo: {
 			dark: './src/assets/fabr-docs-dark.svg',
 			light: './src/assets/fabr-docs-light.svg',
