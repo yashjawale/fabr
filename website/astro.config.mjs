@@ -15,7 +15,7 @@ export default defineConfig({
 		replacesTitle: true,
 	},
     customCss: [
-      './src/styles/global.css',
+      './src/styles/starlight-theme.css',
     ],
     expressiveCode: {
       themes: ['github-light', 'github-dark'],
