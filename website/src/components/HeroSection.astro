@@ -1,5 +1,5 @@
 ---
-import HeroZigZag from './HeroZigZag.astro';
+import HeroZigZagSvg from '../assets/hero-zigzag.svg?component';
 import { Code } from '@astrojs/starlight/components';
 ---
 
@@ -10,7 +10,7 @@ import { Code } from '@astrojs/starlight/components';
 				<span><span class='font-title'>fabr</span>-icate your next project</span>
 				<span class='font-title text-7xl sm:text-8xl italic'>effortlessly</span>
 			</h1>
-			<HeroZigZag class='absolute -bottom-14 left-1/2 -translate-x-1/2 h-[16px]' />
+			<HeroZigZagSvg class='absolute -bottom-14 left-1/2 -translate-x-1/2 h-[16px]' width='auto' height='16' />
 		</div>
 		<div>
 			<Code class='hero-code-snippet' code='npx fabr init' />

@@ -1,6 +1,6 @@
 ---
 import { Icon } from '@astrojs/starlight/components';
-import FabrLogo from './FabrLogo.astro';
+import FabrSvg from '../assets/fabr.svg?component';
 import ThemeSelector from './ThemeSelector.astro';
 
 ---
@@ -8,7 +8,7 @@ import ThemeSelector from './ThemeSelector.astro';
 <div class='bg-fabr-orange text-fabr-cream dark:bg-fabr-orange-dark/20'>
 	<nav class='app-container py-5 flex items-center justify-between'>
 		<a href="/fabr">
-			<FabrLogo height='32px' />
+			<FabrSvg height='32px' width='auto' />
 		</a>
 		<ul class='flex items-center gap-6 uppercase text-sm font-semibold'>
 			<li><a href="/fabr/docs" class="hover:underline">Docs</a></li>
