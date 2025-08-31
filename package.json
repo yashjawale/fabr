@@ -31,7 +31,7 @@
 		"format:check": "prettier --check .",
 		"typecheck": "tsc --noEmit",
 		"ci": "npm run lint && npm run format:check && npm run typecheck && npm run build",
-		"docs:api": "mkdir -p website/src/content/docs/developer/generated && jsdoc2md 'src/lib/*.js' 'src/types/*.js' --template docs-template.hbs > website/src/content/docs/developer/generated/api.md",
+		"docs:api": "npm run build && mkdir -p website/src/content/docs/developer/generated && npx typedoc && ./scripts/fix-api-frontmatter.sh",
 		"docs:build": "npm run docs:api && cd website && npm run build"
 	},
 	"dependencies": {
@@ -46,10 +46,11 @@
 		"@types/node": "^24.1.0",
 		"eslint": "^9.17.0",
 		"eslint-config-prettier": "^10.1.8",
-		"jsdoc-to-markdown": "^9.0.3",
 		"prettier": "^3.4.2",
 		"ts-node-dev": "^2.0.0",
 		"tsx": "^4.20.3",
+		"typedoc": "^0.28.11",
+		"typedoc-plugin-markdown": "^4.8.1",
 		"typescript": "^5.6.0"
 	}
 }
