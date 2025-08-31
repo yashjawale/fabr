@@ -23,8 +23,37 @@ export default defineConfig({
 			},
 			sidebar: [
 				{
-					label: 'General',
-					items: [{ label: 'Getting Started', slug: 'docs' }],
+					label: 'Getting Started',
+					items: [
+						{ label: 'Introduction', slug: 'getting-started/introduction' },
+						{ label: 'Installation', slug: 'getting-started/installation' },
+						{ label: 'Quick Start', slug: 'getting-started/quick-start' },
+					],
+				},
+				{
+					label: 'Add Your Templates',
+					items: [
+						{ label: 'Overview', slug: 'templates/overview' },
+						{ label: 'File-Based Templates', slug: 'templates/file-based' },
+						{ label: 'Command-Based Templates', slug: 'templates/command-based' },
+						{ label: 'Environment Variables', slug: 'templates/environment-variables' },
+						{ label: 'Configuration Reference', slug: 'templates/configuration' },
+					],
+				},
+				{
+					label: 'Contributing',
+					items: [
+						{ label: 'How to Contribute', slug: 'contributing/overview' },
+						{ label: 'Development Setup', slug: 'contributing/development' },
+						{ label: 'Adding Templates', slug: 'contributing/templates' },
+					],
+				},
+				{
+					label: 'Developer Reference',
+					items: [
+						{ label: 'API Documentation', slug: 'developer/api' },
+						{ label: 'Architecture', slug: 'developer/architecture' },
+					],
 				},
 			],
 		}),
