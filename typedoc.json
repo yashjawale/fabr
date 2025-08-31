@@ -1,0 +1,63 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "src/lib/*.ts",
+    "src/types/*.ts"
+  ],
+  "out": "website/src/content/docs/developer/generated",
+  "plugin": ["typedoc-plugin-markdown"],
+  "readme": "none",
+  "hideGenerator": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "sort": ["source-order"],
+  "groupOrder": ["Modules", "Classes", "Interfaces", "Type Aliases", "Functions", "Variables"],
+  "categorizeByGroup": false,
+  "defaultCategory": "Other",
+  "categoryOrder": ["*"],
+  "kindSortOrder": [
+    "Project",
+    "Module",
+    "Namespace",
+    "Enum",
+    "EnumMember",
+    "Class",
+    "Interface",
+    "TypeAlias",
+    "Constructor",
+    "Property",
+    "Variable",
+    "Function",
+    "Accessor",
+    "Method",
+    "Parameter",
+    "TypeParameter",
+    "TypeLiteral",
+    "CallSignature",
+    "ConstructorSignature",
+    "IndexSignature",
+    "GetSignature",
+    "SetSignature"
+  ],
+  "visibilityFilters": {
+    "protected": false,
+    "private": false,
+    "@internal": false
+  },
+  "searchInComments": true,
+  "cleanOutputDir": true,
+  "titleLink": "https://yashjawale.github.io/fabr/",
+  "navigationLinks": {
+    "GitHub": "https://github.com/yashjawale/fabr",
+    "Documentation": "https://yashjawale.github.io/fabr/"
+  },
+  "sidebarLinks": {
+    "Documentation": "https://yashjawale.github.io/fabr/",
+    "GitHub": "https://github.com/yashjawale/fabr"
+  },
+  "includeVersion": true,
+  "disableSources": false,
+  "sourceLinkTemplate": "https://github.com/yashjawale/fabr/blob/{gitRevision}/{path}#L{line}",
+  "gitRevision": "main"
+}
