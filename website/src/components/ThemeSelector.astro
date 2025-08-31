@@ -5,30 +5,18 @@ const { class: className } = Astro.props
 ---
 
 <div
-  class:list={[
-    className,
-    'border border-foreground rounded-full flex -gap-1 justify-center items-center [&>*]:text-lg [&>*]:cursor-pointer text-foreground  md:opacity-80',
-  ]}
+	class:list={[
+		className,
+		'border border-foreground rounded-full flex -gap-1 justify-center items-center [&>*]:text-lg [&>*]:cursor-pointer text-foreground  md:opacity-80',
+	]}
 >
-  <button
-    data-theme="theme-auto"
-    aria-label="Auto Theme"
-    class="theme-button theme-auto"
-  >
-    <Icon name='starlight' />
-  </button>
-  <button
-    data-theme="theme-light"
-    aria-label="Light Theme"
-    class="theme-button theme-light"
-  >
-    <Icon name='sun' />
-  </button>
-  <button
-    data-theme="theme-dark"
-    aria-label="Dark Theme"
-    class="theme-button theme-dark"
-  >
-	<Icon name='moon' />
-  </button>
+	<button data-theme="theme-auto" aria-label="Auto Theme" class="theme-button theme-auto">
+		<Icon name="starlight" />
+	</button>
+	<button data-theme="theme-light" aria-label="Light Theme" class="theme-button theme-light">
+		<Icon name="sun" />
+	</button>
+	<button data-theme="theme-dark" aria-label="Dark Theme" class="theme-button theme-dark">
+		<Icon name="moon" />
+	</button>
 </div>

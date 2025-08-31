@@ -1,137 +1,137 @@
 {
-  "$schema": "./fabr.config.schema.json",
-  "name": "Full Stack Next.js App with Environment Variables",
-  "description": "Complete Next.js application setup with database, authentication, and environment configuration",
-  "version": "1.0.0",
-  "type": "commands",
-  "placeholders": [
-    {
-      "key": "PROJECT_NAME",
-      "prompt": "What is your project name?",
-      "description": "This will be used as the package name and app name",
-      "required": true,
-      "validate": {
-        "pattern": "^[a-z][a-z0-9-]*$",
-        "minLength": 3,
-        "maxLength": 50
-      }
-    },
-    {
-      "key": "APP_NAME",
-      "transform": {
-        "source": "PROJECT_NAME",
-        "case": "pascal"
-      }
-    },
-    {
-      "key": "DATABASE_NAME",
-      "transform": {
-        "source": "PROJECT_NAME",
-        "case": "snake"
-      }
-    }
-  ],
-  "environmentVariables": [
-    {
-      "key": "DATABASE_URL",
-      "prompt": "Enter your database connection URL",
-      "description": "PostgreSQL connection string (e.g., postgresql://user:password@localhost:5432/dbname)",
-      "required": true,
-      "validate": {
-        "pattern": "^postgresql://.+",
-        "minLength": 20
-      }
-    },
-    {
-      "key": "NEXTAUTH_SECRET",
-      "prompt": "Enter NextAuth secret (or press enter to generate)",
-      "description": "Secret key for NextAuth.js (leave empty to auto-generate)",
-      "default": "your-secret-key-here-change-in-production",
-      "local": true,
-      "validate": {
-        "minLength": 32
-      }
-    },
-    {
-      "key": "NEXTAUTH_URL",
-      "prompt": "Enter your app URL",
-      "description": "The URL where your app will be hosted",
-      "default": "http://localhost:3000",
-      "validate": {
-        "pattern": "^https?://.+"
-      }
-    },
-    {
-      "key": "GOOGLE_CLIENT_ID",
-      "prompt": "Enter Google OAuth Client ID (optional)",
-      "description": "Google OAuth client ID for authentication",
-      "required": false,
-      "local": true
-    },
-    {
-      "key": "GOOGLE_CLIENT_SECRET",
-      "prompt": "Enter Google OAuth Client Secret (optional)",
-      "description": "Google OAuth client secret for authentication",
-      "required": false,
-      "local": true
-    },
-    {
-      "key": "REDIS_URL",
-      "prompt": "Enter Redis connection URL (optional)",
-      "description": "Redis URL for caching and session storage",
-      "default": "redis://localhost:6379",
-      "required": false
-    },
-    {
-      "key": "NODE_ENV",
-      "prompt": "Select environment",
-      "description": "Application environment",
-      "default": "development"
-    },
-    {
-      "key": "LOG_LEVEL",
-      "prompt": "Select log level",
-      "description": "Application logging level",
-      "default": "info"
-    }
-  ],
-  "commands": [
-    {
-      "command": "npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias='@/*'",
-      "description": "Create Next.js application with TypeScript and Tailwind"
-    },
-    {
-      "command": "npm pkg set name={{PROJECT_NAME}}",
-      "description": "Set package name"
-    },
-    {
-      "command": "npm pkg set description='{{APP_NAME}} - Full stack Next.js application'",
-      "description": "Set package description"
-    },
-    {
-      "command": "npm install @auth/prisma-adapter next-auth prisma @prisma/client",
-      "description": "Install authentication dependencies"
-    },
-    {
-      "command": "npm install @types/bcryptjs bcryptjs",
-      "description": "Install password hashing utilities"
-    },
-    {
-      "command": "npm install redis ioredis @types/ioredis",
-      "description": "Install Redis client"
-    },
-    {
-      "command": "npx prisma init",
-      "description": "Initialize Prisma ORM"
-    },
-    {
-      "command": "mkdir -p src/lib src/components/ui src/app/api/auth",
-      "description": "Create project directory structure"
-    },
-    {
-      "command": "echo 'Environment files (.env and .env.local) have been created with your configuration!'",
-      "description": "Confirm environment setup",
-      "showOutput": true
-    }
-  ]
+	"$schema": "./fabr.config.schema.json",
+	"name": "Full Stack Next.js App with Environment Variables",
+	"description": "Complete Next.js application setup with database, authentication, and environment configuration",
+	"version": "1.0.0",
+	"type": "commands",
+	"placeholders": [
+		{
+			"key": "PROJECT_NAME",
+			"prompt": "What is your project name?",
+			"description": "This will be used as the package name and app name",
+			"required": true,
+			"validate": {
+				"pattern": "^[a-z][a-z0-9-]*$",
+				"minLength": 3,
+				"maxLength": 50
+			}
+		},
+		{
+			"key": "APP_NAME",
+			"transform": {
+				"source": "PROJECT_NAME",
+				"case": "pascal"
+			}
+		},
+		{
+			"key": "DATABASE_NAME",
+			"transform": {
+				"source": "PROJECT_NAME",
+				"case": "snake"
+			}
+		}
+	],
+	"environmentVariables": [
+		{
+			"key": "DATABASE_URL",
+			"prompt": "Enter your database connection URL",
+			"description": "PostgreSQL connection string (e.g., postgresql://user:password@localhost:5432/dbname)",
+			"required": true,
+			"validate": {
+				"pattern": "^postgresql://.+",
+				"minLength": 20
+			}
+		},
+		{
+			"key": "NEXTAUTH_SECRET",
+			"prompt": "Enter NextAuth secret (or press enter to generate)",
+			"description": "Secret key for NextAuth.js (leave empty to auto-generate)",
+			"default": "your-secret-key-here-change-in-production",
+			"local": true,
+			"validate": {
+				"minLength": 32
+			}
+		},
+		{
+			"key": "NEXTAUTH_URL",
+			"prompt": "Enter your app URL",
+			"description": "The URL where your app will be hosted",
+			"default": "http://localhost:3000",
+			"validate": {
+				"pattern": "^https?://.+"
+			}
+		},
+		{
+			"key": "GOOGLE_CLIENT_ID",
+			"prompt": "Enter Google OAuth Client ID (optional)",
+			"description": "Google OAuth client ID for authentication",
+			"required": false,
+			"local": true
+		},
+		{
+			"key": "GOOGLE_CLIENT_SECRET",
+			"prompt": "Enter Google OAuth Client Secret (optional)",
+			"description": "Google OAuth client secret for authentication",
+			"required": false,
+			"local": true
+		},
+		{
+			"key": "REDIS_URL",
+			"prompt": "Enter Redis connection URL (optional)",
+			"description": "Redis URL for caching and session storage",
+			"default": "redis://localhost:6379",
+			"required": false
+		},
+		{
+			"key": "NODE_ENV",
+			"prompt": "Select environment",
+			"description": "Application environment",
+			"default": "development"
+		},
+		{
+			"key": "LOG_LEVEL",
+			"prompt": "Select log level",
+			"description": "Application logging level",
+			"default": "info"
+		}
+	],
+	"commands": [
+		{
+			"command": "npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias='@/*'",
+			"description": "Create Next.js application with TypeScript and Tailwind"
+		},
+		{
+			"command": "npm pkg set name={{PROJECT_NAME}}",
+			"description": "Set package name"
+		},
+		{
+			"command": "npm pkg set description='{{APP_NAME}} - Full stack Next.js application'",
+			"description": "Set package description"
+		},
+		{
+			"command": "npm install @auth/prisma-adapter next-auth prisma @prisma/client",
+			"description": "Install authentication dependencies"
+		},
+		{
+			"command": "npm install @types/bcryptjs bcryptjs",
+			"description": "Install password hashing utilities"
+		},
+		{
+			"command": "npm install redis ioredis @types/ioredis",
+			"description": "Install Redis client"
+		},
+		{
+			"command": "npx prisma init",
+			"description": "Initialize Prisma ORM"
+		},
+		{
+			"command": "mkdir -p src/lib src/components/ui src/app/api/auth",
+			"description": "Create project directory structure"
+		},
+		{
+			"command": "echo 'Environment files (.env and .env.local) have been created with your configuration!'",
+			"description": "Confirm environment setup",
+			"showOutput": true
+		}
+	]
 }

@@ -1,19 +1,23 @@
 ---
-import HeroZigZagSvg from '../assets/hero-zigzag.svg';
-import { Code } from '@astrojs/starlight/components';
+import HeroZigZagSvg from '../assets/hero-zigzag.svg'
+import { Code } from '@astrojs/starlight/components'
 ---
 
-<div class='bg-fabr-orange dark:bg-fabr-orange-dark/20 text-fabr-cream hero-section-clip'>
-	<main class='app-container pt-36 pb-40'>
-		<div class='relative'>
-			<h1 class='text-2xl text-center flex flex-col items-center gap-10'>
-				<span><span class='font-title'>fabr</span>-icate your next project</span>
-				<span class='font-title text-7xl sm:text-8xl italic'>effortlessly</span>
+<div class="bg-fabr-orange dark:bg-fabr-orange-dark/20 text-fabr-cream hero-section-clip">
+	<main class="app-container pt-36 pb-40">
+		<div class="relative">
+			<h1 class="text-2xl text-center flex flex-col items-center gap-10">
+				<span><span class="font-title">fabr</span>-icate your next project</span>
+				<span class="font-title text-7xl sm:text-8xl italic">effortlessly</span>
 			</h1>
-			<HeroZigZagSvg class='absolute -bottom-14 left-1/2 -translate-x-1/2 h-[16px]' width='auto' height='16' />
+			<HeroZigZagSvg
+				class="absolute -bottom-14 left-1/2 -translate-x-1/2 h-[16px]"
+				width="auto"
+				height="16"
+			/>
 		</div>
 		<div>
-			<Code class='hero-code-snippet' code='npx fabr init' />
+			<Code class="hero-code-snippet" code="npx fabr init" />
 		</div>
 	</main>
 </div>
