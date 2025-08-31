@@ -3,7 +3,7 @@
 Fabr supports command-based templates that create projects through executing shell commands rather than copying files. This is perfect for scenarios where you want to:
 
 - Set up projects using CLI tools (npm, yarn, create-react-app, etc.)
-- Configure package.json and other files programmatically  
+- Configure package.json and other files programmatically
 - Install dependencies and run setup scripts
 - Generate files through commands rather than templates
 
@@ -13,69 +13,73 @@ Add `"type": "commands"` to your `fabr.config.json` and define a `commands` arra
 
 ```json
 {
-  "type": "commands",
-  "name": "My Command Template",
-  "description": "Creates a project using commands",
-  "placeholders": [
-    {
-      "key": "PROJECT_NAME",
-      "prompt": "Project name",
-      "required": true
-    }
-  ],
-  "commands": [
-    {
-      "command": "npm init -y",
-      "description": "Initialize package.json"
-    },
-    {
-      "command": "npm pkg set name={{PROJECT_NAME}}",
-      "description": "Set project name"
-    }
-  ]
+	"type": "commands",
+	"name": "My Command Template",
+	"description": "Creates a project using commands",
+	"placeholders": [
+		{
+			"key": "PROJECT_NAME",
+			"prompt": "Project name",
+			"required": true
+		}
+	],
+	"commands": [
+		{
+			"command": "npm init -y",
+			"description": "Initialize package.json"
+		},
+		{
+			"command": "npm pkg set name={{PROJECT_NAME}}",
+			"description": "Set project name"
+		}
+	]
 }
 ```
 
 ## Command Template Properties
 
 ### `command` (required)
+
 The shell command to execute. Supports placeholder replacement using `{{PLACEHOLDER_NAME}}` syntax.
 
 ```json
 {
-  "command": "echo 'Hello {{PROJECT_NAME}}!' > greeting.txt"
+	"command": "echo 'Hello {{PROJECT_NAME}}!' > greeting.txt"
 }
 ```
 
 ### `description` (optional)
+
 Human-readable description shown during execution.
 
 ```json
 {
-  "command": "npm install express",
-  "description": "Install Express.js framework"
+	"command": "npm install express",
+	"description": "Install Express.js framework"
 }
 ```
 
 ### `workingDirectory` (optional)
+
 Working directory for the command (relative to project root).
 
 ```json
 {
-  "command": "npm init -y",
-  "description": "Initialize frontend package.json",
-  "workingDirectory": "./frontend"
+	"command": "npm init -y",
+	"description": "Initialize frontend package.json",
+	"workingDirectory": "./frontend"
 }
 ```
 
 ### `showOutput` (optional, default: true)
+
 Whether to show command output to the user.
 
 ```json
 {
-  "command": "npm install --silent",
-  "description": "Install dependencies quietly",
-  "showOutput": false
+	"command": "npm install --silent",
+	"description": "Install dependencies quietly",
+	"showOutput": false
 }
 ```
 
@@ -88,32 +92,32 @@ Commands support the same placeholder system as file templates:
 
 ```json
 {
-  "placeholders": [
-    {
-      "key": "PROJECT_NAME", 
-      "prompt": "Project name",
-      "validate": {
-        "pattern": "^[a-z][a-z0-9-]*$"
-      }
-    },
-    {
-      "key": "PROJECT_TITLE",
-      "transform": {
-        "source": "PROJECT_NAME",
-        "case": "pascal" 
-      }
-    }
-  ],
-  "commands": [
-    {
-      "command": "npm pkg set name={{PROJECT_NAME}}",
-      "description": "Set package name"
-    },
-    {
-      "command": "echo 'export const appName = \"{{PROJECT_TITLE}}\";' > src/constants.js",
-      "description": "Create constants file"
-    }
-  ]
+	"placeholders": [
+		{
+			"key": "PROJECT_NAME",
+			"prompt": "Project name",
+			"validate": {
+				"pattern": "^[a-z][a-z0-9-]*$"
+			}
+		},
+		{
+			"key": "PROJECT_TITLE",
+			"transform": {
+				"source": "PROJECT_NAME",
+				"case": "pascal"
+			}
+		}
+	],
+	"commands": [
+		{
+			"command": "npm pkg set name={{PROJECT_NAME}}",
+			"description": "Set package name"
+		},
+		{
+			"command": "echo 'export const appName = \"{{PROJECT_TITLE}}\";' > src/constants.js",
+			"description": "Create constants file"
+		}
+	]
 }
 ```
 
@@ -151,18 +155,20 @@ Commands support the same placeholder system as file templates:
 ## Best Practices
 
 ### 1. Use descriptive command descriptions
+
 ```json
 {
-  "command": "mkdir -p src/components src/utils src/styles",
-  "description": "Create project directory structure"
+	"command": "mkdir -p src/components src/utils src/styles",
+	"description": "Create project directory structure"
 }
 ```
 
 ### 2. Control output visibility
+
 ```json
 {
   "command": "npm install",
-  "description": "Install dependencies", 
+  "description": "Install dependencies",
   "showOutput": true
 },
 {
@@ -173,6 +179,7 @@ Commands support the same placeholder system as file templates:
 ```
 
 ### 3. Use working directories for complex setups
+
 ```json
 {
   "command": "create-react-app frontend",
@@ -186,20 +193,22 @@ Commands support the same placeholder system as file templates:
 ```
 
 ### 4. Validate placeholders appropriately
+
 ```json
 {
-  "key": "PORT",
-  "prompt": "Server port",
-  "default": "3000",
-  "validate": {
-    "pattern": "^[0-9]+$"
-  }
+	"key": "PORT",
+	"prompt": "Server port",
+	"default": "3000",
+	"validate": {
+		"pattern": "^[0-9]+$"
+	}
 }
 ```
 
 ## Examples
 
 See the example configuration files:
+
 - [`example-simple-command-template.json`](../examples/example-simple-command-template.json) - Basic Node.js setup
 - [`example-command-template.json`](../examples/example-command-template.json) - Advanced Express TypeScript API
 

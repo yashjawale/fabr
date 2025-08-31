@@ -1,98 +1,105 @@
 ---
-
 const frameworks = [
-    {
-        name: 'React',
-        file: 'react',
-        url: 'https://react.dev'
-    },
-    {
-        name: 'Next.js',
-        file: 'nextjs',
-        url: 'https://nextjs.org'
-    },
-    {
-        name: 'Vue',
-        file: 'vue',
-        url: 'https://vuejs.org'
-    },
-    {
-        name: 'Angular',
-        file: 'angular',
-        url: 'https://angular.io'
-    },
-    {
-        name: 'Svelte',
-        file: 'svelte',
-        url: 'https://svelte.dev'
-    },
-    {
-        name: 'Astro',
-        file: 'astro',
-        url: 'https://astro.build'
-    },
-    {
-        name: 'Gatsby',
-        file: 'gatsby',
-        url: 'https://www.gatsbyjs.com'
-    },
-    {
-        name: 'Java',
-        file: 'java',
-        url: 'https://www.java.com'
-    },
-    {
-        name: 'Spring',
-        file: 'spring',
-        url: 'https://spring.io'
-    },
-    {
-        name: 'C#',
-        file: 'csharp',
-        url: 'https://docs.microsoft.com/en-us/dotnet/csharp/'
-    },
-    {
-        name: '.NET',
-        file: 'dotnet',
-        url: 'https://dotnet.microsoft.com'
-    },
-    {
-        name: 'C++',
-        file: 'cplusplus',
-        url: 'https://cplusplus.com'
-    },
-    {
-        name: 'Android',
-        file: 'android',
-        url: 'https://developer.android.com'
-    },
-    {
-        name: 'WordPress',
-        file: 'wordpress',
-        url: 'https://wordpress.org'
-    }
+	{
+		name: 'React',
+		file: 'react',
+		url: 'https://react.dev',
+	},
+	{
+		name: 'Next.js',
+		file: 'nextjs',
+		url: 'https://nextjs.org',
+	},
+	{
+		name: 'Vue',
+		file: 'vue',
+		url: 'https://vuejs.org',
+	},
+	{
+		name: 'Angular',
+		file: 'angular',
+		url: 'https://angular.io',
+	},
+	{
+		name: 'Svelte',
+		file: 'svelte',
+		url: 'https://svelte.dev',
+	},
+	{
+		name: 'Astro',
+		file: 'astro',
+		url: 'https://astro.build',
+	},
+	{
+		name: 'Gatsby',
+		file: 'gatsby',
+		url: 'https://www.gatsbyjs.com',
+	},
+	{
+		name: 'Java',
+		file: 'java',
+		url: 'https://www.java.com',
+	},
+	{
+		name: 'Spring',
+		file: 'spring',
+		url: 'https://spring.io',
+	},
+	{
+		name: 'C#',
+		file: 'csharp',
+		url: 'https://docs.microsoft.com/en-us/dotnet/csharp/',
+	},
+	{
+		name: '.NET',
+		file: 'dotnet',
+		url: 'https://dotnet.microsoft.com',
+	},
+	{
+		name: 'C++',
+		file: 'cplusplus',
+		url: 'https://cplusplus.com',
+	},
+	{
+		name: 'Android',
+		file: 'android',
+		url: 'https://developer.android.com',
+	},
+	{
+		name: 'WordPress',
+		file: 'wordpress',
+		url: 'https://wordpress.org',
+	},
 ]
-
 ---
 
-<section class='app-container py-32 text-center'>
-	<h2 class='font-title text-5xl leading-tight md:max-w-2xl mx-auto'>Compatible with your favourite technologies</h2>
-	<p class='mt-8 text-xl md:max-w-2xl mx-auto'>fabr is built around folder templates & shell commands, making bootstrapping any project possible regardless of language or framework</p>
-	<div class='flex gap-8 flex-wrap justify-center items-center mt-16 max-w-3xl mx-auto opacity-50 grayscale dark:invert-30 dark:opacity-80'>
-		{frameworks.map(framework => (
-			<a
-				href={framework.url}
-				target='_blank'
-				rel='noopener noreferrer'
-				class='inline-block'
-				title={framework.name}
-			>
-				<img
-					src={`/fabr/frameworkicons/${framework.file}.svg`}
-					alt={framework.name}
-					class='w-8 h-8 md:w-10 md:h-10'
-				/>
-			</a>
-		))}
+<section class="app-container py-32 text-center">
+	<h2 class="font-title text-5xl leading-tight md:max-w-2xl mx-auto">
+		Compatible with your favourite technologies
+	</h2>
+	<p class="mt-8 text-xl md:max-w-2xl mx-auto">
+		fabr is built around folder templates & shell commands, making bootstrapping any project possible
+		regardless of language or framework
+	</p>
+	<div
+		class="flex gap-8 flex-wrap justify-center items-center mt-16 max-w-3xl mx-auto opacity-50 grayscale dark:invert-30 dark:opacity-80"
+	>
+		{
+			frameworks.map(framework => (
+				<a
+					href={framework.url}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-block"
+					title={framework.name}
+				>
+					<img
+						src={`/fabr/frameworkicons/${framework.file}.svg`}
+						alt={framework.name}
+						class="w-8 h-8 md:w-10 md:h-10"
+					/>
+				</a>
+			))
+		}
 	</div>
 </section>

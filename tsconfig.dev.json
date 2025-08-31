@@ -1,12 +1,12 @@
 {
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
-  },
-  "ts-node": {
-    "esm": false
-  }
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true
+	},
+	"ts-node": {
+		"esm": false
+	}
 }

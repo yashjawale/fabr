@@ -1,0 +1,64 @@
+name: Auto Format
+
+on:
+ push:
+  branches: [main, develop]
+  paths:
+   - '**/*.ts'
+   - '**/*.js'
+   - '**/*.jsx'
+   - '**/*.tsx'
+   - '**/*.astro'
+   - '**/*.json'
+   - '**/*.md'
+
+jobs:
+ format:
+  runs-on: ubuntu-latest
+  if: ${{ !contains(github.event.head_commit.message, 'skip-format') }}
+
+  steps:
+   - name: Checkout code
+     uses: actions/checkout@v4
+     with:
+      token: ${{ secrets.GITHUB_TOKEN }}
+
+   - name: Setup Node.js
+     uses: actions/setup-node@v4
+     with:
+      node-version: '20'
+      cache: 'npm'
+
+   - name: Install root dependencies
+     run: npm ci
+
+   - name: Install website dependencies
+     run: |
+      cd website
+      npm ci
+
+   - name: Format root code
+     run: npm run format
+
+   - name: Format website code
+     run: |
+      cd website
+      npm run format
+
+   - name: Check for changes
+     id: verify-changed-files
+     run: |
+      if [ -n "$(git status --porcelain)" ]; then
+        echo "changed=true" >> $GITHUB_OUTPUT
+      else
+        echo "changed=false" >> $GITHUB_OUTPUT
+      fi
+
+   - name: Commit formatted files
+     if: steps.verify-changed-files.outputs.changed == 'true'
+     run: |
+      git config --local user.email "action@github.com"
+      git config --local user.name "GitHub Action"
+      git add .
+      git commit -m "🎨 Auto-format code [skip-format]"
+      git push

@@ -1,0 +1,11 @@
+dist/
+.astro/
+node_modules/
+*.log
+.env
+.env.*
+!.env.example
+coverage/
+.nyc_output/
+.DS_Store
+Thumbs.db

@@ -9,49 +9,49 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-title: 'Amaranth', serif;
+	--font-title: 'Amaranth', serif;
 
-  --color-fabr-orange: #c94402;
-  --color-fabr-cream: #fcfaee;
-  --color-fabr-dark: #242424;
-  --color-fabr-orange-dark: #ec8856;
-  --color-fabr-light: #f1f1f1;
-  --color-fabr-bg-dark: #242424;
+	--color-fabr-orange: #c94402;
+	--color-fabr-cream: #fcfaee;
+	--color-fabr-dark: #242424;
+	--color-fabr-orange-dark: #ec8856;
+	--color-fabr-light: #f1f1f1;
+	--color-fabr-bg-dark: #242424;
 }
 
 .app-container {
-  @apply container mx-auto px-6 sm:px-20 2xl:px-16;
+	@apply container mx-auto px-6 sm:px-20 2xl:px-16;
 }
 
 /* Hero section */
 .hero-section-clip {
-  clip-path: ellipse(100% 100% at 50% 0%);
+	clip-path: ellipse(100% 100% at 50% 0%);
 }
 
 .hero-code-snippet {
-  @apply max-w-2xs mx-auto mt-28;
+	@apply max-w-2xs mx-auto mt-28;
 }
 
 .hero-code-snippet pre {
-  @apply text-white bg-neutral-800 rounded-lg border-0 p-2;
+	@apply text-white bg-neutral-800 rounded-lg border-0 p-2;
 }
 
 .hero-code-snippet * {
-  @apply text-white text-lg;
+	@apply text-white text-lg;
 }
 
 /* Contribute section */
 .squiggly-section {
-  --mask: radial-gradient(54.08px at 50% 75px, #000 99%, #0000 101%)
-      calc(50% - 60px) 0/120px 51% repeat-x,
-    radial-gradient(54.08px at 50% -45px, #0000 99%, #000 101%) 50% 30px/120px
-      calc(51% - 30px) repeat-x,
-    radial-gradient(54.08px at 50% calc(100% - 75px), #000 99%, #0000 101%) 50%
-      100%/120px 51% repeat-x,
-    radial-gradient(54.08px at 50% calc(100% + 45px), #0000 99%, #000 101%)
-      calc(50% - 60px) calc(100% - 30px) / 120px calc(51% - 30px) repeat-x;
-  -webkit-mask: var(--mask);
-  mask: var(--mask);
+	--mask:
+		radial-gradient(54.08px at 50% 75px, #000 99%, #0000 101%) calc(50% - 60px) 0/120px 51% repeat-x,
+		radial-gradient(54.08px at 50% -45px, #0000 99%, #000 101%) 50% 30px/120px calc(51% - 30px)
+			repeat-x,
+		radial-gradient(54.08px at 50% calc(100% - 75px), #000 99%, #0000 101%) 50% 100%/120px 51%
+			repeat-x,
+		radial-gradient(54.08px at 50% calc(100% + 45px), #0000 99%, #000 101%) calc(50% - 60px)
+			calc(100% - 30px) / 120px calc(51% - 30px) repeat-x;
+	-webkit-mask: var(--mask);
+	mask: var(--mask);
 }
 
 /* THeme selector */

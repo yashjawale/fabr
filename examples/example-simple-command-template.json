@@ -1,75 +1,75 @@
 {
-  "$schema": "./fabr.config.schema.json",
-  "type": "commands",
-  "name": "Simple Node.js Project",
-  "description": "A basic Node.js project setup using commands",
-  "version": "1.0.0",
-  "placeholders": [
-    {
-      "key": "PROJECT_NAME",
-      "prompt": "Project name",
-      "description": "The name of your Node.js project",
-      "required": true,
-      "validate": {
-        "pattern": "^[a-z][a-z0-9-]*$",
-        "minLength": 3,
-        "maxLength": 50
-      }
-    },
-    {
-      "key": "AUTHOR_NAME",
-      "prompt": "Author name", 
-      "description": "Your name",
-      "required": true
-    },
-    {
-      "key": "DESCRIPTION",
-      "prompt": "Project description",
-      "description": "Brief description of your project",
-      "default": "A new Node.js project"
-    }
-  ],
-  "commands": [
-    {
-      "command": "npm init -y",
-      "description": "Initialize package.json",
-      "showOutput": false
-    },
-    {
-      "command": "npm pkg set name={{PROJECT_NAME}}",
-      "description": "Set project name in package.json"
-    },
-    {
-      "command": "npm pkg set description='{{DESCRIPTION}}'",
-      "description": "Set project description"
-    },
-    {
-      "command": "npm pkg set author='{{AUTHOR_NAME}}'",
-      "description": "Set project author"
-    },
-    {
-      "command": "mkdir -p src tests docs",
-      "description": "Create project directories"
-    },
-    {
-      "command": "echo 'console.log(\"Hello from {{PROJECT_NAME}}!\");\\nconsole.log(\"Created by {{AUTHOR_NAME}}\");' > src/index.js",
-      "description": "Create main JavaScript file"
-    },
-    {
-      "command": "echo '# {{PROJECT_NAME}}\\n\\n{{DESCRIPTION}}\\n\\n## Quick Start\\n\\n```bash\\nnpm start\\n```\\n\\n## Author\\n\\n{{AUTHOR_NAME}}' > README.md",
-      "description": "Create README file"
-    },
-    {
-      "command": "npm pkg set main=src/index.js",
-      "description": "Set main entry point"
-    },
-    {
-      "command": "npm pkg set scripts.start='node src/index.js'",
-      "description": "Add start script"
-    },
-    {
-      "command": "npm pkg set scripts.test='echo \"No tests specified\"'",
-      "description": "Add test script placeholder"
-    }
-  ]
+	"$schema": "./fabr.config.schema.json",
+	"type": "commands",
+	"name": "Simple Node.js Project",
+	"description": "A basic Node.js project setup using commands",
+	"version": "1.0.0",
+	"placeholders": [
+		{
+			"key": "PROJECT_NAME",
+			"prompt": "Project name",
+			"description": "The name of your Node.js project",
+			"required": true,
+			"validate": {
+				"pattern": "^[a-z][a-z0-9-]*$",
+				"minLength": 3,
+				"maxLength": 50
+			}
+		},
+		{
+			"key": "AUTHOR_NAME",
+			"prompt": "Author name",
+			"description": "Your name",
+			"required": true
+		},
+		{
+			"key": "DESCRIPTION",
+			"prompt": "Project description",
+			"description": "Brief description of your project",
+			"default": "A new Node.js project"
+		}
+	],
+	"commands": [
+		{
+			"command": "npm init -y",
+			"description": "Initialize package.json",
+			"showOutput": false
+		},
+		{
+			"command": "npm pkg set name={{PROJECT_NAME}}",
+			"description": "Set project name in package.json"
+		},
+		{
+			"command": "npm pkg set description='{{DESCRIPTION}}'",
+			"description": "Set project description"
+		},
+		{
+			"command": "npm pkg set author='{{AUTHOR_NAME}}'",
+			"description": "Set project author"
+		},
+		{
+			"command": "mkdir -p src tests docs",
+			"description": "Create project directories"
+		},
+		{
+			"command": "echo 'console.log(\"Hello from {{PROJECT_NAME}}!\");\\nconsole.log(\"Created by {{AUTHOR_NAME}}\");' > src/index.js",
+			"description": "Create main JavaScript file"
+		},
+		{
+			"command": "echo '# {{PROJECT_NAME}}\\n\\n{{DESCRIPTION}}\\n\\n## Quick Start\\n\\n```bash\\nnpm start\\n```\\n\\n## Author\\n\\n{{AUTHOR_NAME}}' > README.md",
+			"description": "Create README file"
+		},
+		{
+			"command": "npm pkg set main=src/index.js",
+			"description": "Set main entry point"
+		},
+		{
+			"command": "npm pkg set scripts.start='node src/index.js'",
+			"description": "Add start script"
+		},
+		{
+			"command": "npm pkg set scripts.test='echo \"No tests specified\"'",
+			"description": "Add test script placeholder"
+		}
+	]
 }

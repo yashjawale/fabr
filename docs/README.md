@@ -18,6 +18,7 @@ This directory contains comprehensive documentation for the Fabr CLI tool.
 ## Contributing
 
 When adding new documentation:
+
 1. Place Markdown files in this `docs/` directory
 2. Update this README to include links to new documentation
 3. Follow the existing documentation style and format
