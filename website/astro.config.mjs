@@ -56,7 +56,7 @@ export default defineConfig({
 						{
 							label: 'Generated API',
 							collapsed: true,
-							autogenerate: { directory: 'docs/developer/generated' },
+							autogenerate: { directory: 'docs/developer/api' },
 						},
 					],
 				},

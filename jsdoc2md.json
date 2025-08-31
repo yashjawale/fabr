@@ -1,0 +1,13 @@
+{
+	"tags": {
+		"allowUnknownTags": true
+	},
+	"source": {
+		"includePattern": "\\.(js|ts)$",
+		"exclude": ["node_modules/"]
+	},
+	"opts": {
+		"recurse": true
+	},
+	"plugins": ["plugins/markdown"]
+}

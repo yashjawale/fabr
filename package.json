@@ -31,7 +31,7 @@
 		"format:check": "prettier --check .",
 		"typecheck": "tsc --noEmit",
 		"ci": "npm run lint && npm run format:check && npm run typecheck && npm run build",
-		"docs:api": "npm run build && mkdir -p website/src/content/docs/developer/generated && npx typedoc && ./scripts/fix-api-frontmatter.sh",
+		"docs:api": "npm run build && mkdir -p website/src/content/docs/docs/developer/api && npx typedoc && ./scripts/add-api-titles.sh",
 		"docs:build": "npm run docs:api && cd website && npm run build"
 	},
 	"dependencies": {
@@ -50,6 +50,7 @@
 		"ts-node-dev": "^2.0.0",
 		"tsx": "^4.20.3",
 		"typedoc": "^0.28.11",
+		"typedoc-plugin-frontmatter": "^1.3.0",
 		"typedoc-plugin-markdown": "^4.8.1",
 		"typescript": "^5.6.0"
 	}
