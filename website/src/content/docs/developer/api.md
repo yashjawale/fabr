@@ -15,13 +15,172 @@ Fabr is organized into several key modules, each handling specific aspects of te
 
 Handles file operations including copying, filtering, and placeholder replacement in file contents.
 
+#### `walkDir(dirPath: string): string[]`
+
+Recursively walks a directory and returns all file paths. Traverses the directory tree while excluding common build/version control directories.
+
+**Parameters:**
+- `dirPath` - The directory path to walk recursively
+
+**Returns:** An array of absolute file paths found in the directory tree
+
+**Example:**
+```typescript
+const files = walkDir('/path/to/template')
+// Returns: ['/path/to/template/package.json', '/path/to/template/src/index.ts', ...]
+```
+
+**Excluded directories:** `node_modules`, `.git`, `dist`
+
+#### `findAndReplace(projectPath: string, placeholderValues: Record<string, string>): void`
+
+Finds and replaces placeholder values in all files within a directory. Recursively processes all files in the project directory, searching for placeholder patterns and replacing them with their corresponding values.
+
+**Parameters:**
+- `projectPath` - The root path of the project directory to process
+- `placeholderValues` - An object mapping placeholder keys to their replacement values
+
+**Example:**
+```typescript
+const placeholders = {
+  '{{PROJECT_NAME}}': 'my-awesome-app',
+  '{{AUTHOR_NAME}}': 'John Doe'
+}
+
+findAndReplace('/path/to/project', placeholders)
+// All files will have placeholders replaced with actual values
+```
+
+**Behavior:**
+- Only writes files back if changes were made
+- Processes all files except those in excluded directories
+- Uses global regex replacement for thorough placeholder substitution
+
 ### Placeholder System (`src/lib/placeholders.ts`)
 
 Manages the collection, validation, and transformation of user-provided placeholder values.
 
+#### `transformCase(inputStr: string, format: CaseType): string`
+
+Transforms a string into various cases (kebab, pascal, camel, snake, constant). Splits the input string by common delimiters and applies the specified case transformation.
+
+**Parameters:**
+- `inputStr` - The source string to transform
+- `format` - The target case format
+
+**Case Types:**
+- `kebab` - `my-project-name`
+- `pascal` - `MyProjectName`
+- `camel` - `myProjectName`
+- `snake` - `my_project_name`
+- `constant` - `MY_PROJECT_NAME`
+
+**Example:**
+```typescript
+transformCase('My Awesome Project', 'kebab')    // 'my-awesome-project'
+transformCase('my-awesome-project', 'pascal')   // 'MyAwesomeProject'
+transformCase('MyAwesomeProject', 'snake')      // 'my_awesome_project'
+transformCase('my_awesome_project', 'constant') // 'MY_AWESOME_PROJECT'
+```
+
+#### `processPlaceholders(placeholderConfig: Placeholder[]): Promise<Record<string, string>>`
+
+Processes placeholder configurations to get final values. Handles both prompted placeholders (requiring user input) and derived placeholders (transformed from other placeholder values).
+
+**Parameters:**
+- `placeholderConfig` - Array of placeholder configuration objects
+
+**Returns:** Promise resolving to an object mapping placeholder keys to their final values
+
+**Processing Flow:**
+1. Filter placeholders into prompted and derived types
+2. Collect user input for prompted placeholders
+3. Generate derived placeholder values from transformations
+4. Return complete placeholder value map
+
+**Example:**
+```typescript
+const config = [
+  {
+    key: 'PROJECT_NAME',
+    prompt: 'Enter project name:'
+  },
+  {
+    key: 'COMPONENT_NAME',
+    transform: {
+      source: 'PROJECT_NAME',
+      case: 'pascal'
+    }
+  }
+]
+
+const values = await processPlaceholders(config)
+// User enters "my-awesome-app"
+// Returns: { PROJECT_NAME: 'my-awesome-app', COMPONENT_NAME: 'MyAwesomeApp' }
+```
+
 ### Environment Variables (`src/lib/env.ts`) 
 
 Generates `.env` and `.env.local` files from template configuration and user input.
+
+#### `transformCase(inputStr: string, format: CaseType): string`
+
+Same transformation function as in placeholders module, used for environment variable value generation.
+
+#### `collectEnvironmentVariables(envVarConfig: EnvironmentVariable[], placeholderValues: Record<string, string>): Promise<{ regular: Record<string, string>; local: Record<string, string> }>`
+
+Collects environment variable values from user input and transformations. Processes environment variable configurations to generate values for both regular and local environment files.
+
+**Parameters:**
+- `envVarConfig` - Array of environment variable configuration objects
+- `placeholderValues` - Existing placeholder values for transformations
+
+**Returns:** Object containing regular and local environment variables
+
+**Example:**
+```typescript
+const envConfig = [
+  {
+    key: 'DATABASE_URL',
+    prompt: 'Enter database URL:',
+    default: 'sqlite:///app.db'
+  },
+  {
+    key: 'JWT_SECRET',
+    prompt: 'Enter JWT secret:',
+    local: true,
+    required: true
+  }
+]
+
+const result = await collectEnvironmentVariables(envConfig, placeholders)
+// Returns: {
+//   regular: { DATABASE_URL: 'postgresql://...' },
+//   local: { JWT_SECRET: 'secret-key' }
+// }
+```
+
+#### `generateEnvironmentFiles(projectPath: string, regularEnvVars: Record<string, string>, localEnvVars: Record<string, string>): void`
+
+Creates `.env` and `.env.local` files in the project directory with the provided environment variables.
+
+**Parameters:**
+- `projectPath` - The path to the project directory where files will be created
+- `regularEnvVars` - Environment variables for .env file
+- `localEnvVars` - Environment variables for .env.local file
+
+**Example:**
+```typescript
+generateEnvironmentFiles(
+  '/path/to/project',
+  { DATABASE_URL: 'postgresql://localhost:5432/myapp' },
+  { JWT_SECRET: 'super-secret-key' }
+)
+
+// Creates:
+// .env with: DATABASE_URL=postgresql://localhost:5432/myapp
+// .env.local with: JWT_SECRET=super-secret-key
+```
 
 ### Command Execution (`src/lib/commands.ts`)
 
@@ -30,6 +189,33 @@ Executes shell commands for command-based templates with placeholder replacement
 ### User Interface (`src/lib/ui.ts`)
 
 Provides consistent user interaction through prompts, progress indicators, and formatted output.
+
+#### `promptForProjectDetails(templates: Template[], providedProjectName?: string, providedTemplate?: string): Promise<{ template: string; projectName: string }>`
+
+Prompts the user for initial project setup information. Handles interactive prompting for template selection and project name if not provided.
+
+**Parameters:**
+- `templates` - The list of available templates to choose from
+- `providedProjectName` - Pre-provided project name (optional)
+- `providedTemplate` - Pre-provided template slug (optional)
+
+**Returns:** Promise resolving to the user's template and project name choices
+
+**Features:**
+- Fuzzy search for template selection
+- Project name validation
+- Skips prompts if values are pre-provided
+
+**Example:**
+```typescript
+const templates = [
+  { slug: 'react-app', name: 'React App', repo: 'https://github.com/...' }
+]
+
+const result = await promptForProjectDetails(templates)
+// User selects template and enters project name
+// Returns: { template: 'react-app', projectName: 'my-new-project' }
+```
 
 ### Shell Operations (`src/lib/shell.ts`)
 
@@ -43,17 +229,17 @@ The main configuration interface for templates:
 
 ```typescript
 interface FabrConfig {
-  $schema?: string
-  name?: string
-  description?: string
-  version?: string
-  type?: 'files' | 'commands'
+  $schema?: string                      // JSON schema reference
+  name?: string                         // Template display name
+  description?: string                  // Template description
+  version?: string                      // Template version (semver)
+  type?: 'files' | 'commands'          // Template type
   
-  placeholders?: PlaceholderConfig[]
-  environmentVariables?: EnvironmentVariableConfig[]
-  commands?: CommandConfig[]
+  placeholders?: PlaceholderConfig[]    // Placeholder definitions
+  environmentVariables?: EnvironmentVariableConfig[]  // Environment variable definitions
+  commands?: CommandConfig[]            // Commands for command-based templates
   
-  // Legacy properties
+  // Legacy properties for backward compatibility
   preSetupCommand?: string
   postSetupCommand?: string
   installCommand?: string
@@ -72,32 +258,32 @@ interface FabrConfig {
 
 ```typescript
 interface PlaceholderConfig {
-  key: string
-  prompt?: string
-  description?: string
-  default?: string
-  required?: boolean
-  type?: 'string' | 'boolean'
+  key: string                          // Placeholder key (UPPERCASE_WITH_UNDERSCORES)
+  prompt?: string                      // User prompt message
+  description?: string                 // Additional help text
+  default?: string                     // Default value
+  required?: boolean                   // Whether required (default: false)
+  type?: 'string' | 'boolean'         // Input type (default: 'string')
   
-  // Validation
+  // Validation rules
   validation?: {
-    pattern?: string
-    minLength?: number
-    maxLength?: number
-    message?: string
+    pattern?: string                   // Regex pattern
+    minLength?: number                 // Minimum length
+    maxLength?: number                 // Maximum length
+    message?: string                   // Custom error message
   }
   
-  // Transformation
+  // Value transformation from another placeholder
   transform?: {
-    source: string
-    case: CaseType
+    source: string                     // Source placeholder key
+    case: CaseType                     // Target case format
   }
   
-  // Default case generation
+  // Smart default generation
   defaultCase?: {
-    source: string
-    case: CaseType
-    template?: string
+    source: string                     // Source placeholder key
+    case: CaseType                     // Target case format
+    template?: string                  // Template with {value} placeholder
   }
 }
 ```
@@ -106,15 +292,15 @@ interface PlaceholderConfig {
 
 ```typescript
 interface EnvironmentVariableConfig {
-  key: string
-  prompt?: string
-  description?: string
-  default?: string
-  required?: boolean
-  local?: boolean
+  key: string                          // Environment variable name (UPPERCASE_WITH_UNDERSCORES)
+  prompt?: string                      // User prompt message
+  description?: string                 // Additional help text
+  default?: string                     // Default value (can include placeholders)
+  required?: boolean                   // Whether required (default: false)
+  local?: boolean                      // Save to .env.local instead of .env (default: false)
   
-  validation?: ValidationConfig
-  transform?: TransformConfig
+  validation?: ValidationConfig        // Input validation rules
+  transform?: TransformConfig          // Value transformation from placeholder
 }
 ```
 
@@ -122,16 +308,16 @@ interface EnvironmentVariableConfig {
 
 ```typescript
 interface CommandConfig {
-  command: string
-  description?: string
-  workingDirectory?: string
-  showOutput?: boolean
+  command: string                      // Shell command to execute (supports placeholders)
+  description?: string                 // Human-readable description
+  workingDirectory?: string            // Working directory (relative to project root)
+  showOutput?: boolean                 // Whether to show command output (default: true)
 }
 ```
 
 ## Case Transformations
 
-Available case transformation types:
+Available case transformation types with examples:
 
 ```typescript
 type CaseType = 
@@ -143,6 +329,17 @@ type CaseType =
   | 'kebab'     // 'my-project-name'
   | 'snake'     // 'my_project_name'
   | 'constant'  // 'MY_PROJECT_NAME'
+```
+
+**Usage in configurations:**
+```json
+{
+  "key": "COMPONENT_NAME",
+  "transform": {
+    "source": "PROJECT_NAME",
+    "case": "pascal"
+  }
+}
 ```
 
 ## Core Processing Flow
@@ -164,7 +361,7 @@ const config = await loadFabrConfig(templatePath)
 ### 3. Placeholder Collection
 ```typescript
 // Prompt user for placeholder values
-const placeholders = await collectPlaceholders(config.placeholders)
+const placeholders = await processPlaceholders(config.placeholders)
 ```
 
 ### 4. Environment Variable Collection
@@ -190,7 +387,7 @@ await processCommandTemplate(targetPath, config.commands, placeholders, envVars)
 ### 6. Environment File Generation
 ```typescript
 // Generate .env and .env.local files
-await generateEnvironmentFiles(targetPath, envVars)
+await generateEnvironmentFiles(targetPath, envVars.regular, envVars.local)
 ```
 
 ## Utility Functions
@@ -207,6 +404,7 @@ Transforms a string to the specified case format.
 ```typescript
 transformCase('my project name', 'pascal') // 'MyProjectName'
 transformCase('my project name', 'kebab')  // 'my-project-name'
+transformCase('MyProjectName', 'snake')    // 'my_project_name'
 ```
 
 ### Placeholder Replacement
@@ -255,7 +453,8 @@ Validates user input against specified rules.
 const validation = {
   pattern: '^[a-z0-9-]+$',
   minLength: 3,
-  maxLength: 50
+  maxLength: 50,
+  message: 'Must be lowercase with hyphens only'
 }
 
 validateInput('my-project', validation) // { valid: true }
@@ -264,7 +463,7 @@ validateInput('My Project!', validation) // { valid: false, message: '...' }
 
 ## Error Handling
 
-Fabr uses structured error handling:
+Fabr uses structured error handling for clear error categorization and user-friendly messages.
 
 ### FabrError Class
 
@@ -280,13 +479,14 @@ class FabrError extends Error {
 
 ### Common Error Codes
 
-- `TEMPLATE_NOT_FOUND` - Template repository doesn't exist
-- `CONFIG_INVALID` - fabr.config.json is malformed
+- `TEMPLATE_NOT_FOUND` - Template repository doesn't exist or is inaccessible
+- `CONFIG_INVALID` - fabr.config.json is malformed or missing required fields
 - `PLACEHOLDER_VALIDATION_FAILED` - User input validation failed
-- `COMMAND_EXECUTION_FAILED` - Shell command failed
+- `COMMAND_EXECUTION_FAILED` - Shell command failed during execution
 - `FILE_OPERATION_FAILED` - File copy/write operation failed
+- `NETWORK_ERROR` - Network-related issues during template download
 
-### Error Usage
+### Error Usage Example
 
 ```typescript
 try {
@@ -311,12 +511,26 @@ Fabr uses a custom argument parser in `src/lib/args.ts`:
 
 ```typescript
 interface ParsedArgs {
-  command: string
-  args: string[]
-  flags: Record<string, string | boolean>
+  command: string                        // Main command (init, list, help)
+  args: string[]                        // Positional arguments
+  flags: Record<string, string | boolean> // Named flags (--template, --verbose)
 }
 
 function parseArgs(argv: string[]): ParsedArgs
+```
+
+**Example:**
+```bash
+fabr init my-project --template=react-app --verbose
+```
+
+Parses to:
+```typescript
+{
+  command: 'init',
+  args: ['my-project'],
+  flags: { template: 'react-app', verbose: true }
+}
 ```
 
 ### Subcommand Interface
@@ -325,13 +539,13 @@ Commands implement the `Subcommand` interface:
 
 ```typescript
 interface Subcommand {
-  name: string
-  description: string
-  run: (args: ParsedArgs) => Promise<void>
+  name: string                          // Command name
+  description: string                   // Help text description
+  run: (args: ParsedArgs) => Promise<void> // Command implementation
 }
 ```
 
-**Example:**
+**Example Implementation:**
 ```typescript
 export const myCommand: Subcommand = {
   name: 'my-command',
@@ -340,7 +554,12 @@ export const myCommand: Subcommand = {
     const projectName = args.args[0]
     const verbose = args.flags.verbose as boolean
     
+    if (!projectName) {
+      throw new FabrError('Project name is required', 'MISSING_ARGUMENT')
+    }
+    
     // Command implementation
+    console.log(`Processing project: ${projectName}`)
   }
 }
 ```
@@ -354,13 +573,24 @@ export const myCommand: Subcommand = {
 ```typescript
 // src/commands/validate.ts
 import type { Subcommand } from '../types/subcommand.js'
+import { loadFabrConfig } from '../lib/config.js'
 
 export const validate: Subcommand = {
   name: 'validate',
   description: 'Validate a template configuration',
   run: async (args) => {
     const configPath = args.args[0] || 'fabr.config.json'
-    // Implementation
+    
+    try {
+      const config = await loadFabrConfig(configPath)
+      console.log('✅ Configuration is valid')
+      console.log(`Template: ${config.name || 'Unnamed'}`)
+      console.log(`Type: ${config.type || 'files'}`)
+      console.log(`Placeholders: ${config.placeholders?.length || 0}`)
+    } catch (error) {
+      console.error('❌ Configuration validation failed:', error.message)
+      process.exit(1)
+    }
   }
 }
 ```
@@ -378,12 +608,26 @@ Extend the case transformation system:
 ```typescript
 // In src/lib/placeholders.ts
 function transformCase(input: string, caseType: CaseType): string {
+  const words = input.split(/[\s_-]+/).filter(Boolean)
+  
   switch (caseType) {
     case 'reverse':
       return input.split('').reverse().join('')
+    case 'capitalize':
+      return words.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
     // ... existing cases
+    default:
+      return input
   }
 }
+```
+
+Update the CaseType:
+```typescript
+type CaseType = 
+  | 'lower' | 'upper' | 'title' | 'camel' | 'pascal' 
+  | 'kebab' | 'snake' | 'constant'
+  | 'reverse' | 'capitalize'  // New transformations
 ```
 
 ### Adding New Validation Rules
@@ -391,15 +635,70 @@ function transformCase(input: string, caseType: CaseType): string {
 Extend the validation system:
 
 ```typescript
-// In validation config
 interface ValidationConfig {
-  pattern?: string
-  minLength?: number
-  maxLength?: number
+  pattern?: string                      // Regex pattern
+  minLength?: number                    // Minimum length
+  maxLength?: number                    // Maximum length
   custom?: 'email' | 'url' | 'semver'  // New custom validators
-  message?: string
+  message?: string                      // Custom error message
 }
 ```
+
+Implement custom validators:
+```typescript
+function validateInput(value: string, validation: ValidationConfig): ValidationResult {
+  // ... existing validation
+  
+  if (validation.custom) {
+    switch (validation.custom) {
+      case 'email':
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(value)) {
+          return { valid: false, message: 'Please enter a valid email address' }
+        }
+        break
+      case 'url':
+        try {
+          new URL(value)
+        } catch {
+          return { valid: false, message: 'Please enter a valid URL' }
+        }
+        break
+      case 'semver':
+        const semverRegex = /^\d+\.\d+\.\d+(-[a-zA-Z0-9-]+)?$/
+        if (!semverRegex.test(value)) {
+          return { valid: false, message: 'Please enter a valid semantic version (x.y.z)' }
+        }
+        break
+    }
+  }
+  
+  return { valid: true }
+}
+```
+
+## Performance Considerations
+
+### File Processing
+
+- **Large files (>10MB)** are skipped for placeholder replacement to avoid memory issues
+- **Binary files** are automatically detected and copied without processing
+- **Glob patterns** are used efficiently for file filtering to minimize disk I/O
+- **Concurrent processing** of independent files when possible
+
+### Memory Usage
+
+- **Incremental processing** - Templates are processed file by file rather than loading everything into memory
+- **Streaming** - Large command outputs are streamed rather than buffered
+- **Cleanup** - Temporary files and directories are cleaned up immediately after use
+- **Lazy loading** - Modules are loaded only when needed
+
+### Network Operations
+
+- **Efficient cloning** - Template downloads use `git clone --depth 1` for faster downloads
+- **Retry logic** - Failed downloads are retried with exponential backoff
+- **Concurrent limits** - Template processing is limited to prevent resource exhaustion
+- **Caching** - Recently used templates may be cached locally (future enhancement)
 
 ## Testing and Development
 
@@ -431,32 +730,36 @@ DEBUG=fabr* node dist/index.js init my-project
 ```
 
 Or in code:
-
 ```typescript
 import debug from 'debug'
 const log = debug('fabr:templates')
 
 log('Processing template:', templatePath)
+log('Placeholders:', placeholders)
 ```
 
-## Performance Considerations
+### Testing Different Template Types
 
-### File Processing
+```typescript
+// Test file-based template
+const fileConfig = {
+  type: 'files',
+  placeholders: [...]
+}
 
-- Large files (>10MB) are skipped for placeholder replacement
-- Binary files are detected and copied without processing
-- Glob patterns are used efficiently for file filtering
+// Test command-based template  
+const commandConfig = {
+  type: 'commands',
+  commands: [...],
+  placeholders: [...]
+}
 
-### Memory Usage
+// Test hybrid template
+const hybridConfig = {
+  // No type specified - processes files then commands
+  placeholders: [...],
+  commands: [...]
+}
+```
 
-- Templates are processed incrementally
-- Large command outputs are streamed rather than buffered
-- Temporary files are cleaned up after processing
-
-### Network Operations
-
-- Template downloads use git clone for efficiency
-- Failed downloads are retried with exponential backoff
-- Concurrent template processing is limited to prevent resource exhaustion
-
-This API documentation provides the foundation for understanding and extending fabr. For specific implementation details, refer to the source code in the `/src` directory.
+This comprehensive API documentation provides the foundation for understanding and extending fabr. For specific implementation details and the latest changes, refer to the source code in the `/src` directory.
