@@ -10,7 +10,7 @@ File-based templates work by copying files from a repository and replacing place
 ## How File-Based Templates Work
 
 1. **Template Repository** - Your template lives in a Git repository with your project files
-2. **Download** - Fabr clones the repository to get your template files  
+2. **Download** - Fabr clones the repository to get your template files
 3. **Placeholder Replacement** - Any `{{PLACEHOLDER}}` patterns in files get replaced
 4. **Copy to Project** - The processed files are copied to the new project directory
 
@@ -42,7 +42,7 @@ Create a `fabr.config.json` file in your repository root:
   "description": "A simple React application with modern tooling",
   "placeholders": [
     {
-      "key": "PROJECT_NAME", 
+      "key": "PROJECT_NAME",
       "prompt": "What's your project name?",
       "required": true,
       "validation": {
@@ -136,7 +136,7 @@ Provide fallback values:
 ```json
 {
   "key": "PORT",
-  "prompt": "Server port", 
+  "prompt": "Server port",
   "default": "3000"
 }
 ```
@@ -157,7 +157,7 @@ Automatically generate values from other placeholders:
 
 Available transformations:
 - `lower` - lowercase
-- `upper` - UPPERCASE  
+- `upper` - UPPERCASE
 - `title` - Title Case
 - `camel` - camelCase
 - `pascal` - PascalCase
@@ -182,7 +182,7 @@ Generate defaults based on other placeholders:
 
 By default, all files except these are processed:
 - `.git/` directory
-- `node_modules/` directory  
+- `node_modules/` directory
 - Binary files (images, videos, etc.)
 - Files larger than 10MB
 
@@ -281,7 +281,7 @@ node-api-template/
       }
     },
     {
-      "key": "PROJECT_DESCRIPTION", 
+      "key": "PROJECT_DESCRIPTION",
       "prompt": "API description",
       "default": "A new Express.js API"
     },

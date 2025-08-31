@@ -12,7 +12,7 @@ This document explains fabr's internal architecture, design decisions, and how t
 Fabr is designed as a modular CLI tool with clear separation of concerns. The architecture follows these principles:
 
 - **Simplicity** - Keep the core concepts simple and intuitive
-- **Modularity** - Each component has a single responsibility  
+- **Modularity** - Each component has a single responsibility
 - **Extensibility** - Easy to add new features and template types
 - **Reliability** - Robust error handling and validation
 - **Performance** - Efficient file processing and command execution
@@ -241,7 +241,7 @@ class FabrError extends Error {
 
 Errors are caught at appropriate levels:
 - CLI level - Global error handler for unhandled errors
-- Command level - Command-specific error handling  
+- Command level - Command-specific error handling
 - Operation level - Specific error context and recovery
 
 ### 3. User-Friendly Messages

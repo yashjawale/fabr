@@ -61,7 +61,7 @@ Check that fabr is working correctly:
 # Using npx
 npx fabr --version
 
-# Using global installation  
+# Using global installation
 fabr --version
 ```
 

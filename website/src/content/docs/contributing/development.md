@@ -127,7 +127,7 @@ After making changes:
    # Test the CLI
    node dist/index.js --help
    node dist/index.js list
-   
+
    # Test project creation in a temp directory
    cd /tmp && rm -rf test-fabr
    node /path/to/fabr/dist/index.js init test-fabr
@@ -170,7 +170,7 @@ Understanding the codebase structure:
    ```typescript
    // src/commands/mycommand.ts
    import type { Subcommand } from '../types/subcommand.js'
-   
+
    export const mycommand: Subcommand = {
      name: 'mycommand',
      description: 'Description of my command',
@@ -238,7 +238,7 @@ rm -rf test-*
 # Test file-based template
 node /path/to/fabr/dist/index.js init test-file --template=fabr-sample
 
-# Test command-based template  
+# Test command-based template
 node /path/to/fabr/dist/index.js init test-command --template=node-api
 ```
 

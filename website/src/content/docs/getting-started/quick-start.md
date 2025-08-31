@@ -29,7 +29,7 @@ When you run `init`, you'll see a list like this:
 ```
 ? Choose a template:
   ❯ react-app - Modern React application with TypeScript
-    node-server - Express.js server with TypeScript  
+    node-server - Express.js server with TypeScript
     static-site - Simple HTML/CSS/JS website
     nextjs-app - Next.js application with Tailwind CSS
 ```

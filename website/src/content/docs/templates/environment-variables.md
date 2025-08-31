@@ -21,7 +21,7 @@ Add an `environmentVariables` array to your `fabr.config.json`:
       "required": true
     },
     {
-      "key": "API_KEY", 
+      "key": "API_KEY",
       "prompt": "Enter your API key",
       "local": true,
       "required": true
@@ -41,7 +41,7 @@ When users create a project with your template, they'll be prompted for these va
 ### Optional Properties
 
 - **`prompt`** - Message shown when asking for this value
-- **`description`** - Additional help text  
+- **`description`** - Additional help text
 - **`default`** - Default value if user doesn't provide one
 - **`required`** - Whether this variable is required (default: false)
 - **`local`** - Save to `.env.local` instead of `.env` (default: false)
@@ -60,7 +60,7 @@ REDIS_URL=redis://localhost:6379
 NODE_ENV=development
 ```
 
-### `.env.local` File (Sensitive Variables) 
+### `.env.local` File (Sensitive Variables)
 - Sensitive values like API keys and secrets
 - Should be added to `.gitignore`
 - Environment-specific sensitive data
@@ -207,7 +207,7 @@ Here's a comprehensive example for a full-stack application:
 When using `transform`, you can apply these transformations:
 
 - **`kebab`** - `my-project-name`
-- **`pascal`** - `MyProjectName`  
+- **`pascal`** - `MyProjectName`
 - **`camel`** - `myProjectName`
 - **`snake`** - `my_project_name`
 - **`constant`** - `MY_PROJECT_NAME`
@@ -223,7 +223,7 @@ Please provide values for environment variables:
 
 ? Enter your database connection URL postgresql://user:pass@localhost:5432/myapp
 ? Enter NextAuth secret (32+ characters) [hidden input]
-? Enter your app URL (http://localhost:3000) 
+? Enter your app URL (http://localhost:3000)
 ? Enter Redis URL (optional for caching) redis://localhost:6379
 
 ✓ Created .env file with 3 variables

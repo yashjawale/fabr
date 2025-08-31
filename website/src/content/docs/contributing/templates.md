@@ -133,7 +133,7 @@ Provide defaults that work out of the box:
   "default": "3000"
 },
 {
-  "key": "DATABASE_URL", 
+  "key": "DATABASE_URL",
   "prompt": "Database connection string",
   "default": "sqlite:///app.db"
 }
@@ -164,7 +164,7 @@ Include a comprehensive README.md in your template:
 ```
 src/
 ├── components/     # Reusable components
-├── pages/          # Application pages  
+├── pages/          # Application pages
 ├── utils/          # Utility functions
 └── types/          # TypeScript types
 ```
@@ -254,7 +254,7 @@ Here are some template ideas to get you started:
       "required": true
     },
     {
-      "key": "AUTHOR_NAME", 
+      "key": "AUTHOR_NAME",
       "prompt": "Your name",
       "required": true
     }
@@ -352,7 +352,7 @@ npx fabr init test_snake_case --template=your-repo-url
   "templates": [
     {
       "slug": "my-awesome-template",
-      "name": "My Awesome Template", 
+      "name": "My Awesome Template",
       "description": "A great starting point for awesome projects",
       "repository": "https://github.com/yourusername/my-awesome-template",
       "tags": ["typescript", "react", "testing"],

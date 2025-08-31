@@ -23,7 +23,7 @@ Fabr supports two types of templates:
 ### File-Based Templates
 Traditional templates that copy files from a repository and replace placeholders like `{{PROJECT_NAME}}` with your values.
 
-### Command-Based Templates  
+### Command-Based Templates
 Execute shell commands to set up projects programmatically - perfect for CLI tools like `create-react-app` or `npm init`.
 
 ## Why Use Fabr?

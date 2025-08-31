@@ -89,7 +89,7 @@ Run the command in a specific directory (relative to project root):
 ```json
 {
   "command": "npm init -y",
-  "description": "Initialize frontend package.json", 
+  "description": "Initialize frontend package.json",
   "workingDirectory": "./frontend"
 }
 ```
@@ -190,7 +190,7 @@ When a user runs a command-based template:
    $ npm init -y
    ✓ Completed
 
-[2/4] Set project name  
+[2/4] Set project name
    $ npm pkg set name=my-awesome-api
    ✓ Completed
 
@@ -255,7 +255,7 @@ When a user runs a command-based template:
 
 ```json
 {
-  "type": "commands", 
+  "type": "commands",
   "name": "Full-Stack PERN App",
   "description": "PostgreSQL + Express + React + Node.js application",
   "placeholders": [
@@ -343,7 +343,7 @@ When a user runs a command-based template:
   "workingDirectory": "./backend"
 },
 {
-  "command": "npm init -y", 
+  "command": "npm init -y",
   "description": "Initialize frontend",
   "workingDirectory": "./frontend"
 }

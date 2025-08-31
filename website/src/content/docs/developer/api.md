@@ -119,7 +119,7 @@ const values = await processPlaceholders(config)
 // Returns: { PROJECT_NAME: 'my-awesome-app', COMPONENT_NAME: 'MyAwesomeApp' }
 ```
 
-### Environment Variables (`src/lib/env.ts`) 
+### Environment Variables (`src/lib/env.ts`)
 
 Generates `.env` and `.env.local` files from template configuration and user input.
 
@@ -234,11 +234,11 @@ interface FabrConfig {
   description?: string                  // Template description
   version?: string                      // Template version (semver)
   type?: 'files' | 'commands'          // Template type
-  
+
   placeholders?: PlaceholderConfig[]    // Placeholder definitions
   environmentVariables?: EnvironmentVariableConfig[]  // Environment variable definitions
   commands?: CommandConfig[]            // Commands for command-based templates
-  
+
   // Legacy properties for backward compatibility
   preSetupCommand?: string
   postSetupCommand?: string
@@ -264,7 +264,7 @@ interface PlaceholderConfig {
   default?: string                     // Default value
   required?: boolean                   // Whether required (default: false)
   type?: 'string' | 'boolean'         // Input type (default: 'string')
-  
+
   // Validation rules
   validation?: {
     pattern?: string                   // Regex pattern
@@ -272,13 +272,13 @@ interface PlaceholderConfig {
     maxLength?: number                 // Maximum length
     message?: string                   // Custom error message
   }
-  
+
   // Value transformation from another placeholder
   transform?: {
     source: string                     // Source placeholder key
     case: CaseType                     // Target case format
   }
-  
+
   // Smart default generation
   defaultCase?: {
     source: string                     // Source placeholder key
@@ -298,7 +298,7 @@ interface EnvironmentVariableConfig {
   default?: string                     // Default value (can include placeholders)
   required?: boolean                   // Whether required (default: false)
   local?: boolean                      // Save to .env.local instead of .env (default: false)
-  
+
   validation?: ValidationConfig        // Input validation rules
   transform?: TransformConfig          // Value transformation from placeholder
 }
@@ -320,7 +320,7 @@ interface CommandConfig {
 Available case transformation types with examples:
 
 ```typescript
-type CaseType = 
+type CaseType =
   | 'lower'     // 'my project name'
   | 'upper'     // 'MY PROJECT NAME'
   | 'title'     // 'My Project Name'
@@ -411,7 +411,7 @@ transformCase('MyProjectName', 'snake')    // 'my_project_name'
 
 ```typescript
 function replacePlaceholders(
-  content: string, 
+  content: string,
   placeholders: Record<string, string>
 ): string
 ```
@@ -430,7 +430,7 @@ replacePlaceholders(content, placeholders) // 'Welcome to my-app!'
 ```typescript
 function copyFileWithPlaceholders(
   sourcePath: string,
-  targetPath: string, 
+  targetPath: string,
   placeholders: Record<string, string>
 ): Promise<void>
 ```
@@ -441,7 +441,7 @@ Copies a file and replaces placeholders in its content.
 
 ```typescript
 function validateInput(
-  value: string, 
+  value: string,
   validation: ValidationConfig
 ): { valid: boolean; message?: string }
 ```
@@ -553,11 +553,11 @@ export const myCommand: Subcommand = {
   run: async (args) => {
     const projectName = args.args[0]
     const verbose = args.flags.verbose as boolean
-    
+
     if (!projectName) {
       throw new FabrError('Project name is required', 'MISSING_ARGUMENT')
     }
-    
+
     // Command implementation
     console.log(`Processing project: ${projectName}`)
   }
@@ -580,7 +580,7 @@ export const validate: Subcommand = {
   description: 'Validate a template configuration',
   run: async (args) => {
     const configPath = args.args[0] || 'fabr.config.json'
-    
+
     try {
       const config = await loadFabrConfig(configPath)
       console.log('✅ Configuration is valid')
@@ -609,7 +609,7 @@ Extend the case transformation system:
 // In src/lib/placeholders.ts
 function transformCase(input: string, caseType: CaseType): string {
   const words = input.split(/[\s_-]+/).filter(Boolean)
-  
+
   switch (caseType) {
     case 'reverse':
       return input.split('').reverse().join('')
@@ -624,8 +624,8 @@ function transformCase(input: string, caseType: CaseType): string {
 
 Update the CaseType:
 ```typescript
-type CaseType = 
-  | 'lower' | 'upper' | 'title' | 'camel' | 'pascal' 
+type CaseType =
+  | 'lower' | 'upper' | 'title' | 'camel' | 'pascal'
   | 'kebab' | 'snake' | 'constant'
   | 'reverse' | 'capitalize'  // New transformations
 ```
@@ -648,7 +648,7 @@ Implement custom validators:
 ```typescript
 function validateInput(value: string, validation: ValidationConfig): ValidationResult {
   // ... existing validation
-  
+
   if (validation.custom) {
     switch (validation.custom) {
       case 'email':
@@ -672,7 +672,7 @@ function validateInput(value: string, validation: ValidationConfig): ValidationR
         break
     }
   }
-  
+
   return { valid: true }
 }
 ```
@@ -747,7 +747,7 @@ const fileConfig = {
   placeholders: [...]
 }
 
-// Test command-based template  
+// Test command-based template
 const commandConfig = {
   type: 'commands',
   commands: [...],

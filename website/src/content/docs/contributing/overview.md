@@ -14,7 +14,7 @@ There are many ways to help improve fabr:
 ### 🐛 Report Bugs
 Found a bug? We want to know about it! [Open an issue](https://github.com/yashjawale/fabr/issues/new) with:
 - A clear description of the problem
-- Steps to reproduce the issue  
+- Steps to reproduce the issue
 - Your environment (OS, Node.js version, fabr version)
 - Any error messages you see
 
@@ -103,7 +103,7 @@ Use clear, descriptive commit messages:
 ```bash
 # Good
 Add validation for project names in init command
-Fix placeholder replacement in nested directories  
+Fix placeholder replacement in nested directories
 Update documentation for environment variables
 
 # Less helpful
@@ -124,7 +124,7 @@ Changes
 We appreciate all contributions, big and small! Contributors are recognized in:
 
 - **README contributors section** - All contributors are listed
-- **Release notes** - Significant contributions are highlighted  
+- **Release notes** - Significant contributions are highlighted
 - **Community shoutouts** - We celebrate contributions on social media
 
 ## Need Help?
@@ -146,7 +146,7 @@ Some areas where we especially need help:
 - Cross-platform compatibility improvements
 - Plugin system for extensibility
 
-### Developer Experience  
+### Developer Experience
 - Better CLI help and documentation
 - More comprehensive testing
 - Integration with popular editors

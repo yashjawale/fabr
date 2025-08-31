@@ -23,12 +23,12 @@ For more advanced templates with placeholders and environment variables:
 ```json
 {
   "$schema": "https://raw.githubusercontent.com/yashjawale/fabr/main/fabr.config.schema.json",
-  "name": "Advanced Template", 
+  "name": "Advanced Template",
   "description": "Template with placeholders and environment setup",
   "type": "files",
   "placeholders": [...],
   "environmentVariables": [...],
-  "commands": [...] 
+  "commands": [...]
 }
 ```
 
@@ -45,7 +45,7 @@ Display name for your template.
 }
 ```
 
-#### `description` (string, optional)  
+#### `description` (string, optional)
 Brief description shown in template lists.
 
 ```json
@@ -139,7 +139,7 @@ Add validation rules to ensure user input meets requirements:
 
 #### Validation Properties
 - **`pattern`** - Regular expression string
-- **`minLength`** - Minimum character length  
+- **`minLength`** - Minimum character length
 - **`maxLength`** - Maximum character length
 - **`message`** - Custom error message
 
@@ -149,7 +149,7 @@ Generate placeholders from other placeholders:
 
 ```json
 {
-  "key": "COMPONENT_NAME", 
+  "key": "COMPONENT_NAME",
   "transform": {
     "source": "PROJECT_NAME",
     "case": "pascal"
@@ -176,7 +176,7 @@ Provide smart defaults based on transformations:
   "key": "COMPONENT_NAME",
   "prompt": "Main component name?",
   "defaultCase": {
-    "source": "PROJECT_NAME", 
+    "source": "PROJECT_NAME",
     "case": "pascal",
     "template": "{value}App"
   }
@@ -300,7 +300,7 @@ Whether to show command output to user.
     },
     {
       "command": "npm install",
-      "description": "Install frontend dependencies", 
+      "description": "Install frontend dependencies",
       "workingDirectory": "./frontend"
     }
   ]
@@ -330,7 +330,7 @@ Exclude files from processing:
 {
   "excludeFiles": [
     "node_modules/**",
-    "*.log", 
+    "*.log",
     ".DS_Store",
     "dist/**"
   ]
@@ -389,7 +389,7 @@ These properties are supported for backward compatibility:
       }
     },
     {
-      "key": "AUTHOR_NAME", 
+      "key": "AUTHOR_NAME",
       "prompt": "Your name",
       "default": "Developer"
     },

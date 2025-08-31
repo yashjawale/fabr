@@ -26,7 +26,7 @@ These templates work by copying files from a repository and replacing placeholde
 - Configuration files
 - Static websites
 
-### Command-Based Templates  
+### Command-Based Templates
 These templates run shell commands to set up projects programmatically.
 
 **Best for:**
@@ -73,7 +73,7 @@ Both template types use fabr's powerful placeholder system:
 
 Placeholders can be used in:
 - File contents (for file-based templates)
-- Commands (for command-based templates)  
+- Commands (for command-based templates)
 - Environment variable values
 - File and folder names
 
@@ -90,7 +90,7 @@ Fabr can automatically generate `.env` files for your projects:
       "default": "http://localhost:3000/api"
     },
     {
-      "key": "JWT_SECRET", 
+      "key": "JWT_SECRET",
       "prompt": "Enter JWT secret",
       "local": true,
       "required": true
@@ -106,7 +106,7 @@ Variables marked as `local: true` go into `.env.local` (for sensitive data), whi
 Ready to dive deeper? Here's what to explore next:
 
 1. **[File-Based Templates](/templates/file-based)** - Learn to create templates with files and folders
-2. **[Command-Based Templates](/templates/command-based)** - Set up projects with shell commands  
+2. **[Command-Based Templates](/templates/command-based)** - Set up projects with shell commands
 3. **[Environment Variables](/templates/environment-variables)** - Generate .env files automatically
 4. **[Configuration Reference](/templates/configuration)** - Complete fabr.config.json documentation
 
