@@ -25,38 +25,38 @@ export default defineConfig({
 				{
 					label: 'Getting Started',
 					items: [
-						{ label: 'Introduction', slug: 'getting-started/introduction' },
-						{ label: 'Installation', slug: 'getting-started/installation' },
-						{ label: 'Quick Start', slug: 'getting-started/quick-start' },
+						{ label: 'Introduction', slug: 'docs/getting-started/introduction' },
+						{ label: 'Installation', slug: 'docs/getting-started/installation' },
+						{ label: 'Quick Start', slug: 'docs/getting-started/quick-start' },
 					],
 				},
 				{
 					label: 'Add Your Templates',
 					items: [
-						{ label: 'Overview', slug: 'templates/overview' },
-						{ label: 'File-Based Templates', slug: 'templates/file-based' },
-						{ label: 'Command-Based Templates', slug: 'templates/command-based' },
-						{ label: 'Environment Variables', slug: 'templates/environment-variables' },
-						{ label: 'Configuration Reference', slug: 'templates/configuration' },
+						{ label: 'Overview', slug: 'docs/templates/overview' },
+						{ label: 'File-Based Templates', slug: 'docs/templates/file-based' },
+						{ label: 'Command-Based Templates', slug: 'docs/templates/command-based' },
+						{ label: 'Environment Variables', slug: 'docs/templates/environment-variables' },
+						{ label: 'Configuration Reference', slug: 'docs/templates/configuration' },
 					],
 				},
 				{
 					label: 'Contributing',
 					items: [
-						{ label: 'How to Contribute', slug: 'contributing/overview' },
-						{ label: 'Development Setup', slug: 'contributing/development' },
-						{ label: 'Adding Templates', slug: 'contributing/templates' },
+						{ label: 'How to Contribute', slug: 'docs/contributing/overview' },
+						{ label: 'Development Setup', slug: 'docs/contributing/development' },
+						{ label: 'Adding Templates', slug: 'docs/contributing/templates' },
 					],
 				},
 				{
 					label: 'Developer Reference',
 					items: [
-						{ label: 'API Documentation', slug: 'developer/api' },
-						{ label: 'Architecture', slug: 'developer/architecture' },
+						{ label: 'API Documentation', slug: 'docs/developer/api' },
+						{ label: 'Architecture', slug: 'docs/developer/architecture' },
 						{
 							label: 'Generated API',
 							collapsed: true,
-							autogenerate: { directory: 'developer/generated' },
+							autogenerate: { directory: 'docs/developer/generated' },
 						},
 					],
 				},
