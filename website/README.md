@@ -1,46 +1,93 @@
-# Astro Starter Kit: Basics
+# Fabr Documentation
 
-```sh
-npm create astro@latest -- --template basics
+This directory contains the comprehensive documentation website for fabr, built with [Astro](https://astro.build/) and [Starlight](https://starlight.astro.build/).
+
+## Documentation Structure
+
+The documentation is organized into four main sections:
+
+### 🚀 Getting Started
+
+- **Introduction** - Welcome to fabr and overview of features
+- **Installation** - How to install fabr on your system
+- **Quick Start** - Create your first project in under a minute
+
+### 📦 Add Your Templates
+
+- **Overview** - Understanding template types and features
+- **File-Based Templates** - Traditional file copying with placeholder replacement
+- **Command-Based Templates** - Dynamic project setup using shell commands
+- **Environment Variables** - Automatic .env file generation
+- **Configuration Reference** - Complete fabr.config.json documentation
+
+### 🤝 Contributing
+
+- **How to Contribute** - Ways to help improve fabr
+- **Development Setup** - Local development environment setup
+- **Adding Templates** - Create and share templates with the community
+
+### 🔧 Developer Reference
+
+- **API Documentation** - Core functions and utilities reference
+- **Architecture** - Internal design and structure
+- **Generated API** - Auto-generated documentation from TypeScript source
+
+## Building the Documentation
+
+### Prerequisites
+
+- Node.js 18 or higher
+- npm
+
+### Development
+
+```bash
+cd website
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Visit `http://localhost:4321` to see the documentation site.
 
-## 🚀 Project Structure
+### Production Build
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```bash
+npm run build
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+The built site will be in the `dist/` directory.
 
-## 🧞 Commands
+## Contributing to Documentation
 
-All commands are run from the root of the project, from a terminal:
+### Adding New Pages
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+1. Create a new `.md` file in `src/content/docs/`
+2. Add frontmatter with title and description
+3. Update the sidebar in `astro.config.mjs` if needed
 
-## 👀 Want to learn more?
+### Writing Style
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- **Keep it simple** - Use clear, straightforward language
+- **Be humble** - Avoid overly promotional language
+- **Include examples** - Show real code and usage patterns
+- **Stay current** - Update documentation when features change
+
+## Deployment
+
+The documentation is automatically deployed to GitHub Pages via GitHub Actions when changes are pushed to the main branch.
+
+**Live URL:** https://yashjawale.github.io/fabr/
+
+## Tech Stack
+
+- **[Astro](https://astro.build/)** - Static site generator
+- **[Starlight](https://starlight.astro.build/)** - Documentation theme
+- **[Tailwind CSS](https://tailwindcss.com/)** - Styling
+- **[GitHub Actions](https://github.com/features/actions)** - CI/CD pipeline
+
+## Getting Help
+
+- **Astro Documentation:** https://docs.astro.build/
+- **Starlight Documentation:** https://starlight.astro.build/
+- **Fabr Repository:** https://github.com/yashjawale/fabr
+- **Issues:** https://github.com/yashjawale/fabr/issues

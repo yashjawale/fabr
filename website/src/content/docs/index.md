@@ -3,6 +3,8 @@ title: fabr Documentation
 description: A simple CLI tool to bootstrap projects with templates faster than ever before
 ---
 
+# Welcome to fabr
+
 Bootstrap projects with templates faster than ever before.
 
 ## Quick Start
@@ -13,11 +15,11 @@ Get up and running with fabr in under a minute:
 # Install fabr globally
 npm install -g fabr
 
-# Create a new project using the sample template
-fabr init my-project --template=fabr-sample
+# Create a new project
+fabr init my-project --template=next-js
 
 # Start developing
-cd my-project
+cd my-project && npm run dev
 ```
 
 ## What is fabr?
@@ -33,12 +35,11 @@ fabr is a TypeScript CLI utility for scaffolding new development projects using 
 - **🎯 Smart Placeholders** - Advanced replacement with validation
 - **📚 Template Registry** - Discover community templates
 
-## Available Templates
+## Popular Templates
 
-Currently available templates:
-
-- **fabr-sample** - Example template demonstrating fabr's capabilities
-
-More templates are being developed and will be added to the registry soon!
+- **Next.js** - React framework with TypeScript
+- **Vite + React** - Fast frontend development
+- **Node.js API** - Express server with TypeScript
+- **CLI Tools** - TypeScript command-line applications
 
 Ready to get started? [Follow the installation guide →](getting-started/installation)

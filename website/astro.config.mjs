@@ -1,7 +1,8 @@
 // @ts-check
-import { defineConfig } from 'astro/config'
 import starlight from '@astrojs/starlight'
+import starlightMermaid from '@pasqal-io/starlight-client-mermaid'
 import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from 'astro/config'
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,10 +22,38 @@ export default defineConfig({
 			expressiveCode: {
 				themes: ['github-light', 'github-dark'],
 			},
+			plugins: [starlightMermaid()],
 			sidebar: [
 				{
-					label: 'General',
-					items: [{ label: 'Getting Started', slug: 'docs' }],
+					label: 'Getting Started',
+					items: [
+						{ label: 'Introduction', slug: 'docs/getting-started/introduction' },
+						{ label: 'Installation', slug: 'docs/getting-started/installation' },
+						{ label: 'Quick Start', slug: 'docs/getting-started/quick-start' },
+					],
+				},
+				{
+					label: 'Add Your Templates',
+					items: [
+						{ label: 'Overview', slug: 'docs/templates/overview' },
+						{ label: 'File-Based Templates', slug: 'docs/templates/file-based' },
+						{ label: 'Command-Based Templates', slug: 'docs/templates/command-based' },
+						{ label: 'Environment Variables', slug: 'docs/templates/environment-variables' },
+						{ label: 'Template Examples', slug: 'docs/templates/examples' },
+						{ label: 'Configuration Reference', slug: 'docs/templates/configuration' },
+					],
+				},
+				{
+					label: 'Contributing',
+					items: [
+						{ label: 'How to Contribute', slug: 'docs/contributing/overview' },
+						{ label: 'Development Setup', slug: 'docs/contributing/development' },
+						{ label: 'Adding Templates', slug: 'docs/contributing/templates' },
+					],
+				},
+				{
+					label: 'Developer Reference',
+					items: [{ label: 'Architecture', slug: 'docs/developer/architecture' }],
 				},
 			],
 		}),
