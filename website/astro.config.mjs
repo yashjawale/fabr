@@ -2,6 +2,7 @@
 import starlight from '@astrojs/starlight'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
+import starlightMermaid from '@pasqal-io/starlight-client-mermaid'
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,6 +22,7 @@ export default defineConfig({
 			expressiveCode: {
 				themes: ['github-light', 'github-dark'],
 			},
+			plugins: [starlightMermaid()],
 			sidebar: [
 				{
 					label: 'Getting Started',
