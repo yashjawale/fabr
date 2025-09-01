@@ -57,12 +57,12 @@ import ThemeSelector from './ThemeSelector.astro'
 	}
 
 	// Set active class on OS theme change
-	window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+	window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
 		reComputeTheme()
 	})
 
 	// run recomputeTheme when screen crosses 768px
-	window.matchMedia('(min-width: 768px)').addEventListener('change', e => {
+	window.matchMedia('(min-width: 768px)').addEventListener('change', () => {
 		addThemeEventListeners()
 		reComputeTheme()
 	})
