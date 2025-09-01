@@ -3,13 +3,16 @@ title: Command-Based Templates
 description: Set up projects using shell commands instead of copying files
 ---
 
-Command-based templates create projects by executing shell commands rather than copying files. This approach is perfect when you want to use existing CLI tools like `create-react-app`, `npm init`, or any other command-line utilities.
+Command-based templates create projects by executing shell commands rather than copying files. This approach is perfect when you want to use existing CLI tools or package managers for project setup.
 
 ## When to Use Command-Based Templates
 
 Command-based templates are ideal for:
 
-- **CLI tool integration** - Using tools like `create-react-app`, `create-next-app`, `vue create`
+- **CLI tool integration** - Using project creation tools and package managers
+- **Dynamic setup** - Projects that require complex initialization
+- **Tool-specific workflows** - Leveraging existing ecosystem tools
+- **Package management** - Installing and configuring dependencies
 - **Package manager setup** - Running `npm init`, `yarn create`, etc.
 - **Database initialization** - Setting up migrations, seeding data
 - **Dynamic project generation** - Creating files programmatically
@@ -24,8 +27,8 @@ Create a `fabr.config.json` with `"type": "commands"`:
 ```json
 {
   "type": "commands",
-  "name": "Node.js API Starter",
-  "description": "Creates a Node.js API using npm and Express",
+  "name": "Basic API Starter",
+  "description": "Creates a basic API project using package managers",
   "placeholders": [
     {
       "key": "PROJECT_NAME",
@@ -52,7 +55,7 @@ Create a `fabr.config.json` with `"type": "commands"`:
     },
     {
       "command": "npm install express",
-      "description": "Install Express.js"
+      "description": "Install web framework"
     }
   ]
 }
@@ -76,8 +79,8 @@ Human-readable description shown during execution:
 
 ```json
 {
-  "command": "npm install express helmet cors",
-  "description": "Install Express and security middleware"
+  "command": "npm install web-framework security-middleware cors",
+  "description": "Install web framework and security middleware"
 }
 ```
 
@@ -192,13 +195,13 @@ When a user runs a command-based template:
    $ npm pkg set name=my-awesome-api
    ✓ Completed
 
-[3/4] Install Express.js
+[3/4] Install web framework
    $ npm install express
    added 1 package, and audited 2 packages in 1s
    ✓ Completed
 
 [4/4] Create main server file
-   $ echo 'const express = require("express"); ...' > index.js
+   $ echo 'const framework = require("web-framework"); ...' > index.js
    ✓ Completed
 
 ✅ Template setup complete!
@@ -206,13 +209,13 @@ When a user runs a command-based template:
 
 ## Complex Examples
 
-### React App with TypeScript
+### Frontend App with TypeScript
 
 ```json
 {
   "type": "commands",
-  "name": "React TypeScript App",
-  "description": "Create React app with TypeScript and additional tools",
+  "name": "Frontend TypeScript App",
+  "description": "Create frontend app with TypeScript and additional tools",
   "placeholders": [
     {
       "key": "PROJECT_NAME",
@@ -228,8 +231,8 @@ When a user runs a command-based template:
   ],
   "commands": [
     {
-      "command": "npx create-react-app . --template typescript",
-      "description": "Create React app with TypeScript"
+      "command": "npx create-frontend-app . --template typescript",
+      "description": "Create frontend app with TypeScript"
     },
     {
       "command": "npm pkg set name={{PROJECT_NAME}}",
@@ -237,12 +240,12 @@ When a user runs a command-based template:
     },
     {
       "command": "npm install --save-dev tailwindcss postcss autoprefixer",
-      "description": "Install Tailwind CSS",
+      "description": "Install CSS framework",
       "condition": "{{USE_TAILWIND}}"
     },
     {
-      "command": "npx tailwindcss init -p",
-      "description": "Initialize Tailwind config",
+      "command": "npx css-framework init -p",
+      "description": "Initialize CSS config",
       "condition": "{{USE_TAILWIND}}"
     }
   ]
@@ -254,8 +257,8 @@ When a user runs a command-based template:
 ```json
 {
   "type": "commands",
-  "name": "Full-Stack PERN App",
-  "description": "PostgreSQL + Express + React + Node.js application",
+  "name": "Full-Stack Web App",
+  "description": "Full-stack web application with database setup",
   "placeholders": [
     {
       "key": "PROJECT_NAME",

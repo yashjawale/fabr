@@ -19,7 +19,7 @@ These templates work by copying files from a repository and replacing placeholde
 - When you want to version control your template files
 
 **Example use cases:**
-- React component libraries
+- Frontend component libraries
 - Documentation sites
 - Configuration files
 - Static websites
@@ -28,16 +28,16 @@ These templates work by copying files from a repository and replacing placeholde
 These templates run shell commands to set up projects programmatically.
 
 **Best for:**
-- CLI-based project creation (like `create-react-app`)
+- CLI-based project creation
 - Dynamic project setup
 - Integration with existing tools
 - Complex initialization workflows
 
 **Example use cases:**
-- Next.js apps (using `create-next-app`)
-- Node.js servers (using `npm init`)
+- Frontend apps using CLI tools
+- Backend servers with package managers
 - Database setup with migrations
-- Docker container initialization
+- Container initialization
 
 ## Template Configuration
 
@@ -110,10 +110,10 @@ Ready to dive deeper? Here's what to explore next:
 
 ## Template Examples
 
-Check out these example templates to see how everything works together:
+Check out these example template types to see how everything works together:
 
-- **Simple React App** - File-based template with TypeScript setup
-- **Node.js API** - Command-based template using npm init
+- **Frontend App** - File-based template with modern tooling setup
+- **Backend API** - Command-based template using package managers
 - **Full-Stack App** - Combined approach with database setup
 - **Static Site** - Minimal file-based template for HTML/CSS/JS
 
