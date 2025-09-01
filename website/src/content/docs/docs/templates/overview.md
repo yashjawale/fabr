@@ -10,30 +10,36 @@ Templates are the heart of fabr. They define how new projects should be set up, 
 Fabr supports two types of templates, each with their own strengths:
 
 ### File-Based Templates
+
 These templates work by copying files from a repository and replacing placeholders in the content.
 
 **Best for:**
+
 - Static project structures
 - Boilerplate code that doesn't change much
 - Templates with many files
 - When you want to version control your template files
 
 **Example use cases:**
+
 - Frontend component libraries
 - Documentation sites
 - Configuration files
 - Static websites
 
 ### Command-Based Templates
+
 These templates run shell commands to set up projects programmatically.
 
 **Best for:**
+
 - CLI-based project creation
 - Dynamic project setup
 - Integration with existing tools
 - Complex initialization workflows
 
 **Example use cases:**
+
 - Frontend apps using CLI tools
 - Backend servers with package managers
 - Database setup with migrations
@@ -55,21 +61,22 @@ Both template types use fabr's powerful placeholder system:
 
 ```json
 {
-  "placeholders": [
-    {
-      "key": "PROJECT_NAME",
-      "prompt": "What's your project name?",
-      "required": true,
-      "validation": {
-        "pattern": "^[a-z0-9-]+$",
-        "message": "Project name must be lowercase with hyphens"
-      }
-    }
-  ]
+	"placeholders": [
+		{
+			"key": "PROJECT_NAME",
+			"prompt": "What's your project name?",
+			"required": true,
+			"validation": {
+				"pattern": "^[a-z0-9-]+$",
+				"message": "Project name must be lowercase with hyphens"
+			}
+		}
+	]
 }
 ```
 
 Placeholders can be used in:
+
 - File contents (for file-based templates)
 - Commands (for command-based templates)
 - Environment variable values
@@ -81,19 +88,19 @@ Fabr can automatically generate `.env` files for your projects:
 
 ```json
 {
-  "environmentVariables": [
-    {
-      "key": "API_URL",
-      "prompt": "Enter your API URL",
-      "default": "http://localhost:3000/api"
-    },
-    {
-      "key": "JWT_SECRET",
-      "prompt": "Enter JWT secret",
-      "local": true,
-      "required": true
-    }
-  ]
+	"environmentVariables": [
+		{
+			"key": "API_URL",
+			"prompt": "Enter your API URL",
+			"default": "http://localhost:3000/api"
+		},
+		{
+			"key": "JWT_SECRET",
+			"prompt": "Enter JWT secret",
+			"local": true,
+			"required": true
+		}
+	]
 }
 ```
 

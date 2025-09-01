@@ -32,25 +32,25 @@ Add a `fabr.config.json` file in your repository root:
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/yashjawale/fabr/main/fabr.config.schema.json",
-  "name": "My Awesome Template",
-  "description": "A great starting point for awesome projects",
-  "placeholders": [
-    {
-      "key": "PROJECT_NAME",
-      "prompt": "What's your project name?",
-      "required": true,
-      "validation": {
-        "pattern": "^[a-z0-9-]+$",
-        "message": "Use lowercase letters, numbers, and hyphens only"
-      }
-    },
-    {
-      "key": "AUTHOR_NAME",
-      "prompt": "Your name",
-      "default": "Developer"
-    }
-  ]
+	"$schema": "https://raw.githubusercontent.com/yashjawale/fabr/main/fabr.config.schema.json",
+	"name": "My Awesome Template",
+	"description": "A great starting point for awesome projects",
+	"placeholders": [
+		{
+			"key": "PROJECT_NAME",
+			"prompt": "What's your project name?",
+			"required": true,
+			"validation": {
+				"pattern": "^[a-z0-9-]+$",
+				"message": "Use lowercase letters, numbers, and hyphens only"
+			}
+		},
+		{
+			"key": "AUTHOR_NAME",
+			"prompt": "Your name",
+			"default": "Developer"
+		}
+	]
 }
 ```
 
@@ -59,15 +59,17 @@ Add a `fabr.config.json` file in your repository root:
 For file-based templates, add your project files with placeholders:
 
 **package.json:**
+
 ```json
 {
-  "name": "{{PROJECT_NAME}}",
-  "version": "1.0.0",
-  "author": "{{AUTHOR_NAME}}"
+	"name": "{{PROJECT_NAME}}",
+	"version": "1.0.0",
+	"author": "{{AUTHOR_NAME}}"
 }
 ```
 
 **README.md:**
+
 ```markdown
 # {{PROJECT_NAME}}
 
@@ -103,20 +105,20 @@ Use descriptive names and helpful prompts:
 
 ```json
 {
-  "name": "React TypeScript Component Library",
-  "description": "Reusable React components with TypeScript, testing, and Storybook",
-  "placeholders": [
-    {
-      "key": "LIBRARY_NAME",
-      "prompt": "What's your component library name?",
-      "description": "This will be used as the npm package name",
-      "required": true,
-      "validation": {
-        "pattern": "^@?[a-z0-9-]+(/[a-z0-9-]+)?$",
-        "message": "Must be a valid npm package name"
-      }
-    }
-  ]
+	"name": "React TypeScript Component Library",
+	"description": "Reusable React components with TypeScript, testing, and Storybook",
+	"placeholders": [
+		{
+			"key": "LIBRARY_NAME",
+			"prompt": "What's your component library name?",
+			"description": "This will be used as the npm package name",
+			"required": true,
+			"validation": {
+				"pattern": "^@?[a-z0-9-]+(/[a-z0-9-]+)?$",
+				"message": "Must be a valid npm package name"
+			}
+		}
+	]
 }
 ```
 
@@ -158,14 +160,15 @@ Include a comprehensive README.md in your template:
 3. Run tests: `npm test`
 
 ## Project Structure
+```
 
-```
 src/
-├── components/     # Reusable components
-├── pages/          # Application pages
-├── utils/          # Utility functions
-└── types/          # TypeScript types
-```
+├── components/ # Reusable components
+├── pages/ # Application pages
+├── utils/ # Utility functions
+└── types/ # TypeScript types
+
+````
 
 ## Available Scripts
 
@@ -183,8 +186,9 @@ Copy `.env.example` to `.env` and update values:
 ```env
 PORT={{PORT}}
 DATABASE_URL={{DATABASE_URL}}
-```
-```
+````
+
+````
 
 ### 4. Validation and Error Handling
 
@@ -207,7 +211,7 @@ Validate user input appropriately:
     "message": "Please enter a valid email address"
   }
 }
-```
+````
 
 ### 5. Security Best Practices
 
@@ -215,23 +219,23 @@ For environment variables:
 
 ```json
 {
-  "environmentVariables": [
-    {
-      "key": "API_URL",
-      "prompt": "API endpoint URL",
-      "default": "http://localhost:3001/api"
-    },
-    {
-      "key": "JWT_SECRET",
-      "prompt": "JWT secret key (keep this secure!)",
-      "local": true,
-      "required": true,
-      "validation": {
-        "minLength": 32,
-        "message": "JWT secret must be at least 32 characters"
-      }
-    }
-  ]
+	"environmentVariables": [
+		{
+			"key": "API_URL",
+			"prompt": "API endpoint URL",
+			"default": "http://localhost:3001/api"
+		},
+		{
+			"key": "JWT_SECRET",
+			"prompt": "JWT secret key (keep this secure!)",
+			"local": true,
+			"required": true,
+			"validation": {
+				"minLength": 32,
+				"message": "JWT secret must be at least 32 characters"
+			}
+		}
+	]
 }
 ```
 
@@ -243,20 +247,20 @@ Here are some template ideas to get you started:
 
 ```json
 {
-  "name": "React Component Library",
-  "description": "TypeScript React components with Storybook and testing",
-  "placeholders": [
-    {
-      "key": "LIBRARY_NAME",
-      "prompt": "Component library name",
-      "required": true
-    },
-    {
-      "key": "AUTHOR_NAME",
-      "prompt": "Your name",
-      "required": true
-    }
-  ]
+	"name": "React Component Library",
+	"description": "TypeScript React components with Storybook and testing",
+	"placeholders": [
+		{
+			"key": "LIBRARY_NAME",
+			"prompt": "Component library name",
+			"required": true
+		},
+		{
+			"key": "AUTHOR_NAME",
+			"prompt": "Your name",
+			"required": true
+		}
+	]
 }
 ```
 
@@ -264,26 +268,26 @@ Here are some template ideas to get you started:
 
 ```json
 {
-  "type": "commands",
-  "name": "Express TypeScript API",
-  "description": "Express.js API with TypeScript, authentication, and testing",
-  "placeholders": [
-    {
-      "key": "API_NAME",
-      "prompt": "API name",
-      "required": true
-    }
-  ],
-  "commands": [
-    {
-      "command": "npm init -y",
-      "description": "Initialize package.json"
-    },
-    {
-      "command": "npm install express cors helmet dotenv",
-      "description": "Install dependencies"
-    }
-  ]
+	"type": "commands",
+	"name": "Express TypeScript API",
+	"description": "Express.js API with TypeScript, authentication, and testing",
+	"placeholders": [
+		{
+			"key": "API_NAME",
+			"prompt": "API name",
+			"required": true
+		}
+	],
+	"commands": [
+		{
+			"command": "npm init -y",
+			"description": "Initialize package.json"
+		},
+		{
+			"command": "npm install express cors helmet dotenv",
+			"description": "Install dependencies"
+		}
+	]
 }
 ```
 
@@ -291,20 +295,20 @@ Here are some template ideas to get you started:
 
 ```json
 {
-  "name": "Static Site with Vite",
-  "description": "Static website with Vite, TypeScript, and Tailwind CSS",
-  "placeholders": [
-    {
-      "key": "SITE_NAME",
-      "prompt": "Site name",
-      "required": true
-    },
-    {
-      "key": "SITE_DESCRIPTION",
-      "prompt": "Site description",
-      "default": "A beautiful static website"
-    }
-  ]
+	"name": "Static Site with Vite",
+	"description": "Static website with Vite, TypeScript, and Tailwind CSS",
+	"placeholders": [
+		{
+			"key": "SITE_NAME",
+			"prompt": "Site name",
+			"required": true
+		},
+		{
+			"key": "SITE_DESCRIPTION",
+			"prompt": "Site description",
+			"default": "A beautiful static website"
+		}
+	]
 }
 ```
 
@@ -347,17 +351,17 @@ npx fabr init test_snake_case --template=your-repo-url
 
 ```json
 {
-  "templates": [
-    {
-      "slug": "my-awesome-template",
-      "name": "My Awesome Template",
-      "description": "A great starting point for awesome projects",
-      "repository": "https://github.com/yourusername/my-awesome-template",
-      "tags": ["typescript", "react", "testing"],
-      "author": "Your Name",
-      "featured": false
-    }
-  ]
+	"templates": [
+		{
+			"slug": "my-awesome-template",
+			"name": "My Awesome Template",
+			"description": "A great starting point for awesome projects",
+			"repository": "https://github.com/yourusername/my-awesome-template",
+			"tags": ["typescript", "react", "testing"],
+			"author": "Your Name",
+			"featured": false
+		}
+	]
 }
 ```
 
@@ -400,11 +404,12 @@ Use semantic versioning for your template:
 
 ```json
 {
-  "version": "1.2.0"
+	"version": "1.2.0"
 }
 ```
 
 Update the version when you make changes:
+
 - **Patch** (1.2.1) - Bug fixes
 - **Minor** (1.3.0) - New features, backward compatible
 - **Major** (2.0.0) - Breaking changes

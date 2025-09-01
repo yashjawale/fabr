@@ -31,6 +31,7 @@ graph TD
 ### 1. CLI Entry Point (`src/index.ts`)
 
 The main entry point handles:
+
 - Command-line argument parsing
 - Command routing
 - Global error handling
@@ -39,9 +40,9 @@ The main entry point handles:
 ```typescript
 // Simplified flow
 async function main() {
-  const args = parseArgs(process.argv)
-  const command = findCommand(args.command)
-  await command.run(args)
+	const args = parseArgs(process.argv)
+	const command = findCommand(args.command)
+	await command.run(args)
 }
 ```
 
@@ -54,6 +55,7 @@ Each command is a self-contained module implementing the `Subcommand` interface:
 - **`help.ts`** - Show usage information
 
 Commands are responsible for:
+
 - Input validation
 - User interaction orchestration
 - Calling appropriate core logic
@@ -64,35 +66,41 @@ Commands are responsible for:
 The core modules handle the heavy lifting:
 
 #### File Operations (`files.ts`)
+
 - Template repository downloading
 - File copying and filtering
 - Binary file detection
 - Placeholder replacement in file contents
 
 #### Placeholder System (`placeholders.ts`)
+
 - User input collection and validation
 - Value transformations (case conversions)
 - Default value generation
 - Cross-placeholder dependencies
 
 #### Environment Variables (`env.ts`)
+
 - `.env` file generation
 - Sensitive data handling (`.env.local`)
 - Value validation and transformation
 
 #### Command Execution (`commands.ts`)
+
 - Shell command execution with placeholder replacement
 - Working directory management
 - Output capture and display
 - Error handling and retries
 
 #### User Interface (`ui.ts`)
+
 - Consistent prompting and input collection
 - Progress indicators
 - Formatted output and logging
 - Color and emoji support
 
 #### Shell Operations (`shell.ts`)
+
 - Low-level process execution
 - Cross-platform compatibility
 - Stream handling
@@ -160,9 +168,9 @@ Commands are implemented as objects with a consistent interface:
 
 ```typescript
 interface Subcommand {
-  name: string
-  description: string
-  run: (args: ParsedArgs) => Promise<void>
+	name: string
+	description: string
+	run: (args: ParsedArgs) => Promise<void>
 }
 ```
 
@@ -174,11 +182,11 @@ Different template types use different processing strategies:
 
 ```typescript
 async function processTemplate(config: FabrConfig) {
-  if (config.type === 'commands') {
-    return processCommandTemplate(config)
-  } else {
-    return processFileTemplate(config)
-  }
+	if (config.type === 'commands') {
+		return processCommandTemplate(config)
+	} else {
+		return processFileTemplate(config)
+	}
 }
 ```
 
@@ -188,12 +196,12 @@ Complex operations are broken into sequential steps:
 
 ```typescript
 async function initProject(templateUrl: string, projectName: string) {
-  const templatePath = await downloadTemplate(templateUrl)
-  const config = await loadConfig(templatePath)
-  const placeholders = await collectPlaceholders(config.placeholders)
-  const envVars = await collectEnvironmentVariables(config.environmentVariables)
-  await processTemplate(templatePath, projectName, config, placeholders, envVars)
-  await cleanup(templatePath)
+	const templatePath = await downloadTemplate(templateUrl)
+	const config = await loadConfig(templatePath)
+	const placeholders = await collectPlaceholders(config.placeholders)
+	const envVars = await collectEnvironmentVariables(config.environmentVariables)
+	await processTemplate(templatePath, projectName, config, placeholders, envVars)
+	await cleanup(templatePath)
 }
 ```
 
@@ -203,13 +211,13 @@ Template processors are created based on configuration:
 
 ```typescript
 function createTemplateProcessor(config: FabrConfig): TemplateProcessor {
-  switch (config.type) {
-    case 'commands':
-      return new CommandTemplateProcessor(config)
-    case 'files':
-    default:
-      return new FileTemplateProcessor(config)
-  }
+	switch (config.type) {
+		case 'commands':
+			return new CommandTemplateProcessor(config)
+		case 'files':
+		default:
+			return new FileTemplateProcessor(config)
+	}
 }
 ```
 
@@ -221,19 +229,20 @@ Custom error types provide clear error categorization:
 
 ```typescript
 class FabrError extends Error {
-  constructor(
-    message: string,
-    public code: string,
-    public details?: any
-  ) {
-    super(message)
-  }
+	constructor(
+		message: string,
+		public code: string,
+		public details?: any,
+	) {
+		super(message)
+	}
 }
 ```
 
 ### 2. Error Boundaries
 
 Errors are caught at appropriate levels:
+
 - CLI level - Global error handler for unhandled errors
 - Command level - Command-specific error handling
 - Operation level - Specific error context and recovery
@@ -244,17 +253,17 @@ Technical errors are translated to user-friendly messages:
 
 ```typescript
 function formatError(error: Error): string {
-  if (error instanceof FabrError) {
-    switch (error.code) {
-      case 'TEMPLATE_NOT_FOUND':
-        return 'Template not found. Please check the URL and try again.'
-      case 'NETWORK_ERROR':
-        return 'Network error. Please check your internet connection.'
-      default:
-        return error.message
-    }
-  }
-  return 'An unexpected error occurred.'
+	if (error instanceof FabrError) {
+		switch (error.code) {
+			case 'TEMPLATE_NOT_FOUND':
+				return 'Template not found. Please check the URL and try again.'
+			case 'NETWORK_ERROR':
+				return 'Network error. Please check your internet connection.'
+			default:
+				return error.message
+		}
+	}
+	return 'An unexpected error occurred.'
 }
 ```
 
@@ -267,9 +276,9 @@ Components are loaded only when needed:
 ```typescript
 // Commands are loaded dynamically
 const commands = {
-  init: () => import('./commands/init.js'),
-  list: () => import('./commands/list.js'),
-  help: () => import('./commands/help.js')
+	init: () => import('./commands/init.js'),
+	list: () => import('./commands/list.js'),
+	help: () => import('./commands/help.js'),
 }
 ```
 
@@ -290,9 +299,7 @@ Independent operations run concurrently:
 
 ```typescript
 // Process multiple files concurrently
-await Promise.all(
-  files.map(file => processFile(file, placeholders))
-)
+await Promise.all(files.map(file => processFile(file, placeholders)))
 ```
 
 ### 4. Efficient File Filtering
@@ -302,8 +309,8 @@ Glob patterns and early filtering reduce unnecessary processing:
 ```typescript
 // Filter files before processing
 const filesToProcess = files
-  .filter(file => !isBinaryFile(file))
-  .filter(file => isIncluded(file, config.files))
+	.filter(file => !isBinaryFile(file))
+	.filter(file => isIncluded(file, config.files))
 ```
 
 ## Security Considerations
@@ -314,7 +321,7 @@ All user input is validated:
 
 ```typescript
 function validateProjectName(name: string): boolean {
-  return /^[a-z0-9-]+$/.test(name) && name.length >= 3
+	return /^[a-z0-9-]+$/.test(name) && name.length >= 3
 }
 ```
 
@@ -333,9 +340,9 @@ Temporary files are always cleaned up:
 
 ```typescript
 try {
-  await processTemplate(tempPath)
+	await processTemplate(tempPath)
 } finally {
-  await fs.rm(tempPath, { recursive: true, force: true })
+	await fs.rm(tempPath, { recursive: true, force: true })
 }
 ```
 
@@ -346,9 +353,9 @@ Environment variables marked as local are kept secure:
 ```typescript
 // Sensitive variables go to .env.local (gitignored)
 if (envVar.local) {
-  localEnvContent += `${envVar.key}=${value}\n`
+	localEnvContent += `${envVar.key}=${value}\n`
 } else {
-  envContent += `${envVar.key}=${value}\n`
+	envContent += `${envVar.key}=${value}\n`
 }
 ```
 
@@ -386,9 +393,9 @@ Each module has focused unit tests:
 
 ```typescript
 describe('placeholders', () => {
-  test('transforms case correctly', () => {
-    expect(transformCase('hello world', 'pascal')).toBe('HelloWorld')
-  })
+	test('transforms case correctly', () => {
+		expect(transformCase('hello world', 'pascal')).toBe('HelloWorld')
+	})
 })
 ```
 
@@ -398,8 +405,8 @@ End-to-end template processing tests:
 
 ```typescript
 test('processes file template correctly', async () => {
-  const result = await processFileTemplate(templatePath, outputPath, config)
-  expect(result.success).toBe(true)
+	const result = await processFileTemplate(templatePath, outputPath, config)
+	expect(result.success).toBe(true)
 })
 ```
 
@@ -409,8 +416,8 @@ Command-line interface testing:
 
 ```typescript
 test('init command creates project', async () => {
-  const { stdout } = await execFile('node', ['dist/index.js', 'init', 'test'])
-  expect(stdout).toContain('Project created successfully')
+	const { stdout } = await execFile('node', ['dist/index.js', 'init', 'test'])
+	expect(stdout).toContain('Project created successfully')
 })
 ```
 
@@ -430,11 +437,11 @@ Published to npm with optimized bundle:
 
 ```json
 {
-  "files": ["dist/", "README.md", "LICENSE"],
-  "main": "dist/index.js",
-  "bin": {
-    "fabr": "dist/index.js"
-  }
+	"files": ["dist/", "README.md", "LICENSE"],
+	"main": "dist/index.js",
+	"bin": {
+		"fabr": "dist/index.js"
+	}
 }
 ```
 
@@ -454,10 +461,10 @@ Planned plugin architecture for extensibility:
 
 ```typescript
 interface FabrPlugin {
-  name: string
-  version: string
-  commands?: Subcommand[]
-  processors?: TemplateProcessor[]
+	name: string
+	version: string
+	commands?: Subcommand[]
+	processors?: TemplateProcessor[]
 }
 ```
 
@@ -467,9 +474,9 @@ Enhanced configuration with profiles:
 
 ```typescript
 interface FabrProfile {
-  name: string
-  defaultTemplates: string[]
-  placeholderDefaults: Record<string, string>
+	name: string
+	defaultTemplates: string[]
+	placeholderDefaults: Record<string, string>
 }
 ```
 
@@ -479,9 +486,9 @@ Centralized template discovery and management:
 
 ```typescript
 interface TemplateRegistry {
-  search(query: string): Template[]
-  install(template: string): Promise<void>
-  update(template: string): Promise<void>
+	search(query: string): Template[]
+	install(template: string): Promise<void>
+	update(template: string): Promise<void>
 }
 ```
 

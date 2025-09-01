@@ -26,38 +26,38 @@ Create a `fabr.config.json` with `"type": "commands"`:
 
 ```json
 {
-  "type": "commands",
-  "name": "Basic API Starter",
-  "description": "Creates a basic API project using package managers",
-  "placeholders": [
-    {
-      "key": "PROJECT_NAME",
-      "prompt": "Project name",
-      "required": true,
-      "validation": {
-        "pattern": "^[a-z0-9-]+$"
-      }
-    },
-    {
-      "key": "PORT",
-      "prompt": "Server port",
-      "default": "3000"
-    }
-  ],
-  "commands": [
-    {
-      "command": "npm init -y",
-      "description": "Initialize package.json"
-    },
-    {
-      "command": "npm pkg set name={{PROJECT_NAME}}",
-      "description": "Set project name"
-    },
-    {
-      "command": "npm install express",
-      "description": "Install web framework"
-    }
-  ]
+	"type": "commands",
+	"name": "Basic API Starter",
+	"description": "Creates a basic API project using package managers",
+	"placeholders": [
+		{
+			"key": "PROJECT_NAME",
+			"prompt": "Project name",
+			"required": true,
+			"validation": {
+				"pattern": "^[a-z0-9-]+$"
+			}
+		},
+		{
+			"key": "PORT",
+			"prompt": "Server port",
+			"default": "3000"
+		}
+	],
+	"commands": [
+		{
+			"command": "npm init -y",
+			"description": "Initialize package.json"
+		},
+		{
+			"command": "npm pkg set name={{PROJECT_NAME}}",
+			"description": "Set project name"
+		},
+		{
+			"command": "npm install express",
+			"description": "Install web framework"
+		}
+	]
 }
 ```
 
@@ -66,43 +66,47 @@ Create a `fabr.config.json` with `"type": "commands"`:
 Each command in the `commands` array supports these properties:
 
 #### `command` (required)
+
 The shell command to execute. Supports placeholder replacement:
 
 ```json
 {
-  "command": "echo 'Port: {{PORT}}' > config.txt"
+	"command": "echo 'Port: {{PORT}}' > config.txt"
 }
 ```
 
 #### `description` (optional)
+
 Human-readable description shown during execution:
 
 ```json
 {
-  "command": "npm install web-framework security-middleware cors",
-  "description": "Install web framework and security middleware"
+	"command": "npm install web-framework security-middleware cors",
+	"description": "Install web framework and security middleware"
 }
 ```
 
 #### `workingDirectory` (optional)
+
 Run the command in a specific directory (relative to project root):
 
 ```json
 {
-  "command": "npm init -y",
-  "description": "Initialize frontend package.json",
-  "workingDirectory": "./frontend"
+	"command": "npm init -y",
+	"description": "Initialize frontend package.json",
+	"workingDirectory": "./frontend"
 }
 ```
 
 #### `showOutput` (optional, default: true)
+
 Control whether command output is shown to the user:
 
 ```json
 {
-  "command": "npm install --silent",
-  "description": "Install dependencies quietly",
-  "showOutput": false
+	"command": "npm install --silent",
+	"description": "Install dependencies quietly",
+	"showOutput": false
 }
 ```
 
@@ -111,62 +115,65 @@ Control whether command output is shown to the user:
 All placeholder features work in commands:
 
 ### Basic Replacement
+
 ```json
 {
-  "placeholders": [
-    {
-      "key": "PROJECT_NAME",
-      "prompt": "Project name"
-    }
-  ],
-  "commands": [
-    {
-      "command": "mkdir {{PROJECT_NAME}}-api",
-      "description": "Create API directory"
-    }
-  ]
+	"placeholders": [
+		{
+			"key": "PROJECT_NAME",
+			"prompt": "Project name"
+		}
+	],
+	"commands": [
+		{
+			"command": "mkdir {{PROJECT_NAME}}-api",
+			"description": "Create API directory"
+		}
+	]
 }
 ```
 
 ### Transformations
+
 ```json
 {
-  "placeholders": [
-    {
-      "key": "COMPONENT_NAME",
-      "transform": {
-        "source": "PROJECT_NAME",
-        "case": "pascal"
-      }
-    }
-  ],
-  "commands": [
-    {
-      "command": "echo 'export default class {{COMPONENT_NAME}} {}' > src/{{COMPONENT_NAME}}.js",
-      "description": "Create main component"
-    }
-  ]
+	"placeholders": [
+		{
+			"key": "COMPONENT_NAME",
+			"transform": {
+				"source": "PROJECT_NAME",
+				"case": "pascal"
+			}
+		}
+	],
+	"commands": [
+		{
+			"command": "echo 'export default class {{COMPONENT_NAME}} {}' > src/{{COMPONENT_NAME}}.js",
+			"description": "Create main component"
+		}
+	]
 }
 ```
 
 ### Environment Variables
+
 Generate and use environment variables in commands:
 
 ```json
 {
-  "environmentVariables": [
-    {
-      "key": "DATABASE_URL",
-      "prompt": "Database connection string",
-      "default": "sqlite:///app.db"
-    }
-  ],
-  "commands": [
-    {
-      "command": "echo 'DATABASE_URL={{DATABASE_URL}}' > .env",
-      "description": "Create environment file"
-    }
-  ]
+	"environmentVariables": [
+		{
+			"key": "DATABASE_URL",
+			"prompt": "Database connection string",
+			"default": "sqlite:///app.db"
+		}
+	],
+	"commands": [
+		{
+			"command": "echo 'DATABASE_URL={{DATABASE_URL}}' > .env",
+			"description": "Create environment file"
+		}
+	]
 }
 ```
 
@@ -213,42 +220,42 @@ When a user runs a command-based template:
 
 ```json
 {
-  "type": "commands",
-  "name": "Frontend TypeScript App",
-  "description": "Create frontend app with TypeScript and additional tools",
-  "placeholders": [
-    {
-      "key": "PROJECT_NAME",
-      "prompt": "App name",
-      "required": true
-    },
-    {
-      "key": "USE_TAILWIND",
-      "prompt": "Use Tailwind CSS?",
-      "type": "boolean",
-      "default": true
-    }
-  ],
-  "commands": [
-    {
-      "command": "npx create-frontend-app . --template typescript",
-      "description": "Create frontend app with TypeScript"
-    },
-    {
-      "command": "npm pkg set name={{PROJECT_NAME}}",
-      "description": "Update package name"
-    },
-    {
-      "command": "npm install --save-dev tailwindcss postcss autoprefixer",
-      "description": "Install CSS framework",
-      "condition": "{{USE_TAILWIND}}"
-    },
-    {
-      "command": "npx css-framework init -p",
-      "description": "Initialize CSS config",
-      "condition": "{{USE_TAILWIND}}"
-    }
-  ]
+	"type": "commands",
+	"name": "Frontend TypeScript App",
+	"description": "Create frontend app with TypeScript and additional tools",
+	"placeholders": [
+		{
+			"key": "PROJECT_NAME",
+			"prompt": "App name",
+			"required": true
+		},
+		{
+			"key": "USE_TAILWIND",
+			"prompt": "Use Tailwind CSS?",
+			"type": "boolean",
+			"default": true
+		}
+	],
+	"commands": [
+		{
+			"command": "npx create-frontend-app . --template typescript",
+			"description": "Create frontend app with TypeScript"
+		},
+		{
+			"command": "npm pkg set name={{PROJECT_NAME}}",
+			"description": "Update package name"
+		},
+		{
+			"command": "npm install --save-dev tailwindcss postcss autoprefixer",
+			"description": "Install CSS framework",
+			"condition": "{{USE_TAILWIND}}"
+		},
+		{
+			"command": "npx css-framework init -p",
+			"description": "Initialize CSS config",
+			"condition": "{{USE_TAILWIND}}"
+		}
+	]
 }
 ```
 
@@ -256,73 +263,75 @@ When a user runs a command-based template:
 
 ```json
 {
-  "type": "commands",
-  "name": "Full-Stack Web App",
-  "description": "Full-stack web application with database setup",
-  "placeholders": [
-    {
-      "key": "PROJECT_NAME",
-      "prompt": "Project name",
-      "required": true
-    },
-    {
-      "key": "DB_NAME",
-      "prompt": "Database name",
-      "default": "{{PROJECT_NAME}}_db"
-    }
-  ],
-  "environmentVariables": [
-    {
-      "key": "DATABASE_URL",
-      "prompt": "Database connection string",
-      "default": "postgresql://localhost:5432/{{DB_NAME}}"
-    },
-    {
-      "key": "JWT_SECRET",
-      "prompt": "JWT secret key",
-      "local": true,
-      "required": true
-    }
-  ],
-  "commands": [
-    {
-      "command": "mkdir -p backend frontend database",
-      "description": "Create project structure"
-    },
-    {
-      "command": "npm init -y",
-      "description": "Initialize backend package.json",
-      "workingDirectory": "./backend"
-    },
-    {
-      "command": "npm install express pg jsonwebtoken bcryptjs",
-      "description": "Install backend dependencies",
-      "workingDirectory": "./backend"
-    },
-    {
-      "command": "npx create-react-app . --template typescript",
-      "description": "Create React frontend",
-      "workingDirectory": "./frontend"
-    },
-    {
-      "command": "createdb {{DB_NAME}}",
-      "description": "Create PostgreSQL database"
-    }
-  ]
+	"type": "commands",
+	"name": "Full-Stack Web App",
+	"description": "Full-stack web application with database setup",
+	"placeholders": [
+		{
+			"key": "PROJECT_NAME",
+			"prompt": "Project name",
+			"required": true
+		},
+		{
+			"key": "DB_NAME",
+			"prompt": "Database name",
+			"default": "{{PROJECT_NAME}}_db"
+		}
+	],
+	"environmentVariables": [
+		{
+			"key": "DATABASE_URL",
+			"prompt": "Database connection string",
+			"default": "postgresql://localhost:5432/{{DB_NAME}}"
+		},
+		{
+			"key": "JWT_SECRET",
+			"prompt": "JWT secret key",
+			"local": true,
+			"required": true
+		}
+	],
+	"commands": [
+		{
+			"command": "mkdir -p backend frontend database",
+			"description": "Create project structure"
+		},
+		{
+			"command": "npm init -y",
+			"description": "Initialize backend package.json",
+			"workingDirectory": "./backend"
+		},
+		{
+			"command": "npm install express pg jsonwebtoken bcryptjs",
+			"description": "Install backend dependencies",
+			"workingDirectory": "./backend"
+		},
+		{
+			"command": "npx create-react-app . --template typescript",
+			"description": "Create React frontend",
+			"workingDirectory": "./frontend"
+		},
+		{
+			"command": "createdb {{DB_NAME}}",
+			"description": "Create PostgreSQL database"
+		}
+	]
 }
 ```
 
 ## Best Practices
 
 ### 1. Use Descriptive Descriptions
+
 ```json
 {
-  "command": "npm install",
-  "description": "Install project dependencies"  // ✅ Clear purpose
+	"command": "npm install",
+	"description": "Install project dependencies" // ✅ Clear purpose
 }
 ```
 
 ### 2. Control Output Appropriately
+
 ```json
 {
   "command": "npm install",
@@ -337,6 +346,7 @@ When a user runs a command-based template:
 ```
 
 ### 3. Use Working Directories for Organization
+
 ```json
 {
   "command": "npm init -y",
@@ -351,23 +361,26 @@ When a user runs a command-based template:
 ```
 
 ### 4. Validate Command Prerequisites
+
 ```json
 {
-  "placeholders": [
-    {
-      "key": "DB_NAME",
-      "prompt": "Database name",
-      "validation": {
-        "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
-        "message": "Database name must start with a letter"
-      }
-    }
-  ]
+	"placeholders": [
+		{
+			"key": "DB_NAME",
+			"prompt": "Database name",
+			"validation": {
+				"pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+				"message": "Database name must start with a letter"
+			}
+		}
+	]
 }
 ```
 
 ### 5. Handle Errors Gracefully
+
 Commands that fail will stop execution. Ensure your commands:
+
 - Use appropriate flags (like `--yes` for auto-confirmation)
 - Have reasonable defaults
 - Don't require interactive input

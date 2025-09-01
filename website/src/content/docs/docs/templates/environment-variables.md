@@ -11,20 +11,20 @@ Add an `environmentVariables` array to your `fabr.config.json`:
 
 ```json
 {
-  "name": "My Template",
-  "environmentVariables": [
-    {
-      "key": "DATABASE_URL",
-      "prompt": "Enter your database connection URL",
-      "required": true
-    },
-    {
-      "key": "API_KEY",
-      "prompt": "Enter your API key",
-      "local": true,
-      "required": true
-    }
-  ]
+	"name": "My Template",
+	"environmentVariables": [
+		{
+			"key": "DATABASE_URL",
+			"prompt": "Enter your database connection URL",
+			"required": true
+		},
+		{
+			"key": "API_KEY",
+			"prompt": "Enter your API key",
+			"local": true,
+			"required": true
+		}
+	]
 }
 ```
 
@@ -48,6 +48,7 @@ When users create a project with your template, they'll be prompted for these va
 ## File Placement
 
 ### `.env` File (Regular Variables)
+
 - Non-sensitive configuration
 - Shared settings across team members
 - Often committed to version control (with example values)
@@ -59,6 +60,7 @@ NODE_ENV=development
 ```
 
 ### `.env.local` File (Sensitive Variables)
+
 - Sensitive values like API keys and secrets
 - Should be added to `.gitignore`
 - Environment-specific sensitive data
@@ -77,15 +79,15 @@ Ensure user input meets your requirements:
 
 ```json
 {
-  "key": "DATABASE_URL",
-  "prompt": "Enter database URL",
-  "required": true,
-  "validate": {
-    "pattern": "^postgresql://.+",
-    "minLength": 20,
-    "maxLength": 200,
-    "message": "Must be a valid PostgreSQL connection string"
-  }
+	"key": "DATABASE_URL",
+	"prompt": "Enter database URL",
+	"required": true,
+	"validate": {
+		"pattern": "^postgresql://.+",
+		"minLength": 20,
+		"maxLength": 200,
+		"message": "Must be a valid PostgreSQL connection string"
+	}
 }
 ```
 
@@ -95,22 +97,22 @@ Generate environment variables from project placeholders:
 
 ```json
 {
-  "placeholders": [
-    {
-      "key": "PROJECT_NAME",
-      "prompt": "Project name",
-      "required": true
-    }
-  ],
-  "environmentVariables": [
-    {
-      "key": "DATABASE_NAME",
-      "transform": {
-        "source": "PROJECT_NAME",
-        "case": "snake"
-      }
-    }
-  ]
+	"placeholders": [
+		{
+			"key": "PROJECT_NAME",
+			"prompt": "Project name",
+			"required": true
+		}
+	],
+	"environmentVariables": [
+		{
+			"key": "DATABASE_NAME",
+			"transform": {
+				"source": "PROJECT_NAME",
+				"case": "snake"
+			}
+		}
+	]
 }
 ```
 
@@ -120,13 +122,13 @@ Create defaults that incorporate other values:
 
 ```json
 {
-  "environmentVariables": [
-    {
-      "key": "APP_URL",
-      "prompt": "Enter app URL",
-      "default": "https://{{PROJECT_NAME}}.vercel.app"
-    }
-  ]
+	"environmentVariables": [
+		{
+			"key": "APP_URL",
+			"prompt": "Enter app URL",
+			"default": "https://{{PROJECT_NAME}}.vercel.app"
+		}
+	]
 }
 ```
 
@@ -136,67 +138,67 @@ Here's a comprehensive example for a full-stack application:
 
 ```json
 {
-  "name": "Full Stack App Template",
-  "placeholders": [
-    {
-      "key": "PROJECT_NAME",
-      "prompt": "What is your project name?",
-      "required": true,
-      "validation": {
-        "pattern": "^[a-z0-9-]+$"
-      }
-    },
-    {
-      "key": "AUTHOR_EMAIL",
-      "prompt": "Your email address",
-      "required": true
-    }
-  ],
-  "environmentVariables": [
-    {
-      "key": "DATABASE_URL",
-      "prompt": "Enter your database connection URL",
-      "description": "PostgreSQL connection string for your database",
-      "required": true,
-      "validate": {
-        "pattern": "^postgresql://.+",
-        "message": "Must be a valid PostgreSQL URL"
-      }
-    },
-    {
-      "key": "NEXTAUTH_SECRET",
-      "prompt": "Enter NextAuth secret",
-      "description": "Secret key for authentication (32+ characters)",
-      "local": true,
-      "required": true,
-      "validate": {
-        "minLength": 32
-      }
-    },
-    {
-      "key": "NEXTAUTH_URL",
-      "prompt": "Enter your app URL",
-      "default": "http://localhost:3000"
-    },
-    {
-      "key": "DATABASE_NAME",
-      "transform": {
-        "source": "PROJECT_NAME",
-        "case": "snake"
-      }
-    },
-    {
-      "key": "ADMIN_EMAIL",
-      "transform": {
-        "source": "AUTHOR_EMAIL"
-      }
-    },
-    {
-      "key": "REDIS_URL",
-      "prompt": "Enter Redis URL (optional for caching)",
-      "default": "redis://localhost:6379"
-    }
-  ]
+	"name": "Full Stack App Template",
+	"placeholders": [
+		{
+			"key": "PROJECT_NAME",
+			"prompt": "What is your project name?",
+			"required": true,
+			"validation": {
+				"pattern": "^[a-z0-9-]+$"
+			}
+		},
+		{
+			"key": "AUTHOR_EMAIL",
+			"prompt": "Your email address",
+			"required": true
+		}
+	],
+	"environmentVariables": [
+		{
+			"key": "DATABASE_URL",
+			"prompt": "Enter your database connection URL",
+			"description": "PostgreSQL connection string for your database",
+			"required": true,
+			"validate": {
+				"pattern": "^postgresql://.+",
+				"message": "Must be a valid PostgreSQL URL"
+			}
+		},
+		{
+			"key": "NEXTAUTH_SECRET",
+			"prompt": "Enter NextAuth secret",
+			"description": "Secret key for authentication (32+ characters)",
+			"local": true,
+			"required": true,
+			"validate": {
+				"minLength": 32
+			}
+		},
+		{
+			"key": "NEXTAUTH_URL",
+			"prompt": "Enter your app URL",
+			"default": "http://localhost:3000"
+		},
+		{
+			"key": "DATABASE_NAME",
+			"transform": {
+				"source": "PROJECT_NAME",
+				"case": "snake"
+			}
+		},
+		{
+			"key": "ADMIN_EMAIL",
+			"transform": {
+				"source": "AUTHOR_EMAIL"
+			}
+		},
+		{
+			"key": "REDIS_URL",
+			"prompt": "Enter Redis URL (optional for caching)",
+			"default": "redis://localhost:6379"
+		}
+	]
 }
 ```
 
@@ -231,6 +233,7 @@ Please provide values for environment variables:
 This generates:
 
 **`.env`:**
+
 ```env
 DATABASE_URL=postgresql://user:pass@localhost:5432/myapp
 NEXTAUTH_URL=http://localhost:3000
@@ -240,6 +243,7 @@ ADMIN_EMAIL=user@example.com
 ```
 
 **`.env.local`:**
+
 ```env
 NEXTAUTH_SECRET=your-super-secret-key-here
 ```
@@ -247,6 +251,7 @@ NEXTAUTH_SECRET=your-super-secret-key-here
 ## Best Practices
 
 ### 1. Organize by Sensitivity
+
 ```json
 {
   "key": "JWT_SECRET",
@@ -260,43 +265,47 @@ NEXTAUTH_SECRET=your-super-secret-key-here
 ```
 
 ### 2. Provide Helpful Descriptions
+
 ```json
 {
-  "key": "STRIPE_WEBHOOK_SECRET",
-  "prompt": "Stripe webhook endpoint secret",
-  "description": "Found in your Stripe dashboard under Webhooks > [endpoint] > Signing secret",
-  "local": true
+	"key": "STRIPE_WEBHOOK_SECRET",
+	"prompt": "Stripe webhook endpoint secret",
+	"description": "Found in your Stripe dashboard under Webhooks > [endpoint] > Signing secret",
+	"local": true
 }
 ```
 
 ### 3. Use Sensible Defaults
+
 ```json
 {
-  "key": "PORT",
-  "prompt": "Server port",
-  "default": "3000"      // ✅ Good default for development
+	"key": "PORT",
+	"prompt": "Server port",
+	"default": "3000" // ✅ Good default for development
 }
 ```
 
 ### 4. Validate Critical Values
+
 ```json
 {
-  "key": "DATABASE_URL",
-  "validate": {
-    "pattern": "^postgresql://.+",
-    "message": "Must be a valid PostgreSQL connection string"
-  }
+	"key": "DATABASE_URL",
+	"validate": {
+		"pattern": "^postgresql://.+",
+		"message": "Must be a valid PostgreSQL connection string"
+	}
 }
 ```
 
 ### 5. Generate Related Values
+
 ```json
 {
-  "key": "DATABASE_NAME",
-  "transform": {
-    "source": "PROJECT_NAME",
-    "case": "snake"      // ✅ Auto-generate from project name
-  }
+	"key": "DATABASE_NAME",
+	"transform": {
+		"source": "PROJECT_NAME",
+		"case": "snake" // ✅ Auto-generate from project name
+	}
 }
 ```
 

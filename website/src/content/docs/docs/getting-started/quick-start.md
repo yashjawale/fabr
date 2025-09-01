@@ -14,6 +14,7 @@ npx fabr init my-awesome-project
 ```
 
 Fabr will:
+
 1. Show you a list of available templates
 2. Ask you to choose one
 3. Prompt you for project details (name, description, etc.)

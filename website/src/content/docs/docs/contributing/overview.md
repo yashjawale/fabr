@@ -12,27 +12,35 @@ We're excited that you're interested in contributing to fabr! This project is bu
 There are many ways to help improve fabr:
 
 ### 🐛 Report Bugs
+
 Found a bug? We want to know about it! [Open an issue](https://github.com/yashjawale/fabr/issues/new) with:
+
 - A clear description of the problem
 - Steps to reproduce the issue
 - Your environment (OS, Node.js version, fabr version)
 - Any error messages you see
 
 ### 💡 Suggest Features
+
 Have an idea for a new feature? [Create a feature request](https://github.com/yashjawale/fabr/issues/new) and tell us:
+
 - What problem would this solve?
 - How should it work?
 - Why would other users benefit from this?
 
 ### 📝 Improve Documentation
+
 Help make fabr easier to use by:
+
 - Fixing typos or unclear explanations
 - Adding examples and tutorials
 - Improving the getting started experience
 - Translating documentation
 
 ### 🛠 Write Code
+
 Contribute directly to the codebase:
+
 - Fix bugs
 - Implement new features
 - Improve performance
@@ -40,7 +48,9 @@ Contribute directly to the codebase:
 - Refactor code
 
 ### 📦 Create Templates
+
 Share your favorite project setups by creating templates:
+
 - Add templates to the official registry
 - Share templates on GitHub
 - Write template creation tutorials
@@ -56,6 +66,7 @@ Share your favorite project setups by creating templates:
 ### 2. Explore the Codebase
 
 Before contributing code, take some time to understand how fabr works:
+
 - Read the [development setup guide](/contributing/development)
 - Browse the source code in `/src`
 - Look at existing issues and pull requests
@@ -64,6 +75,7 @@ Before contributing code, take some time to understand how fabr works:
 ### 3. Pick an Issue
 
 Look for issues labeled:
+
 - `good first issue` - Perfect for new contributors
 - `help wanted` - Community help needed
 - `documentation` - Documentation improvements
@@ -72,6 +84,7 @@ Look for issues labeled:
 ### 4. Make Your First Contribution
 
 Start small to get familiar with the process:
+
 - Fix a typo in documentation
 - Add an example to the docs
 - Improve an error message
@@ -141,18 +154,21 @@ Don't hesitate to ask for help:
 Some areas where we especially need help:
 
 ### Core Features
+
 - Better error handling and user feedback
 - Performance improvements for large templates
 - Cross-platform compatibility improvements
 - Plugin system for extensibility
 
 ### Developer Experience
+
 - Better CLI help and documentation
 - More comprehensive testing
 - Integration with popular editors
 - Debugging tools for template creators
 
 ### Community
+
 - More example templates
 - Tutorial content and guides
 - Community template registry

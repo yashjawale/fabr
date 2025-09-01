@@ -46,6 +46,7 @@ npm install
 ```
 
 This installs:
+
 - TypeScript and build tools
 - Testing framework
 - Linting and formatting tools
@@ -88,6 +89,7 @@ npm run dev
 ```
 
 This starts `tsx` in watch mode, which:
+
 - Watches for TypeScript file changes
 - Automatically recompiles and restarts
 - Provides instant feedback during development
@@ -116,11 +118,13 @@ src/
 After making changes:
 
 1. **Build the project:**
+
    ```bash
    npm run build
    ```
 
 2. **Test manually:**
+
    ```bash
    # Test the CLI
    node dist/index.js --help
@@ -165,20 +169,22 @@ Understanding the codebase structure:
 ### Adding a New Command
 
 1. Create a new file in `src/commands/`:
+
    ```typescript
    // src/commands/mycommand.ts
    import type { Subcommand } from '../types/subcommand.js'
 
    export const mycommand: Subcommand = {
-     name: 'mycommand',
-     description: 'Description of my command',
-     run: async (args) => {
-       // Command implementation
-     }
+   	name: 'mycommand',
+   	description: 'Description of my command',
+   	run: async args => {
+   		// Command implementation
+   	},
    }
    ```
 
 2. Register it in `src/commands/index.ts`:
+
    ```typescript
    export { mycommand } from './mycommand.js'
    ```
@@ -196,8 +202,8 @@ Add reusable functions to `src/lib/`:
 ```typescript
 // src/lib/myutils.ts
 export function myUtility(input: string): string {
-  // Implementation
-  return processed
+	// Implementation
+	return processed
 }
 ```
 
@@ -214,7 +220,7 @@ Add or modify TypeScript types in `src/types/`:
 ```typescript
 // src/types/mytypes.ts
 export interface MyInterface {
-  property: string
+	property: string
 }
 ```
 
@@ -223,9 +229,11 @@ export interface MyInterface {
 Currently, fabr uses manual testing. When making changes:
 
 ### 1. Unit Testing
+
 Test individual functions manually or by creating small test scripts.
 
 ### 2. Integration Testing
+
 Test the full CLI workflow:
 
 ```bash
@@ -241,7 +249,9 @@ node /path/to/fabr/dist/index.js init test-command --template=node-api
 ```
 
 ### 3. Edge Case Testing
+
 Test error conditions:
+
 - Invalid template URLs
 - Network issues
 - Invalid project names
@@ -250,6 +260,7 @@ Test error conditions:
 ## Debugging
 
 ### Debug Mode
+
 Run with debug output:
 
 ```bash
@@ -257,6 +268,7 @@ DEBUG=fabr* node dist/index.js init test-project
 ```
 
 ### Console Logging
+
 Add temporary debug statements:
 
 ```typescript
@@ -264,6 +276,7 @@ console.log('Debug:', { variable, value })
 ```
 
 ### File System Debugging
+
 Check what files are created:
 
 ```bash
@@ -277,12 +290,14 @@ cat test-project/package.json
 Fabr follows these conventions:
 
 ### TypeScript
+
 - Use TypeScript for all code
 - Add type annotations for function parameters and returns
 - Use interfaces for object types
 - Enable strict mode checking
 
 ### Code Style
+
 - Use ESLint for code style
 - 2-space indentation
 - Semicolons required
@@ -290,11 +305,13 @@ Fabr follows these conventions:
 - Trailing commas in multiline objects/arrays
 
 ### Imports
+
 - Use `.js` extensions in import statements (required for ES modules)
 - Import types with `import type`
 - Group imports: Node.js built-ins, npm packages, local files
 
 ### Error Handling
+
 - Use descriptive error messages
 - Provide helpful suggestions when possible
 - Exit with appropriate codes (0 for success, 1 for errors)
@@ -304,6 +321,7 @@ Fabr follows these conventions:
 When you're ready to contribute:
 
 1. **Create a branch:**
+
    ```bash
    git checkout -b feature/my-feature
    ```
@@ -311,12 +329,14 @@ When you're ready to contribute:
 2. **Make your changes** and test thoroughly
 
 3. **Commit with clear messages:**
+
    ```bash
    git add .
    git commit -m "Add validation for project names"
    ```
 
 4. **Push to your fork:**
+
    ```bash
    git push origin feature/my-feature
    ```

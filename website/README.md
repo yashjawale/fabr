@@ -7,11 +7,13 @@ This directory contains the comprehensive documentation website for fabr, built 
 The documentation is organized into four main sections:
 
 ### 🚀 Getting Started
+
 - **Introduction** - Welcome to fabr and overview of features
 - **Installation** - How to install fabr on your system
 - **Quick Start** - Create your first project in under a minute
 
 ### 📦 Add Your Templates
+
 - **Overview** - Understanding template types and features
 - **File-Based Templates** - Traditional file copying with placeholder replacement
 - **Command-Based Templates** - Dynamic project setup using shell commands
@@ -19,11 +21,13 @@ The documentation is organized into four main sections:
 - **Configuration Reference** - Complete fabr.config.json documentation
 
 ### 🤝 Contributing
+
 - **How to Contribute** - Ways to help improve fabr
 - **Development Setup** - Local development environment setup
 - **Adding Templates** - Create and share templates with the community
 
 ### 🔧 Developer Reference
+
 - **API Documentation** - Core functions and utilities reference
 - **Architecture** - Internal design and structure
 - **Generated API** - Auto-generated documentation from TypeScript source
@@ -31,10 +35,12 @@ The documentation is organized into four main sections:
 ## Building the Documentation
 
 ### Prerequisites
+
 - Node.js 18 or higher
 - npm
 
 ### Development
+
 ```bash
 cd website
 npm install
@@ -44,6 +50,7 @@ npm run dev
 Visit `http://localhost:4321` to see the documentation site.
 
 ### Production Build
+
 ```bash
 npm run build
 ```

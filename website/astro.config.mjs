@@ -53,9 +53,7 @@ export default defineConfig({
 				},
 				{
 					label: 'Developer Reference',
-					items: [
-						{ label: 'Architecture', slug: 'docs/developer/architecture' },
-					],
+					items: [{ label: 'Architecture', slug: 'docs/developer/architecture' }],
 				},
 			],
 		}),
