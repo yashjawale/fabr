@@ -51,13 +51,7 @@ export default defineConfig({
 				{
 					label: 'Developer Reference',
 					items: [
-						{ label: 'API Documentation', slug: 'docs/developer/api' },
 						{ label: 'Architecture', slug: 'docs/developer/architecture' },
-						{
-							label: 'Generated API',
-							collapsed: true,
-							autogenerate: { directory: 'docs/developer/api' },
-						},
 					],
 				},
 			],

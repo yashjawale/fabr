@@ -19,17 +19,20 @@ Fabr is designed as a modular CLI tool with clear separation of concerns. The ar
 
 ## High-Level Architecture
 
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   CLI Entry     │───▶│   Commands      │───▶│   Core Logic    │
-│   (index.ts)    │    │   (commands/)   │    │   (lib/)        │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                                        │
-                                                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   File System   │◀───│   User          │◀───│   Template      │
-│   Operations    │    │   Interface     │    │   Processing    │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+```mermaid
+graph TD
+    A[CLI Entry<br/>index.ts] --> B[Commands<br/>commands/]
+    B --> C[Core Logic<br/>lib/]
+    C --> D[Template<br/>Processing]
+    D --> E[User<br/>Interface]
+    E --> F[File System<br/>Operations]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+    style E fill:#fce4ec
+    style F fill:#f1f8e9
 ```
 
 ## Core Components
