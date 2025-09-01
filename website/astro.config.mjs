@@ -1,8 +1,8 @@
 // @ts-check
 import starlight from '@astrojs/starlight'
+import starlightMermaid from '@pasqal-io/starlight-client-mermaid'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
-import starlightMermaid from '@pasqal-io/starlight-client-mermaid'
 
 // https://astro.build/config
 export default defineConfig({

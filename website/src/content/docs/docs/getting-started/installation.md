@@ -3,8 +3,6 @@ title: Installation
 description: How to install fabr on your system
 ---
 
-# Installation
-
 Fabr can be installed and used in several ways. Choose the method that works best for your workflow.
 
 ## Using npx (Recommended)

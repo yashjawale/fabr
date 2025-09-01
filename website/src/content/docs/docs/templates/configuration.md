@@ -3,8 +3,6 @@ title: Configuration Reference
 description: Complete reference for fabr.config.json template configuration
 ---
 
-# Configuration Reference
-
 This is a comprehensive reference for the `fabr.config.json` file that controls how templates work in fabr. Every template should have this file in its root directory.
 
 ## Basic Structure

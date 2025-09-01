@@ -3,8 +3,6 @@ title: Quick Start
 description: Create your first project with fabr in under a minute
 ---
 
-# Quick Start
-
 Let's create your first project with fabr! This guide will walk you through the basic commands and get you up and running in under a minute.
 
 ## Create Your First Project

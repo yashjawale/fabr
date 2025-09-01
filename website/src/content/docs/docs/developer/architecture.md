@@ -3,8 +3,6 @@ title: Architecture
 description: Understanding fabr's internal architecture and design decisions
 ---
 
-# Architecture
-
 This document explains fabr's internal architecture, design decisions, and how the different components work together to create a seamless template scaffolding experience.
 
 ## Overview
@@ -26,7 +24,7 @@ graph TD
     C --> D[Template<br/>Processing]
     D --> E[User<br/>Interface]
     E --> F[File System<br/>Operations]
-    
+
     style A fill:#e1f5fe
     style B fill:#f3e5f5
     style C fill:#e8f5e8

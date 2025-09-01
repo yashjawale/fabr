@@ -28,7 +28,7 @@ fabr is a TypeScript CLI utility for scaffolding new development projects using 
 
 - **🚀 Fast Setup** - Bootstrap projects in seconds
 - **📁 File Templates** - Copy and customize file structures
-- **⚡ Command Templates** - Execute setup commands programmatically  
+- **⚡ Command Templates** - Execute setup commands programmatically
 - **🔧 Environment Variables** - Generate .env files automatically
 - **🎯 Smart Placeholders** - Advanced replacement with validation
 - **📚 Template Registry** - Discover community templates

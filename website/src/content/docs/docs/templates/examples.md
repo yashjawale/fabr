@@ -334,6 +334,6 @@ my-template/
 ## Next Steps
 
 - Learn more about [Configuration Reference](/docs/templates/configuration)
-- Understand [Environment Variables](/docs/templates/environment-variables)  
+- Understand [Environment Variables](/docs/templates/environment-variables)
 - Explore [File-Based Templates](/docs/templates/file-based)
 - Discover [Command-Based Templates](/docs/templates/command-based)
