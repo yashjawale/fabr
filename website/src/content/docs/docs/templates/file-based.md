@@ -3,8 +3,6 @@ title: File-Based Templates
 description: Create templates using files and folders that get copied and customized for new projects
 ---
 
-# File-Based Templates
-
 File-based templates work by copying files from a repository and replacing placeholders in the content. This is the traditional approach to project templates and works great for most use cases.
 
 ## How File-Based Templates Work

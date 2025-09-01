@@ -3,8 +3,6 @@ title: Environment Variables
 description: Automatically generate .env files with user-provided values during project setup
 ---
 
-# Environment Variables
-
 Fabr can automatically generate `.env` and `.env.local` files during project creation. This feature makes it easy to set up database connections, API keys, and other configuration values that vary between environments.
 
 ## Basic Setup

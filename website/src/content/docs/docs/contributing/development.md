@@ -3,8 +3,6 @@ title: Development Setup
 description: Set up your local development environment to contribute to fabr
 ---
 
-# Development Setup
-
 This guide will help you set up a local development environment for contributing to fabr. By the end, you'll be able to run, test, and modify the fabr CLI locally.
 
 ## Prerequisites

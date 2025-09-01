@@ -3,8 +3,6 @@ title: Adding Templates
 description: Learn how to create and share templates with the fabr community
 ---
 
-# Adding Templates
-
 Creating and sharing templates is one of the best ways to contribute to fabr! This guide will walk you through creating templates and getting them added to the official template registry.
 
 ## Creating Your First Template

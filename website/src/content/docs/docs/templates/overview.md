@@ -3,8 +3,6 @@ title: Templates Overview
 description: Learn about the different types of templates in fabr and how to create your own
 ---
 
-# Templates Overview
-
 Templates are the heart of fabr. They define how new projects should be set up, what files to include, and what questions to ask users during project creation.
 
 ## Types of Templates

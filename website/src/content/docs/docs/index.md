@@ -3,8 +3,6 @@ title: fabr Documentation
 description: A simple CLI tool to bootstrap projects with templates faster than ever before
 ---
 
-# Welcome to fabr
-
 Bootstrap projects with templates faster than ever before.
 
 ## Quick Start

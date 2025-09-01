@@ -3,8 +3,6 @@ title: Command-Based Templates
 description: Set up projects using shell commands instead of copying files
 ---
 
-# Command-Based Templates
-
 Command-based templates create projects by executing shell commands rather than copying files. This approach is perfect when you want to use existing CLI tools like `create-react-app`, `npm init`, or any other command-line utilities.
 
 ## When to Use Command-Based Templates
