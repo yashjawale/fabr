@@ -14,6 +14,11 @@ permissions:
  pages: write
  id-token: write
 
+# Prevent multiple deploy workflows from running simultaneously
+concurrency:
+ group: deploy-${{ github.ref }}
+ cancel-in-progress: true
+
 jobs:
  build:
   runs-on: ubuntu-latest
