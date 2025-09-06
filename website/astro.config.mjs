@@ -3,6 +3,7 @@ import starlight from '@astrojs/starlight'
 import starlightMermaid from '@pasqal-io/starlight-client-mermaid'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
+import starlightTypeDoc, { typeDocSidebarGroup } from 'starlight-typedoc'
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,7 +23,22 @@ export default defineConfig({
 			expressiveCode: {
 				themes: ['github-light', 'github-dark'],
 			},
-			plugins: [starlightMermaid()],
+			plugins: [starlightMermaid(),  starlightTypeDoc({
+          entryPoints: [
+            '../src/lib/**/*.ts',
+            '../src/types/**/*.ts',
+            '../src/commands/**/*.ts'
+          ],
+          tsconfig: '../tsconfig.json',
+          typeDoc: {
+            excludePrivate: true,
+            excludeProtected: true,
+            excludeInternal: true,
+            skipErrorChecking: true,
+            entryPointStrategy: 'expand',
+												
+          }
+        }),],
 			sidebar: [
 				{
 					label: 'Getting Started',
@@ -55,6 +71,7 @@ export default defineConfig({
 					label: 'Developer Reference',
 					items: [{ label: 'Architecture', slug: 'docs/developer/architecture' }],
 				},
+				typeDocSidebarGroup
 			],
 		}),
 	],
