@@ -2,6 +2,7 @@ import { Template } from '../types/templates.js'
 import { InitCommand } from './init.js'
 import { HelpCommand } from './help.js'
 import { ListCommand } from './list.js'
+import { VersionCommand } from './version.js'
 import chalk from 'chalk'
 import { BaseSubcommand } from '../types/subcommand.js'
 
@@ -15,6 +16,7 @@ export interface CommandDefinition {
 const initCommand = new InitCommand()
 const listCommand = new ListCommand()
 const helpCommand = new HelpCommand()
+const versionCommand = new VersionCommand()
 
 /**
  * Registry of all available commands
@@ -34,6 +36,11 @@ export const commands: Record<string, CommandDefinition> = {
 		name: 'help',
 		description: 'Show this help message',
 		handler: helpCommand,
+	},
+	version: {
+		name: 'version',
+		description: 'Show version information',
+		handler: versionCommand,
 	},
 }
 
