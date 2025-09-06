@@ -9,3 +9,6 @@ coverage/
 .nyc_output/
 .DS_Store
 Thumbs.db
+
+# Auto-generated TypeDoc documentation
+src/content/docs/docs/api/
