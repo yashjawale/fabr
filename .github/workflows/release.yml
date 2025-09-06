@@ -21,90 +21,7 @@ permissions:
  id-token: write
 
 jobs:
- validate:
-  runs-on: ubuntu-latest
-  steps:
-   - name: Checkout code
-     uses: actions/checkout@v4
-     with:
-      fetch-depth: 0
-
-   - name: Setup Node.js
-     uses: actions/setup-node@v4
-     with:
-      node-version: '20'
-      cache: 'npm'
-
-   - name: Install dependencies
-     run: npm ci
-
-   - name: Run linting
-     run: npm run lint
-
-   - name: Check formatting
-     run: npm run format:check
-
-   - name: Run type checking
-     run: npm run typecheck
-
-   - name: Build project
-     run: npm run build
-
-   - name: Test CLI functionality
-     run: |
-      # Test basic CLI commands
-      node dist/index.js --help
-      node dist/index.js list
-
- # This job only runs for manual workflow dispatch - it creates the tag
- create-release-tag:
-  if: github.event_name == 'workflow_dispatch'
-  needs: validate
-  runs-on: ubuntu-latest
-  steps:
-   - name: Checkout code
-     uses: actions/checkout@v4
-     with:
-      fetch-depth: 0
-
-   - name: Setup Node.js
-     uses: actions/setup-node@v4
-     with:
-      node-version: '20'
-      cache: 'npm'
-
-   - name: Install dependencies
-     run: npm ci
-
-   - name: Update package.json version
-     run: |
-      # Use sed to update version while preserving formatting
-      sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"${{ github.event.inputs.version }}\"/g" package.json
-      git config --local user.email "action@github.com"
-      git config --local user.name "GitHub Action"
-
-   - name: Commit version bump and create tag
-     if: ${{ github.event.inputs.dry_run != 'true' }}
-     run: |
-      git add package.json
-      git commit -m "🔖 Release v${{ github.event.inputs.version }}"
-
-      # Delete existing tag if it exists (locally and remotely)
-      if git tag -l | grep -q "^v${{ github.event.inputs.version }}$"; then
-        git tag -d v${{ github.event.inputs.version }}
-        git push origin :refs/tags/v${{ github.event.inputs.version }} || true
-      fi
-
-      # Create new tag
-      git tag v${{ github.event.inputs.version }}
-
-      # Push commit and tag
-      git push origin HEAD:main
-      git push origin v${{ github.event.inputs.version }}
-
- # This job runs for tag pushes - it publishes and creates release
- publish-and-release:
-  if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+ release:
   runs-on: ubuntu-latest
   steps:
    - name: Checkout code
@@ -122,32 +39,65 @@ jobs:
    - name: Install dependencies
      run: npm ci
 
-   - name: Run linting
-     run: npm run lint
-
-   - name: Check formatting
-     run: npm run format:check
-
-   - name: Run type checking
-     run: npm run typecheck
-
-   - name: Build project
-     run: npm run build
+   - name: Run validation
+     run: |
+      npm run lint
+      npm run format:check
+      npm run typecheck
+      npm run build
 
    - name: Test CLI functionality
      run: |
-      # Test basic CLI commands
       node dist/index.js --help
       node dist/index.js list
 
-   - name: Extract version from tag
+   - name: Determine version and mode
      id: version
      run: |
-      VERSION=${GITHUB_REF#refs/tags/}
-      echo "version=${VERSION}" >> $GITHUB_OUTPUT
-      echo "clean_version=${VERSION#v}" >> $GITHUB_OUTPUT
+      if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+        # Manual dispatch - we'll do everything: update version, tag, publish, release
+        VERSION="${{ github.event.inputs.version }}"
+        echo "version=v${VERSION}" >> $GITHUB_OUTPUT
+        echo "clean_version=${VERSION}" >> $GITHUB_OUTPUT
+        echo "is_manual=true" >> $GITHUB_OUTPUT
+        echo "should_publish=${{ github.event.inputs.dry_run != 'true' }}" >> $GITHUB_OUTPUT
+      else
+        # Tag push - extract version and publish
+        VERSION=${GITHUB_REF#refs/tags/}
+        echo "version=${VERSION}" >> $GITHUB_OUTPUT
+        echo "clean_version=${VERSION#v}" >> $GITHUB_OUTPUT
+        echo "is_manual=false" >> $GITHUB_OUTPUT
+        echo "should_publish=true" >> $GITHUB_OUTPUT
+      fi
+
+   - name: Update package.json version (manual dispatch only)
+     if: steps.version.outputs.is_manual == 'true'
+     run: |
+      sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"${{ steps.version.outputs.clean_version }}\"/g" package.json
+      git config --local user.email "action@github.com"
+      git config --local user.name "GitHub Action"
+
+   - name: Commit version bump and create tag (manual dispatch only)
+     if: steps.version.outputs.is_manual == 'true' && steps.version.outputs.should_publish == 'true'
+     run: |
+      git add package.json
+      git commit -m "🔖 Release v${{ steps.version.outputs.clean_version }}"
+
+      # Delete existing tag if it exists (locally and remotely)
+      if git tag -l | grep -q "^v${{ steps.version.outputs.clean_version }}$"; then
+        git tag -d v${{ steps.version.outputs.clean_version }}
+        git push origin :refs/tags/v${{ steps.version.outputs.clean_version }} || true
+      fi
+
+      # Create new tag
+      git tag v${{ steps.version.outputs.clean_version }}
+
+      # Push commit and tag
+      git push origin HEAD:main
+      git push origin v${{ steps.version.outputs.clean_version }}
 
    - name: Generate changelog
+     if: steps.version.outputs.should_publish == 'true'
      id: changelog
      run: |
       # Get the previous tag
@@ -170,8 +120,8 @@ jobs:
       } >> $GITHUB_OUTPUT
 
    - name: Prepare package for publishing
+     if: steps.version.outputs.should_publish == 'true'
      run: |
-      # Copy built files and necessary files to a clean directory
       mkdir -p publish
       cp -r dist/* publish/
       cp package.json publish/
@@ -179,6 +129,7 @@ jobs:
       cp LICENSE publish/
 
    - name: Publish to npm
+     if: steps.version.outputs.should_publish == 'true'
      run: |
       cd publish
       npm publish --provenance
@@ -186,6 +137,7 @@ jobs:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
    - name: Create GitHub Release
+     if: steps.version.outputs.should_publish == 'true'
      run: |
       # Create release body
       cat > release_body.md << 'EOF'
@@ -216,22 +168,22 @@ jobs:
      env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
- notify:
-  needs: [create-release-tag, publish-and-release]
-  runs-on: ubuntu-latest
-  if: always() && (needs.create-release-tag.result != 'skipped' || needs.publish-and-release.result != 'skipped')
-  steps:
    - name: Release Status
      run: |
-      if [ "${{ needs.publish-and-release.result }}" = "success" ] || [ "${{ needs.create-release-tag.result }}" = "success" ]; then
-        echo "✅ Release process completed successfully!"
-        if [ "${{ needs.publish-and-release.result }}" = "success" ]; then
+      if [ "${{ steps.version.outputs.is_manual }}" = "true" ]; then
+        if [ "${{ steps.version.outputs.should_publish }}" = "true" ]; then
+          echo "✅ Complete release process finished successfully!"
+          echo "🔖 Version bumped to v${{ steps.version.outputs.clean_version }}"
+          echo "🏷️ Tag v${{ steps.version.outputs.clean_version }} created and pushed"
           echo "📦 Package published to npm: https://www.npmjs.com/package/fabr"
-        fi
-        if [ "${{ needs.create-release-tag.result }}" = "success" ]; then
-          echo "🏷️ Release tag created successfully!"
+          echo "🎉 GitHub release created: https://github.com/yashjawale/fabr/releases/tag/${{ steps.version.outputs.version }}"
+        else
+          echo "✅ Dry run completed successfully!"
+          echo "🔍 Version would be bumped to v${{ steps.version.outputs.clean_version }}"
+          echo "⏭️ No actual publishing or tagging performed"
         fi
       else
-        echo "❌ Release process failed!"
-        exit 1
+        echo "✅ Tag-triggered release completed successfully!"
+        echo "📦 Package published to npm: https://www.npmjs.com/package/fabr"
+        echo "🎉 GitHub release created: https://github.com/yashjawale/fabr/releases/tag/${{ steps.version.outputs.version }}"
       fi
