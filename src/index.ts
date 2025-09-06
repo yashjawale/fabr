@@ -3,6 +3,7 @@
 // Import types
 import { executeCommand } from './commands/index.js'
 import { TemplatesConfig, validateTemplatesConfig } from './types/templates.js'
+import { showVersion } from './commands/version.js'
 
 // Load the list of available templates
 import templatesData from './templates.json' with { type: 'json' }
@@ -25,6 +26,12 @@ const templates = templatesConfig.templates
  */
 async function main(): Promise<void> {
 	const args = process.argv.slice(2)
+
+	// Handle global version flags
+	if (args.includes('--version') || args.includes('-v')) {
+		showVersion()
+		return
+	}
 
 	// Handle global help flags when no command is provided or help is explicitly requested
 	if (args.length === 0 || args[0] === '--help' || args[0] === '-h') {
