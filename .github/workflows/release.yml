@@ -1,0 +1,197 @@
+name: Release
+
+on:
+ push:
+  tags:
+   - 'v*.*.*'
+ workflow_dispatch:
+  inputs:
+   version:
+    description: 'Version to release (e.g., 1.0.0)'
+    required: true
+    type: string
+   dry_run:
+    description: 'Dry run (skip npm publish and GitHub release)'
+    required: false
+    type: boolean
+    default: false
+
+permissions:
+ contents: write
+ id-token: write
+
+jobs:
+ validate:
+  runs-on: ubuntu-latest
+  steps:
+   - name: Checkout code
+     uses: actions/checkout@v4
+     with:
+      fetch-depth: 0
+
+   - name: Setup Node.js
+     uses: actions/setup-node@v4
+     with:
+      node-version: '20'
+      cache: 'npm'
+
+   - name: Install dependencies
+     run: npm ci
+
+   - name: Run linting
+     run: npm run lint
+
+   - name: Check formatting
+     run: npm run format:check
+
+   - name: Run type checking
+     run: npm run typecheck
+
+   - name: Build project
+     run: npm run build
+
+   - name: Test CLI functionality
+     run: |
+      # Test basic CLI commands
+      node dist/index.js --help
+      node dist/index.js list
+
+ release:
+  needs: validate
+  runs-on: ubuntu-latest
+  steps:
+   - name: Checkout code
+     uses: actions/checkout@v4
+     with:
+      fetch-depth: 0
+
+   - name: Setup Node.js
+     uses: actions/setup-node@v4
+     with:
+      node-version: '20'
+      cache: 'npm'
+      registry-url: 'https://registry.npmjs.org'
+
+   - name: Install dependencies
+     run: npm ci
+
+   - name: Build project
+     run: npm run build
+
+   - name: Extract version from tag or input
+     id: version
+     run: |
+      if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+        VERSION="${{ github.event.inputs.version }}"
+        echo "version=v${VERSION}" >> $GITHUB_OUTPUT
+        echo "clean_version=${VERSION}" >> $GITHUB_OUTPUT
+      else
+        VERSION=${GITHUB_REF#refs/tags/}
+        echo "version=${VERSION}" >> $GITHUB_OUTPUT
+        echo "clean_version=${VERSION#v}" >> $GITHUB_OUTPUT
+      fi
+
+   - name: Update package.json version
+     run: |
+      npm version ${{ steps.version.outputs.clean_version }} --no-git-tag-version
+      git config --local user.email "action@github.com"
+      git config --local user.name "GitHub Action"
+
+   - name: Generate changelog
+     id: changelog
+     run: |
+      # Get the previous tag
+      PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+
+      # Generate changelog
+      if [ -n "$PREV_TAG" ]; then
+        echo "## Changes since $PREV_TAG" > CHANGELOG.md
+        git log $PREV_TAG..HEAD --pretty=format:"- %s (%h)" --no-merges >> CHANGELOG.md
+      else
+        echo "## Initial Release" > CHANGELOG.md
+        echo "- First release of Fabr CLI" >> CHANGELOG.md
+      fi
+
+      # Output changelog for GitHub release
+      {
+        echo 'changelog<<EOF'
+        cat CHANGELOG.md
+        echo EOF
+      } >> $GITHUB_OUTPUT
+
+   - name: Prepare package for publishing
+     run: |
+      # Copy built files and necessary files to a clean directory
+      mkdir -p publish
+      cp -r dist/* publish/
+      cp package.json publish/
+      cp README.md publish/
+      cp LICENSE publish/
+
+      # Update main entry point in package.json for publish directory
+      cd publish
+      sed -i 's/"main": "index.js"/"main": "index.js"/' package.json
+
+   - name: Publish to npm (dry run)
+     if: ${{ github.event.inputs.dry_run == 'true' }}
+     run: |
+      cd publish
+      npm publish --dry-run
+     env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+   - name: Publish to npm
+     if: ${{ github.event.inputs.dry_run != 'true' }}
+     run: |
+      cd publish
+      npm publish --provenance
+     env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+   - name: Create GitHub Release
+     if: ${{ github.event.inputs.dry_run != 'true' }}
+     uses: actions/create-release@v1
+     env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+     with:
+      tag_name: ${{ steps.version.outputs.version }}
+      release_name: Release ${{ steps.version.outputs.version }}
+      body: |
+       ## 🚀 Fabr ${{ steps.version.outputs.version }}
+
+       ${{ steps.changelog.outputs.changelog }}
+
+       ### 📦 Installation
+       ```bash
+       npm install -g fabr@${{ steps.version.outputs.clean_version }}
+       ```
+
+       ### 🔗 Links
+       - [npm package](https://www.npmjs.com/package/fabr/v/${{ steps.version.outputs.clean_version }})
+       - [Documentation](https://yashjawale.github.io/fabr/)
+      draft: false
+      prerelease: ${{ contains(steps.version.outputs.version, 'alpha') || contains(steps.version.outputs.version, 'beta') || contains(steps.version.outputs.version, 'rc') }}
+
+   - name: Update package.json and commit
+     if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true' }}
+     run: |
+      git add package.json
+      git commit -m "🔖 Release v${{ steps.version.outputs.clean_version }}"
+      git tag v${{ steps.version.outputs.clean_version }}
+      git push origin main
+      git push origin v${{ steps.version.outputs.clean_version }}
+
+ notify:
+  needs: [validate, release]
+  runs-on: ubuntu-latest
+  if: always()
+  steps:
+   - name: Release Status
+     run: |
+      if [ "${{ needs.release.result }}" = "success" ]; then
+        echo "✅ Release completed successfully!"
+        echo "Package published to npm: https://www.npmjs.com/package/fabr"
+      else
+        echo "❌ Release failed!"
+        exit 1
+      fi

@@ -138,5 +138,32 @@ Templates use `fabr.config.json` to define:
 
 - [Command-Based Templates Guide](./docs/COMMAND-TEMPLATES.md) - Detailed guide for command templates
 - [Environment Variables Guide](./docs/ENVIRONMENT-VARIABLES.md) - Complete guide for .env file generation
+- [Release Process](./docs/RELEASE.md) - Guide for maintainers on releasing new versions
 - [JSON Schema](./fabr.config.schema.json) - Complete configuration schema
 - [Examples](./examples/) - Sample configurations
+
+## Contributing
+
+### Development Setup
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Build the project: `npm run build`
+4. Test the CLI: `npm run test:cli`
+
+### Release Process
+
+For maintainers releasing new versions:
+
+```bash
+# Quick release using helper script
+npm run release patch    # 1.0.0 -> 1.0.1
+npm run release minor    # 1.0.0 -> 1.1.0
+npm run release major    # 1.0.0 -> 2.0.0
+
+# Or manually create a tag
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+See [RELEASE.md](./docs/RELEASE.md) for detailed release instructions.
