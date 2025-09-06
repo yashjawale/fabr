@@ -78,8 +78,8 @@ jobs:
 
    - name: Update package.json version
      run: |
-      # Use jq to update version without triggering npm version scripts
-      jq --arg version "${{ github.event.inputs.version }}" '.version = $version' package.json > package.json.tmp && mv package.json.tmp package.json
+      # Use sed to update version while preserving formatting
+      sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"${{ github.event.inputs.version }}\"/g" package.json
       git config --local user.email "action@github.com"
       git config --local user.name "GitHub Action"
 
@@ -105,7 +105,6 @@ jobs:
  # This job runs for tag pushes - it publishes and creates release
  publish-and-release:
   if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
-  needs: validate
   runs-on: ubuntu-latest
   steps:
    - name: Checkout code
@@ -123,8 +122,23 @@ jobs:
    - name: Install dependencies
      run: npm ci
 
+   - name: Run linting
+     run: npm run lint
+
+   - name: Check formatting
+     run: npm run format:check
+
+   - name: Run type checking
+     run: npm run typecheck
+
    - name: Build project
      run: npm run build
+
+   - name: Test CLI functionality
+     run: |
+      # Test basic CLI commands
+      node dist/index.js --help
+      node dist/index.js list
 
    - name: Extract version from tag
      id: version
@@ -203,9 +217,9 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
  notify:
-  needs: [validate, create-release-tag, publish-and-release]
+  needs: [create-release-tag, publish-and-release]
   runs-on: ubuntu-latest
-  if: always()
+  if: always() && (needs.create-release-tag.result != 'skipped' || needs.publish-and-release.result != 'skipped')
   steps:
    - name: Release Status
      run: |
@@ -213,6 +227,9 @@ jobs:
         echo "✅ Release process completed successfully!"
         if [ "${{ needs.publish-and-release.result }}" = "success" ]; then
           echo "📦 Package published to npm: https://www.npmjs.com/package/fabr"
+        fi
+        if [ "${{ needs.create-release-tag.result }}" = "success" ]; then
+          echo "🏷️ Release tag created successfully!"
         fi
       else
         echo "❌ Release process failed!"
