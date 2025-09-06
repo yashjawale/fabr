@@ -88,16 +88,16 @@ jobs:
      run: |
       git add package.json
       git commit -m "🔖 Release v${{ github.event.inputs.version }}"
-      
+
       # Delete existing tag if it exists (locally and remotely)
       if git tag -l | grep -q "^v${{ github.event.inputs.version }}$"; then
         git tag -d v${{ github.event.inputs.version }}
         git push origin :refs/tags/v${{ github.event.inputs.version }} || true
       fi
-      
+
       # Create new tag
       git tag v${{ github.event.inputs.version }}
-      
+
       # Push commit and tag
       git push origin HEAD:main
       git push origin v${{ github.event.inputs.version }}
