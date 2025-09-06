@@ -24,7 +24,10 @@
 		"mermaid": "^11.10.1",
 		"playwright": "^1.55.0",
 		"rehype-mermaid": "^3.0.0",
-		"tailwindcss": "^4.1.12"
+		"starlight-typedoc": "^0.21.3",
+		"tailwindcss": "^4.1.12",
+		"typedoc": "^0.28.12",
+		"typedoc-plugin-markdown": "^4.8.1"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.4",
