@@ -1,6 +1,6 @@
 {
 	"name": "fabr",
-	"version": "0.0.3",
+	"version": "0.0.2",
 	"description": "A command line utility for scaffolding new development projects ",
 	"keywords": [
 		"scaffold",
@@ -50,7 +50,7 @@
 		"prepare:release": "npm run ci && npm run test:cli",
 		"release": "node scripts/release.js",
 		"release:status": "node scripts/release-status.js",
-		"version": "npm run prepare:release && git add -A",
+		"version": "0.0.3",
 		"postversion": "git push && git push --tags"
 	},
 	"dependencies": {
