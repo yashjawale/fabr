@@ -192,18 +192,18 @@ jobs:
      run: |
       git add package.json
       git commit -m "🔖 Release v${{ steps.version.outputs.clean_version }}"
-      
+
       # Check if tag exists locally and delete it if it does
       if git tag -l | grep -q "^v${{ steps.version.outputs.clean_version }}$"; then
         git tag -d v${{ steps.version.outputs.clean_version }}
       fi
-      
+
       # Create new tag
       git tag v${{ steps.version.outputs.clean_version }}
-      
+
       # Push commits
       git push origin main
-      
+
       # Force push the tag (in case it exists remotely)
       git push origin v${{ steps.version.outputs.clean_version }} --force
 
