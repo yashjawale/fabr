@@ -98,7 +98,6 @@ jobs:
 
    - name: Generate changelog
      if: steps.version.outputs.should_publish == 'true'
-     id: changelog
      run: |
       # Get the previous tag
       PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
@@ -111,11 +110,6 @@ jobs:
         echo "## Initial Release" > CHANGELOG.md
         echo "- First release of Fabr CLI" >> CHANGELOG.md
       fi
-
-      # Output changelog for GitHub release
-      echo "changelog<<EOF" >> $GITHUB_OUTPUT
-      cat CHANGELOG.md >> $GITHUB_OUTPUT
-      echo "EOF" >> $GITHUB_OUTPUT
 
    - name: Prepare package for publishing
      if: steps.version.outputs.should_publish == 'true'
@@ -137,21 +131,19 @@ jobs:
    - name: Create GitHub Release
      if: steps.version.outputs.should_publish == 'true'
      run: |
-      # Create release body
-      cat > release_body.md << 'EOF'
-      ## 🚀 Fabr ${{ steps.version.outputs.version }}
-
-      ${{ steps.changelog.outputs.changelog }}
-
-      ### 📦 Installation
-      ```bash
-      npm install -g fabr@${{ steps.version.outputs.clean_version }}
-      ```
-
-      ### 🔗 Links
-      - [npm package](https://www.npmjs.com/package/fabr/v/${{ steps.version.outputs.clean_version }})
-      - [Documentation](https://yashjawale.github.io/fabr/)
-      EOF
+      # Create release body with changelog
+      echo "## 🚀 Fabr ${{ steps.version.outputs.version }}" > release_body.md
+      echo "" >> release_body.md
+      cat CHANGELOG.md >> release_body.md
+      echo "" >> release_body.md
+      echo "### 📦 Installation" >> release_body.md
+      echo '```bash' >> release_body.md
+      echo "npm install -g fabr@${{ steps.version.outputs.clean_version }}" >> release_body.md
+      echo '```' >> release_body.md
+      echo "" >> release_body.md
+      echo "### 🔗 Links" >> release_body.md
+      echo "- [npm package](https://www.npmjs.com/package/fabr/v/${{ steps.version.outputs.clean_version }})" >> release_body.md
+      echo "- [Documentation](https://yashjawale.github.io/fabr/)" >> release_body.md
 
       # Create release with gh CLI
       PRERELEASE_FLAG=""
