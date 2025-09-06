@@ -150,36 +150,62 @@ jobs:
 
    - name: Create GitHub Release
      if: ${{ github.event.inputs.dry_run != 'true' }}
-     uses: actions/create-release@v1
+     run: |
+      # Skip release creation if this is a manual workflow dispatch 
+      # (the tag push will trigger the workflow again for release creation)
+      if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+        echo "Skipping release creation for manual dispatch - will be handled by tag trigger"
+        exit 0
+      fi
+
+      # Create release body
+      cat > release_body.md << 'EOF'
+      ## 🚀 Fabr ${{ steps.version.outputs.version }}
+
+      ${{ steps.changelog.outputs.changelog }}
+
+      ### 📦 Installation
+      ```bash
+      npm install -g fabr@${{ steps.version.outputs.clean_version }}
+      ```
+
+      ### 🔗 Links
+      - [npm package](https://www.npmjs.com/package/fabr/v/${{ steps.version.outputs.clean_version }})
+      - [Documentation](https://yashjawale.github.io/fabr/)
+      EOF
+
+      # Create release with gh CLI
+      PRERELEASE_FLAG=""
+      if [[ "${{ steps.version.outputs.version }}" == *"alpha"* ]] || [[ "${{ steps.version.outputs.version }}" == *"beta"* ]] || [[ "${{ steps.version.outputs.version }}" == *"rc"* ]]; then
+        PRERELEASE_FLAG="--prerelease"
+      fi
+
+      gh release create ${{ steps.version.outputs.version }} \
+        --title "Release ${{ steps.version.outputs.version }}" \
+        --notes-file release_body.md \
+        $PRERELEASE_FLAG
      env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-     with:
-      tag_name: ${{ steps.version.outputs.version }}
-      release_name: Release ${{ steps.version.outputs.version }}
-      body: |
-       ## 🚀 Fabr ${{ steps.version.outputs.version }}
-
-       ${{ steps.changelog.outputs.changelog }}
-
-       ### 📦 Installation
-       ```bash
-       npm install -g fabr@${{ steps.version.outputs.clean_version }}
-       ```
-
-       ### 🔗 Links
-       - [npm package](https://www.npmjs.com/package/fabr/v/${{ steps.version.outputs.clean_version }})
-       - [Documentation](https://yashjawale.github.io/fabr/)
-      draft: false
-      prerelease: ${{ contains(steps.version.outputs.version, 'alpha') || contains(steps.version.outputs.version, 'beta') || contains(steps.version.outputs.version, 'rc') }}
 
    - name: Update package.json and commit
      if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true' }}
      run: |
       git add package.json
       git commit -m "🔖 Release v${{ steps.version.outputs.clean_version }}"
+
+      # Check if tag exists locally and delete it if it does
+      if git tag -l | grep -q "^v${{ steps.version.outputs.clean_version }}$"; then
+        git tag -d v${{ steps.version.outputs.clean_version }}
+      fi
+
+      # Create new tag
       git tag v${{ steps.version.outputs.clean_version }}
+
+      # Push commits
       git push origin main
-      git push origin v${{ steps.version.outputs.clean_version }}
+
+      # Force push the tag (in case it exists remotely)
+      git push origin v${{ steps.version.outputs.clean_version }} --force
 
  notify:
   needs: [validate, release]
