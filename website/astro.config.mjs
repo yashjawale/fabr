@@ -20,6 +20,20 @@ export default defineConfig({
 				replacesTitle: true,
 			},
 			customCss: ['./src/styles/starlight-theme.css'],
+			pagination: true,
+			lastUpdated: true,
+			editLink: {
+				baseUrl: 'https://github.com/yashjawale/fabr/edit/main/website/'
+			},
+			head: [
+				{
+					tag: 'meta',
+					attrs: {
+						name: 'theme-color',
+						content: '#3b82f6'
+					}
+				}
+			],
 			expressiveCode: {
 				themes: ['github-light', 'github-dark'],
 			},
@@ -36,8 +50,15 @@ export default defineConfig({
             excludeInternal: true,
             skipErrorChecking: true,
             entryPointStrategy: 'expand',
-												
-          }
+            categorizeByGroup: false,
+            groupOrder: ['Functions', 'Classes', 'Interfaces', 'Type Aliases', 'Variables'],
+            sort: ['alphabetical']
+          },
+          sidebar: {
+            label: 'API Reference',
+            collapsed: false
+          },
+          output: 'docs/api'
         }),],
 			sidebar: [
 				{
@@ -66,10 +87,6 @@ export default defineConfig({
 						{ label: 'Development Setup', slug: 'docs/contributing/development' },
 						{ label: 'Adding Templates', slug: 'docs/contributing/templates' },
 					],
-				},
-				{
-					label: 'Developer Reference',
-					items: [{ label: 'Architecture', slug: 'docs/developer/architecture' }],
 				},
 				typeDocSidebarGroup
 			],
