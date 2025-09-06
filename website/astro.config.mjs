@@ -23,43 +23,42 @@ export default defineConfig({
 			pagination: true,
 			lastUpdated: true,
 			editLink: {
-				baseUrl: 'https://github.com/yashjawale/fabr/edit/main/website/'
+				baseUrl: 'https://github.com/yashjawale/fabr/edit/main/website/',
 			},
 			head: [
 				{
 					tag: 'meta',
 					attrs: {
 						name: 'theme-color',
-						content: '#3b82f6'
-					}
-				}
+						content: '#3b82f6',
+					},
+				},
 			],
 			expressiveCode: {
 				themes: ['github-light', 'github-dark'],
 			},
-			plugins: [starlightMermaid(),  starlightTypeDoc({
-          entryPoints: [
-            '../src/lib/**/*.ts',
-            '../src/types/**/*.ts',
-            '../src/commands/**/*.ts'
-          ],
-          tsconfig: '../tsconfig.json',
-          typeDoc: {
-            excludePrivate: true,
-            excludeProtected: true,
-            excludeInternal: true,
-            skipErrorChecking: true,
-            entryPointStrategy: 'expand',
-            categorizeByGroup: false,
-            groupOrder: ['Functions', 'Classes', 'Interfaces', 'Type Aliases', 'Variables'],
-            sort: ['alphabetical']
-          },
-          sidebar: {
-            label: 'API Reference',
-            collapsed: false
-          },
-          output: 'docs/api'
-        }),],
+			plugins: [
+				starlightMermaid(),
+				starlightTypeDoc({
+					entryPoints: ['../src/lib/**/*.ts', '../src/types/**/*.ts', '../src/commands/**/*.ts'],
+					tsconfig: '../tsconfig.json',
+					typeDoc: {
+						excludePrivate: true,
+						excludeProtected: true,
+						excludeInternal: true,
+						skipErrorChecking: true,
+						entryPointStrategy: 'expand',
+						categorizeByGroup: false,
+						groupOrder: ['Functions', 'Classes', 'Interfaces', 'Type Aliases', 'Variables'],
+						sort: ['alphabetical'],
+					},
+					sidebar: {
+						label: 'API Reference',
+						collapsed: false,
+					},
+					output: 'docs/api',
+				}),
+			],
 			sidebar: [
 				{
 					label: 'Getting Started',
@@ -88,7 +87,7 @@ export default defineConfig({
 						{ label: 'Adding Templates', slug: 'docs/contributing/templates' },
 					],
 				},
-				typeDocSidebarGroup
+				typeDocSidebarGroup,
 			],
 		}),
 	],
