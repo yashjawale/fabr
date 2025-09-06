@@ -17,7 +17,7 @@ function getVersion(): string {
 		// Get the current file's directory
 		const __filename = fileURLToPath(import.meta.url)
 		const __dirname = dirname(__filename)
-		
+
 		// Go up to the project root and read package.json
 		const packagePath = join(__dirname, '../../package.json')
 		const packageData = JSON.parse(readFileSync(packagePath, 'utf-8'))
