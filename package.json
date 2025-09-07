@@ -47,9 +47,7 @@
 		"typecheck": "tsc --noEmit",
 		"ci": "npm run lint && npm run format:check && npm run typecheck && npm run build",
 		"test:cli": "npm run build && node dist/index.js --help && node dist/index.js list",
-		"prepare:release": "npm run ci && npm run test:cli",
-		"version": "0.0.3",
-		"postversion": "git push && git push --tags"
+		"semantic-release": "semantic-release"
 	},
 	"dependencies": {
 		"@inquirer/prompts": "^7.8.0",
