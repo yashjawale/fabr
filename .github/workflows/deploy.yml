@@ -1,68 +1,68 @@
 name: Deploy to GitHub Pages
 
 on:
- # Trigger the workflow every time you push to the `main` branch
- # Using a different branch name? Replace `main` with your branch's name
- push:
-  branches: [main]
-  paths:
-   - 'src/**'
-   - 'website/**'
-   - '.github/workflows/deploy.yml'
- # Allows you to run this workflow manually from the Actions tab on GitHub.
- workflow_dispatch:
+  # Trigger the workflow every time you push to the `main` branch
+  # Using a different branch name? Replace `main` with your branch's name
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'website/**'
+      - '.github/workflows/deploy.yml'
+  # Allows you to run this workflow manually from the Actions tab on GitHub.
+  workflow_dispatch:
 
 # Allow this job to clone the repo and create a page deployment
 permissions:
- contents: read
- pages: write
- id-token: write
+  contents: read
+  pages: write
+  id-token: write
 
 # Prevent multiple deploy workflows from running simultaneously
 concurrency:
- group: deploy-${{ github.ref }}
- cancel-in-progress: true
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
- build:
-  runs-on: ubuntu-latest
-  steps:
-   - name: Checkout your repository using git
-     uses: actions/checkout@v4
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v4
 
-   # Setup Node.js for main project TypeDoc generation
-   - name: Setup Node
-     uses: actions/setup-node@v4
-     with:
-      node-version: '20'
-      cache: npm
-      cache-dependency-path: |
-       package-lock.json
-       website/package-lock.json
+      # Setup Node.js for main project TypeDoc generation
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            website/package-lock.json
 
-   # Install main project dependencies (needed for TypeDoc generation)
-   - name: Install main dependencies
-     run: npm ci
+      # Install main project dependencies (needed for TypeDoc generation)
+      - name: Install main dependencies
+        run: npm ci
 
-   # Build main project (needed for TypeDoc to analyze built JS files)
-   - name: Build main project
-     run: npm run build
+      # Build main project (needed for TypeDoc to analyze built JS files)
+      - name: Build main project
+        run: npm run build
 
-   # Install website dependencies and build
-   - name: Install, build, and upload your site
-     uses: withastro/action@v3
-     with:
-      path: ./website # The root location of your Astro project inside the repository. (optional)
-      # node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
-      # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
+      # Install website dependencies and build
+      - name: Install, build, and upload your site
+        uses: withastro/action@v3
+        with:
+          path: ./website # The root location of your Astro project inside the repository. (optional)
+          # node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
+          # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
 
- deploy:
-  needs: build
-  runs-on: ubuntu-latest
-  environment:
-   name: github-pages
-   url: ${{ steps.deployment.outputs.page_url }}
-  steps:
-   - name: Deploy to GitHub Pages
-     id: deployment
-     uses: actions/deploy-pages@v4
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

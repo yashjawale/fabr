@@ -73,7 +73,9 @@ export class ListCommand extends BaseSubcommand<ListArgs> {
 		})
 
 		console.log(
-			chalk.white(`Total: ${templates.length} template${templates.length !== 1 ? 's' : ''} available`),
+			chalk.white(
+				`Total: ${templates.length} template${templates.length !== 1 ? 's' : ''} available`,
+			),
 		)
 	}
 }

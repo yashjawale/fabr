@@ -1,6 +1,6 @@
 {
 	"name": "fabr",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "A command line utility for scaffolding new development projects ",
 	"keywords": [
 		"scaffold",
@@ -26,13 +26,13 @@
 	},
 	"files": [
 		"index.js",
-		"commands/",
-		"lib/",
-		"types/",
 		"templates.json",
 		"README.md",
 		"LICENSE"
 	],
+	"publishConfig": {
+		"access": "public"
+	},
 	"engines": {
 		"node": ">=18.0.0"
 	},
@@ -47,11 +47,7 @@
 		"typecheck": "tsc --noEmit",
 		"ci": "npm run lint && npm run format:check && npm run typecheck && npm run build",
 		"test:cli": "npm run build && node dist/index.js --help && node dist/index.js list",
-		"prepare:release": "npm run ci && npm run test:cli",
-		"release": "node scripts/release.js",
-		"release:status": "node scripts/release-status.js",
-		"version": "0.0.3",
-		"postversion": "git push && git push --tags"
+		"semantic-release": "semantic-release"
 	},
 	"dependencies": {
 		"@inquirer/prompts": "^7.8.0",
@@ -65,8 +61,8 @@
 		"@types/node": "^24.1.0",
 		"eslint": "^9.17.0",
 		"eslint-config-prettier": "^10.1.8",
-		"globals": "^16.3.0",
 		"prettier": "^3.4.2",
+		"semantic-release": "^24.2.7",
 		"ts-node-dev": "^2.0.0",
 		"tsx": "^4.20.3",
 		"typescript": "^5.6.0"
