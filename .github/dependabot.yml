@@ -9,8 +9,19 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
+    # Group all npm dependencies from this directory into a single pull request
+    groups:
+      package-updates:
+        patterns:
+          - '*'
 
   - package-ecosystem: 'npm'
     directory: '/website'
     schedule:
       interval: 'weekly'
+    # Use the same group name to combine updates from this directory
+    # with updates from other directories in the same group.
+    groups:
+      website-updates:
+        patterns:
+          - '*'
