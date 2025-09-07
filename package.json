@@ -26,6 +26,9 @@
 	},
 	"files": [
 		"index.js",
+		"commands/",
+		"lib/",
+		"types/",
 		"templates.json",
 		"README.md",
 		"LICENSE"
