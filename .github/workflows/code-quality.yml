@@ -1,75 +1,75 @@
 name: Code Quality
 
 on:
- push:
-  branches: [main, develop]
- pull_request:
-  branches: [main, develop]
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
 
 jobs:
- lint-and-format:
-  runs-on: ubuntu-latest
-  strategy:
-   matrix:
-    workspace: ['.', 'website']
+  lint-and-format:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        workspace: ['.', 'website']
 
-  steps:
-   - name: Checkout code
-     uses: actions/checkout@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-   - name: Setup Node.js
-     uses: actions/setup-node@v4
-     with:
-      node-version: '20'
-      cache: 'npm'
-      cache-dependency-path: ${{ matrix.workspace }}/package-lock.json
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: ${{ matrix.workspace }}/package-lock.json
 
-   - name: Install dependencies (root)
-     if: matrix.workspace == '.'
-     run: npm ci
+      - name: Install dependencies (root)
+        if: matrix.workspace == '.'
+        run: npm ci
 
-   - name: Install dependencies (website)
-     if: matrix.workspace == 'website'
-     run: |
-      cd website
-      npm ci
+      - name: Install dependencies (website)
+        if: matrix.workspace == 'website'
+        run: |
+          cd website
+          npm ci
 
-   - name: Run ESLint (root)
-     if: matrix.workspace == '.'
-     run: npm run lint
+      - name: Run ESLint (root)
+        if: matrix.workspace == '.'
+        run: npm run lint
 
-   - name: Run ESLint (website)
-     if: matrix.workspace == 'website'
-     run: |
-      cd website
-      npm run lint
+      - name: Run ESLint (website)
+        if: matrix.workspace == 'website'
+        run: |
+          cd website
+          npm run lint
 
-   - name: Check Prettier formatting (root)
-     if: matrix.workspace == '.'
-     run: npm run format:check
+      - name: Check Prettier formatting (root)
+        if: matrix.workspace == '.'
+        run: npm run format:check
 
-   - name: Check Prettier formatting (website)
-     if: matrix.workspace == 'website'
-     run: |
-      cd website
-      npm run format:check
+      - name: Check Prettier formatting (website)
+        if: matrix.workspace == 'website'
+        run: |
+          cd website
+          npm run format:check
 
-   - name: TypeScript type checking (root)
-     if: matrix.workspace == '.'
-     run: npm run typecheck
+      - name: TypeScript type checking (root)
+        if: matrix.workspace == '.'
+        run: npm run typecheck
 
-   - name: TypeScript/Astro type checking (website)
-     if: matrix.workspace == 'website'
-     run: |
-      cd website
-      npm run typecheck
+      - name: TypeScript/Astro type checking (website)
+        if: matrix.workspace == 'website'
+        run: |
+          cd website
+          npm run typecheck
 
-   - name: Build project (root)
-     if: matrix.workspace == '.'
-     run: npm run build
+      - name: Build project (root)
+        if: matrix.workspace == '.'
+        run: npm run build
 
-   - name: Build website
-     if: matrix.workspace == 'website'
-     run: |
-      cd website
-      npm run build
+      - name: Build website
+        if: matrix.workspace == 'website'
+        run: |
+          cd website
+          npm run build

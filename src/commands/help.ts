@@ -29,7 +29,8 @@ export function showGlobalHelp(): void {
 		chalk.gray('  npx fabr init                              ') + chalk.dim('# Interactive mode'),
 	)
 	console.log(
-		chalk.gray('  npx fabr init my-project                   ') + chalk.dim('# Specify project name'),
+		chalk.gray('  npx fabr init my-project                   ') +
+			chalk.dim('# Specify project name'),
 	)
 	console.log(
 		chalk.gray('  npx fabr init my-project --template=slug   ') + chalk.dim('# Specify both'),

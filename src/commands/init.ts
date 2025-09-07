@@ -45,7 +45,10 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
 			description: this.description,
 			arguments: [{ name: 'project-name', description: 'Name of the project directory to create' }],
 			options: [
-				{ flag: '--template=<slug>', description: 'Template slug to use (skips template selection)' },
+				{
+					flag: '--template=<slug>',
+					description: 'Template slug to use (skips template selection)',
+				},
 				{ flag: '-t <slug>', description: 'Short form of --template' },
 				{ flag: '--help, -h', description: 'Show this help message' },
 			],
@@ -56,7 +59,10 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
 					command: 'npx fabr init my-project --template=slug',
 					description: 'Specify both (long form)',
 				},
-				{ command: 'npx fabr init my-project -t slug', description: 'Specify both (short form)' },
+				{
+					command: 'npx fabr init my-project -t slug',
+					description: 'Specify both (short form)',
+				},
 				{ command: 'npx fabr init --help', description: 'Show this help' },
 			],
 		}
@@ -201,9 +207,14 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
 
 				// Validate that all command placeholders have values
 				if (config.commands) {
-					const missingPlaceholders = validateCommandPlaceholders(config.commands, placeholderValues)
+					const missingPlaceholders = validateCommandPlaceholders(
+						config.commands,
+						placeholderValues,
+					)
 					if (missingPlaceholders.length > 0) {
-						console.error(chalk.red(`Missing values for placeholders: ${missingPlaceholders.join(', ')}`))
+						console.error(
+							chalk.red(`Missing values for placeholders: ${missingPlaceholders.join(', ')}`),
+						)
 						process.exit(1)
 					}
 
