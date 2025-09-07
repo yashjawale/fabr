@@ -9,7 +9,7 @@
 		"bootstrap",
 		"fabr"
 	],
-	"homepage": "https://github.com/yashjawale/fabr#readme",
+	"homepage": "https://yashjawale.github.io/fabr",
 	"bugs": {
 		"url": "https://github.com/yashjawale/fabr/issues"
 	},
@@ -20,13 +20,12 @@
 	"license": "GPL-3.0-or-later",
 	"author": "Yash Jawale",
 	"type": "module",
-	"main": "index.js",
+	"main": "dist/index.js",
 	"bin": {
-		"fabr": "index.js"
+		"fabr": "dist/index.js"
 	},
 	"files": [
-		"index.js",
-		"templates.json",
+		"dist/",
 		"README.md",
 		"LICENSE"
 	],
