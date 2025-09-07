@@ -21,7 +21,7 @@
 		"@pasqal-io/starlight-client-mermaid": "^0.1.0",
 		"@tailwindcss/vite": "^4.1.12",
 		"astro": "^5.13.5",
-		"mermaid": "^11.10.1",
+		"mermaid": "^11.11.0",
 		"playwright": "^1.55.0",
 		"rehype-mermaid": "^3.0.0",
 		"starlight-typedoc": "^0.21.3",
