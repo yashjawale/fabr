@@ -40,7 +40,7 @@ jobs:
               await github.rest.pulls.update({
                 owner,
                 repo,
-                pull_request_number: prNumber,
+                pull_number: prNumber,
                 base: 'develop'
               });
               
