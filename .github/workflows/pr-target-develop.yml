@@ -1,0 +1,72 @@
+name: Change PR Target to Develop Branch
+
+# This workflow automatically changes the target branch of new pull requests
+# from 'main' to 'develop' to enforce a development workflow where:
+# - Feature branches merge into develop first
+# - Only develop merges into main for releases
+# This helps maintain a cleaner main branch and enables better release management
+
+on:
+  pull_request:
+    types: [opened]
+    # Only trigger when PR is targeting main branch
+    branches: [main]
+
+permissions:
+  # Need write access to pull requests to modify the target branch
+  pull-requests: write
+  contents: read
+
+jobs:
+  change-target-to-develop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Change PR target from main to develop
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { owner, repo } = context.repo;
+            const prNumber = context.payload.pull_request.number;
+            const prTitle = context.payload.pull_request.title;
+            const prAuthor = context.payload.pull_request.user.login;
+
+            console.log(`Processing PR #${prNumber}: "${prTitle}" by @${prAuthor}`);
+            console.log(`Current target: ${context.payload.pull_request.base.ref}`);
+            console.log(`Changing target from 'main' to 'develop'...`);
+
+            try {
+              // Update the PR to target develop branch instead of main
+              await github.rest.pulls.update({
+                owner,
+                repo,
+                pull_number: prNumber,
+                base: 'develop'
+              });
+              
+              console.log(`✅ Successfully changed PR #${prNumber} target to 'develop' branch`);
+              
+              // Add a comment explaining the change
+              const commentBody = [
+                '🔄 This PR was automatically retargeted from `main` to `develop`.',
+                '',
+                'We use `develop` for all feature work. No action needed!',
+                '',
+                'If you need to target `main` (e.g. for a hotfix), close this PR and open a new one to `main` with `[HOTFIX]` in the title.',
+                '',
+                '*[PR Target Workflow]*'
+              ].join('\n');
+              
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: prNumber,
+                body: commentBody
+              });
+              
+              console.log(`✅ Added explanatory comment to PR #${prNumber}`);
+              
+            } catch (error) {
+              console.error(`❌ Failed to update PR #${prNumber}:`, error);
+              core.setFailed(`Failed to change PR target: ${error.message}`);
+            }
