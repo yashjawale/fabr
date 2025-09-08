@@ -30,11 +30,11 @@ jobs:
             const prNumber = context.payload.pull_request.number;
             const prTitle = context.payload.pull_request.title;
             const prAuthor = context.payload.pull_request.user.login;
-            
+
             console.log(`Processing PR #${prNumber}: "${prTitle}" by @${prAuthor}`);
             console.log(`Current target: ${context.payload.pull_request.base.ref}`);
             console.log(`Changing target from 'main' to 'develop'...`);
-            
+
             try {
               // Update the PR to target develop branch instead of main
               await github.rest.pulls.update({
