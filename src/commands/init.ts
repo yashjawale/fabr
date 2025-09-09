@@ -142,7 +142,7 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
 			}
 
 			// Display fabr ASCII logo
-			console.log(chalk.redBright(asciiArt()))
+			console.log(chalk.redBright.bold(asciiArt()))
 
 			// Get project details from user (skip prompts if already provided)
 			const { template, projectName: finalProjectName } = await promptForProjectDetails(
