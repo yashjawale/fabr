@@ -36,7 +36,7 @@ function getVersion(): string {
  */
 export function showVersion(): void {
 	const version = getVersion()
-	console.log(chalk.cyan.bold(`Fabr v${version}`))
+	console.log(chalk.redBright.bold(`fabr v${version}`))
 }
 
 /**
