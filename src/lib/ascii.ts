@@ -1,6 +1,6 @@
 /**
  * Returns the ASCII art string used in the CLI for the Fabr logo.
- * 
+ *
  * @returns The ASCII art string
  */
 export function asciiArt(): string {

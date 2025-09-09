@@ -14,7 +14,7 @@ type HelpArgs = SubcommandArgs
  * @returns {void}
  */
 export function showGlobalHelp(): void {
-	console.log(chalk.redBright.bold( asciiArt() ))
+	console.log(chalk.redBright.bold(asciiArt()))
 	console.log(chalk.white('Usage:'))
 	console.log(chalk.cyan('  npx fabr <command>') + chalk.gray('  Execute a command\n'))
 	console.log(chalk.white('Available Commands:'))
