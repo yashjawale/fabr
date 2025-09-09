@@ -52,9 +52,7 @@ jobs:
                 '',
                 'We use `develop` for all feature work. No action needed!',
                 '',
-                'If you need to target `main` (e.g. for a hotfix), close this PR and open a new one to `main` with `[HOTFIX]` in the title.',
-                '',
-                '*[PR Target Workflow]*'
+                'If you need to target `main` (e.g. for a hotfix), close this PR and open a new one to `main` with `[HOTFIX]` in the title.'
               ].join('\n');
               
               await github.rest.issues.createComment({
