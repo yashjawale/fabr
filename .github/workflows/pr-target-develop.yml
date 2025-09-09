@@ -48,6 +48,8 @@ jobs:
               
               // Add a comment explaining the change
               const commentBody = [
+                'Thanks for contributing to fabr! 🚀',
+                '',
                 '🔄 This PR was automatically retargeted from `main` to `develop`.',
                 '',
                 'We use `develop` for all feature work. No action needed!',
