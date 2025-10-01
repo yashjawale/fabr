@@ -18,6 +18,7 @@ import { HelpContent } from '../lib/help.js'
 import { FabrConfig, isCommandBasedTemplate, validateFabrConfig } from '../types/fabr-config.js'
 import { BaseSubcommand, SubcommandArgs } from '../types/subcommand.js'
 import { Template, findTemplateBySlug } from '../types/templates.js'
+import { asciiArt } from '../lib/ascii.js'
 
 export interface InitArgs extends SubcommandArgs {
 	projectName?: string
@@ -140,7 +141,8 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
 				}
 			}
 
-			console.log(chalk.cyan.bold('Welcome to Fabr! 🚀'))
+			// Display fabr ASCII logo
+			console.log(chalk.redBright.bold(asciiArt()))
 
 			// Get project details from user (skip prompts if already provided)
 			const { template, projectName: finalProjectName } = await promptForProjectDetails(
