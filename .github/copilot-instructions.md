@@ -79,7 +79,7 @@ Fabr is a TypeScript CLI utility for scaffolding new development projects using 
 - `src/commands/` - Command implementations (init, list, help)
 - `src/lib/` - Core functionality (shell, files, placeholders, commands)
 - `src/types/` - TypeScript type definitions
-- `templates.json` - Available template definitions
+- `src/templates.json` - Available template definitions
 
 ### Key Configuration Files
 

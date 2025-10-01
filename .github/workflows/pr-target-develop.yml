@@ -48,13 +48,13 @@ jobs:
               
               // Add a comment explaining the change
               const commentBody = [
-                'Thanks for contributing to fabr! 🚀',
-                '',
                 '🔄 This PR was automatically retargeted from `main` to `develop`.',
                 '',
                 'We use `develop` for all feature work. No action needed!',
                 '',
-                'If you need to target `main` (e.g. for a hotfix), close this PR and open a new one to `main` with `[HOTFIX]` in the title.'
+                'If you need to target `main` (e.g. for a hotfix), close this PR and open a new one to `main` with `[HOTFIX]` in the title.',
+                '',
+                '*[PR Target Workflow]*'
               ].join('\n');
               
               await github.rest.issues.createComment({
