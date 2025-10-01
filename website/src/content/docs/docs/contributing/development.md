@@ -101,6 +101,7 @@ The main source code is in the `src/` directory:
 ```
 src/
 ├── index.ts              # CLI entry point
+├── templates.json        # Template registry
 ├── commands/             # CLI command implementations
 │   ├── init.ts          # Project creation logic
 │   ├── list.ts          # Template listing
@@ -110,7 +111,6 @@ src/
     ├── placeholders.ts  # Placeholder replacement
     ├── commands.ts      # Command execution
     └── env.ts           # Environment variables
-TEMPLATES.json           # Template registry
 ```
 
 ### 3. Testing Your Changes

@@ -347,7 +347,7 @@ npx fabr init test_snake_case --template=your-repo-url
 
 1. Fork the [fabr repository](https://github.com/yashjawale/fabr)
 
-2. Add your template to `TEMPLATES.json`:
+2. Add your template to `src/templates.json`:
 
 ```json
 {
@@ -449,7 +449,7 @@ Create blog posts or tutorials showing how to use your templates.
 Need help creating templates?
 
 - Check the [configuration reference](/templates/configuration)
-- Look at [existing templates](https://github.com/yashjawale/fabr/tree/main/TEMPLATES.json) for inspiration
+- Look at [existing templates](https://github.com/yashjawale/fabr/tree/main/src/templates.json) for inspiration
 - Ask questions in [GitHub discussions](https://github.com/yashjawale/fabr/discussions)
 - Open an issue if you find bugs or need features
 

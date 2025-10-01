@@ -2,7 +2,6 @@ import chalk from 'chalk'
 import { parseSubcommandArgs, parseSubcommandOnlyArgs } from '../lib/args.js'
 import { HelpContent } from '../lib/help.js'
 import { BaseSubcommand, SubcommandArgs } from '../types/subcommand.js'
-import { asciiArt } from '../lib/ascii.js'
 
 type HelpArgs = SubcommandArgs
 
@@ -14,7 +13,7 @@ type HelpArgs = SubcommandArgs
  * @returns {void}
  */
 export function showGlobalHelp(): void {
-	console.log(chalk.redBright.bold(asciiArt()))
+	console.log(chalk.cyan.bold('Fabr - Project Template Generator 🚀\n'))
 	console.log(chalk.white('Usage:'))
 	console.log(chalk.cyan('  npx fabr <command>') + chalk.gray('  Execute a command\n'))
 	console.log(chalk.white('Available Commands:'))
