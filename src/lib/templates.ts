@@ -7,7 +7,7 @@ import { TemplatesConfig, validateTemplatesConfig } from '../types/templates.js'
 
 // Default GitHub repository for templates
 const DEFAULT_TEMPLATES_REPO = 'yashjawale/fabr'
-const DEFAULT_TEMPLATES_PATH = 'templates.json'
+const DEFAULT_TEMPLATES_PATH = 'TEMPLATES.json'
 
 /**
  * Fetch templates configuration from a GitHub repository
