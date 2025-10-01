@@ -38,10 +38,13 @@ async function main(): Promise<void> {
 			console.error(chalk.red('No command provided'))
 			process.exit(1)
 		}
-		
+
 		await executeCommand(command, templates, args)
 	} catch (error) {
-		console.error(chalk.red('Failed to load templates:'), error instanceof Error ? error.message : 'Unknown error')
+		console.error(
+			chalk.red('Failed to load templates:'),
+			error instanceof Error ? error.message : 'Unknown error',
+		)
 		process.exit(1)
 	}
 }
