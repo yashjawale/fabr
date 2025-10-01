@@ -5,6 +5,11 @@
 			"name": "Fabr Sample Template",
 			"slug": "fabr-sample",
 			"repo": "yashjawale/fabr-sample"
+		},
+		{
+			"name": "Chrome Extension React TypeScript",
+			"slug": "chrome-ext-react-ts",
+			"repo": "yashjawale/fabr-chrome-ext-react-ts"
 		}
 	],
 	"defaultTemplate": "fabr-sample"
