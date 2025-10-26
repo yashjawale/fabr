@@ -7,13 +7,13 @@ Fabr provides a simple yet powerful command-line interface with five main comman
 
 ## Command Overview
 
-| Command | Purpose | Example |
-|---------|---------|---------|
-| `init` | Create a new project from a template | `npx fabr init my-project` |
-| `list` | List all available templates | `npx fabr list` |
-| `search` | Search templates by keywords | `npx fabr search react` |
-| `help` | Show help information | `npx fabr help` |
-| `version` | Show version information | `npx fabr version` |
+| Command   | Purpose                              | Example                    |
+| --------- | ------------------------------------ | -------------------------- |
+| `init`    | Create a new project from a template | `npx fabr init my-project` |
+| `list`    | List all available templates         | `npx fabr list`            |
+| `search`  | Search templates by keywords         | `npx fabr search react`    |
+| `help`    | Show help information                | `npx fabr help`            |
+| `version` | Show version information             | `npx fabr version`         |
 
 ## Global Options
 
@@ -29,14 +29,17 @@ These options work with any command:
 The main command for creating projects from templates.
 
 **Usage:**
+
 ```bash
 npx fabr init [project-name] [options]
 ```
 
 **Arguments:**
+
 - `project-name` - Name of the project directory to create (optional, will prompt if not provided)
 
 **Options:**
+
 - `--template=<slug>` or `-t <slug>` - Template slug to use (skips template selection)
 - `--help, -h` - Show help message
 
@@ -77,11 +80,13 @@ npx fabr init --help
 Display all available templates with their details.
 
 **Usage:**
+
 ```bash
 npx fabr list [options]
 ```
 
 **Options:**
+
 - `--help, -h` - Show help message
 
 **Examples:**
@@ -95,6 +100,7 @@ npx fabr list --help
 ```
 
 **Output example:**
+
 ```
 Available Templates:
 
@@ -114,14 +120,17 @@ Total: 2 templates available
 Search through available templates by name, slug, or repository.
 
 **Usage:**
+
 ```bash
 npx fabr search <query> [options]
 ```
 
 **Arguments:**
+
 - `query` - Search terms to look for
 
 **Options:**
+
 - `--exact` - Search for exact matches only
 - `--case` - Case-sensitive search
 - `--help, -h` - Show help message
@@ -149,6 +158,7 @@ npx fabr search --help
 ```
 
 **Output example:**
+
 ```
 Search Results
 Query: "react"
@@ -169,6 +179,7 @@ To create a project, use: npx fabr init <project-name> --template=<slug>
 Show global help information or help for specific commands.
 
 **Usage:**
+
 ```bash
 npx fabr help
 ```
@@ -186,6 +197,7 @@ npx fabr search --help
 ```
 
 **The help command shows:**
+
 - Usage instructions
 - Available commands overview
 - Global options
@@ -197,6 +209,7 @@ npx fabr search --help
 Display the current version of fabr.
 
 **Usage:**
+
 ```bash
 npx fabr version
 ```
@@ -213,6 +226,7 @@ npx fabr -v
 ```
 
 **Output example:**
+
 ```
 fabr v1.2.3
 ```
