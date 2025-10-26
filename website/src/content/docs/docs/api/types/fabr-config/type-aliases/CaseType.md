@@ -7,7 +7,7 @@ title: "CaseType"
 
 > **CaseType** = `"kebab"` \| `"pascal"` \| `"camel"` \| `"snake"` \| `"constant"`
 
-Defined in: [types/fabr-config.ts:6](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L6)
+Defined in: [types/fabr-config.ts:6](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L6)
 
 TypeScript interfaces for Fabr configuration
 Generated from fabr.config.schema.json

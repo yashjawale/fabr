@@ -7,7 +7,7 @@ title: "isPromptedPlaceholder"
 
 > **isPromptedPlaceholder**(`placeholder`): `boolean`
 
-Defined in: [types/fabr-config.ts:130](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L130)
+Defined in: [types/fabr-config.ts:130](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L130)
 
 Type guard to check if a placeholder is a prompted placeholder.
 A prompted placeholder is one that requires user input and is not transformed from another placeholder.

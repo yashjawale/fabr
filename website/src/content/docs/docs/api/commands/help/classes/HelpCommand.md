@@ -5,7 +5,7 @@ prev: false
 title: "HelpCommand"
 ---
 
-Defined in: [commands/help.ts:42](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/commands/help.ts#L42)
+Defined in: [commands/help.ts:52](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/help.ts#L52)
 
 Show help information for the CLI
 
@@ -33,7 +33,7 @@ Show help information for the CLI
 
 > **execute**(): `Promise`\<`void`\>
 
-Defined in: [commands/help.ts:94](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/commands/help.ts#L94)
+Defined in: [commands/help.ts:104](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/help.ts#L104)
 
 Execute the command with parsed arguments.
 Must be implemented by subclass to provide the command's functionality.
@@ -54,7 +54,7 @@ Promise that resolves when command execution is complete
 
 > **handle**(`templates`, `rawArgs`): `Promise`\<`void`\>
 
-Defined in: [types/subcommand.ts:94](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L94)
+Defined in: [types/subcommand.ts:94](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/subcommand.ts#L94)
 
 Main handler that follows the common command pattern.
 Orchestrates the command execution workflow:
@@ -92,7 +92,7 @@ Promise that resolves when command handling is complete
 
 > **parseArgs**(`rawArgs`): [`SubcommandArgs`](/fabr/docs/api/types/subcommand/interfaces/subcommandargs/)
 
-Defined in: [commands/help.ts:70](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/commands/help.ts#L70)
+Defined in: [commands/help.ts:80](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/help.ts#L80)
 
 Parse command line arguments for the help command.
 Extracts and validates arguments specific to the help command.
@@ -121,7 +121,7 @@ Parsed help command arguments
 
 > **showHelp**(): `void`
 
-Defined in: [commands/help.ts:85](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/commands/help.ts#L85)
+Defined in: [commands/help.ts:95](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/help.ts#L95)
 
 Shows the help information specific to the help command.
 For the help command, this shows the global help.
@@ -140,7 +140,7 @@ For the help command, this shows the global help.
 
 > `readonly` **description**: `"Show this help message"` = `'Show this help message'`
 
-Defined in: [commands/help.ts:44](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/commands/help.ts#L44)
+Defined in: [commands/help.ts:54](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/help.ts#L54)
 
 Command description - must be implemented by subclass.
 A brief description of what the command does, used in help text.
@@ -155,7 +155,7 @@ A brief description of what the command does, used in help text.
 
 > `readonly` **name**: `"help"` = `'help'`
 
-Defined in: [commands/help.ts:43](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/commands/help.ts#L43)
+Defined in: [commands/help.ts:53](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/help.ts#L53)
 
 Command name - must be implemented by subclass.
 This should be the string used to invoke the command from the CLI.

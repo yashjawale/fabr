@@ -7,7 +7,7 @@ title: "findTemplateBySlug"
 
 > **findTemplateBySlug**(`templates`, `slug`): `undefined` \| [`Template`](/fabr/docs/api/types/templates/interfaces/template/)
 
-Defined in: [types/templates.ts:33](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/templates.ts#L33)
+Defined in: [types/templates.ts:33](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/templates.ts#L33)
 
 Find a template by its slug from an array of templates.
 Performs a linear search through the templates array to find a matching slug.

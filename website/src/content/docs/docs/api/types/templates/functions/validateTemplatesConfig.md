@@ -7,7 +7,7 @@ title: "validateTemplatesConfig"
 
 > **validateTemplatesConfig**(`config`): `config is TemplatesConfig`
 
-Defined in: [types/templates.ts:75](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/templates.ts#L75)
+Defined in: [types/templates.ts:75](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/templates.ts#L75)
 
 Validate templates configuration structure and content.
 Performs comprehensive validation of a templates configuration object:

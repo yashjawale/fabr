@@ -5,7 +5,7 @@ prev: false
 title: "FabrConfig"
 ---
 
-Defined in: [types/fabr-config.ts:91](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L91)
+Defined in: [types/fabr-config.ts:91](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L91)
 
 ## Properties
 
@@ -13,7 +13,7 @@ Defined in: [types/fabr-config.ts:91](https://github.com/yashjawale/fabr/blob/af
 
 > `optional` **commands**: [`CommandTemplate`](/fabr/docs/api/types/fabr-config/interfaces/commandtemplate/)[]
 
-Defined in: [types/fabr-config.ts:119](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L119)
+Defined in: [types/fabr-config.ts:119](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L119)
 
 Array of commands to run for command-based templates
 
@@ -23,7 +23,7 @@ Array of commands to run for command-based templates
 
 > `optional` **description**: `string`
 
-Defined in: [types/fabr-config.ts:95](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L95)
+Defined in: [types/fabr-config.ts:95](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L95)
 
 A brief description of what this template creates
 
@@ -33,7 +33,7 @@ A brief description of what this template creates
 
 > `optional` **environmentVariables**: [`EnvironmentVariable`](/fabr/docs/api/types/fabr-config/interfaces/environmentvariable/)[]
 
-Defined in: [types/fabr-config.ts:111](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L111)
+Defined in: [types/fabr-config.ts:111](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L111)
 
 Array of environment variable configurations
 
@@ -43,7 +43,7 @@ Array of environment variable configurations
 
 > `optional` **files**: [`FileConfiguration`](/fabr/docs/api/types/fabr-config/interfaces/fileconfiguration/)
 
-Defined in: [types/fabr-config.ts:113](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L113)
+Defined in: [types/fabr-config.ts:113](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L113)
 
 File-specific configurations
 
@@ -53,7 +53,7 @@ File-specific configurations
 
 > `optional` **gitInit**: `boolean`
 
-Defined in: [types/fabr-config.ts:115](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L115)
+Defined in: [types/fabr-config.ts:115](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L115)
 
 Whether to initialize a git repository after setup
 
@@ -63,7 +63,7 @@ Whether to initialize a git repository after setup
 
 > `optional` **installCommand**: `string`
 
-Defined in: [types/fabr-config.ts:105](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L105)
+Defined in: [types/fabr-config.ts:105](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L105)
 
 Command to install dependencies
 
@@ -73,7 +73,7 @@ Command to install dependencies
 
 > `optional` **name**: `string`
 
-Defined in: [types/fabr-config.ts:93](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L93)
+Defined in: [types/fabr-config.ts:93](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L93)
 
 The name of the template configuration
 
@@ -83,7 +83,7 @@ The name of the template configuration
 
 > `optional` **placeholders**: [`Placeholder`](/fabr/docs/api/types/fabr-config/interfaces/placeholder/)[]
 
-Defined in: [types/fabr-config.ts:109](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L109)
+Defined in: [types/fabr-config.ts:109](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L109)
 
 Array of placeholder configurations for template customization
 
@@ -93,7 +93,7 @@ Array of placeholder configurations for template customization
 
 > `optional` **postInstallCommand**: `string`
 
-Defined in: [types/fabr-config.ts:107](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L107)
+Defined in: [types/fabr-config.ts:107](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L107)
 
 Command to run after dependency installation
 
@@ -103,7 +103,7 @@ Command to run after dependency installation
 
 > `optional` **postSetupCommand**: `string`
 
-Defined in: [types/fabr-config.ts:103](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L103)
+Defined in: [types/fabr-config.ts:103](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L103)
 
 Command to run after placeholder replacement
 
@@ -113,7 +113,7 @@ Command to run after placeholder replacement
 
 > `optional` **preSetupCommand**: `string`
 
-Defined in: [types/fabr-config.ts:101](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L101)
+Defined in: [types/fabr-config.ts:101](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L101)
 
 Command to run before any setup tasks
 
@@ -123,7 +123,7 @@ Command to run before any setup tasks
 
 > `optional` **removeFiles**: `string`[]
 
-Defined in: [types/fabr-config.ts:117](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L117)
+Defined in: [types/fabr-config.ts:117](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L117)
 
 Array of file patterns to remove after setup completion
 
@@ -133,7 +133,7 @@ Array of file patterns to remove after setup completion
 
 > `optional` **type**: `"files"` \| `"commands"`
 
-Defined in: [types/fabr-config.ts:99](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L99)
+Defined in: [types/fabr-config.ts:99](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L99)
 
 Template type: 'files' (default) or 'commands'
 
@@ -143,6 +143,6 @@ Template type: 'files' (default) or 'commands'
 
 > `optional` **version**: `string`
 
-Defined in: [types/fabr-config.ts:97](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L97)
+Defined in: [types/fabr-config.ts:97](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L97)
 
 Version of the template configuration

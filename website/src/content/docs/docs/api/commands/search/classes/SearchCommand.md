@@ -2,26 +2,26 @@
 editUrl: false
 next: false
 prev: false
-title: "InitCommand"
+title: "SearchCommand"
 ---
 
-Defined in: [commands/init.ts:31](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/init.ts#L31)
+Defined in: [commands/search.ts:16](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/search.ts#L16)
 
-Create a new project from a template
+Search through available templates and display matching results
 
 ## Extends
 
-- [`BaseSubcommand`](/fabr/docs/api/types/subcommand/classes/basesubcommand/)\<[`InitArgs`](/fabr/docs/api/commands/init/interfaces/initargs/)\>
+- [`BaseSubcommand`](/fabr/docs/api/types/subcommand/classes/basesubcommand/)\<`SearchArgs`\>
 
 ## Constructors
 
 ### Constructor
 
-> **new InitCommand**(): `InitCommand`
+> **new SearchCommand**(): `SearchCommand`
 
 #### Returns
 
-`InitCommand`
+`SearchCommand`
 
 #### Inherited from
 
@@ -33,19 +33,11 @@ Create a new project from a template
 
 > **execute**(`templates`, `args`): `Promise`\<`void`\>
 
-Defined in: [commands/init.ts:114](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/init.ts#L114)
+Defined in: [commands/search.ts:154](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/search.ts#L154)
 
-Execute the init command to create a new project from a template.
-
-This method orchestrates the entire project creation process:
-1. Validates the project name
-2. Prompts for missing information (project name, template)
-3. Downloads the template from GitHub
-4. Processes the template configuration
-5. Handles placeholders and environment variables
-6. Runs setup commands
-7. Installs dependencies and runs post-install tasks
-8. Cleans up temporary files
+Execute the search command.
+Performs the search based on provided query and options, then displays results.
+Shows appropriate messages for no query, no results, or successful matches.
 
 #### Parameters
 
@@ -53,19 +45,19 @@ This method orchestrates the entire project creation process:
 
 [`Template`](/fabr/docs/api/types/templates/interfaces/template/)[]
 
-Array of available templates
+Array of available templates to search through
 
 ##### args
 
-[`InitArgs`](/fabr/docs/api/commands/init/interfaces/initargs/)
+`SearchArgs`
 
-Parsed command arguments
+Parsed search command arguments
 
 #### Returns
 
 `Promise`\<`void`\>
 
-A promise that resolves when project creation is complete
+A promise that resolves when the search is complete
 
 #### Overrides
 
@@ -113,12 +105,12 @@ Promise that resolves when command handling is complete
 
 ### parseArgs()
 
-> **parseArgs**(`rawArgs`): [`InitArgs`](/fabr/docs/api/commands/init/interfaces/initargs/)
+> **parseArgs**(`rawArgs`): `SearchArgs`
 
-Defined in: [commands/init.ts:80](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/init.ts#L80)
+Defined in: [commands/search.ts:62](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/search.ts#L62)
 
-Parse command line arguments for the init command.
-Extracts project name, template slug, and help flag from the provided arguments.
+Parse command line arguments for the search command.
+Extracts and validates arguments specific to the search command.
 
 #### Parameters
 
@@ -130,9 +122,9 @@ Raw command line arguments
 
 #### Returns
 
-[`InitArgs`](/fabr/docs/api/commands/init/interfaces/initargs/)
+`SearchArgs`
 
-Parsed init command arguments including project name and template slug
+Parsed search command arguments
 
 #### Overrides
 
@@ -161,9 +153,9 @@ Uses the getHelpContent() method to format and display help information.
 
 ### description
 
-> `readonly` **description**: `"Create a new project from a template"` = `'Create a new project from a template'`
+> `readonly` **description**: `"Search templates by name, slug, or repository"` = `'Search templates by name, slug, or repository'`
 
-Defined in: [commands/init.ts:33](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/init.ts#L33)
+Defined in: [commands/search.ts:18](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/search.ts#L18)
 
 Command description - must be implemented by subclass.
 A brief description of what the command does, used in help text.
@@ -176,9 +168,9 @@ A brief description of what the command does, used in help text.
 
 ### name
 
-> `readonly` **name**: `"init"` = `'init'`
+> `readonly` **name**: `"search"` = `'search'`
 
-Defined in: [commands/init.ts:32](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/init.ts#L32)
+Defined in: [commands/search.ts:17](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/search.ts#L17)
 
 Command name - must be implemented by subclass.
 This should be the string used to invoke the command from the CLI.
