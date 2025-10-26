@@ -1,7 +1,7 @@
-<div align="center">
-  <img src="https://raw.githubusercontent.com/yashjawale/fabr/main/website/src/assets/fabr.svg" alt="Fabr Logo" width="120" height="120">
+<div align="">
+  <img src="./website/public/favicon.svg" alt="fabr" width="120" height="120">
   
-  *A simple command line utility for scaffolding new development projects*
+  A simple command line utility for scaffolding new development projects
   
   [![npm version](https://badge.fury.io/js/fabr.svg)](https://www.npmjs.com/package/fabr)
   [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
@@ -36,11 +36,11 @@ Get help:
 npx fabr --help
 ```
 
-> **💡 Tip:** No installation required! Use `npx` to run Fabr directly.
+> **💡 Tip:** No installation required! Use `npx` to run fabr directly.
 
-## What Makes Fabr Special?
+## What Makes fabr Special?
 
-Fabr supports two types of templates to fit your workflow:
+fabr supports two types of templates to fit your workflow:
 
 ### 🗂️ **File-Based Templates**
 Copy files from a repository and replace placeholders with your project details:
@@ -137,7 +137,7 @@ You can also check the complete list in our [TEMPLATES.json](./TEMPLATES.json) f
 
 ## Like What You See? ⭐
 
-If Fabr helps streamline your development workflow, please consider giving it a star on GitHub! It helps others discover the project and motivates us to keep improving.
+If fabr helps streamline your development workflow, please consider giving it a star on GitHub! It helps others discover the project and motivates us to keep improving.
 
 [![GitHub stars](https://img.shields.io/github/stars/yashjawale/fabr?style=social)](https://github.com/yashjawale/fabr)
 
@@ -183,6 +183,4 @@ Licensed under the [GPL-3.0](LICENSE) license.
 
 ---
 
-<div align="center">
-  <sub>Built with ❤️ by <a href="https://github.com/yashjawale">Yash Jawale</a></sub>
-</div>
+<a href="https://yashjawale.github.io/" target="_blank"><img style="height: 22px;" src="https://raw.githubusercontent.com/yashjawale/.github/main/docs/logo.svg" alt="Yash Jawale"/></a>
