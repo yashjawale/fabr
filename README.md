@@ -1,18 +1,15 @@
-<div align="">
-  <img src="./website/public/favicon.svg" alt="fabr" width="180" style="margin-bottom: 2rem;">
+<img src="./website/public/favicon.svg" alt="fabr" width="180" style="margin-bottom: 2rem;">
   
-  A simple command line utility for scaffolding new development projects
+A simple command line utility for scaffolding new development projects
   
-  [![npm version](https://badge.fury.io/js/fabr.svg)](https://www.npmjs.com/package/fabr)
-  [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-  [![Node.js](https://img.shields.io/badge/Node.js-18%2B-green)](https://nodejs.org/)
-  [![GitHub issues](https://img.shields.io/github/issues/yashjawale/fabr)](https://github.com/yashjawale/fabr/issues)
-  
-  [![Code Quality](https://github.com/yashjawale/fabr/actions/workflows/code-quality.yml/badge.svg)](https://github.com/yashjawale/fabr/actions/workflows/code-quality.yml)
-  [![Release](https://github.com/yashjawale/fabr/actions/workflows/release.yml/badge.svg)](https://github.com/yashjawale/fabr/actions/workflows/release.yml)
-  [![Deploy Documentation](https://github.com/yashjawale/fabr/actions/workflows/docs.yml/badge.svg)](https://github.com/yashjawale/fabr/actions/workflows/docs.yml)
-  
-</div>
+[![npm version](https://badge.fury.io/js/fabr.svg)](https://www.npmjs.com/package/fabr)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Node.js](https://img.shields.io/badge/Node.js-18%2B-green)](https://nodejs.org/)
+[![GitHub issues](https://img.shields.io/github/issues/yashjawale/fabr)](https://github.com/yashjawale/fabr/issues)
+
+[![Code Quality](https://github.com/yashjawale/fabr/actions/workflows/code-quality.yml/badge.svg)](https://github.com/yashjawale/fabr/actions/workflows/code-quality.yml)
+[![Release](https://github.com/yashjawale/fabr/actions/workflows/release.yml/badge.svg)](https://github.com/yashjawale/fabr/actions/workflows/release.yml)
+[![Deploy Documentation](https://github.com/yashjawale/fabr/actions/workflows/docs.yml/badge.svg)](https://github.com/yashjawale/fabr/actions/workflows/docs.yml)
 
 ---
 
