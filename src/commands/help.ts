@@ -20,6 +20,9 @@ export function showGlobalHelp(): void {
 	console.log(chalk.white('Available Commands:'))
 	console.log(chalk.cyan('  init') + chalk.gray('    Create a new project from a template'))
 	console.log(chalk.cyan('  list') + chalk.gray('    List all available templates'))
+	console.log(
+		chalk.cyan('  search') + chalk.gray('  Search templates by name, slug, or repository'),
+	)
 	console.log(chalk.cyan('  version') + chalk.gray(' Show version information'))
 	console.log(chalk.cyan('  help') + chalk.gray('    Show this help message\n'))
 	console.log(chalk.white('Global Options:'))
@@ -37,6 +40,7 @@ export function showGlobalHelp(): void {
 		chalk.gray('  npx fabr init my-project --template=slug   ') + chalk.dim('# Specify both'),
 	)
 	console.log(chalk.gray('  npx fabr list'))
+	console.log(chalk.gray('  npx fabr search react'))
 	console.log(chalk.gray('  npx fabr version'))
 	console.log(chalk.gray('  npx fabr --version'))
 	console.log(chalk.gray('  npx fabr help\n'))

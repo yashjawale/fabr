@@ -2,6 +2,7 @@ import { Template } from '../types/templates.js'
 import { InitCommand } from './init.js'
 import { HelpCommand } from './help.js'
 import { ListCommand } from './list.js'
+import { SearchCommand } from './search.js'
 import { VersionCommand } from './version.js'
 import chalk from 'chalk'
 import { BaseSubcommand } from '../types/subcommand.js'
@@ -15,6 +16,7 @@ export interface CommandDefinition {
 // Create command instances
 const initCommand = new InitCommand()
 const listCommand = new ListCommand()
+const searchCommand = new SearchCommand()
 const helpCommand = new HelpCommand()
 const versionCommand = new VersionCommand()
 
@@ -31,6 +33,11 @@ export const commands: Record<string, CommandDefinition> = {
 		name: 'list',
 		description: 'List all available templates',
 		handler: listCommand,
+	},
+	search: {
+		name: 'search',
+		description: 'Search templates by name, slug, or repository',
+		handler: searchCommand,
 	},
 	help: {
 		name: 'help',
