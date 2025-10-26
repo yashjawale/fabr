@@ -5,7 +5,7 @@ prev: false
 title: "BaseSubcommand"
 ---
 
-Defined in: [types/subcommand.ts:25](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L25)
+Defined in: [types/subcommand.ts:25](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/subcommand.ts#L25)
 
 Base class for implementing subcommands with consistent structure.
 Provides a common framework for command parsing, help display, and execution.
@@ -16,6 +16,8 @@ Implements the SubcommandDefinition interface with standardized behavior.
 - [`HelpCommand`](/fabr/docs/api/commands/help/classes/helpcommand/)
 - [`InitCommand`](/fabr/docs/api/commands/init/classes/initcommand/)
 - [`ListCommand`](/fabr/docs/api/commands/list/classes/listcommand/)
+- [`SearchCommand`](/fabr/docs/api/commands/search/classes/searchcommand/)
+- [`VersionCommand`](/fabr/docs/api/commands/version/classes/versioncommand/)
 
 ## Type Parameters
 
@@ -43,7 +45,7 @@ Implements the SubcommandDefinition interface with standardized behavior.
 
 > `abstract` **execute**(`templates`, `args`): `Promise`\<`void`\>
 
-Defined in: [types/subcommand.ts:69](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L69)
+Defined in: [types/subcommand.ts:69](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/subcommand.ts#L69)
 
 Execute the command with parsed arguments.
 Must be implemented by subclass to provide the command's functionality.
@@ -78,7 +80,7 @@ Promise that resolves when command execution is complete
 
 > **handle**(`templates`, `rawArgs`): `Promise`\<`void`\>
 
-Defined in: [types/subcommand.ts:94](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L94)
+Defined in: [types/subcommand.ts:94](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/subcommand.ts#L94)
 
 Main handler that follows the common command pattern.
 Orchestrates the command execution workflow:
@@ -112,7 +114,7 @@ Promise that resolves when command handling is complete
 
 > `abstract` **parseArgs**(`args`): `T`
 
-Defined in: [types/subcommand.ts:58](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L58)
+Defined in: [types/subcommand.ts:58](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/subcommand.ts#L58)
 
 Parse command line arguments for this specific command.
 Must be implemented by subclass to handle command-specific argument parsing.
@@ -141,7 +143,7 @@ Parsed arguments object extending SubcommandArgs
 
 > **showHelp**(): `void`
 
-Defined in: [types/subcommand.ts:77](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L77)
+Defined in: [types/subcommand.ts:77](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/subcommand.ts#L77)
 
 Show help for this command using the help content configuration.
 Uses the getHelpContent() method to format and display help information.
@@ -160,7 +162,7 @@ Uses the getHelpContent() method to format and display help information.
 
 > `abstract` `readonly` **description**: `string`
 
-Defined in: [types/subcommand.ts:38](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L38)
+Defined in: [types/subcommand.ts:38](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/subcommand.ts#L38)
 
 Command description - must be implemented by subclass.
 A brief description of what the command does, used in help text.
@@ -175,7 +177,7 @@ A brief description of what the command does, used in help text.
 
 > `abstract` `readonly` **name**: `string`
 
-Defined in: [types/subcommand.ts:32](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L32)
+Defined in: [types/subcommand.ts:32](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/subcommand.ts#L32)
 
 Command name - must be implemented by subclass.
 This should be the string used to invoke the command from the CLI.

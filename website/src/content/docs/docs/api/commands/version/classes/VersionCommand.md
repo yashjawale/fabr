@@ -2,26 +2,26 @@
 editUrl: false
 next: false
 prev: false
-title: "InitCommand"
+title: "VersionCommand"
 ---
 
-Defined in: [commands/init.ts:31](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/init.ts#L31)
+Defined in: [commands/version.ts:45](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/version.ts#L45)
 
-Create a new project from a template
+Show version information for the CLI
 
 ## Extends
 
-- [`BaseSubcommand`](/fabr/docs/api/types/subcommand/classes/basesubcommand/)\<[`InitArgs`](/fabr/docs/api/commands/init/interfaces/initargs/)\>
+- [`BaseSubcommand`](/fabr/docs/api/types/subcommand/classes/basesubcommand/)\<`VersionArgs`\>
 
 ## Constructors
 
 ### Constructor
 
-> **new InitCommand**(): `InitCommand`
+> **new VersionCommand**(): `VersionCommand`
 
 #### Returns
 
-`InitCommand`
+`VersionCommand`
 
 #### Inherited from
 
@@ -31,41 +31,18 @@ Create a new project from a template
 
 ### execute()
 
-> **execute**(`templates`, `args`): `Promise`\<`void`\>
+> **execute**(): `Promise`\<`void`\>
 
-Defined in: [commands/init.ts:114](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/init.ts#L114)
+Defined in: [commands/version.ts:88](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/version.ts#L88)
 
-Execute the init command to create a new project from a template.
-
-This method orchestrates the entire project creation process:
-1. Validates the project name
-2. Prompts for missing information (project name, template)
-3. Downloads the template from GitHub
-4. Processes the template configuration
-5. Handles placeholders and environment variables
-6. Runs setup commands
-7. Installs dependencies and runs post-install tasks
-8. Cleans up temporary files
-
-#### Parameters
-
-##### templates
-
-[`Template`](/fabr/docs/api/types/templates/interfaces/template/)[]
-
-Array of available templates
-
-##### args
-
-[`InitArgs`](/fabr/docs/api/commands/init/interfaces/initargs/)
-
-Parsed command arguments
+Execute the version command.
+Displays version information and exits the process.
 
 #### Returns
 
 `Promise`\<`void`\>
 
-A promise that resolves when project creation is complete
+A promise that resolves when version is displayed
 
 #### Overrides
 
@@ -113,12 +90,12 @@ Promise that resolves when command handling is complete
 
 ### parseArgs()
 
-> **parseArgs**(`rawArgs`): [`InitArgs`](/fabr/docs/api/commands/init/interfaces/initargs/)
+> **parseArgs**(`rawArgs`): [`SubcommandArgs`](/fabr/docs/api/types/subcommand/interfaces/subcommandargs/)
 
-Defined in: [commands/init.ts:80](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/init.ts#L80)
+Defined in: [commands/version.ts:73](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/version.ts#L73)
 
-Parse command line arguments for the init command.
-Extracts project name, template slug, and help flag from the provided arguments.
+Parse command line arguments for the version command.
+Extracts and validates arguments specific to the version command.
 
 #### Parameters
 
@@ -130,9 +107,9 @@ Raw command line arguments
 
 #### Returns
 
-[`InitArgs`](/fabr/docs/api/commands/init/interfaces/initargs/)
+[`SubcommandArgs`](/fabr/docs/api/types/subcommand/interfaces/subcommandargs/)
 
-Parsed init command arguments including project name and template slug
+Parsed version command arguments
 
 #### Overrides
 
@@ -161,9 +138,9 @@ Uses the getHelpContent() method to format and display help information.
 
 ### description
 
-> `readonly` **description**: `"Create a new project from a template"` = `'Create a new project from a template'`
+> `readonly` **description**: `"Show version information"` = `'Show version information'`
 
-Defined in: [commands/init.ts:33](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/init.ts#L33)
+Defined in: [commands/version.ts:47](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/version.ts#L47)
 
 Command description - must be implemented by subclass.
 A brief description of what the command does, used in help text.
@@ -176,9 +153,9 @@ A brief description of what the command does, used in help text.
 
 ### name
 
-> `readonly` **name**: `"init"` = `'init'`
+> `readonly` **name**: `"version"` = `'version'`
 
-Defined in: [commands/init.ts:32](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/init.ts#L32)
+Defined in: [commands/version.ts:46](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/version.ts#L46)
 
 Command name - must be implemented by subclass.
 This should be the string used to invoke the command from the CLI.

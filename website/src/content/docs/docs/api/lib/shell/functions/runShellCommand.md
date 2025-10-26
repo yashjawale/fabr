@@ -7,7 +7,7 @@ title: "runShellCommand"
 
 > **runShellCommand**(`command`, `spinnerText`): `Promise`\<`void`\>
 
-Defined in: [lib/shell.ts:17](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/lib/shell.ts#L17)
+Defined in: [lib/shell.ts:17](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/lib/shell.ts#L17)
 
 Executes a shell command with a spinner for user feedback.
 Supports chaining commands with && operator and provides visual feedback.

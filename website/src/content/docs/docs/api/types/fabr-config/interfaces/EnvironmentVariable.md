@@ -5,7 +5,7 @@ prev: false
 title: "EnvironmentVariable"
 ---
 
-Defined in: [types/fabr-config.ts:52](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L52)
+Defined in: [types/fabr-config.ts:52](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L52)
 
 ## Properties
 
@@ -13,7 +13,7 @@ Defined in: [types/fabr-config.ts:52](https://github.com/yashjawale/fabr/blob/af
 
 > `optional` **default**: `string`
 
-Defined in: [types/fabr-config.ts:60](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L60)
+Defined in: [types/fabr-config.ts:60](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L60)
 
 Default value for this environment variable
 
@@ -23,7 +23,7 @@ Default value for this environment variable
 
 > `optional` **defaultCase**: [`PlaceholderDefaultCase`](/fabr/docs/api/types/fabr-config/interfaces/placeholderdefaultcase/)
 
-Defined in: [types/fabr-config.ts:68](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L68)
+Defined in: [types/fabr-config.ts:68](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L68)
 
 Generate a default value by transforming a placeholder
 
@@ -33,7 +33,7 @@ Generate a default value by transforming a placeholder
 
 > `optional` **description**: `string`
 
-Defined in: [types/fabr-config.ts:58](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L58)
+Defined in: [types/fabr-config.ts:58](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L58)
 
 Additional description or help text for this environment variable
 
@@ -43,7 +43,7 @@ Additional description or help text for this environment variable
 
 > **key**: `string`
 
-Defined in: [types/fabr-config.ts:54](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L54)
+Defined in: [types/fabr-config.ts:54](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L54)
 
 The environment variable name (e.g., 'DATABASE_URL', 'API_KEY')
 
@@ -53,7 +53,7 @@ The environment variable name (e.g., 'DATABASE_URL', 'API_KEY')
 
 > `optional` **local**: `boolean`
 
-Defined in: [types/fabr-config.ts:64](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L64)
+Defined in: [types/fabr-config.ts:64](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L64)
 
 Whether this should be saved to .env.local instead of .env (for sensitive values)
 
@@ -63,7 +63,7 @@ Whether this should be saved to .env.local instead of .env (for sensitive values
 
 > `optional` **prompt**: `string`
 
-Defined in: [types/fabr-config.ts:56](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L56)
+Defined in: [types/fabr-config.ts:56](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L56)
 
 The message to show when prompting for this value
 
@@ -73,7 +73,7 @@ The message to show when prompting for this value
 
 > `optional` **required**: `boolean`
 
-Defined in: [types/fabr-config.ts:62](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L62)
+Defined in: [types/fabr-config.ts:62](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L62)
 
 Whether this environment variable is required
 
@@ -83,7 +83,7 @@ Whether this environment variable is required
 
 > `optional` **transform**: [`PlaceholderTransform`](/fabr/docs/api/types/fabr-config/interfaces/placeholdertransform/)
 
-Defined in: [types/fabr-config.ts:66](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L66)
+Defined in: [types/fabr-config.ts:66](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L66)
 
 Transform this environment variable's value from a placeholder
 
@@ -93,6 +93,6 @@ Transform this environment variable's value from a placeholder
 
 > `optional` **validate**: [`PlaceholderValidation`](/fabr/docs/api/types/fabr-config/interfaces/placeholdervalidation/)
 
-Defined in: [types/fabr-config.ts:70](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L70)
+Defined in: [types/fabr-config.ts:70](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L70)
 
 Validation rules for this environment variable

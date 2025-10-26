@@ -7,7 +7,7 @@ title: "processEnvironmentVariables"
 
 > **processEnvironmentVariables**(`envVarConfig`, `placeholderValues`): `Promise`\<\{ `local`: `Record`\<`string`, `string`\>; `regular`: `Record`\<`string`, `string`\>; \}\>
 
-Defined in: [lib/env.ts:55](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/lib/env.ts#L55)
+Defined in: [lib/env.ts:55](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/lib/env.ts#L55)
 
 Processes environment variable configurations to get final values.
 Handles both prompted environment variables (requiring user input) and transformed
