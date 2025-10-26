@@ -5,7 +5,7 @@ prev: false
 title: "InitCommand"
 ---
 
-Defined in: [commands/init.ts:30](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/commands/init.ts#L30)
+Defined in: [commands/init.ts:31](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/init.ts#L31)
 
 Create a new project from a template
 
@@ -33,7 +33,7 @@ Create a new project from a template
 
 > **execute**(`templates`, `args`): `Promise`\<`void`\>
 
-Defined in: [commands/init.ts:107](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/commands/init.ts#L107)
+Defined in: [commands/init.ts:114](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/init.ts#L114)
 
 Execute the init command to create a new project from a template.
 
@@ -77,7 +77,7 @@ A promise that resolves when project creation is complete
 
 > **handle**(`templates`, `rawArgs`): `Promise`\<`void`\>
 
-Defined in: [types/subcommand.ts:94](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L94)
+Defined in: [types/subcommand.ts:94](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/subcommand.ts#L94)
 
 Main handler that follows the common command pattern.
 Orchestrates the command execution workflow:
@@ -115,7 +115,7 @@ Promise that resolves when command handling is complete
 
 > **parseArgs**(`rawArgs`): [`InitArgs`](/fabr/docs/api/commands/init/interfaces/initargs/)
 
-Defined in: [commands/init.ts:73](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/commands/init.ts#L73)
+Defined in: [commands/init.ts:80](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/init.ts#L80)
 
 Parse command line arguments for the init command.
 Extracts project name, template slug, and help flag from the provided arguments.
@@ -144,7 +144,7 @@ Parsed init command arguments including project name and template slug
 
 > **showHelp**(): `void`
 
-Defined in: [types/subcommand.ts:77](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L77)
+Defined in: [types/subcommand.ts:77](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/subcommand.ts#L77)
 
 Show help for this command using the help content configuration.
 Uses the getHelpContent() method to format and display help information.
@@ -163,7 +163,7 @@ Uses the getHelpContent() method to format and display help information.
 
 > `readonly` **description**: `"Create a new project from a template"` = `'Create a new project from a template'`
 
-Defined in: [commands/init.ts:32](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/commands/init.ts#L32)
+Defined in: [commands/init.ts:33](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/init.ts#L33)
 
 Command description - must be implemented by subclass.
 A brief description of what the command does, used in help text.
@@ -178,7 +178,7 @@ A brief description of what the command does, used in help text.
 
 > `readonly` **name**: `"init"` = `'init'`
 
-Defined in: [commands/init.ts:31](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/commands/init.ts#L31)
+Defined in: [commands/init.ts:32](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/init.ts#L32)
 
 Command name - must be implemented by subclass.
 This should be the string used to invoke the command from the CLI.

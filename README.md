@@ -1,13 +1,24 @@
-# Fabr
+<img src="./website/public/favicon.svg" alt="fabr" width="180" style="margin-bottom: 2rem;">
+  
+A simple command line utility for scaffolding new development projects
+  
+[![npm version](https://badge.fury.io/js/fabr.svg)](https://www.npmjs.com/package/fabr)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Node.js](https://img.shields.io/badge/Node.js-18%2B-green)](https://nodejs.org/)
+[![GitHub issues](https://img.shields.io/github/issues/yashjawale/fabr)](https://github.com/yashjawale/fabr/issues)
 
-A command line utility for scaffolding new development projects
+[![Code Quality](https://github.com/yashjawale/fabr/actions/workflows/code-quality.yml/badge.svg)](https://github.com/yashjawale/fabr/actions/workflows/code-quality.yml)
+[![Release](https://github.com/yashjawale/fabr/actions/workflows/release.yml/badge.svg)](https://github.com/yashjawale/fabr/actions/workflows/release.yml)
+[![Deploy Documentation](https://github.com/yashjawale/fabr/actions/workflows/docs.yml/badge.svg)](https://github.com/yashjawale/fabr/actions/workflows/docs.yml)
+
+---
 
 ## Quick Start
 
 Create a new project from a template:
 
 ```bash
-npx fabr init
+npx fabr init my-project
 ```
 
 List available templates:
@@ -19,61 +30,51 @@ npx fabr list
 Get help:
 
 ```bash
-npx fabr help
+npx fabr --help
 ```
 
-## Available Commands
+> **💡 Tip:** No installation required! Use `npx` to run fabr directly.
 
-- `npx fabr init` - Create a new project from a template
-- `npx fabr list` - List all available templates
-- `npx fabr help` - Show help information
+## What Makes fabr Special?
 
-## Features
+fabr supports two types of templates to fit your workflow:
 
 ### 🗂️ **File-Based Templates**
 
-Traditional templates that copy files from a repository and replace placeholders:
+Copy files from a repository and replace placeholders with your project details:
 
-- Copy template files to your project
-- Replace placeholders like `{{PROJECT_NAME}}` in file contents
-- Support for placeholder validation, transformations, and defaults
+- Replace `{{PROJECT_NAME}}` and other placeholders in file contents
+- Supports validation, transformations, and smart defaults
+- Perfect for static project structures
 
 ### ⚡ **Command-Based Templates**
 
 Execute shell commands to set up projects programmatically:
 
-- Run commands like `npm init`, `create-react-app`, etc.
+- Run commands like `npm create`, `git init`, etc.
 - Use placeholders in commands: `npm pkg set name={{PROJECT_NAME}}`
-- Perfect for CLI-based project setup workflows
-- Control command output visibility and working directories
+- Great for CLI-based project initialization
 
-### 🔧 **Advanced Placeholder System**
+### 🔧 **Smart Placeholder System**
 
-- **Validation**: Regex patterns, min/max length
-- **Transformations**: Convert between naming conventions (camelCase, kebab-case, etc.)
-- **Defaults**: Computed defaults from other placeholders
-- **Interactive prompts**: Guided project setup
+- **Interactive prompts**: Guided project setup with helpful questions
+- **Validation**: Ensure correct input with regex patterns and length checks
+- **Transformations**: Automatically convert between naming conventions
+- **Environment variables**: Generate `.env` files with secure defaults
 
-### 🌍 **Environment Variable Management**
+## Available Templates
 
-- **Automatic .env creation**: Generate .env and .env.local files from prompts
-- **Sensitive data handling**: Separate local variables from shared config
-- **Validation & defaults**: Same powerful validation as placeholders
-- **Template integration**: Derive environment values from project placeholders
+To see all available templates, run:
 
-### 📝 **Template Configuration**
+```bash
+npx fabr list
+```
 
-Templates use `fabr.config.json` to define:
+You can also check the complete list in our [TEMPLATES.json](./TEMPLATES.json) file, which contains all officially supported templates with their repository links.
 
-- Placeholder prompts and validation
-- Environment variable configuration
-- Pre/post setup commands
-- File processing rules
-- Command sequences for setup
+## Configuration Examples
 
-## Template Types
-
-### File-Based Template
+### Simple File-Based Template
 
 ```json
 {
@@ -81,7 +82,7 @@ Templates use `fabr.config.json` to define:
 	"placeholders": [
 		{
 			"key": "PROJECT_NAME",
-			"prompt": "Project name",
+			"prompt": "What's your project name?",
 			"required": true
 		}
 	],
@@ -95,7 +96,7 @@ Templates use `fabr.config.json` to define:
 }
 ```
 
-### Command-Based Template
+### Command-Based Template Example
 
 ```json
 {
@@ -104,7 +105,7 @@ Templates use `fabr.config.json` to define:
 	"placeholders": [
 		{
 			"key": "PROJECT_NAME",
-			"prompt": "Project name",
+			"prompt": "What's your project name?",
 			"required": true
 		}
 	],
@@ -116,7 +117,7 @@ Templates use `fabr.config.json` to define:
 		},
 		{
 			"key": "JWT_SECRET",
-			"prompt": "JWT secret",
+			"prompt": "JWT secret (keep this secure!)",
 			"local": true,
 			"required": true
 		}
@@ -134,36 +135,56 @@ Templates use `fabr.config.json` to define:
 }
 ```
 
-## Documentation
+---
 
-- [Command-Based Templates Guide](./docs/COMMAND-TEMPLATES.md) - Detailed guide for command templates
-- [Environment Variables Guide](./docs/ENVIRONMENT-VARIABLES.md) - Complete guide for .env file generation
-- [Release Process](./docs/RELEASE.md) - Guide for maintainers on releasing new versions
-- [JSON Schema](./fabr.config.schema.json) - Complete configuration schema
-- [Examples](./examples/) - Sample configurations
+## Like What You See? ⭐
+
+If fabr helps streamline your development workflow, please consider giving it a star on GitHub! It helps others discover the project and motivates us to keep improving.
+
+[![GitHub stars](https://img.shields.io/github/stars/yashjawale/fabr?style=social)](https://github.com/yashjawale/fabr)
+
+---
+
+## Documentation & Support
+
+- 📖 **Full Documentation**: [fabr.yashjawale.dev](https://yashjawale.github.io/fabr)
+- 🐛 **Found a Bug?**: [Create an issue](https://github.com/yashjawale/fabr/issues)
+- 💡 **Feature Request?**: [Share your ideas](https://github.com/yashjawale/fabr/issues)
+- 📋 **Configuration Schema**: Check out [`fabr.config.schema.json`](./fabr.config.schema.json) for complete reference
 
 ## Contributing
 
-### Development Setup
+We welcome contributions! Here's how to get started:
 
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Build the project: `npm run build`
-4. Test the CLI: `npm run test:cli`
+1. **Fork the repository**
+2. **Clone and setup**:
 
-### Release Process
+   ```bash
+   git clone https://github.com/your-username/fabr.git
+   cd fabr
+   npm install
+   ```
 
-For maintainers releasing new versions:
+3. **Make your changes**:
 
-```bash
-# Quick release using helper script
-npm run release patch    # 1.0.0 -> 1.0.1
-npm run release minor    # 1.0.0 -> 1.1.0
-npm run release major    # 1.0.0 -> 2.0.0
+   ```bash
+   npm run build  # Build the project
+   npm run test:cli  # Test your changes
+   ```
 
-# Or manually create a tag
-git tag v1.0.0
-git push origin v1.0.0
-```
+4. **Submit a pull request**
 
-See [RELEASE.md](./docs/RELEASE.md) for detailed release instructions.
+### Development Commands
+
+- `npm run dev` - Development mode with hot reload
+- `npm run build` - Build TypeScript to JavaScript
+- `npm run lint` - Check code style
+- `npm run test:cli` - Test CLI functionality
+
+## License
+
+Licensed under the [GPL-3.0](LICENSE) license.
+
+---
+
+<a href="https://yashjawale.github.io/" target="_blank"><img style="height: 22px;" src="https://raw.githubusercontent.com/yashjawale/.github/main/docs/logo.svg" alt="Yash Jawale"/></a>

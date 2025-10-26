@@ -5,7 +5,7 @@ prev: false
 title: "SubcommandResult"
 ---
 
-Defined in: [lib/args.ts:12](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/lib/args.ts#L12)
+Defined in: [lib/args.ts:12](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/args.ts#L12)
 
 ## Type Parameters
 
@@ -19,7 +19,7 @@ Defined in: [lib/args.ts:12](https://github.com/yashjawale/fabr/blob/af253d79621
 
 > **args**: `T`
 
-Defined in: [lib/args.ts:13](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/lib/args.ts#L13)
+Defined in: [lib/args.ts:13](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/args.ts#L13)
 
 ***
 
@@ -27,4 +27,4 @@ Defined in: [lib/args.ts:13](https://github.com/yashjawale/fabr/blob/af253d79621
 
 > **help**: `boolean`
 
-Defined in: [lib/args.ts:14](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/lib/args.ts#L14)
+Defined in: [lib/args.ts:14](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/args.ts#L14)

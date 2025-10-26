@@ -7,7 +7,7 @@ title: "validateCommandPlaceholders"
 
 > **validateCommandPlaceholders**(`commands`, `placeholderValues`): `string`[]
 
-Defined in: [lib/commands.ts:136](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/lib/commands.ts#L136)
+Defined in: [lib/commands.ts:136](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/commands.ts#L136)
 
 Validate that all placeholders in commands have corresponding values.
 Scans all command templates for placeholder patterns and checks if each

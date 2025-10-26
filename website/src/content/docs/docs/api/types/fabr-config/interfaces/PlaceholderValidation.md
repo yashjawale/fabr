@@ -5,7 +5,7 @@ prev: false
 title: "PlaceholderValidation"
 ---
 
-Defined in: [types/fabr-config.ts:8](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L8)
+Defined in: [types/fabr-config.ts:8](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L8)
 
 ## Properties
 
@@ -13,7 +13,7 @@ Defined in: [types/fabr-config.ts:8](https://github.com/yashjawale/fabr/blob/af2
 
 > `optional` **maxLength**: `number`
 
-Defined in: [types/fabr-config.ts:14](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L14)
+Defined in: [types/fabr-config.ts:14](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L14)
 
 Maximum length of the value
 
@@ -23,7 +23,7 @@ Maximum length of the value
 
 > `optional` **minLength**: `number`
 
-Defined in: [types/fabr-config.ts:12](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L12)
+Defined in: [types/fabr-config.ts:12](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L12)
 
 Minimum length of the value
 
@@ -33,6 +33,6 @@ Minimum length of the value
 
 > `optional` **pattern**: `string`
 
-Defined in: [types/fabr-config.ts:10](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/fabr-config.ts#L10)
+Defined in: [types/fabr-config.ts:10](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L10)
 
 Regular expression pattern that the value must match

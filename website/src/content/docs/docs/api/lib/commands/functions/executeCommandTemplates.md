@@ -7,7 +7,7 @@ title: "executeCommandTemplates"
 
 > **executeCommandTemplates**(`commands`, `placeholderValues`, `projectPath`): `Promise`\<`void`\>
 
-Defined in: [lib/commands.ts:41](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/lib/commands.ts#L41)
+Defined in: [lib/commands.ts:41](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/commands.ts#L41)
 
 Execute a list of command templates with placeholder replacement.
 Processes each command template by replacing placeholders with their values,

@@ -7,7 +7,7 @@ title: "processPlaceholders"
 
 > **processPlaceholders**(`placeholderConfig`): `Promise`\<`Record`\<`string`, `string`\>\>
 
-Defined in: [lib/placeholders.ts:47](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/lib/placeholders.ts#L47)
+Defined in: [lib/placeholders.ts:47](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/placeholders.ts#L47)
 
 Processes placeholder configurations to get final values.
 Handles both prompted placeholders (requiring user input) and derived placeholders
@@ -20,7 +20,7 @@ then derives transformed placeholders from the collected values.
 
 The array of placeholder configuration objects
 
-`undefined` | [`Placeholder`](/fabr/docs/api/types/fabr-config/interfaces/placeholder/)[]
+[`Placeholder`](/fabr/docs/api/types/fabr-config/interfaces/placeholder/)[] | `undefined`
 
 ## Returns
 

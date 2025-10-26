@@ -2,26 +2,26 @@
 editUrl: false
 next: false
 prev: false
-title: "HelpCommand"
+title: "VersionCommand"
 ---
 
-Defined in: [commands/help.ts:52](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/help.ts#L52)
+Defined in: [commands/version.ts:45](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/version.ts#L45)
 
-Show help information for the CLI
+Show version information for the CLI
 
 ## Extends
 
-- [`BaseSubcommand`](/fabr/docs/api/types/subcommand/classes/basesubcommand/)\<`HelpArgs`\>
+- [`BaseSubcommand`](/fabr/docs/api/types/subcommand/classes/basesubcommand/)\<`VersionArgs`\>
 
 ## Constructors
 
 ### Constructor
 
-> **new HelpCommand**(): `HelpCommand`
+> **new VersionCommand**(): `VersionCommand`
 
 #### Returns
 
-`HelpCommand`
+`VersionCommand`
 
 #### Inherited from
 
@@ -33,16 +33,16 @@ Show help information for the CLI
 
 > **execute**(): `Promise`\<`void`\>
 
-Defined in: [commands/help.ts:104](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/help.ts#L104)
+Defined in: [commands/version.ts:88](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/version.ts#L88)
 
-Execute the command with parsed arguments.
-Must be implemented by subclass to provide the command's functionality.
+Execute the version command.
+Displays version information and exits the process.
 
 #### Returns
 
 `Promise`\<`void`\>
 
-Promise that resolves when command execution is complete
+A promise that resolves when version is displayed
 
 #### Overrides
 
@@ -92,10 +92,10 @@ Promise that resolves when command handling is complete
 
 > **parseArgs**(`rawArgs`): [`SubcommandArgs`](/fabr/docs/api/types/subcommand/interfaces/subcommandargs/)
 
-Defined in: [commands/help.ts:80](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/help.ts#L80)
+Defined in: [commands/version.ts:73](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/version.ts#L73)
 
-Parse command line arguments for the help command.
-Extracts and validates arguments specific to the help command.
+Parse command line arguments for the version command.
+Extracts and validates arguments specific to the version command.
 
 #### Parameters
 
@@ -109,7 +109,7 @@ Raw command line arguments
 
 [`SubcommandArgs`](/fabr/docs/api/types/subcommand/interfaces/subcommandargs/)
 
-Parsed help command arguments
+Parsed version command arguments
 
 #### Overrides
 
@@ -121,16 +121,16 @@ Parsed help command arguments
 
 > **showHelp**(): `void`
 
-Defined in: [commands/help.ts:95](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/help.ts#L95)
+Defined in: [types/subcommand.ts:77](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/subcommand.ts#L77)
 
-Shows the help information specific to the help command.
-For the help command, this shows the global help.
+Show help for this command using the help content configuration.
+Uses the getHelpContent() method to format and display help information.
 
 #### Returns
 
 `void`
 
-#### Overrides
+#### Inherited from
 
 [`BaseSubcommand`](/fabr/docs/api/types/subcommand/classes/basesubcommand/).[`showHelp`](/fabr/docs/api/types/subcommand/classes/basesubcommand/#showhelp)
 
@@ -138,9 +138,9 @@ For the help command, this shows the global help.
 
 ### description
 
-> `readonly` **description**: `"Show this help message"` = `'Show this help message'`
+> `readonly` **description**: `"Show version information"` = `'Show version information'`
 
-Defined in: [commands/help.ts:54](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/help.ts#L54)
+Defined in: [commands/version.ts:47](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/version.ts#L47)
 
 Command description - must be implemented by subclass.
 A brief description of what the command does, used in help text.
@@ -153,9 +153,9 @@ A brief description of what the command does, used in help text.
 
 ### name
 
-> `readonly` **name**: `"help"` = `'help'`
+> `readonly` **name**: `"version"` = `'version'`
 
-Defined in: [commands/help.ts:53](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/help.ts#L53)
+Defined in: [commands/version.ts:46](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/version.ts#L46)
 
 Command name - must be implemented by subclass.
 This should be the string used to invoke the command from the CLI.

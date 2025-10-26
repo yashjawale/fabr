@@ -5,7 +5,7 @@ prev: false
 title: "SubcommandDefinition"
 ---
 
-Defined in: [types/subcommand.ts:12](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L12)
+Defined in: [types/subcommand.ts:12](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/subcommand.ts#L12)
 
 ## Type Parameters
 
@@ -19,7 +19,7 @@ Defined in: [types/subcommand.ts:12](https://github.com/yashjawale/fabr/blob/af2
 
 > **description**: `string`
 
-Defined in: [types/subcommand.ts:14](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L14)
+Defined in: [types/subcommand.ts:14](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/subcommand.ts#L14)
 
 ***
 
@@ -27,7 +27,7 @@ Defined in: [types/subcommand.ts:14](https://github.com/yashjawale/fabr/blob/af2
 
 > **execute**: (`templates`, `args`) => `Promise`\<`void`\>
 
-Defined in: [types/subcommand.ts:17](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L17)
+Defined in: [types/subcommand.ts:17](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/subcommand.ts#L17)
 
 #### Parameters
 
@@ -49,7 +49,7 @@ Defined in: [types/subcommand.ts:17](https://github.com/yashjawale/fabr/blob/af2
 
 > **name**: `string`
 
-Defined in: [types/subcommand.ts:13](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L13)
+Defined in: [types/subcommand.ts:13](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/subcommand.ts#L13)
 
 ***
 
@@ -57,7 +57,7 @@ Defined in: [types/subcommand.ts:13](https://github.com/yashjawale/fabr/blob/af2
 
 > **parseArgs**: (`args`) => `T`
 
-Defined in: [types/subcommand.ts:15](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L15)
+Defined in: [types/subcommand.ts:15](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/subcommand.ts#L15)
 
 #### Parameters
 
@@ -75,7 +75,7 @@ Defined in: [types/subcommand.ts:15](https://github.com/yashjawale/fabr/blob/af2
 
 > **showHelp**: () => `void`
 
-Defined in: [types/subcommand.ts:16](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L16)
+Defined in: [types/subcommand.ts:16](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/subcommand.ts#L16)
 
 #### Returns
 

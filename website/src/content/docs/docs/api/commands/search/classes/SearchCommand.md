@@ -2,26 +2,26 @@
 editUrl: false
 next: false
 prev: false
-title: "HelpCommand"
+title: "SearchCommand"
 ---
 
-Defined in: [commands/help.ts:52](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/help.ts#L52)
+Defined in: [commands/search.ts:16](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/search.ts#L16)
 
-Show help information for the CLI
+Search through available templates and display matching results
 
 ## Extends
 
-- [`BaseSubcommand`](/fabr/docs/api/types/subcommand/classes/basesubcommand/)\<`HelpArgs`\>
+- [`BaseSubcommand`](/fabr/docs/api/types/subcommand/classes/basesubcommand/)\<`SearchArgs`\>
 
 ## Constructors
 
 ### Constructor
 
-> **new HelpCommand**(): `HelpCommand`
+> **new SearchCommand**(): `SearchCommand`
 
 #### Returns
 
-`HelpCommand`
+`SearchCommand`
 
 #### Inherited from
 
@@ -31,18 +31,33 @@ Show help information for the CLI
 
 ### execute()
 
-> **execute**(): `Promise`\<`void`\>
+> **execute**(`templates`, `args`): `Promise`\<`void`\>
 
-Defined in: [commands/help.ts:104](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/help.ts#L104)
+Defined in: [commands/search.ts:154](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/search.ts#L154)
 
-Execute the command with parsed arguments.
-Must be implemented by subclass to provide the command's functionality.
+Execute the search command.
+Performs the search based on provided query and options, then displays results.
+Shows appropriate messages for no query, no results, or successful matches.
+
+#### Parameters
+
+##### templates
+
+[`Template`](/fabr/docs/api/types/templates/interfaces/template/)[]
+
+Array of available templates to search through
+
+##### args
+
+`SearchArgs`
+
+Parsed search command arguments
 
 #### Returns
 
 `Promise`\<`void`\>
 
-Promise that resolves when command execution is complete
+A promise that resolves when the search is complete
 
 #### Overrides
 
@@ -90,12 +105,12 @@ Promise that resolves when command handling is complete
 
 ### parseArgs()
 
-> **parseArgs**(`rawArgs`): [`SubcommandArgs`](/fabr/docs/api/types/subcommand/interfaces/subcommandargs/)
+> **parseArgs**(`rawArgs`): `SearchArgs`
 
-Defined in: [commands/help.ts:80](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/help.ts#L80)
+Defined in: [commands/search.ts:62](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/search.ts#L62)
 
-Parse command line arguments for the help command.
-Extracts and validates arguments specific to the help command.
+Parse command line arguments for the search command.
+Extracts and validates arguments specific to the search command.
 
 #### Parameters
 
@@ -107,9 +122,9 @@ Raw command line arguments
 
 #### Returns
 
-[`SubcommandArgs`](/fabr/docs/api/types/subcommand/interfaces/subcommandargs/)
+`SearchArgs`
 
-Parsed help command arguments
+Parsed search command arguments
 
 #### Overrides
 
@@ -121,16 +136,16 @@ Parsed help command arguments
 
 > **showHelp**(): `void`
 
-Defined in: [commands/help.ts:95](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/help.ts#L95)
+Defined in: [types/subcommand.ts:77](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/subcommand.ts#L77)
 
-Shows the help information specific to the help command.
-For the help command, this shows the global help.
+Show help for this command using the help content configuration.
+Uses the getHelpContent() method to format and display help information.
 
 #### Returns
 
 `void`
 
-#### Overrides
+#### Inherited from
 
 [`BaseSubcommand`](/fabr/docs/api/types/subcommand/classes/basesubcommand/).[`showHelp`](/fabr/docs/api/types/subcommand/classes/basesubcommand/#showhelp)
 
@@ -138,9 +153,9 @@ For the help command, this shows the global help.
 
 ### description
 
-> `readonly` **description**: `"Show this help message"` = `'Show this help message'`
+> `readonly` **description**: `"Search templates by name, slug, or repository"` = `'Search templates by name, slug, or repository'`
 
-Defined in: [commands/help.ts:54](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/help.ts#L54)
+Defined in: [commands/search.ts:18](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/search.ts#L18)
 
 Command description - must be implemented by subclass.
 A brief description of what the command does, used in help text.
@@ -153,9 +168,9 @@ A brief description of what the command does, used in help text.
 
 ### name
 
-> `readonly` **name**: `"help"` = `'help'`
+> `readonly` **name**: `"search"` = `'search'`
 
-Defined in: [commands/help.ts:53](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/help.ts#L53)
+Defined in: [commands/search.ts:17](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/search.ts#L17)
 
 Command name - must be implemented by subclass.
 This should be the string used to invoke the command from the CLI.

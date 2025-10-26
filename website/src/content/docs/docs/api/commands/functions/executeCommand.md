@@ -7,7 +7,7 @@ title: "executeCommand"
 
 > **executeCommand**(`commandName`, `templates`, `args`): `Promise`\<`void`\>
 
-Defined in: [commands/index.ts:51](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/commands/index.ts#L51)
+Defined in: [commands/index.ts:65](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/index.ts#L65)
 
 Execute a command by name with the provided arguments.
 Looks up the command in the registry and delegates execution to the appropriate handler.

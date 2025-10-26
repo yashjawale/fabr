@@ -7,7 +7,7 @@ title: "createEnvironmentFiles"
 
 > **createEnvironmentFiles**(`projectPath`, `regularEnvVars`, `localEnvVars`): `void`
 
-Defined in: [lib/env.ts:162](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/lib/env.ts#L162)
+Defined in: [lib/env.ts:162](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/env.ts#L162)
 
 Creates .env and .env.local files with the provided environment variables.
 Writes environment variables to appropriate files based on their categorization.

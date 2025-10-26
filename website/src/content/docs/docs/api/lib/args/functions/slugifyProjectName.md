@@ -7,7 +7,7 @@ title: "slugifyProjectName"
 
 > **slugifyProjectName**(`name`): `string`
 
-Defined in: [lib/args.ts:176](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/lib/args.ts#L176)
+Defined in: [lib/args.ts:176](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/args.ts#L176)
 
 Convert a string to a valid project name slug.
 Applies multiple transformations to ensure the name is suitable for directory/project names:

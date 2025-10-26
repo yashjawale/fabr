@@ -7,7 +7,7 @@ title: "promptForProjectDetails"
 
 > **promptForProjectDetails**(`templates`, `providedProjectName?`, `providedTemplate?`): `Promise`\<\{ `projectName`: `string`; `template`: `string`; \}\>
 
-Defined in: [lib/ui.ts:15](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/lib/ui.ts#L15)
+Defined in: [lib/ui.ts:15](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/ui.ts#L15)
 
 Prompts the user for the initial project setup information.
 Handles interactive prompting for template selection and project name if not provided.

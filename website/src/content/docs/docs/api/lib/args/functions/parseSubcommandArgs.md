@@ -7,7 +7,7 @@ title: "parseSubcommandArgs"
 
 > **parseSubcommandArgs**(`args`, `commandName`): `string`[]
 
-Defined in: [lib/args.ts:154](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/lib/args.ts#L154)
+Defined in: [lib/args.ts:154](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/args.ts#L154)
 
 Generic subcommand argument parser that removes the command name from arguments.
 If the first argument matches the command name, it removes it and returns the rest.
