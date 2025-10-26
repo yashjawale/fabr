@@ -5,7 +5,7 @@ prev: false
 title: "TemplatesConfig"
 ---
 
-Defined in: [types/templates.ts:15](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/templates.ts#L15)
+Defined in: [types/templates.ts:15](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/templates.ts#L15)
 
 ## Properties
 
@@ -13,7 +13,7 @@ Defined in: [types/templates.ts:15](https://github.com/yashjawale/fabr/blob/af25
 
 > `optional` **$schema**: `string`
 
-Defined in: [types/templates.ts:17](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/templates.ts#L17)
+Defined in: [types/templates.ts:17](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/templates.ts#L17)
 
 JSON Schema reference
 
@@ -23,7 +23,7 @@ JSON Schema reference
 
 > `optional` **defaultTemplate**: `string`
 
-Defined in: [types/templates.ts:21](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/templates.ts#L21)
+Defined in: [types/templates.ts:21](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/templates.ts#L21)
 
 The default template to select (must match a template slug)
 
@@ -33,6 +33,6 @@ The default template to select (must match a template slug)
 
 > **templates**: [`Template`](/fabr/docs/api/types/templates/interfaces/template/)[]
 
-Defined in: [types/templates.ts:19](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/templates.ts#L19)
+Defined in: [types/templates.ts:19](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/templates.ts#L19)
 
 Array of available project templates

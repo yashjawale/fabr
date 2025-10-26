@@ -5,7 +5,7 @@ prev: false
 title: "InitArgs"
 ---
 
-Defined in: [commands/init.ts:22](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/commands/init.ts#L22)
+Defined in: [commands/init.ts:23](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/init.ts#L23)
 
 ## Extends
 
@@ -17,7 +17,7 @@ Defined in: [commands/init.ts:22](https://github.com/yashjawale/fabr/blob/af253d
 
 > **help**: `boolean`
 
-Defined in: [types/subcommand.ts:9](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/types/subcommand.ts#L9)
+Defined in: [types/subcommand.ts:9](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/subcommand.ts#L9)
 
 #### Inherited from
 
@@ -29,7 +29,7 @@ Defined in: [types/subcommand.ts:9](https://github.com/yashjawale/fabr/blob/af25
 
 > `optional` **projectName**: `string`
 
-Defined in: [commands/init.ts:23](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/commands/init.ts#L23)
+Defined in: [commands/init.ts:24](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/init.ts#L24)
 
 ***
 
@@ -37,4 +37,4 @@ Defined in: [commands/init.ts:23](https://github.com/yashjawale/fabr/blob/af253d
 
 > `optional` **templateSlug**: `string`
 
-Defined in: [commands/init.ts:24](https://github.com/yashjawale/fabr/blob/af253d796213941a067e07d1a9e8b7372a1ddc07/src/commands/init.ts#L24)
+Defined in: [commands/init.ts:25](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/init.ts#L25)
