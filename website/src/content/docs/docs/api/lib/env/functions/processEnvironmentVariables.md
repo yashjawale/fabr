@@ -7,7 +7,7 @@ title: "processEnvironmentVariables"
 
 > **processEnvironmentVariables**(`envVarConfig`, `placeholderValues`): `Promise`\<\{ `local`: `Record`\<`string`, `string`\>; `regular`: `Record`\<`string`, `string`\>; \}\>
 
-Defined in: [lib/env.ts:55](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/lib/env.ts#L55)
+Defined in: [lib/env.ts:55](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/env.ts#L55)
 
 Processes environment variable configurations to get final values.
 Handles both prompted environment variables (requiring user input) and transformed
@@ -20,7 +20,7 @@ regular (.env) and local (.env.local) categories based on their configuration.
 
 The array of environment variable configuration objects
 
-`undefined` | [`EnvironmentVariable`](/fabr/docs/api/types/fabr-config/interfaces/environmentvariable/)[]
+[`EnvironmentVariable`](/fabr/docs/api/types/fabr-config/interfaces/environmentvariable/)[] | `undefined`
 
 ### placeholderValues
 

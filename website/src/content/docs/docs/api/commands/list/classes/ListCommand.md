@@ -5,7 +5,7 @@ prev: false
 title: "ListCommand"
 ---
 
-Defined in: [commands/list.ts:12](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/list.ts#L12)
+Defined in: [commands/list.ts:12](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/list.ts#L12)
 
 List all available templates with their details
 
@@ -33,7 +33,7 @@ List all available templates with their details
 
 > **execute**(`templates`): `Promise`\<`void`\>
 
-Defined in: [commands/list.ts:61](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/list.ts#L61)
+Defined in: [commands/list.ts:61](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/list.ts#L61)
 
 Execute the list command.
 Displays all available templates with their names, slugs, and repositories.
@@ -63,7 +63,7 @@ A promise that resolves when the template list is displayed
 
 > **handle**(`templates`, `rawArgs`): `Promise`\<`void`\>
 
-Defined in: [types/subcommand.ts:94](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/subcommand.ts#L94)
+Defined in: [types/subcommand.ts:94](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/subcommand.ts#L94)
 
 Main handler that follows the common command pattern.
 Orchestrates the command execution workflow:
@@ -101,7 +101,7 @@ Promise that resolves when command handling is complete
 
 > **parseArgs**(`rawArgs`): [`SubcommandArgs`](/fabr/docs/api/types/subcommand/interfaces/subcommandargs/)
 
-Defined in: [commands/list.ts:43](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/list.ts#L43)
+Defined in: [commands/list.ts:43](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/list.ts#L43)
 
 Parse command line arguments for the list command.
 Extracts and validates arguments specific to the list command.
@@ -130,7 +130,7 @@ Parsed list command arguments
 
 > **showHelp**(): `void`
 
-Defined in: [types/subcommand.ts:77](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/subcommand.ts#L77)
+Defined in: [types/subcommand.ts:77](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/subcommand.ts#L77)
 
 Show help for this command using the help content configuration.
 Uses the getHelpContent() method to format and display help information.
@@ -149,7 +149,7 @@ Uses the getHelpContent() method to format and display help information.
 
 > `readonly` **description**: `"List all available templates"` = `'List all available templates'`
 
-Defined in: [commands/list.ts:14](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/list.ts#L14)
+Defined in: [commands/list.ts:14](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/list.ts#L14)
 
 Command description - must be implemented by subclass.
 A brief description of what the command does, used in help text.
@@ -164,7 +164,7 @@ A brief description of what the command does, used in help text.
 
 > `readonly` **name**: `"list"` = `'list'`
 
-Defined in: [commands/list.ts:13](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/list.ts#L13)
+Defined in: [commands/list.ts:13](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/list.ts#L13)
 
 Command name - must be implemented by subclass.
 This should be the string used to invoke the command from the CLI.

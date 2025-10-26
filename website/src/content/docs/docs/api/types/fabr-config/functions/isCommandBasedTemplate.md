@@ -7,7 +7,7 @@ title: "isCommandBasedTemplate"
 
 > **isCommandBasedTemplate**(`config`): `boolean`
 
-Defined in: [types/fabr-config.ts:178](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L178)
+Defined in: [types/fabr-config.ts:178](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L178)
 
 Type guard to check if a config is a command-based template.
 Command-based templates execute commands to generate files rather than using file copying.

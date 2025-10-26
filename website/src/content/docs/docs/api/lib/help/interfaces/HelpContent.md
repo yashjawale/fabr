@@ -5,7 +5,7 @@ prev: false
 title: "HelpContent"
 ---
 
-Defined in: [lib/help.ts:5](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/lib/help.ts#L5)
+Defined in: [lib/help.ts:5](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/help.ts#L5)
 
 Utilities for help content formatting
 
@@ -15,7 +15,7 @@ Utilities for help content formatting
 
 > `optional` **arguments**: `object`[]
 
-Defined in: [lib/help.ts:8](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/lib/help.ts#L8)
+Defined in: [lib/help.ts:8](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/help.ts#L8)
 
 #### description
 
@@ -31,7 +31,7 @@ Defined in: [lib/help.ts:8](https://github.com/yashjawale/fabr/blob/f01b72cf7871
 
 > `optional` **description**: `string`
 
-Defined in: [lib/help.ts:7](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/lib/help.ts#L7)
+Defined in: [lib/help.ts:7](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/help.ts#L7)
 
 ***
 
@@ -39,7 +39,7 @@ Defined in: [lib/help.ts:7](https://github.com/yashjawale/fabr/blob/f01b72cf7871
 
 > `optional` **examples**: `object`[]
 
-Defined in: [lib/help.ts:10](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/lib/help.ts#L10)
+Defined in: [lib/help.ts:10](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/help.ts#L10)
 
 #### command
 
@@ -55,7 +55,7 @@ Defined in: [lib/help.ts:10](https://github.com/yashjawale/fabr/blob/f01b72cf787
 
 > `optional` **options**: `object`[]
 
-Defined in: [lib/help.ts:9](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/lib/help.ts#L9)
+Defined in: [lib/help.ts:9](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/help.ts#L9)
 
 #### description
 
@@ -71,4 +71,4 @@ Defined in: [lib/help.ts:9](https://github.com/yashjawale/fabr/blob/f01b72cf7871
 
 > `optional` **usage**: `string`
 
-Defined in: [lib/help.ts:6](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/lib/help.ts#L6)
+Defined in: [lib/help.ts:6](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/help.ts#L6)

@@ -5,7 +5,7 @@ prev: false
 title: "Placeholder"
 ---
 
-Defined in: [types/fabr-config.ts:33](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L33)
+Defined in: [types/fabr-config.ts:33](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L33)
 
 ## Properties
 
@@ -13,7 +13,7 @@ Defined in: [types/fabr-config.ts:33](https://github.com/yashjawale/fabr/blob/f0
 
 > `optional` **default**: `string`
 
-Defined in: [types/fabr-config.ts:41](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L41)
+Defined in: [types/fabr-config.ts:41](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L41)
 
 Default value for this placeholder
 
@@ -23,7 +23,7 @@ Default value for this placeholder
 
 > `optional` **defaultCase**: [`PlaceholderDefaultCase`](/fabr/docs/api/types/fabr-config/interfaces/placeholderdefaultcase/)
 
-Defined in: [types/fabr-config.ts:47](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L47)
+Defined in: [types/fabr-config.ts:47](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L47)
 
 Generate a default value by transforming another placeholder
 
@@ -33,7 +33,7 @@ Generate a default value by transforming another placeholder
 
 > `optional` **description**: `string`
 
-Defined in: [types/fabr-config.ts:39](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L39)
+Defined in: [types/fabr-config.ts:39](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L39)
 
 Additional description or help text for this placeholder
 
@@ -43,7 +43,7 @@ Additional description or help text for this placeholder
 
 > **key**: `string`
 
-Defined in: [types/fabr-config.ts:35](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L35)
+Defined in: [types/fabr-config.ts:35](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L35)
 
 The placeholder key (e.g., 'PROJECT_NAME', 'AUTHOR_NAME')
 
@@ -53,7 +53,7 @@ The placeholder key (e.g., 'PROJECT_NAME', 'AUTHOR_NAME')
 
 > `optional` **prompt**: `string`
 
-Defined in: [types/fabr-config.ts:37](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L37)
+Defined in: [types/fabr-config.ts:37](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L37)
 
 The message to show when prompting for this value
 
@@ -63,7 +63,7 @@ The message to show when prompting for this value
 
 > `optional` **required**: `boolean`
 
-Defined in: [types/fabr-config.ts:43](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L43)
+Defined in: [types/fabr-config.ts:43](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L43)
 
 Whether this placeholder is required
 
@@ -73,7 +73,7 @@ Whether this placeholder is required
 
 > `optional` **transform**: [`PlaceholderTransform`](/fabr/docs/api/types/fabr-config/interfaces/placeholdertransform/)
 
-Defined in: [types/fabr-config.ts:45](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L45)
+Defined in: [types/fabr-config.ts:45](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L45)
 
 Transform this placeholder's value from another placeholder
 
@@ -83,6 +83,6 @@ Transform this placeholder's value from another placeholder
 
 > `optional` **validate**: [`PlaceholderValidation`](/fabr/docs/api/types/fabr-config/interfaces/placeholdervalidation/)
 
-Defined in: [types/fabr-config.ts:49](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L49)
+Defined in: [types/fabr-config.ts:49](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L49)
 
 Validation rules for this placeholder

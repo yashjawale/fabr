@@ -66,6 +66,7 @@ export default defineConfig({
 						{ label: 'Introduction', slug: 'docs/getting-started/introduction' },
 						{ label: 'Installation', slug: 'docs/getting-started/installation' },
 						{ label: 'Quick Start', slug: 'docs/getting-started/quick-start' },
+						{ label: 'Get to know the CLI', slug: 'docs/getting-started/cli-reference' },
 					],
 				},
 				{

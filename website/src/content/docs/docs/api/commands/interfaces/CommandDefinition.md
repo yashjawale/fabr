@@ -5,7 +5,7 @@ prev: false
 title: "CommandDefinition"
 ---
 
-Defined in: [commands/index.ts:10](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/index.ts#L10)
+Defined in: [commands/index.ts:10](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/index.ts#L10)
 
 ## Properties
 
@@ -13,7 +13,7 @@ Defined in: [commands/index.ts:10](https://github.com/yashjawale/fabr/blob/f01b7
 
 > **description**: `string`
 
-Defined in: [commands/index.ts:12](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/index.ts#L12)
+Defined in: [commands/index.ts:12](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/index.ts#L12)
 
 ***
 
@@ -21,7 +21,7 @@ Defined in: [commands/index.ts:12](https://github.com/yashjawale/fabr/blob/f01b7
 
 > **handler**: [`BaseSubcommand`](/fabr/docs/api/types/subcommand/classes/basesubcommand/)
 
-Defined in: [commands/index.ts:13](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/index.ts#L13)
+Defined in: [commands/index.ts:13](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/index.ts#L13)
 
 ***
 
@@ -29,4 +29,4 @@ Defined in: [commands/index.ts:13](https://github.com/yashjawale/fabr/blob/f01b7
 
 > **name**: `string`
 
-Defined in: [commands/index.ts:11](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/index.ts#L11)
+Defined in: [commands/index.ts:11](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/index.ts#L11)

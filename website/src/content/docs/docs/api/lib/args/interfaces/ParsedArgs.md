@@ -5,7 +5,7 @@ prev: false
 title: "ParsedArgs"
 ---
 
-Defined in: [lib/args.ts:5](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/lib/args.ts#L5)
+Defined in: [lib/args.ts:5](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/args.ts#L5)
 
 Argument parsing utilities for the Fabr CLI
 
@@ -15,7 +15,7 @@ Argument parsing utilities for the Fabr CLI
 
 > `optional` **command**: `string`
 
-Defined in: [lib/args.ts:6](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/lib/args.ts#L6)
+Defined in: [lib/args.ts:6](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/args.ts#L6)
 
 ***
 
@@ -23,7 +23,7 @@ Defined in: [lib/args.ts:6](https://github.com/yashjawale/fabr/blob/f01b72cf7871
 
 > **flags**: `Record`\<`string`, `string` \| `boolean`\>
 
-Defined in: [lib/args.ts:8](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/lib/args.ts#L8)
+Defined in: [lib/args.ts:8](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/args.ts#L8)
 
 ***
 
@@ -31,7 +31,7 @@ Defined in: [lib/args.ts:8](https://github.com/yashjawale/fabr/blob/f01b72cf7871
 
 > **help**: `boolean`
 
-Defined in: [lib/args.ts:9](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/lib/args.ts#L9)
+Defined in: [lib/args.ts:9](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/args.ts#L9)
 
 ***
 
@@ -39,4 +39,4 @@ Defined in: [lib/args.ts:9](https://github.com/yashjawale/fabr/blob/f01b72cf7871
 
 > **positional**: `string`[]
 
-Defined in: [lib/args.ts:7](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/lib/args.ts#L7)
+Defined in: [lib/args.ts:7](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/args.ts#L7)

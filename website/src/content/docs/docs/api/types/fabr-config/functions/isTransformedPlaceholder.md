@@ -7,7 +7,7 @@ title: "isTransformedPlaceholder"
 
 > **isTransformedPlaceholder**(`placeholder`): `boolean`
 
-Defined in: [types/fabr-config.ts:142](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L142)
+Defined in: [types/fabr-config.ts:142](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L142)
 
 Type guard to check if a placeholder is a transformed placeholder.
 A transformed placeholder derives its value from another placeholder using case transformation.
