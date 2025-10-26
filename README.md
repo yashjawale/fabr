@@ -1,5 +1,5 @@
 <div align="">
-  <img src="./website/public/favicon.svg" alt="fabr" width="120" height="120">
+  <img src="./website/public/favicon.svg" alt="fabr" width="180" style="margin-bottom: 2rem;">
   
   A simple command line utility for scaffolding new development projects
   
