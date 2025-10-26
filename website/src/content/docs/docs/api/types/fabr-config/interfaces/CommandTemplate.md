@@ -5,7 +5,7 @@ prev: false
 title: "CommandTemplate"
 ---
 
-Defined in: [types/fabr-config.ts:80](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L80)
+Defined in: [types/fabr-config.ts:80](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L80)
 
 ## Properties
 
@@ -13,7 +13,7 @@ Defined in: [types/fabr-config.ts:80](https://github.com/yashjawale/fabr/blob/f0
 
 > **command**: `string`
 
-Defined in: [types/fabr-config.ts:82](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L82)
+Defined in: [types/fabr-config.ts:82](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L82)
 
 The command to execute
 
@@ -23,7 +23,7 @@ The command to execute
 
 > `optional` **description**: `string`
 
-Defined in: [types/fabr-config.ts:84](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L84)
+Defined in: [types/fabr-config.ts:84](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L84)
 
 Description of what this command does
 
@@ -33,7 +33,7 @@ Description of what this command does
 
 > `optional` **showOutput**: `boolean`
 
-Defined in: [types/fabr-config.ts:88](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L88)
+Defined in: [types/fabr-config.ts:88](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L88)
 
 Whether to show command output (default: true)
 
@@ -43,6 +43,6 @@ Whether to show command output (default: true)
 
 > `optional` **workingDirectory**: `string`
 
-Defined in: [types/fabr-config.ts:86](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L86)
+Defined in: [types/fabr-config.ts:86](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L86)
 
 Working directory for this command (relative to project root)

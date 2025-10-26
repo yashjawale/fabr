@@ -7,7 +7,7 @@ title: "findAndReplace"
 
 > **findAndReplace**(`projectPath`, `placeholderValues`): `void`
 
-Defined in: [lib/files.ts:40](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/lib/files.ts#L40)
+Defined in: [lib/files.ts:40](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/lib/files.ts#L40)
 
 Finds and replaces placeholder values in all files within a directory.
 Recursively processes all files in the project directory, searching for placeholder

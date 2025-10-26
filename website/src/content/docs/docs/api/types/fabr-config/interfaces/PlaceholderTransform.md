@@ -5,7 +5,7 @@ prev: false
 title: "PlaceholderTransform"
 ---
 
-Defined in: [types/fabr-config.ts:17](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L17)
+Defined in: [types/fabr-config.ts:17](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L17)
 
 ## Properties
 
@@ -13,7 +13,7 @@ Defined in: [types/fabr-config.ts:17](https://github.com/yashjawale/fabr/blob/f0
 
 > **case**: [`CaseType`](/fabr/docs/api/types/fabr-config/type-aliases/casetype/)
 
-Defined in: [types/fabr-config.ts:21](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L21)
+Defined in: [types/fabr-config.ts:21](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L21)
 
 The case transformation to apply
 
@@ -23,6 +23,6 @@ The case transformation to apply
 
 > **source**: `string`
 
-Defined in: [types/fabr-config.ts:19](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/fabr-config.ts#L19)
+Defined in: [types/fabr-config.ts:19](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/fabr-config.ts#L19)
 
 The source placeholder key to transform from

@@ -5,7 +5,7 @@ prev: false
 title: "VersionCommand"
 ---
 
-Defined in: [commands/version.ts:45](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/version.ts#L45)
+Defined in: [commands/version.ts:45](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/version.ts#L45)
 
 Show version information for the CLI
 
@@ -33,7 +33,7 @@ Show version information for the CLI
 
 > **execute**(): `Promise`\<`void`\>
 
-Defined in: [commands/version.ts:88](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/version.ts#L88)
+Defined in: [commands/version.ts:88](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/version.ts#L88)
 
 Execute the version command.
 Displays version information and exits the process.
@@ -54,7 +54,7 @@ A promise that resolves when version is displayed
 
 > **handle**(`templates`, `rawArgs`): `Promise`\<`void`\>
 
-Defined in: [types/subcommand.ts:94](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/subcommand.ts#L94)
+Defined in: [types/subcommand.ts:94](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/subcommand.ts#L94)
 
 Main handler that follows the common command pattern.
 Orchestrates the command execution workflow:
@@ -92,7 +92,7 @@ Promise that resolves when command handling is complete
 
 > **parseArgs**(`rawArgs`): [`SubcommandArgs`](/fabr/docs/api/types/subcommand/interfaces/subcommandargs/)
 
-Defined in: [commands/version.ts:73](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/version.ts#L73)
+Defined in: [commands/version.ts:73](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/version.ts#L73)
 
 Parse command line arguments for the version command.
 Extracts and validates arguments specific to the version command.
@@ -121,7 +121,7 @@ Parsed version command arguments
 
 > **showHelp**(): `void`
 
-Defined in: [types/subcommand.ts:77](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/subcommand.ts#L77)
+Defined in: [types/subcommand.ts:77](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/subcommand.ts#L77)
 
 Show help for this command using the help content configuration.
 Uses the getHelpContent() method to format and display help information.
@@ -140,7 +140,7 @@ Uses the getHelpContent() method to format and display help information.
 
 > `readonly` **description**: `"Show version information"` = `'Show version information'`
 
-Defined in: [commands/version.ts:47](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/version.ts#L47)
+Defined in: [commands/version.ts:47](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/version.ts#L47)
 
 Command description - must be implemented by subclass.
 A brief description of what the command does, used in help text.
@@ -155,7 +155,7 @@ A brief description of what the command does, used in help text.
 
 > `readonly` **name**: `"version"` = `'version'`
 
-Defined in: [commands/version.ts:46](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/commands/version.ts#L46)
+Defined in: [commands/version.ts:46](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/commands/version.ts#L46)
 
 Command name - must be implemented by subclass.
 This should be the string used to invoke the command from the CLI.

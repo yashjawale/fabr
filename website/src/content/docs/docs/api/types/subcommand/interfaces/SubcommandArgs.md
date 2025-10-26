@@ -5,7 +5,7 @@ prev: false
 title: "SubcommandArgs"
 ---
 
-Defined in: [types/subcommand.ts:8](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/subcommand.ts#L8)
+Defined in: [types/subcommand.ts:8](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/subcommand.ts#L8)
 
 ## Extended by
 
@@ -17,4 +17,4 @@ Defined in: [types/subcommand.ts:8](https://github.com/yashjawale/fabr/blob/f01b
 
 > **help**: `boolean`
 
-Defined in: [types/subcommand.ts:9](https://github.com/yashjawale/fabr/blob/f01b72cf78714226de776336ec5f87a5b71f2c78/src/types/subcommand.ts#L9)
+Defined in: [types/subcommand.ts:9](https://github.com/yashjawale/fabr/blob/2175f836f52904c60bea5117c14ee0416e76bd93/src/types/subcommand.ts#L9)
