@@ -43,18 +43,23 @@ npx fabr --help
 fabr supports two types of templates to fit your workflow:
 
 ### 🗂️ **File-Based Templates**
+
 Copy files from a repository and replace placeholders with your project details:
+
 - Replace `{{PROJECT_NAME}}` and other placeholders in file contents
 - Supports validation, transformations, and smart defaults
 - Perfect for static project structures
 
 ### ⚡ **Command-Based Templates**
+
 Execute shell commands to set up projects programmatically:
+
 - Run commands like `npm create`, `git init`, etc.
 - Use placeholders in commands: `npm pkg set name={{PROJECT_NAME}}`
 - Great for CLI-based project initialization
 
 ### 🔧 **Smart Placeholder System**
+
 - **Interactive prompts**: Guided project setup with helpful questions
 - **Validation**: Ensure correct input with regex patterns and length checks
 - **Transformations**: Automatically convert between naming conventions
@@ -76,21 +81,21 @@ You can also check the complete list in our [TEMPLATES.json](./TEMPLATES.json) f
 
 ```json
 {
-  "name": "React App Template",
-  "placeholders": [
-    {
-      "key": "PROJECT_NAME",
-      "prompt": "What's your project name?",
-      "required": true
-    }
-  ],
-  "environmentVariables": [
-    {
-      "key": "API_URL",
-      "prompt": "Enter API URL",
-      "default": "http://localhost:3000/api"
-    }
-  ]
+	"name": "React App Template",
+	"placeholders": [
+		{
+			"key": "PROJECT_NAME",
+			"prompt": "What's your project name?",
+			"required": true
+		}
+	],
+	"environmentVariables": [
+		{
+			"key": "API_URL",
+			"prompt": "Enter API URL",
+			"default": "http://localhost:3000/api"
+		}
+	]
 }
 ```
 
@@ -98,38 +103,38 @@ You can also check the complete list in our [TEMPLATES.json](./TEMPLATES.json) f
 
 ```json
 {
-  "type": "commands",
-  "name": "Node.js Setup",
-  "placeholders": [
-    {
-      "key": "PROJECT_NAME",
-      "prompt": "What's your project name?",
-      "required": true
-    }
-  ],
-  "environmentVariables": [
-    {
-      "key": "PORT",
-      "prompt": "Server port",
-      "default": "3000"
-    },
-    {
-      "key": "JWT_SECRET",
-      "prompt": "JWT secret (keep this secure!)",
-      "local": true,
-      "required": true
-    }
-  ],
-  "commands": [
-    {
-      "command": "npm init -y",
-      "description": "Initialize package.json"
-    },
-    {
-      "command": "npm pkg set name={{PROJECT_NAME}}",
-      "description": "Set project name"
-    }
-  ]
+	"type": "commands",
+	"name": "Node.js Setup",
+	"placeholders": [
+		{
+			"key": "PROJECT_NAME",
+			"prompt": "What's your project name?",
+			"required": true
+		}
+	],
+	"environmentVariables": [
+		{
+			"key": "PORT",
+			"prompt": "Server port",
+			"default": "3000"
+		},
+		{
+			"key": "JWT_SECRET",
+			"prompt": "JWT secret (keep this secure!)",
+			"local": true,
+			"required": true
+		}
+	],
+	"commands": [
+		{
+			"command": "npm init -y",
+			"description": "Initialize package.json"
+		},
+		{
+			"command": "npm pkg set name={{PROJECT_NAME}}",
+			"description": "Set project name"
+		}
+	]
 }
 ```
 
@@ -156,6 +161,7 @@ We welcome contributions! Here's how to get started:
 
 1. **Fork the repository**
 2. **Clone and setup**:
+
    ```bash
    git clone https://github.com/your-username/fabr.git
    cd fabr
@@ -163,6 +169,7 @@ We welcome contributions! Here's how to get started:
    ```
 
 3. **Make your changes**:
+
    ```bash
    npm run build  # Build the project
    npm run test:cli  # Test your changes
