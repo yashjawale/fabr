@@ -49,7 +49,7 @@
 		"semantic-release": "semantic-release"
 	},
 	"dependencies": {
-		"@inquirer/prompts": "^7.8.0",
+		"@inquirer/prompts": "^8.0.1",
 		"chalk": "^5.4.1",
 		"execa": "^9.6.0",
 		"ora": "^9.0.0",
