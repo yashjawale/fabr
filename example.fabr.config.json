@@ -1,0 +1,31 @@
+{
+	"$schema": "./fabr.config.schema.json",
+	"preSetupCommand": "echo 'Preparing your project'",
+	"placeholders": [
+		{
+			"key": "PLUGIN_SLUG",
+			"prompt": "What is your plugin slug?",
+			"default": "my-plugin"
+		}
+	],
+	"renamedFiles": [
+		{
+			"from": "plugin.php",
+			"to": "{{PLUGIN_SLUG}}.php"
+		}
+	],
+	"environmentVariables": [
+		{
+			"key": "API_URL",
+			"prompt": "API endpoint URL",
+			"default": "http://localhost:3000",
+			"local": false
+		},
+		{
+			"key": "API_KEY",
+			"prompt": "API key",
+			"local": true
+		}
+	],
+	"postSetupCommand": "npm install"
+}

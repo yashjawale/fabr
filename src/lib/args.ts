@@ -90,73 +90,15 @@ export function parseArgs(args: string[]): ParsedArgs {
  */
 export function parseSubcommandOnlyArgs(
 	args: string[],
+	commandName?: string,
 ): Omit<ParsedArgs, 'command'> & { positional: string[] } {
-	const result = {
-		positional: [] as string[],
-		flags: {} as Record<string, string | boolean>,
-		help: false,
+	const input = commandName && args[0] === commandName ? args.slice(1) : args
+	const parsed = parseArgs(input)
+	return {
+		positional: parsed.command ? [parsed.command, ...parsed.positional] : parsed.positional,
+		flags: parsed.flags,
+		help: parsed.help,
 	}
-
-	for (let i = 0; i < args.length; i++) {
-		const arg = args[i]
-		if (!arg) continue
-
-		if (arg === '--help' || arg === '-h') {
-			result.help = true
-		} else if (arg.startsWith('--')) {
-			// Handle --key=value or --key
-			const [key, ...valueParts] = arg.substring(2).split('=')
-			if (!key) continue
-			const value = valueParts.length > 0 ? valueParts.join('=') : true
-			result.flags[key] = value
-		} else if (arg.startsWith('-') && arg.length > 1) {
-			// Handle short flags like -h or -t value
-			const flagsStr = arg.substring(1)
-
-			// Check if this might be a flag with a value
-			const nextArg = i + 1 < args.length ? args[i + 1] : null
-			const hasValue = nextArg && !nextArg.startsWith('-')
-
-			if (flagsStr.length === 1 && hasValue) {
-				// Single character flag with value: -t value
-				result.flags[flagsStr] = nextArg
-				i++ // Skip next argument as it's the value
-			} else {
-				// Handle multiple short flags or single flag without value
-				const flags = flagsStr.split('')
-				flags.forEach(flag => {
-					if (flag === 'h') {
-						result.help = true
-					} else {
-						result.flags[flag] = true
-					}
-				})
-			}
-		} else {
-			// All non-flag arguments are positional for subcommands
-			result.positional.push(arg)
-		}
-	}
-
-	return result
-}
-
-/**
- * Generic subcommand argument parser that removes the command name from arguments.
- * If the first argument matches the command name, it removes it and returns the rest.
- * This prepares arguments for subcommand-specific parsing.
- *
- * @param {string[]} args - Original command line arguments
- * @param {string} commandName - Name of the command to remove from arguments
- *
- * @returns {string[]} Clean arguments array without the command name
- */
-export function parseSubcommandArgs(args: string[], commandName: string): string[] {
-	// Remove the command name if it's the first argument
-	if (args[0] === commandName) {
-		return args.slice(1)
-	}
-	return args
 }
 
 /**

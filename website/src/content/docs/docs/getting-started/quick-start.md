@@ -105,8 +105,7 @@ npm run dev
 
 Now that you've created your first project, you might want to:
 
-- Learn about [file-based templates](/templates/file-based) to understand how templates work
-- Explore [command-based templates](/templates/command-based) for more advanced setups
+- See the [template configuration reference](/docs/templates/configuration) to customize files and setup
 - [Create your own templates](/templates/overview) to share your favorite project configurations
 
 Happy coding! 🚀

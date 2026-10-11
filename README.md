@@ -8,7 +8,6 @@ A simple command line utility for scaffolding new development projects
 [![GitHub issues](https://img.shields.io/github/issues/yashjawale/fabr)](https://github.com/yashjawale/fabr/issues)
 
 [![Code Quality](https://github.com/yashjawale/fabr/actions/workflows/code-quality.yml/badge.svg)](https://github.com/yashjawale/fabr/actions/workflows/code-quality.yml)
-[![Release](https://github.com/yashjawale/fabr/actions/workflows/release.yml/badge.svg)](https://github.com/yashjawale/fabr/actions/workflows/release.yml)
 [![Deploy Documentation](https://github.com/yashjawale/fabr/actions/workflows/docs.yml/badge.svg)](https://github.com/yashjawale/fabr/actions/workflows/docs.yml)
 
 ---
@@ -37,30 +36,12 @@ npx fabr --help
 
 ## What Makes fabr Special?
 
-fabr supports two types of templates to fit your workflow:
+Templates are copied from a repository, then fabr can:
 
-### 🗂️ **File-Based Templates**
-
-Copy files from a repository and replace placeholders with your project details:
-
-- Replace `{{PROJECT_NAME}}` and other placeholders in file contents
-- Supports validation, transformations, and smart defaults
-- Perfect for static project structures
-
-### ⚡ **Command-Based Templates**
-
-Execute shell commands to set up projects programmatically:
-
-- Run commands like `npm create`, `git init`, etc.
-- Use placeholders in commands: `npm pkg set name={{PROJECT_NAME}}`
-- Great for CLI-based project initialization
-
-### 🔧 **Smart Placeholder System**
-
-- **Interactive prompts**: Guided project setup with helpful questions
-- **Validation**: Ensure correct input with regex patterns and length checks
-- **Transformations**: Automatically convert between naming conventions
-- **Environment variables**: Generate `.env` files with secure defaults
+- Replace `{{KEY}}` tokens in file contents
+- Rename explicitly listed files
+- Generate `.env` and `.env.local` files
+- Run pre- and post-setup commands
 
 ## Available Templates
 
@@ -70,66 +51,28 @@ To see all available templates, run:
 npx fabr list
 ```
 
-You can also check the complete list in our [TEMPLATES.json](./TEMPLATES.json) file, which contains all officially supported templates with their repository links.
+You can also check the complete list in [templates.json](./templates.json) file, which contains all officially supported templates with their repository links.
 
 ## Configuration Examples
 
-### Simple File-Based Template
+See the complete [example template configuration](./example.fabr.config.json), which demonstrates placeholders, file renaming, environment files, and setup commands.
+
+### Template configuration
 
 ```json
 {
-	"name": "React App Template",
 	"placeholders": [
 		{
 			"key": "PROJECT_NAME",
-			"prompt": "What's your project name?",
-			"required": true
+			"prompt": "What's your project name?"
 		}
 	],
 	"environmentVariables": [
 		{
 			"key": "API_URL",
 			"prompt": "Enter API URL",
-			"default": "http://localhost:3000/api"
-		}
-	]
-}
-```
-
-### Command-Based Template Example
-
-```json
-{
-	"type": "commands",
-	"name": "Node.js Setup",
-	"placeholders": [
-		{
-			"key": "PROJECT_NAME",
-			"prompt": "What's your project name?",
-			"required": true
-		}
-	],
-	"environmentVariables": [
-		{
-			"key": "PORT",
-			"prompt": "Server port",
-			"default": "3000"
-		},
-		{
-			"key": "JWT_SECRET",
-			"prompt": "JWT secret (keep this secure!)",
-			"local": true,
-			"required": true
-		}
-	],
-	"commands": [
-		{
-			"command": "npm init -y",
-			"description": "Initialize package.json"
-		},
-		{
-			"command": "npm pkg set name={{PROJECT_NAME}}",
-			"description": "Set project name"
+			"default": "http://localhost:3000/api",
+			"local": false
 		}
 	]
 }

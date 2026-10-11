@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import { parseSubcommandArgs, parseSubcommandOnlyArgs } from '../lib/args.js'
+import { parseSubcommandOnlyArgs } from '../lib/args.js'
 import { HelpContent } from '../lib/help.js'
 import { BaseSubcommand, SubcommandArgs } from '../types/subcommand.js'
 import { asciiArt } from '../lib/ascii.js'
@@ -78,8 +78,7 @@ export class HelpCommand extends BaseSubcommand<HelpArgs> {
 	 * @returns {HelpArgs} Parsed help command arguments
 	 */
 	parseArgs(rawArgs: string[]): HelpArgs {
-		const cleanArgs = parseSubcommandArgs(rawArgs, this.name)
-		const parsed = parseSubcommandOnlyArgs(cleanArgs)
+		const parsed = parseSubcommandOnlyArgs(rawArgs, this.name)
 
 		return {
 			help: parsed.help,

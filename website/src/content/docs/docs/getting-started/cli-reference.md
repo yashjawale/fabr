@@ -70,7 +70,7 @@ npx fabr init --help
 4. **Template download** - Downloads the template from GitHub using degit
 5. **Configuration processing** - Reads `fabr.config.json` if present
 6. **Placeholder replacement** - Replaces `{{PLACEHOLDER}}` patterns in files
-7. **Command execution** - Runs setup commands for command-based templates
+7. **Setup commands** - Runs optional pre- and post-setup commands from the template configuration
 8. **Environment setup** - Creates `.env` files if configured
 9. **Dependency installation** - Runs install commands like `npm install`
 10. **Cleanup** - Removes template configuration files

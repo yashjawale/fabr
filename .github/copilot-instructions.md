@@ -1,6 +1,6 @@
 # Fabr - Project Template Generator
 
-Fabr is a TypeScript CLI utility for scaffolding new development projects using templates. It supports both file-based templates (traditional copy/replace) and command-based templates (programmatic setup via shell commands).
+Fabr is a CLI utility for scaffolding projects from repository templates. Configuration supports file-content replacement, explicit file renaming, environment-file creation, and pre/post setup commands.
 
 **Always reference these instructions first and fallback to search or bash commands only when you encounter unexpected information that does not match the info here.**
 
@@ -122,7 +122,7 @@ Fabr is a TypeScript CLI utility for scaffolding new development projects using 
 
 ### Debugging Template Issues
 
-- Check `src/lib/commands.ts` for command-based template execution
+- Check `src/lib/files.ts` for file replacement and renaming
 - Check `src/lib/files.ts` for file-based template processing
 - Check `src/lib/placeholders.ts` for placeholder replacement logic
 - Use `console.log()` debugging and rebuild to test

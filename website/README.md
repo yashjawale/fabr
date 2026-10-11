@@ -16,7 +16,7 @@ The documentation is organized into four main sections:
 
 - **Overview** - Understanding template types and features
 - **File-Based Templates** - Traditional file copying with placeholder replacement
-- **Command-Based Templates** - Dynamic project setup using shell commands
+- **Template customization** - Replace placeholders, rename files, create environment files, and run setup commands
 - **Environment Variables** - Automatic .env file generation
 - **Configuration Reference** - Complete fabr.config.json documentation
 
