@@ -73,10 +73,6 @@ export default defineConfig({
 					label: 'Add Your Templates',
 					items: [
 						{ label: 'Overview', slug: 'docs/templates/overview' },
-						{ label: 'File-Based Templates', slug: 'docs/templates/file-based' },
-						{ label: 'Command-Based Templates', slug: 'docs/templates/command-based' },
-						{ label: 'Environment Variables', slug: 'docs/templates/environment-variables' },
-						{ label: 'Template Examples', slug: 'docs/templates/examples' },
 						{ label: 'Configuration Reference', slug: 'docs/templates/configuration' },
 					],
 				},

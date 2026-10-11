@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 import { Template } from '../types/templates.js'
-import { parseSubcommandOnlyArgs, parseSubcommandArgs } from '../lib/args.js'
+import { parseSubcommandOnlyArgs } from '../lib/args.js'
 import { BaseSubcommand, SubcommandArgs } from '../types/subcommand.js'
 import { HelpContent } from '../lib/help.js'
 
@@ -41,8 +41,7 @@ export class ListCommand extends BaseSubcommand<ListArgs> {
 	 * @returns {ListArgs} Parsed list command arguments
 	 */
 	parseArgs(rawArgs: string[]): ListArgs {
-		const cleanArgs = parseSubcommandArgs(rawArgs, this.name)
-		const parsed = parseSubcommandOnlyArgs(cleanArgs)
+		const parsed = parseSubcommandOnlyArgs(rawArgs, this.name)
 
 		return {
 			help: parsed.help,

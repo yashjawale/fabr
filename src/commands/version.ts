@@ -2,7 +2,7 @@ import chalk from 'chalk'
 import { readFileSync } from 'fs'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
-import { parseSubcommandArgs, parseSubcommandOnlyArgs } from '../lib/args.js'
+import { parseSubcommandOnlyArgs } from '../lib/args.js'
 import { HelpContent } from '../lib/help.js'
 import { BaseSubcommand, SubcommandArgs } from '../types/subcommand.js'
 
@@ -71,8 +71,7 @@ export class VersionCommand extends BaseSubcommand<VersionArgs> {
 	 * @returns {VersionArgs} Parsed version command arguments
 	 */
 	parseArgs(rawArgs: string[]): VersionArgs {
-		const cleanArgs = parseSubcommandArgs(rawArgs, this.name)
-		const parsed = parseSubcommandOnlyArgs(cleanArgs)
+		const parsed = parseSubcommandOnlyArgs(rawArgs, this.name)
 
 		return {
 			help: parsed.help,

@@ -18,15 +18,7 @@ Fabr (short for "fabricate") takes the pain out of project setup by letting you:
 
 ## How It Works
 
-Fabr supports two types of templates:
-
-### File-Based Templates
-
-Traditional templates that copy files from a repository and replace placeholders like `{{PROJECT_NAME}}` with your values.
-
-### Command-Based Templates
-
-Execute shell commands to set up projects programmatically - perfect for CLI tools like `create-react-app` or `npm init`.
+Templates are copied from a repository. An optional `fabr.config.json` can configure content replacement, explicit file renaming, environment-file creation, and commands to run before or after setup. See the [configuration reference](/docs/templates/configuration).
 
 ## Why Use Fabr?
 

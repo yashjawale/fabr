@@ -5,20 +5,17 @@ import ora from 'ora'
 import * as path from 'path'
 
 // Import modularized functions from the 'lib' directory
-import { parseSubcommandArgs, parseSubcommandOnlyArgs, validateProjectName } from '../lib/args.js'
+import { parseSubcommandOnlyArgs, validateProjectName } from '../lib/args.js'
+import { asciiArt } from '../lib/ascii.js'
 import { processAndCreateEnvironmentFiles } from '../lib/env.js'
-import { findAndReplace } from '../lib/files.js'
+import { findAndReplace, renameFiles } from '../lib/files.js'
+import { HelpContent } from '../lib/help.js'
 import { processPlaceholders } from '../lib/placeholders.js'
 import { runShellCommand } from '../lib/shell.js'
 import { promptForProjectDetails } from '../lib/ui.js'
-
-// Import types
-import { executeCommandTemplates, validateCommandPlaceholders } from '../lib/commands.js'
-import { HelpContent } from '../lib/help.js'
-import { FabrConfig, isCommandBasedTemplate, validateFabrConfig } from '../types/fabr-config.js'
+import { FabrConfig, validateFabrConfig } from '../types/fabr-config.js'
 import { BaseSubcommand, SubcommandArgs } from '../types/subcommand.js'
 import { Template, findTemplateBySlug } from '../types/templates.js'
-import { asciiArt } from '../lib/ascii.js'
 
 export interface InitArgs extends SubcommandArgs {
 	projectName?: string
@@ -78,8 +75,7 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
 	 * @returns {InitArgs} Parsed init command arguments including project name and template slug
 	 */
 	parseArgs(rawArgs: string[]): InitArgs {
-		const cleanArgs = parseSubcommandArgs(rawArgs, this.name)
-		const parsed = parseSubcommandOnlyArgs(cleanArgs)
+		const parsed = parseSubcommandOnlyArgs(rawArgs, this.name)
 
 		return {
 			projectName: parsed.positional[0] ?? undefined,
@@ -102,9 +98,8 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
 	 * 3. Downloads the template from GitHub
 	 * 4. Processes the template configuration
 	 * 5. Handles placeholders and environment variables
-	 * 6. Runs setup commands
-	 * 7. Installs dependencies and runs post-install tasks
-	 * 8. Cleans up temporary files
+	 * 6. Runs the post-setup command
+	 * 7. Cleans up the template configuration
 	 *
 	 * @param {Template[]} templates - Array of available templates
 	 * @param {InitArgs} args - Parsed command arguments
@@ -181,69 +176,32 @@ export class InitCommand extends BaseSubcommand<InitArgs> {
 					if (validateFabrConfig(configData)) {
 						config = configData
 					} else {
-						console.log(chalk.yellow("Invalid 'fabr.config.json' format. Skipping advanced setup."))
+						console.log(chalk.yellow("Invalid 'fabr.config.json' format. Skipping template setup."))
 					}
 				} catch {
-					console.log(chalk.yellow("Failed to parse 'fabr.config.json'. Skipping advanced setup."))
+					console.log(chalk.yellow("Failed to parse 'fabr.config.json'. Skipping template setup."))
 				}
 			} else {
-				console.log(chalk.yellow("No 'fabr.config.json' found. Skipping advanced setup."))
+				console.log(chalk.yellow("No 'fabr.config.json' found. Skipping template setup."))
 			}
 
-			// STAGE 1: Run pre-setup command
+			// Run commands around template processing.
 			await runShellCommand(config.preSetupCommand, 'Running pre-setup tasks...')
 
-			// STAGE 2: Process all placeholders
 			const placeholderValues = await processPlaceholders(config.placeholders)
 
-			// STAGE 2.5: Process environment variables and create .env files
-			await processAndCreateEnvironmentFiles(
-				config.environmentVariables,
-				placeholderValues,
-				projectPath,
-			)
+			await processAndCreateEnvironmentFiles(config.environmentVariables, projectPath)
 
-			// Check if this is a command-based template
-			if (isCommandBasedTemplate(config)) {
-				console.log(chalk.cyan.bold('\n🔧 Processing command-based template...\n'))
-
-				// Validate that all command placeholders have values
-				if (config.commands) {
-					const missingPlaceholders = validateCommandPlaceholders(
-						config.commands,
-						placeholderValues,
-					)
-					if (missingPlaceholders.length > 0) {
-						console.error(
-							chalk.red(`Missing values for placeholders: ${missingPlaceholders.join(', ')}`),
-						)
-						process.exit(1)
-					}
-
-					// Execute all command templates
-					await executeCommandTemplates(config.commands, placeholderValues, projectPath)
-				} else {
-					console.log(chalk.yellow('Command-based template specified but no commands found.'))
-				}
-			} else {
-				// File-based template processing (existing logic)
-				if (Object.keys(placeholderValues).length > 0) {
-					const replaceSpinner = ora('Replacing placeholders in files...').start()
-					findAndReplace(projectPath, placeholderValues)
-					replaceSpinner.succeed(chalk.green('Placeholders replaced successfully!'))
-				}
+			if (Object.keys(placeholderValues).length > 0) {
+				const replaceSpinner = ora('Replacing placeholders in files...').start()
+				findAndReplace(projectPath, placeholderValues)
+				replaceSpinner.succeed(chalk.green('Placeholders replaced successfully!'))
 			}
+			renameFiles(projectPath, config.renamedFiles, placeholderValues)
 
-			// STAGE 3: Run post-setup command
 			await runShellCommand(config.postSetupCommand, 'Running post-setup tasks...')
 
-			// STAGE 4: Install dependencies
-			await runShellCommand(config.installCommand, 'Installing dependencies...')
-
-			// STAGE 5: Run post-install command
-			await runShellCommand(config.postInstallCommand, 'Running post-install tasks...')
-
-			// STAGE 6: Clean up config file
+			// Clean up the template configuration
 			if (fs.existsSync(configPath)) {
 				fs.unlinkSync(configPath)
 				console.log(chalk.gray('Cleaned up fabr.config.json'))

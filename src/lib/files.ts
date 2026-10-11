@@ -46,20 +46,36 @@ export const findAndReplace = (
 	filesToProcess.forEach(filePath => {
 		let content = fs.readFileSync(filePath, 'utf8')
 		let changed = false
-		for (const key in placeholderValues) {
-			if (
-				Object.prototype.hasOwnProperty.call(placeholderValues, key) &&
-				placeholderValues[key] !== undefined
-			) {
-				const regex = new RegExp(key, 'g')
-				if (content.match(regex)) {
-					content = content.replace(regex, placeholderValues[key])
-					changed = true
-				}
+		for (const [key, value] of Object.entries(placeholderValues)) {
+			const token = new RegExp(`\\{\\{${key}\\}\\}`, 'g')
+			if (token.test(content)) {
+				content = content.replace(token, () => value)
+				changed = true
 			}
 		}
 		if (changed) {
 			fs.writeFileSync(filePath, content, 'utf8')
 		}
 	})
+}
+
+/** Rename explicitly configured files. */
+export const renameFiles = (
+	projectPath: string,
+	renamedFiles: Array<{ from: string; to: string }> | undefined,
+	placeholderValues: Record<string, string>,
+): void => {
+	for (const rename of renamedFiles ?? []) {
+		const resolve = (filePath: string) =>
+			filePath.replace(/\{\{([^}]+)\}\}/g, (_, key: string) => placeholderValues[key] ?? '')
+		const source = path.resolve(projectPath, resolve(rename.from))
+		const destination = path.resolve(projectPath, resolve(rename.to))
+		if (
+			!source.startsWith(`${projectPath}${path.sep}`) ||
+			!destination.startsWith(`${projectPath}${path.sep}`)
+		) {
+			throw new Error('Renamed file paths must stay within the project directory.')
+		}
+		fs.renameSync(source, destination)
+	}
 }

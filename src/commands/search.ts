@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 import { Template } from '../types/templates.js'
-import { parseSubcommandArgs, parseSubcommandOnlyArgs } from '../lib/args.js'
+import { parseSubcommandOnlyArgs } from '../lib/args.js'
 import { BaseSubcommand, SubcommandArgs } from '../types/subcommand.js'
 import { HelpContent } from '../lib/help.js'
 
@@ -60,8 +60,7 @@ export class SearchCommand extends BaseSubcommand<SearchArgs> {
 	 * @returns {SearchArgs} Parsed search command arguments
 	 */
 	parseArgs(rawArgs: string[]): SearchArgs {
-		const cleanArgs = parseSubcommandArgs(rawArgs, this.name)
-		const parsed = parseSubcommandOnlyArgs(cleanArgs)
+		const parsed = parseSubcommandOnlyArgs(rawArgs, this.name)
 
 		// Get the search query from positional arguments
 		const query = parsed.positional.join(' ').trim()

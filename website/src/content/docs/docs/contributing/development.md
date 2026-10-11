@@ -110,7 +110,7 @@ src/
     ├── placeholders.ts  # Placeholder replacement
     ├── commands.ts      # Command execution
     └── env.ts           # Environment variables
-TEMPLATES.json           # Template registry
+templates.json           # Template registry
 ```
 
 ### 3. Testing Your Changes

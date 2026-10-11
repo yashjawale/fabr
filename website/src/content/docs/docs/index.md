@@ -22,7 +22,7 @@ cd my-project
 
 ## What is fabr?
 
-fabr is a TypeScript CLI utility for scaffolding new development projects using templates. It supports both file-based templates (traditional copy/replace) and command-based templates (programmatic setup via shell commands).
+fabr is a CLI utility for scaffolding projects from repository templates. It supports file-content replacement, explicit file renames, environment-file creation, and pre/post setup commands.
 
 ## Key Features
 
@@ -30,7 +30,7 @@ fabr is a TypeScript CLI utility for scaffolding new development projects using 
 - **📁 File Templates** - Copy and customize file structures
 - **⚡ Command Templates** - Execute setup commands programmatically
 - **🔧 Environment Variables** - Generate .env files automatically
-- **🎯 Smart Placeholders** - Advanced replacement with validation
+- **🎯 Placeholders** - Replace `{{KEY}}` tokens in template files
 - **📚 Template Registry** - Discover community templates
 
 ## Available Templates
