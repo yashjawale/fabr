@@ -22,9 +22,9 @@ Open a pull request adding an entry to the root [`templates.json`](https://githu
 
 ```json
 {
-  "name": "WordPress Plugin Starter",
-  "slug": "wordpress-plugin",
-  "repo": "yourname/wordpress-plugin"
+	"name": "WordPress Plugin Starter",
+	"slug": "wordpress-plugin",
+	"repo": "yourname/wordpress-plugin"
 }
 ```
 

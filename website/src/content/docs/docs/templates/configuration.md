@@ -7,19 +7,15 @@ Add an optional `fabr.config.json` to the root of a template repository. It supp
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/yashjawale/fabr/main/fabr.config.schema.json",
-  "preSetupCommand": "echo 'Preparing project'",
-  "placeholders": [
-    { "key": "PROJECT_NAME", "prompt": "Project name?" }
-  ],
-  "renamedFiles": [
-    { "from": "package.template.json", "to": "package.json" },
-    { "from": "src/{{PROJECT_NAME}}.ts", "to": "src/app.ts" }
-  ],
-  "environmentVariables": [
-    { "key": "API_KEY", "prompt": "API key?", "local": true }
-  ],
-  "postSetupCommand": "npm install"
+	"$schema": "https://raw.githubusercontent.com/yashjawale/fabr/main/fabr.config.schema.json",
+	"preSetupCommand": "echo 'Preparing project'",
+	"placeholders": [{ "key": "PROJECT_NAME", "prompt": "Project name?" }],
+	"renamedFiles": [
+		{ "from": "package.template.json", "to": "package.json" },
+		{ "from": "src/{{PROJECT_NAME}}.ts", "to": "src/app.ts" }
+	],
+	"environmentVariables": [{ "key": "API_KEY", "prompt": "API key?", "local": true }],
+	"postSetupCommand": "npm install"
 }
 ```
 
